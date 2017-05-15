@@ -1,13 +1,21 @@
 package com.xiangxun.workorder;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import com.hellen.baseframe.binder.ContentBinder;
+import com.xiangxun.workorder.base.BaseActivity;
+
+@ContentBinder(R.layout.activity_main)
+public class MainActivity extends BaseActivity {
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    protected void initView(Bundle savedInstanceState) {
+
+    }
+
+    @Override
+    protected void initListener() {
+
     }
 }
