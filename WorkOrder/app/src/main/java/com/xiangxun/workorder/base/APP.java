@@ -35,6 +35,7 @@ public class APP extends FrameAPP {
     @Override
     public void onCreate() {
         super.onCreate();
+        instance = this;
         //初始化新增的日志管理系统,可以进行双向使用，既可以使用Dlog直接进行展示，
         // 也可以使用APPlog进行侧面展示。
         DLog.init(BuildConfig.DEBUG, "WorkOrder");
