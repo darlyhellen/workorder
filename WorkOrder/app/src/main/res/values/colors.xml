@@ -14,8 +14,8 @@
     <!-- popwindows -->
     <color name="pop_back">#7a000000</color>
     <color name="color_1">#f70000</color>
-    <color name="color_2">#dc6b6b</color>
-    <color name="color_3">#ffffff</color>
+    <color name="color_2">#fa0000</color>
+    <color name="color_3">#fd0000</color>
     <color name="set_list_line">#888888</color>
     <color name="bg_white">#FFf8f8f8</color>
 
@@ -208,5 +208,7 @@
     <color name="chart_value_2">#75a80d</color>
     <color name="chart_value_3">#8fc026</color>
     <color name="chart_value_4">#B5CC84</color>
+
+    <color name="color_cecece">#cecece</color>
 
 </resources>

@@ -1,4 +1,4 @@
-package com.xiangxun.workorder.widget;
+package com.xiangxun.workorder.widget.camera;
 
 import android.app.Activity;
 import android.content.Context;

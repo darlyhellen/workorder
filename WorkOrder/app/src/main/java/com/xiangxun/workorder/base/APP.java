@@ -6,6 +6,7 @@ import android.util.Log;
 import com.hellen.baseframe.application.FrameAPP;
 import com.hellen.baseframe.common.dlog.DLog;
 import com.hellen.baseframe.common.obsinfo.ConApp;
+import com.hellen.baseframe.common.utiltools.SharePreferHelp;
 import com.xiangxun.workorder.BuildConfig;
 
 import java.io.File;

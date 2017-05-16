@@ -13,7 +13,7 @@ import com.hellen.baseframe.common.dlog.DLog;
 import com.xiangxun.workorder.base.BaseActivity;
 import com.xiangxun.workorder.base.ConsMVP;
 import com.xiangxun.workorder.db.TestBean;
-import com.xiangxun.workorder.widget.PhotoPop;
+import com.xiangxun.workorder.widget.camera.PhotoPop;
 
 import java.io.File;
 import java.util.List;

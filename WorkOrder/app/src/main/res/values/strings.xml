@@ -2,10 +2,26 @@
 <resources>
 
     <string name="app_name">工作流</string>
+    <string name="neterror">网络异常,请检查网络</string>
+    <string name="loading">加载中....</string>
     <!-- popwindows -->
     <string name="photo">拍照</string>
     <string name="grapht">从相册中选取</string>
     <string name="consel">取消</string>
     <string name="subment">提交</string>
+    <!--Login-->
+    <string name="mine_login_hine1">请输入账号</string>
+    <string name="mine_login_hine2">密码</string>
+    <string name="mine_login_login">登&#160;&#160;&#160;&#160;录</string>
+    <string name="mine_login_loginning">登录中</string>
+    <string name="splash_adv_logo">Copyright © 1993&#8211;2017\n西安翔迅科技有限责任公司版权所有</string>
+    <string name="loginout">退出登录</string>
+    <string name="regest">注册账号</string>
+    <string name="find_pass">忘记密码</string>
+    <string name="login_succ">登录成功</string>
+    <string name="login_nameorpassfail">用户名密码错误</string>
+    <string name="login_contain_null">用户名密码不能包含空格</string>
+    <string name="login_contain_mode">用户名不能包含表情</string>
+    <string name="un_login">未登录</string>
 
 </resources>
