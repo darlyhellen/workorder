@@ -13,6 +13,7 @@ import android.text.TextUtils;
 import com.hellen.baseframe.common.dlog.DLog;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -224,41 +225,50 @@ public abstract class DateBaseHelper {
         }
     }
 
+    private ContentValues getContentValues() {
+        ContentValues contentValues = new ContentValues();
+        try {
+            //得到类对象
+            Class userCla = (Class) getClass();
+            //得到类中的所有属性集合
+            Field[] fs = userCla.getDeclaredFields();
+            for (int i = 0; i < fs.length; i++) {
+                Field f = fs[i];
+                f.setAccessible(true); //设置些属性是可以访问的
+                String type = f.getType().toString();
+                DLog.i(f.getName() + "---" + f.get(this) + "---" + type);
+                if (type.endsWith("String")) {
+                    contentValues.put(f.getName(), String.valueOf(f.get(this).toString()));
+                } else if (type.endsWith("Integer") || type.endsWith("int")) {
+                    contentValues.put(f.getName(), Integer.valueOf(f.get(this).toString()));
+                } else if (type.endsWith("Float") || type.endsWith("float")) {
+                    contentValues.put(f.getName(), Float.valueOf(f.get(this).toString()));
+                } else if (type.endsWith("Double") || type.endsWith("double")) {
+                    contentValues.put(f.getName(), Double.valueOf(f.get(this).toString()));
+                } else if (type.endsWith("Boolean") || type.endsWith("boolean")) {
+                    contentValues.put(f.getName(), Boolean.valueOf(f.get(this).toString()));
+                } else if (type.endsWith("Long") || type.endsWith("long")) {
+                    contentValues.put(f.getName(), Long.valueOf(f.get(this).toString()));
+                } else if (type.endsWith("Short") || type.endsWith("short")) {
+                    contentValues.put(f.getName(), Short.valueOf(f.get(this).toString()));
+                } else if (type.endsWith("Byte") || type.endsWith("byte")) {
+                    contentValues.put(f.getName(), Byte.valueOf(f.get(this).toString()));
+                }
+            }
+            return contentValues;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return contentValues;
+    }
 
     /**
-     * @param columns
-     * @param values
      * @return 根据数组的列和值进行insert
      */
-    public boolean insert(String[] columns, Object[] values) {
-        ContentValues contentValues = new ContentValues();
-        for (int rows = 0; rows < columns.length; ++rows) {
-            ContentValuesPut(contentValues, columns[rows], values[rows]);
-        }
-
-        long rowId = this.db.insert(getClass().getSimpleName(), null, contentValues);
+    public boolean insert() {
+        long rowId = this.db.insert(getClass().getSimpleName(), null, getContentValues());
         return rowId != -1;
     }
-
-    /**
-     * 根据map来进行insert
-     *
-     * @param getClass().getSimpleName()
-     * @param columnValues
-     * @return
-     */
-    public boolean insert(Map<String, Object> columnValues) {
-        ContentValues contentValues = new ContentValues();
-        Iterator iterator = columnValues.keySet().iterator();
-        while (iterator.hasNext()) {
-            String key = (String) iterator.next();
-            this.ContentValuesPut(contentValues, key, columnValues.get(key));
-        }
-
-        long rowId = this.db.insert(getClass().getSimpleName(), null, contentValues);
-        return rowId != -1;
-    }
-
 
     /**
      * 统一对数组where条件进行拼接
@@ -308,41 +318,25 @@ public abstract class DateBaseHelper {
     /**
      * 根据数组条件来update
      *
-     * @param columns
-     * @param values
      * @param whereColumns
      * @param whereArgs
      * @return
      */
-    public boolean update(String[] columns, Object[] values, String[] whereColumns, String[] whereArgs) {
-        ContentValues contentValues = new ContentValues();
-        for (int i = 0; i < columns.length; ++i) {
-            this.ContentValuesPut(contentValues, columns[i], values[i]);
-        }
+    public boolean update(String[] whereColumns, String[] whereArgs) {
         String whereClause = this.initWhereSqlFromArray(whereColumns);
-        int rowNumber = this.db.update(getClass().getSimpleName(), contentValues, whereClause, whereArgs);
+        int rowNumber = this.db.update(getClass().getSimpleName(), getContentValues(), whereClause, whereArgs);
         return rowNumber > 0;
     }
 
     /**
      * 根据map值来进行update
      *
-     * @param columnValues
      * @param whereParam
      * @return
      */
-    public boolean update(Map<String, Object> columnValues, Map<String, String> whereParam) {
-        ContentValues contentValues = new ContentValues();
-        Iterator iterator = columnValues.keySet().iterator();
-
-        String columns;
-        while (iterator.hasNext()) {
-            columns = (String) iterator.next();
-            ContentValuesPut(contentValues, columns, columnValues.get(columns));
-        }
-
+    public boolean update(Map<String, String> whereParam) {
         Map map = this.initWhereSqlFromMap(whereParam);
-        int rowNumber = this.db.update(getClass().getSimpleName(), contentValues, (String) map.get("whereSql"), (String[]) map.get("whereSqlParam"));
+        int rowNumber = this.db.update(getClass().getSimpleName(), getContentValues(), (String) map.get("whereSql"), (String[]) map.get("whereSqlParam"));
         return rowNumber > 0;
     }
 

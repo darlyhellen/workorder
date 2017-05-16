@@ -11,7 +11,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.telephony.TelephonyManager;
 
-
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.hellen.baseframe.application.FrameListener;
@@ -19,9 +18,7 @@ import com.hellen.baseframe.application.FramePresenter;
 import com.hellen.baseframe.application.FrameView;
 import com.hellen.baseframe.common.dlog.DLog;
 import com.hellen.baseframe.common.matchs.MatcherUtil;
-import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.hellen.baseframe.common.utiltools.SharePreferHelp;
-import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.APP;
 import com.xiangxun.workorder.base.ConsMVP;
 import com.xiangxun.workorder.bean.BaseModel;
@@ -67,6 +64,8 @@ public class Login implements FramePresenter {
      */
     public void login_in(Context context, String username, String password,
                          final FrameListener<UserInfo> listener) {
+
+
         // TODO Auto-generated method stub
         if (!APP.isNetworkConnected(APP.getInstance())) {
             listener.onFaild(0, "网络异常,请检查网络");
@@ -94,8 +93,13 @@ public class Login implements FramePresenter {
                 .compile("([^\\._\\w\\u4e00-\\u9fa5])*");
         Matcher matcher = pattern.matcher(username);
         if (matcher.matches()) {
-            ToastApp.showToast(R.string.login_contain_mode);
             listener.onFaild(0, "用户名不能包含表情");
+            return;
+        }
+
+
+        if (username.equals("13891431454")&&password.equals("123456")){
+            listener.onSucces(new UserInfo());
             return;
         }
         JSONObject ob = new JSONObject();

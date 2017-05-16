@@ -1,19 +1,14 @@
 package com.xiangxun.workorder.ui.login;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-
 import com.hellen.baseframe.binder.ContentBinder;
 import com.hellen.baseframe.binder.ViewsBinder;
-import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.hellen.baseframe.common.utiltools.SharePreferHelp;
+import com.xiangxun.workorder.MainActivity;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.BaseActivity;
 import com.xiangxun.workorder.ui.biz.Login;
@@ -21,7 +16,6 @@ import com.xiangxun.workorder.ui.login.edittext.ClearEditText;
 import com.xiangxun.workorder.ui.login.edittext.XSubButton;
 import com.xiangxun.workorder.ui.presenter.LoginPresenter;
 
-import java.util.List;
 
 @ContentBinder(R.layout.login_activity_layout)
 public class LoginActivity extends BaseActivity implements OnClickListener, Login.MainView {
@@ -139,7 +133,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Logi
 
     @Override
     public void onLoginSuccess() {
-
+        startActivity(new Intent(this, MainActivity.class));
+        end();
     }
 
     @Override
@@ -159,7 +154,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Logi
 
     @Override
     public void end() {
-
+        finish();
     }
 
     @Override

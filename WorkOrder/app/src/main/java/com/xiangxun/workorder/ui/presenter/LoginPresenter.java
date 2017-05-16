@@ -64,13 +64,13 @@ public class LoginPresenter {
                         // TODO Auto-generated method stub
                         main.onLoginSuccess();
                         main.setEnableClick();
-                        //userBiz.onStop(loading);
+                        userBiz.onStop(loading);
                     }
 
                     @Override
                     public void onFaild(int code, String info) {
                         // TODO Auto-generated method stub
-//                        main.onLoginFailed();
+                        main.onLoginFailed();
                         main.setEnableClick();
                         userBiz.onStop(loading);
                         switch (code) {

@@ -37,11 +37,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @ViewsBinder(R.id.delete)
     private Button delete;
 
+    TestBean bean;
 
     @Override
     protected void initView(Bundle savedInstanceState) {
         pop = new PhotoPop(this);
-        TestBean.getInstance(this);
+        bean = TestBean.getInstance(this);
+        bean.setName("qiangyu");
+        bean.setGender("male");
+        bean.setAge(23);
+
     }
 
     @Override
@@ -60,11 +65,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 pop.show(button);
                 break;
             case R.id.insert:
-                TestBean.instance.insert(new String[]{"name", "gender", "age"}, new Object[]{"qiangyu", "male", 23});
+                bean.insert();
                 break;
             case R.id.update:
-                TestBean.instance.update(new String[]{"name", "gender", "age"}, new Object[]{"yangqiangyu", "male", 24},
-                        new String[]{"name"}, new String[]{"qiangyu"});
+                TestBean.instance.update(new String[]{"name"}, new String[]{"qiangyu"});
                 break;
             case R.id.select:
                 List<Map> list = TestBean.instance.queryListMap("select * from " + TestBean.class.getSimpleName(), null);
