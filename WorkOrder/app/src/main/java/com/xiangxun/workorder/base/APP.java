@@ -1,18 +1,14 @@
 package com.xiangxun.workorder.base;
 
-import android.app.ActivityManager;
-import android.content.Context;
 import android.os.StrictMode;
 import android.util.Log;
 
 import com.hellen.baseframe.application.FrameAPP;
 import com.hellen.baseframe.common.dlog.DLog;
 import com.hellen.baseframe.common.obsinfo.ConApp;
-import com.hellen.baseframe.common.obsinfo.LogApp;
 import com.xiangxun.workorder.BuildConfig;
 
 import java.io.File;
-import java.util.List;
 
 /**
  * Created by Zhangyuhui/Darly on 2017/5/15.

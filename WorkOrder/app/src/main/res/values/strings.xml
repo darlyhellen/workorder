@@ -2,81 +2,10 @@
 <resources>
 
     <string name="app_name">工作流</string>
-    <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="set_cache_succ">缓存清理完成！</string>
-    <string name="set_cache_fail">清理缓存失败，需要手动删除文件</string>
-    <!-- NetUtils -->
-    <string name="neterror">网络异常,请检查网络</string>
-    <string name="neterror_norespanse">请求过去，服务端返回数据失败</string>
-    <string name="yes">确认</string>
-    <string name="no">取消</string>
-    <string name="loading">加载中....</string>
-    <string name="start">开始旅行</string>
-    <string name="runother">先逛一逛</string>
-    <!-- AutoNav -->
-    <string name="nav_get">获取</string>
-    <string name="username">13891431454</string>
-    <string name="userpass">123</string>
-
-    <string name="sure">保存</string>
-
-    <!-- MainActivity -->
-    <string name="footer_main">首页</string>
-    <string name="footer_list">消息</string>
-    <string name="footer_msg">社区</string>
-    <string name="footer_act">赏花</string>
-    <string name="footer_center">设置</string>
-    <string name="main_free">免费</string>
-    <string name="ornamental">芳香类</string>
-    <string name="succulent">观果类</string>
-    <string name="venusaur">观花类</string>
-    <string name="center">个人中心</string>
-    <string name="helper">消息小助手</string>
-
-    <!-- LoginActivity -->
-    <string name="login">登录</string>
-    <string name="loginout">退出登录</string>
-    <string name="regest">注册账号</string>
-    <string name="find_pass">忘记密码</string>
-    <string name="register_pass">设置密码</string>
-    <string name="finds_pass">找回密码</string>
-    <string name="register_code">获取验证码</string>
-    <string name="register_code_two">重新获取</string>
-    <string name="register_next">下一步</string>
-    <string name="login_succ">登录成功</string>
-    <string name="login_nameorpassfail">用户名密码错误</string>
-    <string name="login_contain_null">用户名密码不能包含空格</string>
-    <string name="login_contain_mode">用户名不能包含表情</string>
-    <string name="huawei">华为应用市场</string>
-    <string name="un_login">未登录</string>
-
-    <string name="baogao">我的收藏</string>
-    <string name="yuyue">我的预约</string>
-    <string name="yijian">意见反馈</string>
-    <string name="shezhi">设置</string>
-    <string name="gengxin">检查更新</string>
-    <string name="guanyu">关于我们</string>
-
     <!-- popwindows -->
     <string name="photo">拍照</string>
     <string name="grapht">从相册中选取</string>
     <string name="consel">取消</string>
     <string name="subment">提交</string>
-
-    <!-- WXPayEntryActivity -->
-    <string name="app_tip">提示</string>
-    <string name="pay_result_tip">这个界面用于显示第三方app通过微信支付的结果</string>
-    <string name="pay_result_callback_msg" formatted="false">微信支付结果：%s</string>
-    <string name="zhur">主任医师</string>
-    <string name="fuzhur">副主任医师</string>
-    <string name="zhuz">主治医师</string>
-
-    <!--消息页面-->
-    <string name="news_del">删除</string>
-    <string name="news_all">全选</string>
-    <string name="news_allnot">全否</string>
-    <string name="news_opt">编辑</string>
-    <string name="news_col">完成</string>
 
 </resources>

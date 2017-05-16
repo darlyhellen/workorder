@@ -7,17 +7,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.hellen.baseframe.binder.ContentBinder;
 import com.hellen.baseframe.binder.ViewsBinder;
 import com.hellen.baseframe.common.dlog.DLog;
 import com.xiangxun.workorder.base.BaseActivity;
 import com.xiangxun.workorder.base.ConsMVP;
+import com.xiangxun.workorder.db.TestBean;
 import com.xiangxun.workorder.widget.PhotoPop;
 
 import java.io.File;
+import java.util.List;
+import java.util.Map;
 
 @ContentBinder(R.layout.activity_main)
 public class MainActivity extends BaseActivity implements View.OnClickListener {
@@ -28,25 +28,53 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public PhotoPop pop;
     @ViewsBinder(R.id.button)
     private Button button;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
+    @ViewsBinder(R.id.insert)
+    private Button insert;
+    @ViewsBinder(R.id.update)
+    private Button update;
+    @ViewsBinder(R.id.select)
+    private Button select;
+    @ViewsBinder(R.id.delete)
+    private Button delete;
+
 
     @Override
     protected void initView(Bundle savedInstanceState) {
         pop = new PhotoPop(this);
+        TestBean.getInstance(this);
     }
 
     @Override
     protected void initListener() {
         button.setOnClickListener(this);
+        insert.setOnClickListener(this);
+        update.setOnClickListener(this);
+        select.setOnClickListener(this);
+        delete.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        pop.show(button);
+        switch (v.getId()) {
+            case R.id.button:
+                pop.show(button);
+                break;
+            case R.id.insert:
+                TestBean.instance.insert(new String[]{"name", "gender", "age"}, new Object[]{"qiangyu", "male", 23});
+                break;
+            case R.id.update:
+                TestBean.instance.update(new String[]{"name", "gender", "age"}, new Object[]{"yangqiangyu", "male", 24},
+                        new String[]{"name"}, new String[]{"qiangyu"});
+                break;
+            case R.id.select:
+                List<Map> list = TestBean.instance.queryListMap("select * from " + TestBean.class.getSimpleName(), null);
+                DLog.i("SELECT" + "--" + String.valueOf(list));
+                break;
+            case R.id.delete:
+                TestBean.instance.delete(
+                        new String[]{"name"}, new String[]{"qiangyu"});
+                break;
+        }
     }
 
 
