@@ -1,11 +1,13 @@
 package com.xiangxun.workorder.ui.presenter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 
 import com.hellen.baseframe.common.dlog.DLog;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.db.TestBean;
+import com.xiangxun.workorder.ui.MainActivity;
 import com.xiangxun.workorder.ui.biz.Main;
 
 import java.util.List;
@@ -52,6 +54,10 @@ public class MainPresenter {
             case R.id.delete:
                 view.getBean().delete(
                         new String[]{"name"}, new String[]{"qiangyu"});
+                break;
+            case R.id.xw_share:
+                //進入設置頁面
+                context.startActivity(new Intent(context, MainActivity.class));
                 break;
         }
     }

@@ -77,6 +77,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         presenter = new MainPresenter(this);
 
         title.setTitle("工单系统");
+        title.setRightBackgroundResource(R.mipmap.set);
         data = new ArrayList<>();
         data.add(new Patrol("通讯录", R.mipmap.contact_phone));
         data.add(new Patrol("人员管理", R.mipmap.man_user_manage));
@@ -96,6 +97,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         update.setOnClickListener(this);
         select.setOnClickListener(this);
         delete.setOnClickListener(this);
+        title.setRightOnClickListener(this);
+        gridView.setOnItemClickListener(this);
     }
 
     @Override
