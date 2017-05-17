@@ -210,5 +210,12 @@
     <color name="chart_value_4">#B5CC84</color>
 
     <color name="color_cecece">#cecece</color>
+    <color name="color_71ac16">#71ac16</color>
+    <color name="color_5eb2ee">#ff5eb2ee</color>
+    <color name="color_1f8ce1">#1F8CE1</color>
+    <color name="color_e3e3e3">#e3e3e3</color>
+    <color name="transparent_white">#00000000</color>
+    <color name="color_eaeaea">#eaeaea</color>
+    <color name="color_ffffff">#ffffff</color>
 
 </resources>

@@ -21,11 +21,11 @@ public class LoginPresenter {
 
     private String TAG = getClass().getSimpleName();
     private Login userBiz;
-    private Login.MainView main;
+    private Login.LoginView main;
     private ShowLoading loading;
 
 
-    public LoginPresenter(Login.MainView main) {
+    public LoginPresenter(Login.LoginView main) {
         this.main = main;
         this.userBiz = new Login();
         loading = new ShowLoading((LoginActivity) main);

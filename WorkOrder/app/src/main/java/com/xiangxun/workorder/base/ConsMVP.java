@@ -95,26 +95,4 @@ public enum ConsMVP {
         this.dec = dec;
     }
 
-
-    /**
-     * 首页广告
-     */
-    public static final String UMENG_EVENT_1 = "event_1";
-    /**
-     * 商城
-     */
-    public static final String UMENG_EVENT_2 = "event_2";
-    /**
-     * 体检预约
-     */
-    public static final String UMENG_EVENT_3 = "event_3";
-    /**
-     * 报告查询
-     */
-    public static final String UMENG_EVENT_4 = "event_4";
-    /**
-     * 报告解读
-     */
-    public static final String UMENG_EVENT_5 = "event_5";
-
 }

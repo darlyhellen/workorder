@@ -8,7 +8,7 @@ import android.view.View.OnClickListener;
 import com.hellen.baseframe.binder.ContentBinder;
 import com.hellen.baseframe.binder.ViewsBinder;
 import com.hellen.baseframe.common.utiltools.SharePreferHelp;
-import com.xiangxun.workorder.MainActivity;
+import com.xiangxun.workorder.ui.MainActivity;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.BaseActivity;
 import com.xiangxun.workorder.base.ConsMVP;
@@ -17,9 +17,15 @@ import com.xiangxun.workorder.ui.login.edittext.ClearEditText;
 import com.xiangxun.workorder.ui.login.edittext.XSubButton;
 import com.xiangxun.workorder.ui.presenter.LoginPresenter;
 
-
+/**
+ * Created by Zhangyuhui/Darly on 2017/5/17.
+ * Copyright by [Zhangyuhui/Darly]
+ * ©2017 XunXiang.Company. All rights reserved.
+ *
+ * @TODO: 登陆页面
+ */
 @ContentBinder(R.layout.login_activity_layout)
-public class LoginActivity extends BaseActivity implements OnClickListener, Login.MainView {
+public class LoginActivity extends BaseActivity implements OnClickListener, Login.LoginView {
 
     @ViewsBinder(R.id.edt_user_acount)
     private ClearEditText mEdtAcount;
