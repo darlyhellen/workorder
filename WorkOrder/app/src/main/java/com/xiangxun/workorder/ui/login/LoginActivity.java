@@ -11,6 +11,7 @@ import com.hellen.baseframe.common.utiltools.SharePreferHelp;
 import com.xiangxun.workorder.MainActivity;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.BaseActivity;
+import com.xiangxun.workorder.base.ConsMVP;
 import com.xiangxun.workorder.ui.biz.Login;
 import com.xiangxun.workorder.ui.login.edittext.ClearEditText;
 import com.xiangxun.workorder.ui.login.edittext.XSubButton;
@@ -103,8 +104,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Logi
     protected void initView(Bundle savedInstanceState) {
         presenter = new LoginPresenter(this);
         mBtnLogin.setViewInit(R.string.mine_login_login, R.string.mine_login_loginning, mEdtAcount, mEdtPassWord);
-        String account = SharePreferHelp.getValue("loginName", null);
-        String password = SharePreferHelp.getValue("password", null);
+        String account = SharePreferHelp.getValue(ConsMVP.USERNAME.getDec(), null);
+        String password = SharePreferHelp.getValue(ConsMVP.PASSWORD.getDec(), null);
         mEdtAcount.setText(account);
         mEdtPassWord.setText(password);
     }
@@ -133,13 +134,16 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Logi
 
     @Override
     public void onLoginSuccess() {
+        SharePreferHelp.putValue(ConsMVP.USERNAME.getDec(), "13891431454");
+        SharePreferHelp.putValue(ConsMVP.PASSWORD.getDec(), "123456");
         startActivity(new Intent(this, MainActivity.class));
         end();
     }
 
     @Override
     public void onLoginFailed() {
-
+        SharePreferHelp.remove("loginName");
+        SharePreferHelp.remove("password");
     }
 
     @Override

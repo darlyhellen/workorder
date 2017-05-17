@@ -10,9 +10,12 @@ public enum ConsMVP {
     /**
      * 下午3:30:24 TODO 是否首次安装程序，判断是否进入引导页面。
      */
-    ISFIRSTCOME("checkisupdate", 0), WIDTH("screen width", 0), HEIGHT(
-            "screen height", 0), ISLOGIN("islogin", 0), USERINFO("userinfo", 0), BANNER("homebannar", 0), MAIN_FLOWER("main_flower", 0), PLAYPOSITION("playPosition", 0), TOKEN("token", 0), NOTUPDATE("noupdate", 0), CHECKISUPDATE(
-            "checkupdate", 0), THEME("theme", 0), REAL_PACKAGE_NAME("com.hellen.flower", 0);
+    ISFIRSTCOME("checkisupdate", 0), WIDTH("screen width", 0),
+    HEIGHT("screen height", 0), ISLOGIN("islogin", 0), USERINFO("userinfo", 0),
+    BANNER("homebannar", 0), MAIN_FLOWER("main_flower", 0), PLAYPOSITION("playPosition", 0),
+    TOKEN("token", 0), NOTUPDATE("noupdate", 0), CHECKISUPDATE("checkupdate", 0),
+    THEME("theme", 0), REAL_PACKAGE_NAME("com.hellen.flower", 0), USERNAME("loginName", 0),
+    PASSWORD("password", 0);
 
     public static final int DB_SELECT = 0x0001;
 
