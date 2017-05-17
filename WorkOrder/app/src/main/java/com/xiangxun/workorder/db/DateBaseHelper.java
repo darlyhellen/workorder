@@ -57,6 +57,11 @@ public abstract class DateBaseHelper {
     private String createSql;
     private String updateSql;
 
+
+    private List<String> cSqls;
+    private List<String> uSqls;
+
+
     protected int getVersion(Context context) {
         ApplicationInfo info = findMeta(context);
         if (info != null) {
@@ -90,12 +95,10 @@ public abstract class DateBaseHelper {
     }
 
     protected String getCreateSql() {
-        DLog.i(getSql());
         return getSql();
     }
 
     protected String getUpdateSql() {
-        DLog.i(getSql());
         return getSql();
     }
 
@@ -114,7 +117,6 @@ public abstract class DateBaseHelper {
                 Field f = fs[i];
                 f.setAccessible(true); //设置些属性是可以访问的
                 String type = f.getType().toString();
-                DLog.i(f.getName() + "---" + f.get(this) + "---" + type);
                 if (type.endsWith("String")) {
                     builder.append(f.getName());
                     builder.append(" varchar(255) NOT NULL,");
@@ -143,6 +145,7 @@ public abstract class DateBaseHelper {
             }
             builder.deleteCharAt(builder.length() - 1);
             builder.append(")");
+            DLog.i(builder.toString());
             return builder.toString();
         } catch (Exception e) {
             e.printStackTrace();
@@ -150,12 +153,12 @@ public abstract class DateBaseHelper {
         return builder.toString();
     }
 
-    public DateBaseHelper(Context context) {
-        this.dbName = this.getDbName(context);
-        this.version = this.getVersion(context);
+    public DateBaseHelper() {
+        this.dbName = this.getDbName(DBControler.instance.context);
+        this.version = this.getVersion(DBControler.instance.context);
         this.createSql = this.getCreateSql();
         this.updateSql = this.getUpdateSql();
-        this.dbHelper = new DBHelporer(context, this.dbName, null, this.version);
+        this.dbHelper = new DBHelporer(DBControler.instance.context, this.dbName, null, this.version);
     }
 
 
@@ -167,9 +170,11 @@ public abstract class DateBaseHelper {
         return this.db;
     }
 
-    protected void close() {
-        this.db.close();
-        this.dbHelper.close();
+    public void close() {
+        if (db != null) {
+            this.db.close();
+            this.dbHelper.close();
+        }
     }
 
 
@@ -186,13 +191,24 @@ public abstract class DateBaseHelper {
         @Override
         public void onCreate(SQLiteDatabase db) {
             //执行创建表语句
-            db.execSQL(DateBaseHelper.this.createSql);
+            DLog.i("onCreate" + cSqls);
+            if (cSqls != null) {
+                for (String sql : cSqls) {
+                    db.execSQL(sql);
+                }
+            }
+
         }
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             //执行更新语句
-            db.execSQL(DateBaseHelper.this.updateSql);
+            DLog.i("onCreate" + uSqls);
+            if (uSqls != null) {
+                for (String sql : uSqls) {
+                    db.execSQL(sql);
+                }
+            }
         }
     }
 
@@ -266,7 +282,10 @@ public abstract class DateBaseHelper {
      * @return 根据数组的列和值进行insert
      */
     public boolean insert() {
-        long rowId = this.db.insert(getClass().getSimpleName(), null, getContentValues());
+        if (db == null) {
+            open();
+        }
+        long rowId = db.insert(getClass().getSimpleName(), null, getContentValues());
         return rowId != -1;
     }
 
@@ -324,7 +343,10 @@ public abstract class DateBaseHelper {
      */
     public boolean update(String[] whereColumns, String[] whereArgs) {
         String whereClause = this.initWhereSqlFromArray(whereColumns);
-        int rowNumber = this.db.update(getClass().getSimpleName(), getContentValues(), whereClause, whereArgs);
+        if (db == null) {
+            open();
+        }
+        int rowNumber = db.update(getClass().getSimpleName(), getContentValues(), whereClause, whereArgs);
         return rowNumber > 0;
     }
 
@@ -336,7 +358,10 @@ public abstract class DateBaseHelper {
      */
     public boolean update(Map<String, String> whereParam) {
         Map map = this.initWhereSqlFromMap(whereParam);
-        int rowNumber = this.db.update(getClass().getSimpleName(), getContentValues(), (String) map.get("whereSql"), (String[]) map.get("whereSqlParam"));
+        if (db == null) {
+            open();
+        }
+        int rowNumber = db.update(getClass().getSimpleName(), getContentValues(), (String) map.get("whereSql"), (String[]) map.get("whereSqlParam"));
         return rowNumber > 0;
     }
 
@@ -349,7 +374,10 @@ public abstract class DateBaseHelper {
      */
     public boolean delete(String[] whereColumns, String[] whereParam) {
         String whereStr = this.initWhereSqlFromArray(whereColumns);
-        int rowNumber = this.db.delete(getClass().getSimpleName(), whereStr, whereParam);
+        if (db == null) {
+            open();
+        }
+        int rowNumber = db.delete(getClass().getSimpleName(), whereStr, whereParam);
         return rowNumber > 0;
     }
 
@@ -362,7 +390,10 @@ public abstract class DateBaseHelper {
      */
     public boolean delete(Map<String, String> whereParams) {
         Map map = this.initWhereSqlFromMap(whereParams);
-        int rowNumber = this.db.delete(getClass().getSimpleName(), map.get("whereSql").toString(), (String[]) map.get("whereSqlParam"));
+        if (db == null) {
+            open();
+        }
+        int rowNumber = db.delete(getClass().getSimpleName(), map.get("whereSql").toString(), (String[]) map.get("whereSqlParam"));
         return rowNumber > 0;
     }
 
@@ -376,7 +407,10 @@ public abstract class DateBaseHelper {
      */
     public List<Map> queryListMap(String sql, String[] params) {
         ArrayList list = new ArrayList();
-        Cursor cursor = this.db.rawQuery(sql, params);
+        if (db == null) {
+            open();
+        }
+        Cursor cursor = db.rawQuery(sql, params);
         int columnCount = cursor.getColumnCount();
         while (cursor.moveToNext()) {
             HashMap item = new HashMap();
@@ -411,7 +445,10 @@ public abstract class DateBaseHelper {
      * @return
      */
     public Map queryItemMap(String sql, String[] params) {
-        Cursor cursor = this.db.rawQuery(sql, params);
+        if (db == null) {
+            open();
+        }
+        Cursor cursor = db.rawQuery(sql, params);
         HashMap map = new HashMap();
         if (cursor.moveToNext()) {
             for (int i = 0; i < cursor.getColumnCount(); ++i) {
@@ -435,13 +472,4 @@ public abstract class DateBaseHelper {
         cursor.close();
         return map;
     }
-
-    public void execSQL(String sql) {
-        this.db.execSQL(sql);
-    }
-
-    public void execSQL(String sql, Object[] params) {
-        this.db.execSQL(sql, params);
-    }
-
 }

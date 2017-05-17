@@ -42,7 +42,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void initView(Bundle savedInstanceState) {
         pop = new PhotoPop(this);
-        bean = TestBean.getInstance(this);
+        bean = new TestBean();
         bean.setName("qiangyu");
         bean.setGender("male");
         bean.setAge(23);
@@ -68,14 +68,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 bean.insert();
                 break;
             case R.id.update:
-                TestBean.instance.update(new String[]{"name"}, new String[]{"qiangyu"});
+                bean.update(new String[]{"name"}, new String[]{"qiangyu"});
                 break;
             case R.id.select:
-                List<Map> list = TestBean.instance.queryListMap("select * from " + TestBean.class.getSimpleName(), null);
+                List<Map> list = bean.queryListMap("select * from " + TestBean.class.getSimpleName(), null);
                 DLog.i("SELECT" + "--" + String.valueOf(list));
                 break;
             case R.id.delete:
-                TestBean.instance.delete(
+                bean.delete(
                         new String[]{"name"}, new String[]{"qiangyu"});
                 break;
         }
@@ -114,6 +114,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             DLog.i(head_path);
             File temp = new File(head_path);
             pop.cropPhoto(Uri.fromFile(temp));// 裁剪图片
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (bean!=null){
+            bean.close();
         }
     }
 }

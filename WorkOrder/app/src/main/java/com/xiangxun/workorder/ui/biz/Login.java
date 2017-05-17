@@ -23,7 +23,7 @@ import com.xiangxun.workorder.base.APP;
 import com.xiangxun.workorder.base.ConsMVP;
 import com.xiangxun.workorder.bean.BaseModel;
 import com.xiangxun.workorder.bean.BaseModelPaser;
-import com.xiangxun.workorder.bean.UserInfo;
+import com.xiangxun.workorder.db.UserInfo;
 import com.xiangxun.workorder.common.retrofit.RxjavaRetrofitRequestUtil;
 
 import org.json.JSONException;

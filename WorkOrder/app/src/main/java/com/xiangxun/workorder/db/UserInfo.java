@@ -5,15 +5,19 @@
  * UserInfo.java
  * TODO
  */
-package com.xiangxun.workorder.bean;
+package com.xiangxun.workorder.db;
+
+import android.content.Context;
+
+import com.xiangxun.workorder.db.DateBaseHelper;
 
 import java.io.Serializable;
 
 /**
  *
  */
-public class UserInfo implements Serializable {
-    private Integer id;
+public class UserInfo extends DateBaseHelper implements Serializable {
+
 
     private String name;
 
@@ -51,38 +55,8 @@ public class UserInfo implements Serializable {
      */
     private String title;
 
-
-    /**
-     * 下午4:33:40
-     *
-     * @author zhangyh2
-     */
     public UserInfo() {
-        // TODO Auto-generated constructor stub
-    }
-
-    public UserInfo(String name, String pass, String sim, String icon,
-                    String idCard, Double money, String same, String sex, String tel,
-                    String token, String login) {
-        this.name = name;
-        this.pass = pass;
-        this.sim = sim;
-        this.icon = icon;
-        this.idCard = idCard;
-        this.money = money;
-        this.same = same;
-        this.sex = sex;
-        this.tel = tel;
-        this.token = token;
-        this.login = login;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
+        super();
     }
 
     public String getName() {

@@ -1,5 +1,7 @@
 package com.xiangxun.workorder.base;
 
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.StrictMode;
 import android.util.Log;
 
@@ -7,6 +9,7 @@ import com.hellen.baseframe.application.FrameAPP;
 import com.hellen.baseframe.common.dlog.DLog;
 import com.hellen.baseframe.common.obsinfo.ConApp;
 import com.xiangxun.workorder.BuildConfig;
+import com.xiangxun.workorder.db.DBControler;
 
 import java.io.File;
 
@@ -44,10 +47,11 @@ public class APP extends FrameAPP {
         ConsMVP.WIDTH.setLen(ConApp.getInstance().getWidth());
         ConsMVP.HEIGHT.setLen(ConApp.getInstance().getHeight());
         creatFile();
-        if (BuildConfig.DEBUG) {
+        if (!BuildConfig.DEBUG) {
             // 是否为开发测试环境。正式环境下无需打开调试。
             initStrictMode();
         }
+        DBControler.getInstance(this).init();
     }
 
     /**

@@ -8,7 +8,7 @@ import com.hellen.baseframe.common.obsinfo.LogApp;
 import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.APP;
-import com.xiangxun.workorder.bean.UserInfo;
+import com.xiangxun.workorder.db.UserInfo;
 import com.xiangxun.workorder.ui.biz.Login;
 import com.xiangxun.workorder.ui.login.LoginActivity;
 import com.xiangxun.workorder.widget.loading.ShowLoading;
