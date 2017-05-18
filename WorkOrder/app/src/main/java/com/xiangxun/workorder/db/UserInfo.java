@@ -18,6 +18,8 @@ import java.io.Serializable;
  */
 public class UserInfo extends DateBaseHelper implements Serializable {
 
+    @TableBinder
+    private int id;
 
     private String name;
 
@@ -57,6 +59,14 @@ public class UserInfo extends DateBaseHelper implements Serializable {
 
     public UserInfo() {
         super();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

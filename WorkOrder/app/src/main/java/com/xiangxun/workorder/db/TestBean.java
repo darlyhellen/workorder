@@ -12,6 +12,8 @@ public class TestBean extends DateBaseHelper {
         super();
     }
 
+    @TableBinder
+    private int id;
 
     private String name;
 
@@ -19,6 +21,13 @@ public class TestBean extends DateBaseHelper {
 
     private int age;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public void setName(String name) {
         this.name = name;

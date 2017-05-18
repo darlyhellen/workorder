@@ -42,10 +42,11 @@ public class MainPresenter {
                 view.getPop().show(v);
                 break;
             case R.id.insert:
-                view.getBean().insert();
+                view.getBean().save();
                 break;
             case R.id.update:
-                view.getBean().update();
+                view.getBean().setName("张宇辉");
+                view.getBean().save();
                 break;
             case R.id.select:
                 break;

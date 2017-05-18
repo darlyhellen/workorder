@@ -50,7 +50,6 @@ public class DBControler {
             try {
                 Class s = Class.forName(pack);
                 if ((DateBaseHelper.class).isAssignableFrom(s) && !DateBaseHelper.class.getSimpleName().equals(s.getSimpleName())) {
-                    DLog.i(s.getSuperclass() + "====" + s);
                     //过滤出来后，进行初始化遍历建立数据库
                     Object o = s.newInstance();
                     String createSql = (String) getFieldValue(o, "createSql");
@@ -70,13 +69,10 @@ public class DBControler {
             try {
                 Class s = Class.forName(pack);
                 if ((DateBaseHelper.class).isAssignableFrom(s) && !DateBaseHelper.class.getSimpleName().equals(s.getSimpleName())) {
-                    DLog.i(s.getSuperclass() + "====" + s);
-
                     Object o = s.newInstance();
                     setFieldValue(o, "cSqls", sql);
                     setFieldValue(o, "uSqls", upSql);
                     List<String> createSql = (List<String>) getFieldValue(o, "cSqls");
-                    DLog.i("获取设置的值，看看是否设置正常" + createSql);
                     invokeMethod(o,"open",null,null);
                     break;
                 }

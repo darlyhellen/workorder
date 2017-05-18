@@ -13,13 +13,10 @@ import android.text.TextUtils;
 import com.hellen.baseframe.common.dlog.DLog;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by Zhangyuhui/Darly on 2017/5/15.
@@ -102,12 +99,11 @@ public abstract class DateBaseHelper {
         return getSql();
     }
 
-
     private String getSql() {
         StringBuilder builder = new StringBuilder();
         builder.append("CREATE TABLE ");
         builder.append(getClass().getSimpleName());
-        builder.append("(id integer PRIMARY KEY NOT NULL,");
+        builder.append("(");
         try {
             //得到类对象
             Class userCla = (Class) getClass();
@@ -117,35 +113,41 @@ public abstract class DateBaseHelper {
                 Field f = fs[i];
                 f.setAccessible(true); //设置些属性是可以访问的
                 String type = f.getType().toString();
-                if (type.endsWith("String")) {
+                TableBinder binder = f.getAnnotation(TableBinder.class);
+                if (binder != null) {
+                    //过渡ID
                     builder.append(f.getName());
-                    builder.append(" varchar(255) NOT NULL,");
-                } else if (type.endsWith("Integer") || type.endsWith("int")) {
-                    builder.append(f.getName());
-                    builder.append(" integer NOT NULL,");
-                } else if (type.endsWith("Float") || type.endsWith("float")) {
-                    builder.append(f.getName());
-                    builder.append(" float NOT NULL,");
-                } else if (type.endsWith("Double") || type.endsWith("double")) {
-                    builder.append(f.getName());
-                    builder.append(" double NOT NULL,");
-                } else if (type.endsWith("Boolean") || type.endsWith("boolean")) {
-                    builder.append(f.getName());
-                    builder.append(" boolean NOT NULL,");
-                } else if (type.endsWith("Long") || type.endsWith("long")) {
-                    builder.append(f.getName());
-                    builder.append(" long NOT NULL,");
-                } else if (type.endsWith("Short") || type.endsWith("short")) {
-                    builder.append(f.getName());
-                    builder.append(" short NOT NULL,");
-                } else if (type.endsWith("Byte") || type.endsWith("byte")) {
-                    builder.append(f.getName());
-                    builder.append(" byte NOT NULL,");
+                    builder.append(" integer PRIMARY KEY NOT NULL,");
+                } else {
+                    if (type.endsWith("String")) {
+                        builder.append(f.getName());
+                        builder.append(" varchar(255) NOT NULL,");
+                    } else if (type.endsWith("Integer") || type.endsWith("int")) {
+                        builder.append(f.getName());
+                        builder.append(" integer NOT NULL,");
+                    } else if (type.endsWith("Float") || type.endsWith("float")) {
+                        builder.append(f.getName());
+                        builder.append(" float NOT NULL,");
+                    } else if (type.endsWith("Double") || type.endsWith("double")) {
+                        builder.append(f.getName());
+                        builder.append(" double NOT NULL,");
+                    } else if (type.endsWith("Boolean") || type.endsWith("boolean")) {
+                        builder.append(f.getName());
+                        builder.append(" boolean NOT NULL,");
+                    } else if (type.endsWith("Long") || type.endsWith("long")) {
+                        builder.append(f.getName());
+                        builder.append(" long NOT NULL,");
+                    } else if (type.endsWith("Short") || type.endsWith("short")) {
+                        builder.append(f.getName());
+                        builder.append(" short NOT NULL,");
+                    } else if (type.endsWith("Byte") || type.endsWith("byte")) {
+                        builder.append(f.getName());
+                        builder.append(" byte NOT NULL,");
+                    }
                 }
             }
             builder.deleteCharAt(builder.length() - 1);
             builder.append(")");
-            DLog.i(builder.toString());
             return builder.toString();
         } catch (Exception e) {
             e.printStackTrace();
@@ -213,31 +215,100 @@ public abstract class DateBaseHelper {
     }
 
 
-    /**
-     * @param values
-     * @param key
-     * @param value  统一对ContentValues处理
-     */
-    private void ContentValuesPut(ContentValues values, String key, Object value) {
-        if (value == null) {
-            values.put(key, "");
-        } else {
-            String className = value.getClass().getName();
-            if (className.equals("java.lang.String")) {
-                values.put(key, value.toString());
-            } else if (className.equals("java.lang.Integer")) {
-                values.put(key, Integer.valueOf(value.toString()));
-            } else if (className.equals("java.lang.Float")) {
-                values.put(key, Float.valueOf(value.toString()));
-            } else if (className.equals("java.lang.Double")) {
-                values.put(key, Double.valueOf(value.toString()));
-            } else if (className.equals("java.lang.Boolean")) {
-                values.put(key, Boolean.valueOf(value.toString()));
-            } else if (className.equals("java.lang.Long")) {
-                values.put(key, Long.valueOf(value.toString()));
-            } else if (className.equals("java.lang.Short")) {
-                values.put(key, Short.valueOf(value.toString()));
+    public void save() {
+        if (db == null) {
+            open();
+        }
+        //首先查询数据库中，是否存在此数据。当然不考虑ID
+        Cursor c = findOne();
+        if (c != null && c.getCount() != 0) {
+            //有东西
+            DLog.i("更新数据");
+            //可以更新
+            while (c.moveToNext()) {
+                c.getCount();
+                int id = c.getInt(c.getColumnIndex("id"));
+                db.update(getClass().getSimpleName(), getContentValues(), "id = ?", new String[]{id + ""});
             }
+            c.close();
+        } else {
+            db.insert(getClass().getSimpleName(), null, getContentValues());
+            DLog.i("直接插入数据");
+            //插入完成后，进行修改ID
+            Cursor t = findOne();
+            if (t != null) {
+                while (t.moveToNext()) {
+                    int sid = t.getInt(t.getColumnIndex("id"));
+                    setID(sid);
+                }
+                t.close();
+            }
+        }
+    }
+
+    public Cursor findOne() {
+        Cursor c = null;
+        String buffer = "id = " + findID();
+        DLog.i("findOne---" + buffer);
+        c = db.query(getClass().getSimpleName(), null, buffer, null, null, null, null);
+        if (c != null && c.getCount() != 0) {
+            return c;
+        } else {
+            Map<String, Object> map = getContentMap();
+            StringBuilder builder = new StringBuilder();
+            int i = 0;
+            for (Map.Entry<String, Object> entry : map.entrySet()) {
+                builder.append(entry.getKey());
+                builder.append(" = '");
+                builder.append(entry.getValue());
+                if (i != map.size() - 1) {
+                    builder.append("' and ");
+                } else {
+                    builder.append("'");
+                }
+                i++;
+            }
+            c = db.query(getClass().getSimpleName(), null, builder.toString(), null, null, null, null);
+        }
+        return c;
+    }
+
+    private int findID() {
+        int ob = 0;
+        try {
+            //得到类对象
+            Class userCla = (Class) getClass();
+            //得到类中的所有属性集合
+            Field[] fs = userCla.getDeclaredFields();
+            for (int i = 0; i < fs.length; i++) {
+                Field f = fs[i];
+                f.setAccessible(true); //设置些属性是可以访问的
+                if ("id".equals(f.getName())) {
+                    ob = Integer.valueOf(f.get(this).toString());
+                }
+            }
+            return ob;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ob;
+    }
+
+    private void setID(int sid) {
+        try {
+            //得到类对象
+            Class userCla = (Class) getClass();
+            //得到类中的所有属性集合
+            Field[] fs = userCla.getDeclaredFields();
+            for (int i = 0; i < fs.length; i++) {
+                Field f = fs[i];
+                f.setAccessible(true); //设置些属性是可以访问的
+                if ("id".equals(f.getName())) {
+                    f.set(this, sid);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -252,7 +323,11 @@ public abstract class DateBaseHelper {
                 Field f = fs[i];
                 f.setAccessible(true); //设置些属性是可以访问的
                 String type = f.getType().toString();
-                DLog.i(f.getName() + "---" + f.get(this) + "---" + type);
+                TableBinder binder = f.getAnnotation(TableBinder.class);
+                if (binder != null) {
+                    //id过渡
+                    continue;
+                }
                 if (type.endsWith("String")) {
                     contentValues.put(f.getName(), String.valueOf(f.get(this).toString()));
                 } else if (type.endsWith("Integer") || type.endsWith("int")) {
@@ -278,198 +353,114 @@ public abstract class DateBaseHelper {
         return contentValues;
     }
 
-    /**
-     * @return 根据数组的列和值进行insert
-     */
-    public boolean insert() {
+    private Map<String, Object> getContentMap() {
+        Map<String, Object> contentValues = new HashMap<String, Object>();
+        try {
+            //得到类对象
+            Class userCla = (Class) getClass();
+            //得到类中的所有属性集合
+            Field[] fs = userCla.getDeclaredFields();
+            for (int i = 0; i < fs.length; i++) {
+                Field f = fs[i];
+                f.setAccessible(true); //设置些属性是可以访问的
+                String type = f.getType().toString();
+                TableBinder binder = f.getAnnotation(TableBinder.class);
+                if (binder != null) {
+                    //id过渡
+                    continue;
+                }
+                if (type.endsWith("String")) {
+                    contentValues.put(f.getName(), String.valueOf(f.get(this).toString()));
+                } else if (type.endsWith("Integer") || type.endsWith("int")) {
+                    contentValues.put(f.getName(), Integer.valueOf(f.get(this).toString()));
+                } else if (type.endsWith("Float") || type.endsWith("float")) {
+                    contentValues.put(f.getName(), Float.valueOf(f.get(this).toString()));
+                } else if (type.endsWith("Double") || type.endsWith("double")) {
+                    contentValues.put(f.getName(), Double.valueOf(f.get(this).toString()));
+                } else if (type.endsWith("Boolean") || type.endsWith("boolean")) {
+                    contentValues.put(f.getName(), Boolean.valueOf(f.get(this).toString()));
+                } else if (type.endsWith("Long") || type.endsWith("long")) {
+                    contentValues.put(f.getName(), Long.valueOf(f.get(this).toString()));
+                } else if (type.endsWith("Short") || type.endsWith("short")) {
+                    contentValues.put(f.getName(), Short.valueOf(f.get(this).toString()));
+                } else if (type.endsWith("Byte") || type.endsWith("byte")) {
+                    contentValues.put(f.getName(), Byte.valueOf(f.get(this).toString()));
+                }
+            }
+            return contentValues;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return contentValues;
+    }
+
+
+    public void select() {
         if (db == null) {
             open();
         }
-        long rowId = db.insert(getClass().getSimpleName(), null, getContentValues());
-        return rowId != -1;
+        //获取到了查询信息。
+        Cursor c = db.rawQuery(null, new String[]{});
     }
 
     /**
-     * 统一对数组where条件进行拼接
-     *
-     * @param whereColumns
      * @return
      */
-    private String initWhereSqlFromArray(String[] whereColumns) {
-        StringBuffer whereStr = new StringBuffer();
-        for (int i = 0; i < whereColumns.length; ++i) {
-            whereStr.append(whereColumns[i]).append(" = ? ");
-            if (i < whereColumns.length - 1) {
-                whereStr.append(" and ");
-            }
+    public boolean deleteAll() {
+        if (db == null) {
+            open();
         }
-        return whereStr.toString();
+        int rowNumber = db.delete(getClass().getSimpleName(), null, null);
+        return rowNumber > 0;
     }
-
-    /**
-     * 统一对map的where条件和值进行处理
-     *
-     * @param whereParams
-     * @return
-     */
-    private Map<String, Object> initWhereSqlFromMap(Map<String, String> whereParams) {
-        Set set = whereParams.keySet();
-        String[] temp = new String[whereParams.size()];
-        int i = 0;
-        Iterator iterator = set.iterator();
-        StringBuffer whereStr = new StringBuffer();
-        while (iterator.hasNext()) {
-            String key = (String) iterator.next();
-            whereStr.append(key).append(" = ? ");
-            temp[i] = whereParams.get(key);
-            if (i < set.size() - 1) {
-                whereStr.append(" and ");
-            }
-            i++;
-        }
-        HashMap result = new HashMap();
-        result.put("whereSql", whereStr);
-        result.put("whereSqlParam", temp);
-        return result;
-    }
-
 
     /**
      * 根据数组条件来update
      *
-     * @param whereColumns
-     * @param whereArgs
      * @return
      */
-    public boolean update(String[] whereColumns, String[] whereArgs) {
-        String whereClause = this.initWhereSqlFromArray(whereColumns);
+    public boolean delete() {
         if (db == null) {
             open();
         }
-        int rowNumber = db.update(getClass().getSimpleName(), getContentValues(), whereClause, whereArgs);
-        return rowNumber > 0;
-    }
-
-    /**
-     * 根据map值来进行update
-     *
-     * @param whereParam
-     * @return
-     */
-    public boolean update(Map<String, String> whereParam) {
-        Map map = this.initWhereSqlFromMap(whereParam);
-        if (db == null) {
-            open();
+        int ob = 0;
+        try {
+            ob = (int) DBControler.instance.getFieldValue(getClass().newInstance(), "id");
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
         }
-        int rowNumber = db.update(getClass().getSimpleName(), getContentValues(), (String) map.get("whereSql"), (String[]) map.get("whereSqlParam"));
-        return rowNumber > 0;
-    }
-
-    /**
-     * 根据数组条件进行delete
-     *
-     * @param whereColumns
-     * @param whereParam
-     * @return
-     */
-    public boolean delete(String[] whereColumns, String[] whereParam) {
-        String whereStr = this.initWhereSqlFromArray(whereColumns);
-        if (db == null) {
-            open();
-        }
-        int rowNumber = db.delete(getClass().getSimpleName(), whereStr, whereParam);
+        int rowNumber = db.delete(getClass().getSimpleName(), "id = ", new String[]{ob + ""});
         return rowNumber > 0;
     }
 
 
-    /**
-     * 根据map来进行delete
-     *
-     * @param whereParams
-     * @return
-     */
-    public boolean delete(Map<String, String> whereParams) {
-        Map map = this.initWhereSqlFromMap(whereParams);
+    public List selectUrl() {
         if (db == null) {
             open();
         }
-        int rowNumber = db.delete(getClass().getSimpleName(), map.get("whereSql").toString(), (String[]) map.get("whereSqlParam"));
-        return rowNumber > 0;
-    }
+        Object ob = null;
+        try {
+            Field id = getClass().getDeclaredField("url");
+            id.setAccessible(true); //设置些属性是可以访问的
+            ob = id.get(this);
 
-
-    /**
-     * 查询返回List
-     *
-     * @param sql
-     * @param params
-     * @return
-     */
-    public List<Map> queryListMap(String sql, String[] params) {
-        ArrayList list = new ArrayList();
-        if (db == null) {
-            open();
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
         }
-        Cursor cursor = db.rawQuery(sql, params);
-        int columnCount = cursor.getColumnCount();
+
+        Cursor cursor = db.query(getClass().getSimpleName(), null, "url = ", new String[]{ob + ""}, null, null, null);
         while (cursor.moveToNext()) {
-            HashMap item = new HashMap();
-            for (int i = 0; i < columnCount; ++i) {
-                int type = cursor.getType(i);
-                switch (type) {
-                    case 0:
-                        item.put(cursor.getColumnName(i), null);
-                        break;
-                    case 1:
-                        item.put(cursor.getColumnName(i), cursor.getInt(i));
-                        break;
-                    case 2:
-                        item.put(cursor.getColumnName(i), cursor.getFloat(i));
-                        break;
-                    case 3:
-                        item.put(cursor.getColumnName(i), cursor.getString(i));
-                        break;
-                }
-            }
-            list.add(item);
+
         }
         cursor.close();
-        return list;
+        return new ArrayList();
     }
 
-    /**
-     * 查询单条数据返回map
-     *
-     * @param sql
-     * @param params
-     * @return
-     */
-    public Map queryItemMap(String sql, String[] params) {
-        if (db == null) {
-            open();
-        }
-        Cursor cursor = db.rawQuery(sql, params);
-        HashMap map = new HashMap();
-        if (cursor.moveToNext()) {
-            for (int i = 0; i < cursor.getColumnCount(); ++i) {
-                int type = cursor.getType(i);
-                switch (type) {
-                    case 0:
-                        map.put(cursor.getColumnName(i), null);
-                        break;
-                    case 1:
-                        map.put(cursor.getColumnName(i), cursor.getInt(i));
-                        break;
-                    case 2:
-                        map.put(cursor.getColumnName(i), cursor.getFloat(i));
-                        break;
-                    case 3:
-                        map.put(cursor.getColumnName(i), cursor.getString(i));
-                        break;
-                }
-            }
-        }
-        cursor.close();
-        return map;
-    }
+    ;
+
+
 }
