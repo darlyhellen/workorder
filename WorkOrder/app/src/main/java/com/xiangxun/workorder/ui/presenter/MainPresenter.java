@@ -45,15 +45,12 @@ public class MainPresenter {
                 view.getBean().insert();
                 break;
             case R.id.update:
-                view.getBean().update(new String[]{"name"}, new String[]{"qiangyu"});
+                view.getBean().update();
                 break;
             case R.id.select:
-                List<Map> list = view.getBean().queryListMap("select * from " + TestBean.class.getSimpleName(), null);
-                DLog.i("SELECT" + "--" + String.valueOf(list));
                 break;
             case R.id.delete:
-                view.getBean().delete(
-                        new String[]{"name"}, new String[]{"qiangyu"});
+                view.getBean().delete();
                 break;
             case R.id.xw_share:
                 //進入設置頁面

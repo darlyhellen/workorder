@@ -22,12 +22,12 @@
     <GridView
         android:id="@+id/gv_home"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_padding15"
         android:divider="@null"
         android:horizontalSpacing="@dimen/margin_padding5"
         android:listSelector="@color/transparent_white"
-        android:numColumns="3"
+        android:numColumns="6"
         android:scrollbars="none"
         android:verticalSpacing="@dimen/margin_padding8" />
 
