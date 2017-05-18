@@ -2,7 +2,7 @@ package com.xiangxun.workorder.common.retrofit;
 
 import com.hellen.baseframe.common.dlog.DLog;
 import com.xiangxun.workorder.base.APP;
-import com.xiangxun.workorder.base.ConsHttpUrl;
+import com.xiangxun.workorder.base.Api;
 import com.xiangxun.workorder.base.HttpRetrofitInterface;
 
 import java.util.concurrent.TimeUnit;
@@ -74,7 +74,7 @@ public class RxjavaRetrofitRequestUtil {
                 .client(builder.build())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .baseUrl(ConsHttpUrl.HOSTNEW)
+                .baseUrl(Api.getUrl())
                 .build();
         return retrofit.create(HttpRetrofitInterface.class);
     }
@@ -91,7 +91,7 @@ public class RxjavaRetrofitRequestUtil {
                 .client(builder.build())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .baseUrl(ConsHttpUrl.HOSTNEW)
+                .baseUrl(Api.getUrl())
                 .build();
         return retrofit.create(HttpRetrofitInterface.class);
     }

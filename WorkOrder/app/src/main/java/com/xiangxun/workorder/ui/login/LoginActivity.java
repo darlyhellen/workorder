@@ -8,10 +8,10 @@ import android.view.View.OnClickListener;
 import com.hellen.baseframe.binder.ContentBinder;
 import com.hellen.baseframe.binder.ViewsBinder;
 import com.hellen.baseframe.common.utiltools.SharePreferHelp;
-import com.xiangxun.workorder.ui.MainActivity;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.BaseActivity;
 import com.xiangxun.workorder.base.ConsMVP;
+import com.xiangxun.workorder.ui.MainActivity;
 import com.xiangxun.workorder.ui.biz.Login;
 import com.xiangxun.workorder.ui.login.edittext.ClearEditText;
 import com.xiangxun.workorder.ui.login.edittext.XSubButton;
@@ -38,73 +38,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Logi
 
 
     private LoginPresenter presenter;
-//    private Handler mHandler = new Handler() {
-//        public void handleMessage(Message msg) {
-//            mBtnLogin.setNormal();
-//            switch (msg.what) {
-//                case ConstantStatus.loadSuccess:
-//                    LoginData loginData = (LoginData) msg.obj;
-//                    Login login = loginData.getLogin();
-//                    if (login != null && "false".equals(login.getRes())) {
-//                        MsgToast.geToast().setMsg("登录失败, 请检查用户名或者密码是否正确~");
-//                        return;
-//                    }
-//                    MsgToast.geToast().setMsg("登录成功");
-//                    if (loginData.getUser() != null && loginData.getUser().size() > 0) {
-//                        UserData userData = loginData.getUser().get(0);
-//                        InfoCache.getInstance().setUserData(userData);
-//                        ShareDataUtils.setSharedStringData(mContext, SharedPreferencesKeys.USERNAME, acount);
-//                        ShareDataUtils.setSharedStringData(mContext, SharedPreferencesKeys.PASSWORD, password);
-//                        ShareDataUtils.setSharedStringData(mContext, SharedPreferencesKeys.USERID, userData.getId());
-//                        ShareDataUtils.setSharedStringData(mContext, SharedPreferencesKeys.NAME, userData.getName());
-//                        ShareDataUtils.setSharedStringData(mContext, SharedPreferencesKeys.DEPTID, userData.getDeptid());
-//                        ShareDataUtils.setSharedStringData(mContext, SharedPreferencesKeys.DUTYORGID, userData.getDutyorgcode());
-//                        ShareDataUtils.setSharedStringData(mContext, SharedPreferencesKeys.USERPHONE, userData.getMobile());
-//                        ShareDataUtils.setSharedStringData(mContext, SharedPreferencesKeys.MOBILEROLES, userData.getMobileRoles());
-//                        XiangXunApplication.getInstance().setIsFirstIn(Tools.getAppVersionName(LoginActivity.this));
-//                        List<Menu> menus = loginData.getMenu();
-//                        if (menus != null && menus.size() > 0) {
-//                            for (int i = 0; i < menus.size(); i++) {
-//                                Menu menu = menus.get(i);
-//                                if (menu != null && "物资管理".equals(menu.getName())) {
-//                                    List<ChildrenRoot> children = menu.getChildren();
-//                                    if (children != null && children.size() > 0) {
-//                                        ShareDataUtils.saveObject(mContext, "menu_materiel", children);
-//                                    }
-//                                } else if (menu != null && "设备管理".equals(menu.getName())) {
-//                                    List<ChildrenRoot> children = menu.getChildren();
-//                                    if (children != null && children.size() > 0) {
-//                                        ShareDataUtils.saveObject(mContext, "menu_device", children);
-//                                    }
-//                                } else if (menu != null && "道路挖占".equals(menu.getName())) {
-//                                    List<ChildrenRoot> children = menu.getChildren();
-//                                    if (children != null && children.size() > 0) {
-//                                        ShareDataUtils.saveObject(mContext, "menu_occupy", children);
-//                                    }
-//                                } else if (menu != null && "巡视系统".equals(menu.getName())) {
-//                                    List<ChildrenRoot> children = menu.getChildren();
-//                                    if (children != null && children.size() > 0) {
-//                                        ShareDataUtils.saveObject(mContext, "menu_patrol", children);
-//                                    }
-//                                }
-//                            }
-//                            ShareDataUtils.saveObject(mContext, "home_menu", menus);
-//                        }
-//                        startActivity(new Intent(mContext, MainActivity.class));
-//                        finish();
-//                    } else {
-//                        MsgToast.geToast().setMsg("登录失败, 请重新登录~");
-//                    }
-//                    break;
-//                case ConstantStatus.loadFailed:
-//                    MsgToast.geToast().setMsg("登录失败");
-//                    break;
-//                case ConstantStatus.NetWorkError:
-//                    MsgToast.geToast().setMsg("数据异常");
-//                    break;
-//            }
-//        }
-//    };
 
     @Override
     protected void initView(Bundle savedInstanceState) {
