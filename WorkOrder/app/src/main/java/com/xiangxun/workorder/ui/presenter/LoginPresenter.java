@@ -6,8 +6,10 @@ import android.view.View;
 import com.hellen.baseframe.application.FrameListener;
 import com.hellen.baseframe.common.obsinfo.LogApp;
 import com.hellen.baseframe.common.obsinfo.ToastApp;
+import com.hellen.baseframe.common.utiltools.SharePreferHelp;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.APP;
+import com.xiangxun.workorder.base.ConsMVP;
 import com.xiangxun.workorder.bean.LoginRoot;
 import com.xiangxun.workorder.db.UserInfo;
 import com.xiangxun.workorder.ui.biz.Login;
@@ -25,7 +27,6 @@ public class LoginPresenter {
     private Login.LoginView main;
     private ShowLoading loading;
 
-    private boolean isGet;
 
     public LoginPresenter(Login.LoginView main) {
         this.main = main;
@@ -43,12 +44,15 @@ public class LoginPresenter {
         switch (v.getId()) {
             case R.id.btn_login:
                 if (APP.isNetworkConnected(context)) {
-                    if (!isGet) {
-                        isGet = true;
-                    } else {
-                        isGet = false;
-                    }
                     login(context);
+                } else {
+                    ToastApp.showToast(R.string.neterror);
+                }
+                LogApp.i("onClick--mUserLoginPresenter.login()");
+                break;
+            case R.id.btn_login_post:
+                if (APP.isNetworkConnected(context)) {
+                    login_post(context);
                 } else {
                     ToastApp.showToast(R.string.neterror);
                 }
@@ -63,67 +67,71 @@ public class LoginPresenter {
         LogApp.i(TAG, "login");
         userBiz.onStart(loading);
         main.setDisableClick();
-        if (isGet) {
-            userBiz.login_in(context, main.getUserName(), main.getPassword(),
-                    new FrameListener<LoginRoot>() {
+        userBiz.login_get(context, main.getUserName(), main.getPassword(),
+                new FrameListener<LoginRoot>() {
 
-                        @Override
-                        public void onSucces(final LoginRoot result) {
-                            // TODO Auto-generated method stub
-                            main.onLoginSuccess();
-                            main.setEnableClick();
-                            userBiz.onStop(loading);
-                        }
+                    @Override
+                    public void onSucces(final LoginRoot result) {
+                        // TODO Auto-generated method stub
+                        main.onLoginSuccess();
+                        main.setEnableClick();
+                        userBiz.onStop(loading);
+                    }
 
-                        @Override
-                        public void onFaild(int code, String info) {
-                            // TODO Auto-generated method stub
-                            main.onLoginFailed();
-                            main.setEnableClick();
-                            userBiz.onStop(loading);
-                            switch (code) {
-                                case 0:
-                                    ToastApp.showToast(info);
-                                    break;
-                                case 1:
-                                    ToastApp.showToast("网络请求异常");
-                                    break;
-                                default:
-                                    break;
-                            }
+                    @Override
+                    public void onFaild(int code, String info) {
+                        // TODO Auto-generated method stub
+                        main.onLoginFailed();
+                        main.setEnableClick();
+                        userBiz.onStop(loading);
+                        switch (code) {
+                            case 0:
+                                ToastApp.showToast(info);
+                                break;
+                            case 1:
+                                ToastApp.showToast("网络请求异常");
+                                break;
+                            default:
+                                break;
                         }
-                    });
-        } else {
-            userBiz.login_get(context, main.getUserName(), main.getPassword(),
-                    new FrameListener<LoginRoot>() {
+                    }
+                });
 
-                        @Override
-                        public void onSucces(final LoginRoot result) {
-                            // TODO Auto-generated method stub
-                            main.onLoginSuccess();
-                            main.setEnableClick();
-                            userBiz.onStop(loading);
-                        }
+    }
 
-                        @Override
-                        public void onFaild(int code, String info) {
-                            // TODO Auto-generated method stub
-                            main.onLoginFailed();
-                            main.setEnableClick();
-                            userBiz.onStop(loading);
-                            switch (code) {
-                                case 0:
-                                    ToastApp.showToast(info);
-                                    break;
-                                case 1:
-                                    ToastApp.showToast("网络请求异常");
-                                    break;
-                                default:
-                                    break;
-                            }
+    public void login_post(Context context) {
+        LogApp.i(TAG, "login");
+        userBiz.onStart(loading);
+        main.setDisableClick();
+        userBiz.login_in(context, main.getUserName(), main.getPassword(),
+                new FrameListener<LoginRoot>() {
+
+                    @Override
+                    public void onSucces(final LoginRoot result) {
+                        // TODO Auto-generated method stub
+                        main.onLoginSuccess();
+                        main.setEnableClick();
+                        userBiz.onStop(loading);
+                    }
+
+                    @Override
+                    public void onFaild(int code, String info) {
+                        // TODO Auto-generated method stub
+                        main.onLoginFailed();
+                        main.setEnableClick();
+                        userBiz.onStop(loading);
+                        switch (code) {
+                            case 0:
+                                ToastApp.showToast(info);
+                                break;
+                            case 1:
+                                ToastApp.showToast("网络请求异常");
+                                break;
+                            default:
+                                break;
                         }
-                    });
-        }
+                    }
+                });
     }
 
 }

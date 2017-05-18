@@ -33,6 +33,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Logi
     private ClearEditText mEdtPassWord;
     @ViewsBinder(R.id.btn_login)
     private XSubButton mBtnLogin;
+    @ViewsBinder(R.id.btn_login_post)
+    private XSubButton mBtnLogin_post;
     private String password;
     private String acount;
 
@@ -43,6 +45,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Logi
     protected void initView(Bundle savedInstanceState) {
         presenter = new LoginPresenter(this);
         mBtnLogin.setViewInit(R.string.mine_login_login, R.string.mine_login_loginning, mEdtAcount, mEdtPassWord);
+        mBtnLogin_post.setViewInit(R.string.mine_login_login, R.string.mine_login_loginning, mEdtAcount, mEdtPassWord);
         String account = SharePreferHelp.getValue(ConsMVP.USERNAME.getDec(), null);
         String password = SharePreferHelp.getValue(ConsMVP.PASSWORD.getDec(), null);
         mEdtAcount.setText(account);
@@ -52,7 +55,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Logi
     @Override
     public void initListener() {
         mBtnLogin.setOnClickListener(this);
-
+        mBtnLogin_post.setOnClickListener(this);
     }
 
     @Override
@@ -73,8 +76,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Logi
 
     @Override
     public void onLoginSuccess() {
-        SharePreferHelp.putValue(ConsMVP.USERNAME.getDec(), "13891431454");
-        SharePreferHelp.putValue(ConsMVP.PASSWORD.getDec(), "123456");
         startActivity(new Intent(this, MainActivity.class));
         end();
     }
@@ -103,11 +104,14 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Logi
     @Override
     public void setDisableClick() {
         mBtnLogin.setEnabled(false);
+        mBtnLogin_post.setEnabled(false);
     }
 
     @Override
     public void setEnableClick() {
         mBtnLogin.setEnabled(true);
         mBtnLogin.setNormal();
+        mBtnLogin_post.setEnabled(true);
+        mBtnLogin_post.setNormal();
     }
 }

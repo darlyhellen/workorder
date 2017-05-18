@@ -56,7 +56,7 @@ public class Login implements FramePresenter {
      * @see com.hellen.biz.LoginPresent#login(java.lang.String,
      * java.lang.String, com.hellen.biz.OnLoginListener)
      */
-    public void login_in(Context context, String username, String password,
+    public void login_in(Context context, final String username, final String password,
                          final FrameListener<LoginRoot> listener) {
         // TODO Auto-generated method stub
         if (!APP.isNetworkConnected(APP.getInstance())) {
@@ -89,11 +89,6 @@ public class Login implements FramePresenter {
             return;
         }
 
-
-        if (username.equals("13891431454") && password.equals("123456")) {
-            listener.onSucces(new LoginRoot());
-            return;
-        }
         JSONObject ob = new JSONObject();
         try {
             ob.put("loginName", username);
@@ -121,6 +116,9 @@ public class Login implements FramePresenter {
                                     ConsMVP.USERINFO.getDec(), s.toString());
                             SharePreferHelp.putValue(
                                     ConsMVP.ISLOGIN.getDec(), true);
+                            SharePreferHelp.putValue(ConsMVP.USERNAME.getDec(), username);
+                            SharePreferHelp.putValue(ConsMVP.PASSWORD.getDec(), password);
+                            SharePreferHelp.putValue(ConsMVP.USERID.getDec(), root.getData().getId());
                         }
                         return root;
                     }
@@ -155,7 +153,7 @@ public class Login implements FramePresenter {
     }
 
 
-    public void login_get(Context context, String username, String password,
+    public void login_get(Context context, final String username, final String password,
                           final FrameListener<LoginRoot> listener) {
         // TODO Auto-generated method stub
         if (!APP.isNetworkConnected(APP.getInstance())) {
@@ -204,6 +202,9 @@ public class Login implements FramePresenter {
                                     ConsMVP.USERINFO.getDec(), s.toString());
                             SharePreferHelp.putValue(
                                     ConsMVP.ISLOGIN.getDec(), true);
+                            SharePreferHelp.putValue(ConsMVP.USERNAME.getDec(), username);
+                            SharePreferHelp.putValue(ConsMVP.PASSWORD.getDec(), password);
+                            SharePreferHelp.putValue(ConsMVP.USERID.getDec(), root.getData().getId());
                         }
                         return root;
                     }

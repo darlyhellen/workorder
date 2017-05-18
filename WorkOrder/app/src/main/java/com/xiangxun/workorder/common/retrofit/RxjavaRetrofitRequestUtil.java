@@ -1,6 +1,7 @@
 package com.xiangxun.workorder.common.retrofit;
 
 import com.hellen.baseframe.common.dlog.DLog;
+import com.xiangxun.workorder.BuildConfig;
 import com.xiangxun.workorder.base.APP;
 import com.xiangxun.workorder.base.Api;
 import com.xiangxun.workorder.base.HttpRetrofitInterface;
@@ -34,13 +35,15 @@ public class RxjavaRetrofitRequestUtil {
     }
 
     private void initClient() {
-        HttpLoggingInterceptor log = new HttpLoggingInterceptor();
-        log.setLevel(HttpLoggingInterceptor.Level.BODY);
         builder = new OkHttpClient.Builder();
         //设置请求超时时间
         builder.connectTimeout(REQUEST_TIME, TimeUnit.SECONDS);
         //设置请求日志
-        builder.addInterceptor(log);
+        if (BuildConfig.DEBUG) {
+            HttpLoggingInterceptor log = new HttpLoggingInterceptor();
+            log.setLevel(HttpLoggingInterceptor.Level.BODY);
+            builder.addInterceptor(log);
+        }
         interSize = builder.interceptors().size();
         builder.addInterceptor(RxInterceptor.getInstance());
 

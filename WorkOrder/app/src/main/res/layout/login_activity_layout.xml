@@ -84,6 +84,13 @@
             android:id="@+id/btn_login"
             android:layout_width="fill_parent"
             android:layout_height="@dimen/view_height40"
+            android:layout_marginTop="@dimen/margin_padding40"
+            android:visibility="gone" />
+
+        <com.xiangxun.workorder.ui.login.edittext.XSubButton
+            android:id="@+id/btn_login_post"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/view_height40"
             android:layout_marginTop="@dimen/margin_padding40" />
     </LinearLayout>
 

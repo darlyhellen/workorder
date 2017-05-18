@@ -1,6 +1,10 @@
 package com.xiangxun.workorder.common.retrofit;
 
+import android.text.TextUtils;
+
+import com.hellen.baseframe.common.utiltools.SharePreferHelp;
 import com.xiangxun.workorder.base.APP;
+import com.xiangxun.workorder.base.ConsMVP;
 
 import java.io.IOException;
 
@@ -38,11 +42,21 @@ public class RxInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request.Builder builder = chain.request().newBuilder();
-        builder.addHeader("Content-Type", "application/json;charset=UTF-8")
-                .addHeader("Accept", "application/json")
-                .addHeader("charset", "utf-8")
-                .addHeader("version", APPSYS_STRING + VersionCode)
-                .build();
+        String userID = SharePreferHelp.getValue(ConsMVP.USERID.getDec(),null);
+        if (TextUtils.isEmpty(userID)){
+            builder.addHeader("Content-Type", "application/json;charset=UTF-8")
+                    .addHeader("Accept", "application/json")
+                    .addHeader("charset", "utf-8")
+                    .addHeader("version", APPSYS_STRING + VersionCode)
+                    .build();
+        }else {
+            builder.addHeader("Content-Type", "application/json;charset=UTF-8")
+                    .addHeader("Accept", "application/json")
+                    .addHeader("charset", "utf-8")
+                    .addHeader("userID",userID)
+                    .addHeader("version", APPSYS_STRING + VersionCode)
+                    .build();
+        }
         return chain.proceed(builder.build());
     }
 }

@@ -15,7 +15,7 @@ public enum ConsMVP {
     BANNER("homebannar", 0), MAIN_FLOWER("main_flower", 0), PLAYPOSITION("playPosition", 0),
     TOKEN("token", 0), NOTUPDATE("noupdate", 0), CHECKISUPDATE("checkupdate", 0),
     THEME("theme", 0), REAL_PACKAGE_NAME("com.hellen.flower", 0), USERNAME("loginName", 0),
-    PASSWORD("password", 0);
+    PASSWORD("password", 0),USERID("userid", 0);
 
     public static final int DB_SELECT = 0x0001;
 
