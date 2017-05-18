@@ -17,6 +17,7 @@ import com.xiangxun.workorder.base.BaseActivity;
 import com.xiangxun.workorder.base.ConsMVP;
 import com.xiangxun.workorder.bean.Patrol;
 import com.xiangxun.workorder.db.TestBean;
+import com.xiangxun.workorder.db.UserInfo;
 import com.xiangxun.workorder.ui.adapter.PatrolHomeAdapter;
 import com.xiangxun.workorder.ui.biz.Main;
 import com.xiangxun.workorder.ui.presenter.MainPresenter;
@@ -28,6 +29,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * Created by Zhangyuhui/Darly on 2017/5/17.
@@ -70,10 +72,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     @Override
     protected void initView(Bundle savedInstanceState) {
         pop = new PhotoPop(this);
-        bean = new TestBean();
-        bean.setName("qiangyu");
-        bean.setGender("male");
-        bean.setAge(23);
+
         presenter = new MainPresenter(this);
 
         title.setTitle("工单系统");
@@ -174,6 +173,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     @Override
     public TestBean getBean() {
+        int r = new Random().nextInt();
+        bean = new TestBean();
+        bean.setName("qiangyu" + r);
+        bean.setGender("male" + r);
+        bean.setUrl("http://www.baidu.com/" + r);
+        bean.setAge(23 + r);
         return bean;
     }
 

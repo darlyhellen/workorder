@@ -49,6 +49,14 @@ public class MainPresenter {
                 view.getBean().save();
                 break;
             case R.id.select:
+                List lv = view.getBean().selectUrl();
+                for (Object be : lv) {
+                    DLog.i(be);
+                }
+                List ls = view.getBean().findAll();
+                for (Object be : ls) {
+                    DLog.i(((TestBean) be).toString());
+                }
                 break;
             case R.id.delete:
                 view.getBean().delete();

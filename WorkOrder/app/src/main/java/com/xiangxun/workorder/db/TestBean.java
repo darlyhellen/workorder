@@ -21,6 +21,8 @@ public class TestBean extends DateBaseHelper {
 
     private int age;
 
+    private String url;
+
     public int getId() {
         return id;
     }
@@ -43,5 +45,20 @@ public class TestBean extends DateBaseHelper {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+
+    @Override
+    public String toString() {
+        return "int id=" + id + "\tString name=" + name + "\tString gender=" + gender + "\tint age=" + age + "\tString url=" + url;
     }
 }

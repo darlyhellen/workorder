@@ -423,15 +423,7 @@ public abstract class DateBaseHelper {
         if (db == null) {
             open();
         }
-        int ob = 0;
-        try {
-            ob = (int) DBControler.instance.getFieldValue(getClass().newInstance(), "id");
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        }
-        int rowNumber = db.delete(getClass().getSimpleName(), "id = ", new String[]{ob + ""});
+        int rowNumber = db.delete(getClass().getSimpleName(), "id = ?", new String[]{findID() + ""});
         return rowNumber > 0;
     }
 
@@ -451,16 +443,86 @@ public abstract class DateBaseHelper {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
-
-        Cursor cursor = db.query(getClass().getSimpleName(), null, "url = ", new String[]{ob + ""}, null, null, null);
-        while (cursor.moveToNext()) {
-
+        Cursor cursor = db.query(getClass().getSimpleName(), null, "url = ?", new String[]{ob + ""}, null, null, null);
+        //通过反射机制，设置每项参数值。
+        List<Object> lis = new ArrayList<>();
+        try {
+            //得到类对象
+            Class userCla = (Class) getClass();
+            //得到类中的所有属性集合
+            Field[] fs = userCla.getDeclaredFields();
+            while (cursor.moveToNext()) {
+                Object b = userCla.newInstance();
+                for (int i = 0; i < fs.length; i++) {
+                    Field f = fs[i];
+                    f.setAccessible(true); //设置些属性是可以访问的
+                    String type = f.getType().toString();
+                    if (type.endsWith("String")) {
+                        f.set(this, cursor.getString(cursor.getColumnIndex(f.getName())));
+                    } else if (type.endsWith("Integer") || type.endsWith("int")) {
+                        f.set(this, cursor.getInt(cursor.getColumnIndex(f.getName())));
+                    } else if (type.endsWith("Float") || type.endsWith("float")) {
+                        f.set(this, cursor.getFloat(cursor.getColumnIndex(f.getName())));
+                    } else if (type.endsWith("Double") || type.endsWith("double")) {
+                        f.set(this, cursor.getDouble(cursor.getColumnIndex(f.getName())));
+                    } else if (type.endsWith("Boolean") || type.endsWith("boolean")) {
+                        f.set(this, cursor.getBlob(cursor.getColumnIndex(f.getName())));
+                    } else if (type.endsWith("Long") || type.endsWith("long")) {
+                        f.set(this, cursor.getLong(cursor.getColumnIndex(f.getName())));
+                    } else if (type.endsWith("Short") || type.endsWith("short")) {
+                        f.set(this, cursor.getShort(cursor.getColumnIndex(f.getName())));
+                    }
+                }
+                lis.add(b);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         cursor.close();
-        return new ArrayList();
+        return lis;
     }
 
-    ;
-
+    public List findAll() {
+        if (db == null) {
+            open();
+        }
+        Cursor cursor = db.query(getClass().getSimpleName(), null, null, null, null, null, null);
+        //通过反射机制，设置每项参数值。
+        List<Object> lis = new ArrayList<>();
+        try {
+            //得到类对象
+            Class userCla = (Class) getClass();
+            //得到类中的所有属性集合
+            Field[] fs = userCla.getDeclaredFields();
+            while (cursor.moveToNext()) {
+                Object b = userCla.newInstance();
+                for (int i = 0; i < fs.length; i++) {
+                    Field f = fs[i];
+                    f.setAccessible(true); //设置些属性是可以访问的
+                    String type = f.getType().toString();
+                    if (type.endsWith("String")) {
+                        f.set(b, cursor.getString(cursor.getColumnIndex(f.getName())));
+                    } else if (type.endsWith("Integer") || type.endsWith("int")) {
+                        f.set(b, cursor.getInt(cursor.getColumnIndex(f.getName())));
+                    } else if (type.endsWith("Float") || type.endsWith("float")) {
+                        f.set(b, cursor.getFloat(cursor.getColumnIndex(f.getName())));
+                    } else if (type.endsWith("Double") || type.endsWith("double")) {
+                        f.set(b, cursor.getDouble(cursor.getColumnIndex(f.getName())));
+                    } else if (type.endsWith("Boolean") || type.endsWith("boolean")) {
+                        f.set(b, cursor.getBlob(cursor.getColumnIndex(f.getName())));
+                    } else if (type.endsWith("Long") || type.endsWith("long")) {
+                        f.set(b, cursor.getLong(cursor.getColumnIndex(f.getName())));
+                    } else if (type.endsWith("Short") || type.endsWith("short")) {
+                        f.set(b, cursor.getShort(cursor.getColumnIndex(f.getName())));
+                    }
+                }
+                lis.add(b);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        cursor.close();
+        return lis;
+    }
 
 }
