@@ -11,10 +11,9 @@ import com.hellen.baseframe.application.FrameListener;
 import com.hellen.baseframe.application.FramePresenter;
 import com.hellen.baseframe.application.FrameView;
 import com.hellen.baseframe.common.dlog.DLog;
-import com.hellen.baseframe.common.matchs.MatcherUtil;
 import com.hellen.baseframe.common.utiltools.SharePreferHelp;
 import com.xiangxun.workorder.base.APP;
-import com.xiangxun.workorder.base.ConsMVP;
+import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.bean.LoginRoot;
 import com.xiangxun.workorder.common.retrofit.RxjavaRetrofitRequestUtil;
 import com.xiangxun.workorder.common.urlencode.Tools;
@@ -112,13 +111,9 @@ public class Login implements FramePresenter {
 
                         if (root != null && root.getStatus() == 1 && root.getData() != null) {
                             // 对其进行解析。当登录成功时
-                            SharePreferHelp.putValue(
-                                    ConsMVP.USERINFO.getDec(), s.toString());
-                            SharePreferHelp.putValue(
-                                    ConsMVP.ISLOGIN.getDec(), true);
-                            SharePreferHelp.putValue(ConsMVP.USERNAME.getDec(), username);
-                            SharePreferHelp.putValue(ConsMVP.PASSWORD.getDec(), password);
-                            SharePreferHelp.putValue(ConsMVP.USERID.getDec(), root.getData().getId());
+                            SharePreferHelp.putValue(AppEnum.USERNAME.getDec(), username);
+                            SharePreferHelp.putValue(AppEnum.PASSWORD.getDec(), password);
+                            SharePreferHelp.putValue(AppEnum.USERID.getDec(), root.getData().getId());
                         }
                         return root;
                     }
@@ -198,13 +193,9 @@ public class Login implements FramePresenter {
 
                         if (root != null && root.getStatus() == 1 && root.getData() != null) {
                             // 对其进行解析。当登录成功时
-                            SharePreferHelp.putValue(
-                                    ConsMVP.USERINFO.getDec(), s.toString());
-                            SharePreferHelp.putValue(
-                                    ConsMVP.ISLOGIN.getDec(), true);
-                            SharePreferHelp.putValue(ConsMVP.USERNAME.getDec(), username);
-                            SharePreferHelp.putValue(ConsMVP.PASSWORD.getDec(), password);
-                            SharePreferHelp.putValue(ConsMVP.USERID.getDec(), root.getData().getId());
+                            SharePreferHelp.putValue(AppEnum.USERNAME.getDec(), username);
+                            SharePreferHelp.putValue(AppEnum.PASSWORD.getDec(), password);
+                            SharePreferHelp.putValue(AppEnum.USERID.getDec(), root.getData().getId());
                         }
                         return root;
                     }
@@ -252,8 +243,6 @@ public class Login implements FramePresenter {
      */
     public void login_out(String username, String password,
                           FrameListener<UserInfo> listener) {
-        // TODO Auto-generated method stub
-        SharePreferHelp.remove(ConsMVP.TOKEN.getDec());
     }
 
     @Override

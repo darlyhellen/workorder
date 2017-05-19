@@ -22,7 +22,7 @@ import android.widget.PopupWindow;
 
 import com.hellen.baseframe.common.dlog.DLog;
 import com.xiangxun.workorder.R;
-import com.xiangxun.workorder.base.ConsMVP;
+import com.xiangxun.workorder.base.AppEnum;
 
 import net.bither.util.NativeUtil;
 
@@ -122,7 +122,7 @@ public class PhotoPop extends PopupWindow implements OnClickListener {
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_PICK);
         ((Activity) context).startActivityForResult(intent,
-                ConsMVP.REQUESTCODE_CAM);
+                AppEnum.REQUESTCODE_CAM);
         DLog.i("albumPhoto");
     }
 
@@ -133,9 +133,9 @@ public class PhotoPop extends PopupWindow implements OnClickListener {
      */
     private void capPhoto() {
         // 照相
-        capUri = ConsMVP.ROOT + System.currentTimeMillis() + ".png";
-        ConsMVP.capUri = capUri;
-        File destDir = new File(ConsMVP.ROOT);
+        capUri = AppEnum.ROOT + System.currentTimeMillis() + ".png";
+        AppEnum.capUri = capUri;
+        File destDir = new File(AppEnum.ROOT);
         if (!destDir.exists()) {
             destDir.mkdirs();
         }
@@ -154,7 +154,7 @@ public class PhotoPop extends PopupWindow implements OnClickListener {
         openCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT,
                 Uri.fromFile(new File(capUri)));
         ((Activity) context).startActivityForResult(openCameraIntent,
-                ConsMVP.REQUESTCODE_CAP);
+                AppEnum.REQUESTCODE_CAP);
         DLog.i("capPhoto");
 
     }
@@ -175,7 +175,7 @@ public class PhotoPop extends PopupWindow implements OnClickListener {
         intent.putExtra("outputY", 150);
         intent.putExtra("return-data", true);
         ((Activity) context).startActivityForResult(intent,
-                ConsMVP.REQUESTCODE_CUT);
+                AppEnum.REQUESTCODE_CUT);
         DLog.i("cropPhoto");
     }
 
@@ -189,10 +189,10 @@ public class PhotoPop extends PopupWindow implements OnClickListener {
     public String PopStringActivityResult(Intent data, int tag) {
         DLog.i("PopStringActivityResult");
         switch (tag) {
-            case ConsMVP.REQUESTCODE_CAP:
+            case AppEnum.REQUESTCODE_CAP:
                 // 照相机程序返回的
                 return /* capUri */getImagePathForCAP(capUri);
-            case ConsMVP.REQUESTCODE_CAM:
+            case AppEnum.REQUESTCODE_CAM:
                 // 照片的原始资源地址
                 photoUri = data.getData();
                 DLog.i(getImagePath(photoUri));
@@ -221,7 +221,7 @@ public class PhotoPop extends PopupWindow implements OnClickListener {
         } else {
             // 先压缩图片。然后旋转图片。最后保存图片。
             rotateBitmapByDegree(compressImageCap(capUri), degree);
-            return ConsMVP.ROOT + rota;
+            return AppEnum.ROOT + rota;
         }
     }
 
@@ -312,7 +312,7 @@ public class PhotoPop extends PopupWindow implements OnClickListener {
     public Bitmap compressBitmap(final Bitmap bit, int quality) {
         // int quality = 10;// 同学们可以与原生的压缩方法对比一下，同样设置成50效果如何
         // 获取文件存储的文件夹。
-        File dirFile = new File(ConsMVP.ROOT);
+        File dirFile = new File(AppEnum.ROOT);
         if (!dirFile.exists()) {
             dirFile.mkdirs();
         }

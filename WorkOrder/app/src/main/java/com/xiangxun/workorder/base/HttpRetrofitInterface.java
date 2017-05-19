@@ -18,12 +18,21 @@ import rx.Observable;
 
 public interface HttpRetrofitInterface {
     /**
-     * 上午11:13:12 TODO 用户登录接口，传递参数为<b>username,password,sim</b>
+     * @param route
+     * @return
+     * @TODO:用户登录POST接口，传递参数为<b>route</b>
      */
     //@FormUrlEncoded//添加这行注解，否则参数报错。Post请求
     @POST("login/login/authority/")
     Observable<JsonObject> postlogin(@Body RequestBody route);
 
+    /**
+     * @param loginName
+     * @param password
+     * @param keyValue
+     * @return
+     * @TODO:用户登录GET接口，传递参数为<b>username,password,sim</b>
+     */
     @GET("login/login/authority/")
     Observable<JsonObject> getlogin(@Query("loginName") String loginName, @Query("password") String password, @Query("keyValue") String keyValue);
 

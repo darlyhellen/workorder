@@ -1,7 +1,5 @@
 package com.xiangxun.workorder.base;
 
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.os.StrictMode;
 import android.util.Log;
 
@@ -44,8 +42,8 @@ public class APP extends FrameAPP {
         showinfo.notifyPrefer("WorkOrder");
         //设置固定参数
         showinfo.notifyCal(true);
-        ConsMVP.WIDTH.setLen(ConApp.getInstance().getWidth());
-        ConsMVP.HEIGHT.setLen(ConApp.getInstance().getHeight());
+        AppEnum.WIDTH.setLen(ConApp.getInstance().getWidth());
+        AppEnum.HEIGHT.setLen(ConApp.getInstance().getHeight());
         creatFile();
         if (!BuildConfig.DEBUG) {
             // 是否为开发测试环境。正式环境下无需打开调试。
@@ -78,23 +76,23 @@ public class APP extends FrameAPP {
      */
     private void creatFile() {
         // TODO Auto-generated method stub
-        File boot = new File(ConsMVP.ROOT);
+        File boot = new File(AppEnum.ROOT);
         if (!boot.exists()) {
             boot.mkdir();
         }
-        File main = new File(ConsMVP.MAINRADIO);
+        File main = new File(AppEnum.MAINRADIO);
         if (!main.exists()) {
             main.mkdir();
         }
-        File image = new File(ConsMVP.IMAGE);
+        File image = new File(AppEnum.IMAGE);
         if (!image.exists()) {
             image.mkdir();
         }
-        File log = new File(ConsMVP.LOG);
+        File log = new File(AppEnum.LOG);
         if (!log.exists()) {
             log.mkdir();
         }
-        File down = new File(ConsMVP.DOWN);
+        File down = new File(AppEnum.DOWN);
         if (!down.exists()) {
             down.mkdir();
         }

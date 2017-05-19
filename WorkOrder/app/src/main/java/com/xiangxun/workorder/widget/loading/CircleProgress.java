@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.animation.AnimationUtils;
 
 import com.xiangxun.workorder.R;
-import com.xiangxun.workorder.base.ConsMVP;
+import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.ui.login.edittext.EaseInOutCubicInterpolator;
 
 
@@ -67,8 +67,8 @@ public class CircleProgress extends View {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int width = ConsMVP.WIDTH.getLen() / 10;
-        int height = ConsMVP.WIDTH.getLen() / 10;
+        int width = AppEnum.WIDTH.getLen() / 10;
+        int height = AppEnum.WIDTH.getLen() / 10;
         mViewSize = Math.min(width, height);
         setMeasuredDimension(mViewSize, mViewSize);
         mCenter.set(mViewSize / 2, mViewSize / 2);

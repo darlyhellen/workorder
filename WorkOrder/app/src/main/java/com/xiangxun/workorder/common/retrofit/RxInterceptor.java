@@ -4,7 +4,7 @@ import android.text.TextUtils;
 
 import com.hellen.baseframe.common.utiltools.SharePreferHelp;
 import com.xiangxun.workorder.base.APP;
-import com.xiangxun.workorder.base.ConsMVP;
+import com.xiangxun.workorder.base.AppEnum;
 
 import java.io.IOException;
 
@@ -42,7 +42,7 @@ public class RxInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request.Builder builder = chain.request().newBuilder();
-        String userID = SharePreferHelp.getValue(ConsMVP.USERID.getDec(),null);
+        String userID = SharePreferHelp.getValue(AppEnum.USERID.getDec(),null);
         if (TextUtils.isEmpty(userID)){
             builder.addHeader("Content-Type", "application/json;charset=UTF-8")
                     .addHeader("Accept", "application/json")

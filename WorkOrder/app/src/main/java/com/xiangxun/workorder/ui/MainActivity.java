@@ -13,11 +13,10 @@ import com.hellen.baseframe.binder.ContentBinder;
 import com.hellen.baseframe.binder.ViewsBinder;
 import com.hellen.baseframe.common.dlog.DLog;
 import com.xiangxun.workorder.R;
+import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.base.BaseActivity;
-import com.xiangxun.workorder.base.ConsMVP;
 import com.xiangxun.workorder.bean.Patrol;
 import com.xiangxun.workorder.db.TestBean;
-import com.xiangxun.workorder.db.UserInfo;
 import com.xiangxun.workorder.ui.adapter.PatrolHomeAdapter;
 import com.xiangxun.workorder.ui.biz.Main;
 import com.xiangxun.workorder.ui.presenter.MainPresenter;
@@ -126,27 +125,27 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         DLog.i("onActivityResult" + requestCode + resultCode);
-        if (requestCode == ConsMVP.REQUESTCODE_CUT) {
+        if (requestCode == AppEnum.REQUESTCODE_CUT) {
             // 裁剪
             if (data != null) {
                 Bundle extras = data.getExtras();
                 Bitmap head = extras.getParcelable("data");
             }
-        } else if (requestCode == ConsMVP.REQUESTCODE_CAM
-                || requestCode == ConsMVP.REQUESTCODE_CAP) {
+        } else if (requestCode == AppEnum.REQUESTCODE_CAM
+                || requestCode == AppEnum.REQUESTCODE_CAP) {
 
             // 拍照或相册
             String head_path = null;
             if (data == null) {
                 if (pop == null) {
-                    head_path = ConsMVP.capUri;
+                    head_path = AppEnum.capUri;
                 } else {
                     head_path = pop.PopStringActivityResult(null,
-                            ConsMVP.REQUESTCODE_CAP);
+                            AppEnum.REQUESTCODE_CAP);
                 }
             } else {
                 head_path = pop.PopStringActivityResult(data,
-                        ConsMVP.REQUESTCODE_CAM);
+                        AppEnum.REQUESTCODE_CAM);
             }
             if (head_path == null) {
                 return;

@@ -9,8 +9,8 @@ import com.hellen.baseframe.binder.ContentBinder;
 import com.hellen.baseframe.binder.ViewsBinder;
 import com.hellen.baseframe.common.utiltools.SharePreferHelp;
 import com.xiangxun.workorder.R;
+import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.base.BaseActivity;
-import com.xiangxun.workorder.base.ConsMVP;
 import com.xiangxun.workorder.ui.MainActivity;
 import com.xiangxun.workorder.ui.biz.Login;
 import com.xiangxun.workorder.ui.login.edittext.ClearEditText;
@@ -46,8 +46,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Logi
         presenter = new LoginPresenter(this);
         mBtnLogin.setViewInit(R.string.mine_login_login, R.string.mine_login_loginning, mEdtAcount, mEdtPassWord);
         mBtnLogin_post.setViewInit(R.string.mine_login_login, R.string.mine_login_loginning, mEdtAcount, mEdtPassWord);
-        String account = SharePreferHelp.getValue(ConsMVP.USERNAME.getDec(), null);
-        String password = SharePreferHelp.getValue(ConsMVP.PASSWORD.getDec(), null);
+        String account = SharePreferHelp.getValue(AppEnum.USERNAME.getDec(), null);
+        String password = SharePreferHelp.getValue(AppEnum.PASSWORD.getDec(), null);
         mEdtAcount.setText(account);
         mEdtPassWord.setText(password);
     }
