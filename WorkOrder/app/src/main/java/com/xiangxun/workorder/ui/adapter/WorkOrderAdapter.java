@@ -11,6 +11,7 @@ import com.hellen.baseframe.baseadapter.ParentAdapter;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.bean.WorkOrderData;
 import com.xiangxun.workorder.common.urlencode.Tools;
+import com.xiangxun.workorder.widget.coupon.CouponDisplayView;
 
 import java.util.List;
 
@@ -38,6 +39,7 @@ public class WorkOrderAdapter extends ParentAdapter<WorkOrderData> {
             hocker.id_tv_supplier_product = (TextView) view.findViewById(R.id.id_tv_supplier_product);
             hocker.id_tv_appraise_man = (TextView) view.findViewById(R.id.id_tv_appraise_man);
             hocker.id_tv_appraise_date = (TextView) view.findViewById(R.id.id_tv_appraise_date);
+            hocker.id_tv_background = (CouponDisplayView) view.findViewById(R.id.id_tv_background);
             view.setTag(hocker);
         } else {
             hocker = (ViewHocker) view.getTag();
@@ -49,6 +51,13 @@ public class WorkOrderAdapter extends ParentAdapter<WorkOrderData> {
         if (TextUtils.isEmpty(workOrderData.workEventState)) {
             hocker.id_tv_appraise_man.setVisibility(View.INVISIBLE);
         } else {
+            if ("闭合".equals(workOrderData.workEventState)) {
+                hocker.id_tv_background.setShowDisplay(false);
+                hocker.id_tv_background.setBackgroundResource(R.drawable.app_login_shape);
+            } else {
+                hocker.id_tv_background.setShowDisplay(true);
+                hocker.id_tv_background.setBackgroundResource(R.color.red02);
+            }
             hocker.id_tv_appraise_man.setVisibility(View.VISIBLE);
             hocker.id_tv_appraise_man.setText(Tools.isEmpty(workOrderData.workEventState));
         }
@@ -64,5 +73,6 @@ public class WorkOrderAdapter extends ParentAdapter<WorkOrderData> {
         TextView id_tv_supplier_product;
         TextView id_tv_appraise_man;
         TextView id_tv_appraise_date;
+        CouponDisplayView id_tv_background;
     }
 }

@@ -22,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by Zhangyuhui/Darly on 2017/5/19.
@@ -105,11 +106,15 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+        DLog.i("onItemClick--" + position);
     }
 
 
     protected void setWorkOrderData(List<WorkOrderData> orderBeans) {
+        xlist.removeFooterView(xlist.mFooterView);
+        if (orderBeans.size() > 9) {
+            xlist.addFooterView(xlist.mFooterView);
+        }
         switch (listState) {
             case AppEnum.LISTSTATEFIRST:
                 data.clear();
@@ -188,7 +193,7 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
             dd.workEndTime = i + "" + currentPage;
             dd.backOrgCode = i + "" + currentPage;
             dd.dutyOrgName = i + "西安翔迅科技" + currentPage;
-            if (i % 2 == 0) {
+            if (new Random().nextBoolean()) {
                 dd.workEventState = "闭合";
             } else {
                 dd.workEventState = "打开";

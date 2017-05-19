@@ -13,9 +13,9 @@
 
     <!-- popwindows -->
     <color name="pop_back">#7a000000</color>
-    <color name="color_1">#f70000</color>
-    <color name="color_2">#fa0000</color>
-    <color name="color_3">#fd0000</color>
+    <color name="color_1">#ff0000</color>
+    <color name="color_2">#ff0000</color>
+    <color name="color_3">#ff0000</color>
     <color name="set_list_line">#888888</color>
     <color name="bg_white">#FFf8f8f8</color>
 

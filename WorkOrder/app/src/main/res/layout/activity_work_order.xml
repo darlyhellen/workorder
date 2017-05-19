@@ -16,8 +16,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@null"
-        android:dividerHeight="2.0dp"
-        android:listSelector="@color/transparent_white"
+        android:dividerHeight="4dp"
+        android:listSelector="@color/color_e3e3e3"
         android:padding="@dimen/margin_padding5"
         android:scrollbars="none" />
 

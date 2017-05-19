@@ -4,6 +4,7 @@ import android.animation.TimeInterpolator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.util.AttributeSet;
@@ -57,12 +58,12 @@ public class CircleProgress extends View {
         mPaint.setStyle(Paint.Style.FILL);
 
         TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.CircleProgress, defStyle, 0);
-        int color1 = a.getColor(R.styleable.CircleProgress_color1, getResources().getColor(R.color.color_1));
-        int color2 = a.getColor(R.styleable.CircleProgress_color2, getResources().getColor(R.color.color_2));
-        int color3 = a.getColor(R.styleable.CircleProgress_color3, getResources().getColor(R.color.color_3));
+//        int color1 = a.getColor(R.styleable.CircleProgress_color1, getResources().getColor(R.color.color_1));
+//        int color2 = a.getColor(R.styleable.CircleProgress_color2, getResources().getColor(R.color.color_2));
+//        int color3 = a.getColor(R.styleable.CircleProgress_color3, getResources().getColor(R.color.color_3));
         a.recycle();
 
-        COLORS = new int[]{color1, color2, color3};
+        COLORS = new int[]{Color.WHITE, Color.WHITE, Color.WHITE};
     }
 
     @Override

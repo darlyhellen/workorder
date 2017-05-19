@@ -10,6 +10,7 @@ import com.hellen.baseframe.application.FrameListener;
 import com.hellen.baseframe.application.FramePresenter;
 import com.hellen.baseframe.application.FrameView;
 import com.hellen.baseframe.common.dlog.DLog;
+import com.xiangxun.workorder.base.APP;
 import com.xiangxun.workorder.bean.LoginRoot;
 import com.xiangxun.workorder.bean.WorkOrderData;
 import com.xiangxun.workorder.bean.WorkOrderRoot;
@@ -48,6 +49,11 @@ public class WorkOrderListener implements FramePresenter {
     }
 
     public void getWorkOrder(int page, Map<String, String> map, final FrameListener<WorkOrderRoot> listener) {
+
+        if (!APP.isNetworkConnected(APP.getInstance())) {
+            listener.onFaild(0, "网络异常,请检查网络");
+            return;
+        }
         //在这里进行数据请求
         RxjavaRetrofitRequestUtil.getInstance().get().getWorkOrder(page, map).
                 subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io())

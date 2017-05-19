@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.xiangxun.workorder.widget.coupon.CouponDisplayView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/id_tv_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/app_login_shape"
     android:orientation="vertical"
     android:padding="4dp">
 
@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_padding5"
         android:text=""
-        android:textColor="@color/color_5eb2ee"
+        android:textColor="@color/black"
         android:textSize="@dimen/textSize14" />
 
     <TextView
@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_padding5"
         android:text=""
-        android:textColor="@color/color_5eb2ee"
+        android:textColor="@color/black"
         android:textSize="@dimen/textSize14" />
 
     <RelativeLayout
@@ -65,9 +65,9 @@
             android:layout_centerInParent="true"
             android:gravity="center"
             android:text=""
-            android:textColor="@color/color_5eb2ee"
+            android:textColor="@color/black"
             android:textSize="@dimen/textSize14" />
     </RelativeLayout>
 
 
-</LinearLayout>
+</com.xiangxun.workorder.widget.coupon.CouponDisplayView>

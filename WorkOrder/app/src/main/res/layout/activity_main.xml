@@ -15,7 +15,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@mipmap/home_top_bg"
+        android:background="@mipmap/patrol_manage"
         android:visibility="visible"
         tools:ignore="ContentDescription" />
 

@@ -40,20 +40,10 @@ public class LoginPresenter {
     public void onClickDown(Context context, View v) {
         switch (v.getId()) {
             case R.id.btn_login:
-                if (APP.isNetworkConnected(context)) {
-                    login(context);
-                } else {
-                    ToastApp.showToast(R.string.neterror);
-                }
-                LogApp.i("onClick--mUserLoginPresenter.login()");
+                login(context);
                 break;
             case R.id.btn_login_post:
-                if (APP.isNetworkConnected(context)) {
-                    login_post(context);
-                } else {
-                    ToastApp.showToast(R.string.neterror);
-                }
-                LogApp.i("onClick--mUserLoginPresenter.login()");
+                login_post(context);
                 break;
             default:
                 break;
