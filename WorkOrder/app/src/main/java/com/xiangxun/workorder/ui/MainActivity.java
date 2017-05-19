@@ -12,6 +12,7 @@ import android.widget.GridView;
 import com.hellen.baseframe.binder.ContentBinder;
 import com.hellen.baseframe.binder.ViewsBinder;
 import com.hellen.baseframe.common.dlog.DLog;
+import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.base.BaseActivity;
@@ -19,6 +20,7 @@ import com.xiangxun.workorder.bean.Patrol;
 import com.xiangxun.workorder.db.TestBean;
 import com.xiangxun.workorder.ui.adapter.PatrolHomeAdapter;
 import com.xiangxun.workorder.ui.biz.Main;
+import com.xiangxun.workorder.ui.main.WorkOrderActivity;
 import com.xiangxun.workorder.ui.presenter.MainPresenter;
 import com.xiangxun.workorder.widget.camera.PhotoPop;
 import com.xiangxun.workorder.widget.header.HeaderView;
@@ -41,6 +43,7 @@ import java.util.Random;
 public class MainActivity extends BaseActivity implements View.OnClickListener, Main.MainView, AdapterView.OnItemClickListener {
 
 
+    public static final String 工单管理 = "工单管理";
     @ViewsBinder(R.id.button)
     private Button button;
     @ViewsBinder(R.id.insert)
@@ -74,14 +77,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
         presenter = new MainPresenter(this);
 
-        title.setTitle("工单系统");
+        title.setTitle(R.string.main_titile);
         title.setRightBackgroundResource(R.mipmap.set);
         data = new ArrayList<>();
-        data.add(new Patrol("通讯录", R.mipmap.contact_phone));
-        data.add(new Patrol("人员管理", R.mipmap.man_user_manage));
-        data.add(new Patrol("工单查询", R.mipmap.work_order_search));
-        data.add(new Patrol("工单上报", R.mipmap.work_order_repor));
-        data.add(new Patrol("工单管理", R.mipmap.work_order_search));
+        data.add(new Patrol(1, R.string.main_work_order, R.mipmap.work_order_search));
+        data.add(new Patrol(2, R.string.main_work_order, R.mipmap.man_user_manage));
+        data.add(new Patrol(3, R.string.main_work_order, R.mipmap.work_order_search));
+        data.add(new Patrol(4, R.string.main_work_order, R.mipmap.work_order_repor));
+        data.add(new Patrol(5, R.string.main_work_order, R.mipmap.contact_phone));
 
         adapter = new PatrolHomeAdapter(data, R.layout.home_grideview_layout, this);
         gridView.setAdapter(adapter);
@@ -108,16 +111,24 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Patrol patrol = (Patrol) parent.getItemAtPosition(position);
-        if ("通讯录".equals(patrol.name)) {
-            startActivity(new Intent(this, MainActivity.class));
-        } else if ("人员管理".equals(patrol.name)) {
-            startActivity(new Intent(this, MainActivity.class));
-        } else if ("工单查询".equals(patrol.name)) {
-            startActivity(new Intent(this, MainActivity.class));
-        } else if ("工单上报".equals(patrol.name)) {
-            startActivity(new Intent(this, MainActivity.class));
-        } else if ("工单管理".equals(patrol.name)) {
-            startActivity(new Intent(this, MainActivity.class));
+        if (patrol == null) {
+            ToastApp.showToast("数据错误！");
+            return;
+        }
+        switch (patrol.getListId()) {
+            case 1:
+                startActivity(new Intent(this, WorkOrderActivity.class));
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            default:
+                break;
         }
     }
 

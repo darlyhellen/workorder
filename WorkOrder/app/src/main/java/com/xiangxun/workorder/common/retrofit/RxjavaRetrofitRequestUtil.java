@@ -37,7 +37,9 @@ public class RxjavaRetrofitRequestUtil {
     private void initClient() {
         builder = new OkHttpClient.Builder();
         //设置请求超时时间
-        builder.connectTimeout(REQUEST_TIME, TimeUnit.SECONDS);
+        builder.readTimeout(REQUEST_TIME, TimeUnit.SECONDS);//设置读取超时时间
+        builder.writeTimeout(REQUEST_TIME, TimeUnit.SECONDS);//设置写的超时时间
+        builder.connectTimeout(REQUEST_TIME, TimeUnit.SECONDS);//设置连接超时时间
         //设置请求日志
         if (BuildConfig.DEBUG) {
             HttpLoggingInterceptor log = new HttpLoggingInterceptor();

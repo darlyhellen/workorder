@@ -8,15 +8,38 @@ package com.xiangxun.workorder.bean;
  * @TODO:首页model类
  */
 public class Patrol {
-    public String name;
-    public int id;
+    private int name;
+    private int id;
+    private int listId;
 
-    public Patrol() {
-
+    public Patrol(int listId, int name, int id) {
+        this.listId = listId;
+        this.id = id;
+        this.name = name;
     }
 
-    public Patrol(String name, int id) {
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
         this.id = id;
+    }
+
+    public int getListId() {
+        return listId;
+    }
+
+    public void setListId(int listId) {
+        this.listId = listId;
+    }
+
+    public int getName() {
+        return name;
+    }
+
+    public void setName(int name) {
         this.name = name;
     }
 }

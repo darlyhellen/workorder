@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <com.xiangxun.workorder.widget.header.HeaderView
+        android:id="@+id/id_work_order_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <com.xiangxun.workorder.widget.xlistView.XListView
+        android:id="@+id/id_work_order_xlist"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@null"
+        android:dividerHeight="2.0dp"
+        android:listSelector="@color/transparent_white"
+        android:padding="@dimen/margin_padding5"
+        android:scrollbars="none" />
+
+
+</LinearLayout>

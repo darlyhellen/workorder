@@ -38,7 +38,7 @@ public class PatrolHomeAdapter extends ParentAdapter<Patrol> {
             holder = (ViewHolder) view.getTag();
         }
 
-        holder.modeButton.setIV(patrol.id, patrol.name);
+        holder.modeButton.setIV(patrol.getId(), context.getResources().getString(patrol.getName()));
         return view;
     }
 

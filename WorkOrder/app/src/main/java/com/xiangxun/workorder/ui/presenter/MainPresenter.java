@@ -63,7 +63,7 @@ public class MainPresenter {
                 break;
             case R.id.xw_share:
                 //進入設置頁面
-                context.startActivity(new Intent(context, MainActivity.class));
+                DLog.i("设置按钮点击");
                 break;
         }
     }

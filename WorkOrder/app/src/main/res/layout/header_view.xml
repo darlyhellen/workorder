@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="@dimen/title_height"
-    android:background="@mipmap/title_bg" >
+    android:background="@mipmap/title_bg">
 
     <LinearLayout
         android:id="@+id/title_view_back_llayout"
@@ -14,7 +14,7 @@
         android:orientation="horizontal"
         android:paddingLeft="@dimen/margin_padding15"
         android:paddingRight="@dimen/margin_padding15"
-        android:visibility="invisible" >
+        android:visibility="invisible">
 
         <ImageView
             android:id="@+id/title_view_back_img"
@@ -40,7 +40,7 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:gravity="right"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <ViewFlipper
             android:id="@+id/title_view_right_Flipper01"
@@ -48,7 +48,7 @@
             android:layout_height="fill_parent"
             android:paddingLeft="@dimen/margin_padding10"
             android:paddingRight="@dimen/margin_padding10"
-            android:visibility="visible" >
+            android:visibility="invisible">
 
             <LinearLayout
                 android:id="@+id/ll_right"
@@ -56,7 +56,7 @@
                 android:layout_height="fill_parent"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:visibility="visible" >
+                android:visibility="visible">
 
                 <ImageView
                     android:id="@+id/xw_share"

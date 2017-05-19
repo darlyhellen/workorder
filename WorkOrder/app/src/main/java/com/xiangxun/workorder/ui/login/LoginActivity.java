@@ -2,6 +2,7 @@ package com.xiangxun.workorder.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 
@@ -9,6 +10,7 @@ import com.hellen.baseframe.binder.ContentBinder;
 import com.hellen.baseframe.binder.ViewsBinder;
 import com.hellen.baseframe.common.utiltools.SharePreferHelp;
 import com.xiangxun.workorder.R;
+import com.xiangxun.workorder.base.Api;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.base.BaseActivity;
 import com.xiangxun.workorder.ui.MainActivity;
@@ -68,7 +70,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Logi
             case R.id.btn_login:
                 acount = mEdtAcount.getText().toString().trim();
                 password = mEdtPassWord.getText().toString().trim();
-
                 //DcNetWorkUtils.login(this, acount, password, mHandler);
                 break;
         }
@@ -82,8 +83,10 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Logi
 
     @Override
     public void onLoginFailed() {
-        SharePreferHelp.remove("loginName");
-        SharePreferHelp.remove("password");
+        if (!TextUtils.isEmpty(SharePreferHelp.getValue(AppEnum.USERID.getDec(), null))) {
+            startActivity(new Intent(this, MainActivity.class));
+            end();
+        }
     }
 
     @Override

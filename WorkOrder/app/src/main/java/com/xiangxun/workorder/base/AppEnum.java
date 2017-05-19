@@ -41,6 +41,12 @@ public enum AppEnum {
 
     public static final int REQUESTCODE_CUT = 0x1003;
 
+    public static final int LISTSTATEFIRST = 0x1004;
+
+    public static final int LISTSTATEREFRESH = 0x1005;
+
+    public static final int LISTSTATELOADMORE = 0x1006;
+
     private String dec;
 
     private int len;

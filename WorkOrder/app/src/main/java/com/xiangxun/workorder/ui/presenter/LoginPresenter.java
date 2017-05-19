@@ -29,7 +29,7 @@ public class LoginPresenter {
         this.main = main;
         this.userBiz = new Login();
         loading = new ShowLoading((LoginActivity) main);
-        loading.setMessage(R.string.loading);
+        loading.setMessage(R.string.mine_login_loginning);
     }
 
 

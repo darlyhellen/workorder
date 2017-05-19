@@ -2,6 +2,8 @@ package com.xiangxun.workorder.base;
 
 import com.google.gson.JsonObject;
 
+import java.util.Map;
+
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -36,5 +38,12 @@ public interface HttpRetrofitInterface {
     @GET("login/login/authority/")
     Observable<JsonObject> getlogin(@Query("loginName") String loginName, @Query("password") String password, @Query("keyValue") String keyValue);
 
-
+    /**
+     * @param page
+     * @param map
+     * @return
+     * @TODO:用户工单查询GET接口，传递参数为<b>page,map</b>
+     */
+    @GET("refer/workorder/list/")
+    Observable<JsonObject> getWorkOrder(@Query("page") int page, @Query("map") Map<String, String> map);
 }

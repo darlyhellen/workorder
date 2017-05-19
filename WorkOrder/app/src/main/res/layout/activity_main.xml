@@ -27,7 +27,7 @@
         android:divider="@null"
         android:horizontalSpacing="@dimen/margin_padding5"
         android:listSelector="@color/transparent_white"
-        android:numColumns="6"
+        android:numColumns="3"
         android:scrollbars="none"
         android:verticalSpacing="@dimen/margin_padding8" />
 
@@ -35,7 +35,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <TextView
             android:layout_width="match_parent"
