@@ -49,7 +49,7 @@ public class APP extends FrameAPP {
             // 是否为开发测试环境。正式环境下无需打开调试。
             initStrictMode();
         }
-        DBControler.getInstance(this).init();
+        //DBControler.getInstance(this).init();
     }
 
     /**
