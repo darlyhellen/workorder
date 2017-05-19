@@ -10,11 +10,10 @@ import com.hellen.baseframe.binder.ContentBinder;
 import com.hellen.baseframe.binder.ViewsBinder;
 import com.hellen.baseframe.common.utiltools.SharePreferHelp;
 import com.xiangxun.workorder.R;
-import com.xiangxun.workorder.base.Api;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.base.BaseActivity;
 import com.xiangxun.workorder.ui.MainActivity;
-import com.xiangxun.workorder.ui.biz.Login;
+import com.xiangxun.workorder.ui.biz.LoginListener;
 import com.xiangxun.workorder.ui.login.edittext.ClearEditText;
 import com.xiangxun.workorder.ui.login.edittext.XSubButton;
 import com.xiangxun.workorder.ui.presenter.LoginPresenter;
@@ -27,7 +26,7 @@ import com.xiangxun.workorder.ui.presenter.LoginPresenter;
  * @TODO: 登陆页面
  */
 @ContentBinder(R.layout.login_activity_layout)
-public class LoginActivity extends BaseActivity implements OnClickListener, Login.LoginView {
+public class LoginActivity extends BaseActivity implements OnClickListener, LoginListener.LoginView {
 
     @ViewsBinder(R.id.edt_user_acount)
     private ClearEditText mEdtAcount;

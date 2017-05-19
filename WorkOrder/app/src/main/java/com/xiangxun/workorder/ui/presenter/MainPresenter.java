@@ -1,17 +1,14 @@
 package com.xiangxun.workorder.ui.presenter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.View;
 
 import com.hellen.baseframe.common.dlog.DLog;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.db.TestBean;
-import com.xiangxun.workorder.ui.MainActivity;
-import com.xiangxun.workorder.ui.biz.Main;
+import com.xiangxun.workorder.ui.biz.MainListener;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Zhangyuhui/Darly on 2017/5/17.
@@ -22,13 +19,13 @@ import java.util.Map;
  */
 public class MainPresenter {
 
-    private Main biz;
+    private MainListener biz;
 
-    private Main.MainView view;
+    private MainListener.MainView view;
 
-    public MainPresenter(Main.MainView view) {
+    public MainPresenter(MainListener.MainView view) {
         this.view = view;
-        this.biz = new Main();
+        this.biz = new MainListener();
     }
 
 

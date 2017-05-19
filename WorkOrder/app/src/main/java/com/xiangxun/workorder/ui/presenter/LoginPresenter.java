@@ -9,7 +9,7 @@ import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.APP;
 import com.xiangxun.workorder.bean.LoginRoot;
-import com.xiangxun.workorder.ui.biz.Login;
+import com.xiangxun.workorder.ui.biz.LoginListener;
 import com.xiangxun.workorder.ui.login.LoginActivity;
 import com.xiangxun.workorder.widget.loading.ShowLoading;
 
@@ -20,14 +20,14 @@ import com.xiangxun.workorder.widget.loading.ShowLoading;
 public class LoginPresenter {
 
     private String TAG = getClass().getSimpleName();
-    private Login userBiz;
-    private Login.LoginView main;
+    private LoginListener userBiz;
+    private LoginListener.LoginView main;
     private ShowLoading loading;
 
 
-    public LoginPresenter(Login.LoginView main) {
+    public LoginPresenter(LoginListener.LoginView main) {
         this.main = main;
-        this.userBiz = new Login();
+        this.userBiz = new LoginListener();
         loading = new ShowLoading((LoginActivity) main);
         loading.setMessage(R.string.mine_login_loginning);
     }

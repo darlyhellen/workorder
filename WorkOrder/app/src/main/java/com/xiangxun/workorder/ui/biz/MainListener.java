@@ -14,7 +14,7 @@ import com.xiangxun.workorder.widget.camera.PhotoPop;
  *
  * @TODO: 首页接口请求类
  */
-public class Main implements FramePresenter {
+public class MainListener implements FramePresenter {
 
 
     @Override

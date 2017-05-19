@@ -7,7 +7,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-    <!--Login-->
+    <!--login-->
     <style name="more_about_text" parent="android:Widget.TextView">
         <item name="android:layout_centerHorizontal">true</item>
         <item name="android:layout_width">wrap_content</item>

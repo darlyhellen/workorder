@@ -19,7 +19,7 @@ import com.xiangxun.workorder.base.BaseActivity;
 import com.xiangxun.workorder.bean.Patrol;
 import com.xiangxun.workorder.db.TestBean;
 import com.xiangxun.workorder.ui.adapter.PatrolHomeAdapter;
-import com.xiangxun.workorder.ui.biz.Main;
+import com.xiangxun.workorder.ui.biz.MainListener;
 import com.xiangxun.workorder.ui.main.WorkOrderActivity;
 import com.xiangxun.workorder.ui.presenter.MainPresenter;
 import com.xiangxun.workorder.widget.camera.PhotoPop;
@@ -40,7 +40,7 @@ import java.util.Random;
  * @TODO: 首页静态页面, 暂时没有接口网络请求。
  */
 @ContentBinder(R.layout.activity_main)
-public class MainActivity extends BaseActivity implements View.OnClickListener, Main.MainView, AdapterView.OnItemClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener, MainListener.MainView, AdapterView.OnItemClickListener {
 
 
     public static final String 工单管理 = "工单管理";

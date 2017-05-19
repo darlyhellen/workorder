@@ -35,7 +35,7 @@ import rx.schedulers.Schedulers;
 /**
  * @author zhangyh2 LoginUser 下午3:42:16 TODO 用户登录获取数据传递给了接口
  */
-public class Login implements FramePresenter {
+public class LoginListener implements FramePresenter {
     public interface LoginView extends FrameView {
 
         void onLoginSuccess();
