@@ -1,6 +1,10 @@
 package com.xiangxun.workorder.base;
 
+import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.StrictMode;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.hellen.baseframe.application.FrameAPP;
@@ -96,5 +100,20 @@ public class APP extends FrameAPP {
         if (!down.exists()) {
             down.mkdir();
         }
+    }
+
+
+    /**
+     * 返回当前程序版本名
+     */
+    public static String getAppVersionName() {
+        String curVersionName = null;
+        try {
+            PackageManager pm = instance.getPackageManager();
+            PackageInfo pi = pm.getPackageInfo(instance.getPackageName(), 0);
+            curVersionName = pi.versionName;
+        } catch (Exception e) {
+        }
+        return curVersionName;
     }
 }

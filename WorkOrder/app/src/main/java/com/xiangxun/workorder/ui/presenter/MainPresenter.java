@@ -1,12 +1,14 @@
 package com.xiangxun.workorder.ui.presenter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 
 import com.hellen.baseframe.common.dlog.DLog;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.db.TestBean;
 import com.xiangxun.workorder.ui.biz.MainListener;
+import com.xiangxun.workorder.ui.main.SetActivity;
 
 import java.util.List;
 
@@ -61,6 +63,7 @@ public class MainPresenter {
             case R.id.xw_share:
                 //進入設置頁面
                 DLog.i("设置按钮点击");
+                context.startActivity(new Intent(context, SetActivity.class));
                 break;
         }
     }

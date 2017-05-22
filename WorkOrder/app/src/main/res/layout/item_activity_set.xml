@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?><!--设置页面List的条目样式-->
+<com.xiangxun.workorder.widget.coupon.CouponDisplayView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/id_tv_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/rl_more_clear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="20dp">
+
+        <TextView
+            android:id="@+id/id_set_item_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/id_set_item_decls"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/id_set_item_decl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/id_set_item_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp" />
+    </LinearLayout>
+
+
+</com.xiangxun.workorder.widget.coupon.CouponDisplayView>
