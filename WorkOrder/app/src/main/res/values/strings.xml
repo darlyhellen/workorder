@@ -39,9 +39,16 @@
 
 
     <!-- SetActivity-->
+    <string name="set_decl">提示</string>
     <string name="set_clean_cache">清理缓存</string>
+    <string name="set_clean_cache_des">是否确认清理缓存？</string>
     <string name="set_update">版本更新</string>
+    <string name="set_update_des">是否确认新版本升级？</string>
     <string name="set_loginout">退出登录</string>
+    <string name="set_loginout_des">是否确认退出登录？</string>
+    <string name="set_sure">确认</string>
+    <string name="set_consel">取消</string>
+
 
 
     <string name="more_update">检查更新</string>

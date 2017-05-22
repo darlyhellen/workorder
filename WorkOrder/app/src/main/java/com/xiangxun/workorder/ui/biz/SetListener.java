@@ -32,18 +32,18 @@ public class SetListener implements FramePresenter {
     }
 
 
-    @Override
-    public void onStart(Dialog dialog) {
-
-    }
-
     public void getSize(FrameListener<Long> listener) {
         new GetCacheSizeTask(listener).execute();
     }
 
     @Override
-    public void onStop(Dialog dialog) {
+    public void onStart(Dialog loading) {
+        loading.show();
+    }
 
+    @Override
+    public void onStop(Dialog loading) {
+        loading.dismiss();
     }
 
     private class GetCacheSizeTask extends AsyncTask<Object, Object, Long> {

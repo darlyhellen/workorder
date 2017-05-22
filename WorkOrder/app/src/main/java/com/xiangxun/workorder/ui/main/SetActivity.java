@@ -2,6 +2,8 @@ package com.xiangxun.workorder.ui.main;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.hellen.baseframe.binder.ContentBinder;
@@ -25,7 +27,7 @@ import java.util.List;
  * @TODO:首页设置页面。
  */
 @ContentBinder(R.layout.activity_set)
-public class SetActivity extends BaseActivity implements SetListener.SetInterface, View.OnClickListener {
+public class SetActivity extends BaseActivity implements SetListener.SetInterface, View.OnClickListener, OnItemClickListener {
 
     @ViewsBinder(R.id.id_set_title)
     private HeaderView header;
@@ -52,6 +54,7 @@ public class SetActivity extends BaseActivity implements SetListener.SetInterfac
     @Override
     protected void initListener() {
         header.setLeftBackOneListener(this);
+        listView.setOnItemClickListener(this);
     }
 
     @Override
@@ -67,7 +70,6 @@ public class SetActivity extends BaseActivity implements SetListener.SetInterfac
     @Override
     public void end() {
         finish();
-
     }
 
     @Override
@@ -78,5 +80,24 @@ public class SetActivity extends BaseActivity implements SetListener.SetInterfac
     @Override
     public void setEnableClick() {
 
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        SetModel model = (SetModel) parent.getItemAtPosition(position);
+
+        switch (model.getTitle()){
+            case R.string.set_clean_cache:
+                presenter.clickClean(this);
+                break;
+            case R.string.set_update:
+                presenter.clickUpdate(this);
+                break;
+            case R.string.set_loginout:
+                presenter.clickLoginOut(this);
+                break;
+            default:
+                break;
+        }
     }
 }

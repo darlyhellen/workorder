@@ -78,7 +78,7 @@ public class APP extends FrameAPP {
      *
      * @author Zhangyuhui BaseActivity.java TODO 建立文件夹
      */
-    private void creatFile() {
+    public void creatFile() {
         // TODO Auto-generated method stub
         File boot = new File(AppEnum.ROOT);
         if (!boot.exists()) {
