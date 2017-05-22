@@ -27,6 +27,7 @@
     <!-- 首页-->
     <string name="main_titile">工单系统</string>
     <string name="main_work_order">我的工单</string>
+    <string name="main_work_map">设备位置</string>
 
 
     <!-- XListView -->

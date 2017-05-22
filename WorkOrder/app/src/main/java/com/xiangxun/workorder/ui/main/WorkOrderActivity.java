@@ -1,5 +1,6 @@
 package com.xiangxun.workorder.ui.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -107,6 +108,10 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         DLog.i("onItemClick--" + position);
+        WorkOrderData ds = (WorkOrderData) parent.getItemAtPosition(position);
+        Intent intent = new Intent(this, LbsAmapActivity.class);
+        intent.putExtra("data", ds);
+        startActivity(intent);
     }
 
 
@@ -213,6 +218,8 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
             dd.workDisposeRequest = i + "" + currentPage;
             dd.issuedRegId = i + "" + currentPage;
             dd.workBeginTime = time.format(new Date());
+            dd.longitude = 108.928822 + 0.000001 * i;
+            dd.latitude = 34.273066 + 0.000001 * i;
             datas.add(dd);
         }
         setWorkOrderData(datas);

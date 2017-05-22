@@ -1,5 +1,7 @@
 package com.xiangxun.workorder.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by Zhangyuhui/Darly on 2017/5/19.
  * Copyright by [Zhangyuhui/Darly]
@@ -7,7 +9,7 @@ package com.xiangxun.workorder.bean;
  *
  * @TODO:
  */
-public class WorkOrderData {
+public class WorkOrderData implements Serializable {
 
     public int workDays;
     public String serveBackText;
@@ -66,5 +68,7 @@ public class WorkOrderData {
     public String workDisposeRequest;
     public String issuedRegId;
     public String workBeginTime;
+    public double latitude;
+    public double longitude;
 
 }

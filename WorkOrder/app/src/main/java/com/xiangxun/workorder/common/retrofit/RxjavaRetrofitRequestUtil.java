@@ -25,7 +25,7 @@ public class RxjavaRetrofitRequestUtil {
 
     private static int VersionCode = APP.getInstance().getVersionCode();
     private static final String APPSYS_STRING = "Android_";
-    private static final int REQUEST_TIME = 3000;
+    private static final int REQUEST_TIME = 30;
     private int interSize = 0;
 
     private OkHttpClient.Builder builder;

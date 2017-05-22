@@ -7,6 +7,19 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!--高德地图权限-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+     
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
 
     <application
         android:name=".base.APP"
@@ -33,6 +46,9 @@
             android:name=".ui.main.WorkOrderActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ui.main.LbsAmapActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
 
         <meta-data
             android:name="DATABASE"
@@ -40,6 +56,11 @@
         <meta-data
             android:name="VERSION"
             android:value="1" />
+
+        <!--高德地图APIKEY-->
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="f31962d3f32bcac1f5ff82f353f9e5c8" />
     </application>
 
 </manifest>
