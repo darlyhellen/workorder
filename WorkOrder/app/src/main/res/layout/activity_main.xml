@@ -38,52 +38,60 @@
         android:orientation="horizontal"
         android:visibility="visible">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="测试页面" />
-
 
         <Button
             android:id="@+id/button"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:gravity="center"
             android:padding="10dp"
             android:text="相机" />
 
         <Button
             android:id="@+id/insert"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:gravity="center"
             android:padding="10dp"
             android:text="Insert" />
 
         <Button
             android:id="@+id/update"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:gravity="center"
             android:padding="10dp"
             android:text="Update" />
 
         <Button
             android:id="@+id/select"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:gravity="center"
             android:padding="10dp"
             android:text="Select" />
 
         <Button
             android:id="@+id/delete"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:gravity="center"
             android:padding="10dp"
             android:text="Delete" />
+
+        <Button
+            android:id="@+id/down"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="down" />
 
     </LinearLayout>
 </LinearLayout>

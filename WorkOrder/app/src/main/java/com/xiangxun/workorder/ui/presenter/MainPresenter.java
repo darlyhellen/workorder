@@ -8,6 +8,7 @@ import com.hellen.baseframe.common.dlog.DLog;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.db.TestBean;
 import com.xiangxun.workorder.ui.biz.MainListener;
+import com.xiangxun.workorder.ui.main.DownLoadActivity;
 import com.xiangxun.workorder.ui.main.SetActivity;
 
 import java.util.List;
@@ -59,6 +60,9 @@ public class MainPresenter {
                 break;
             case R.id.delete:
                 view.getBean().delete();
+                break;
+            case R.id.down:
+                context.startActivity(new Intent(context, DownLoadActivity.class));
                 break;
             case R.id.xw_share:
                 //進入設置頁面

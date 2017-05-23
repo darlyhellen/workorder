@@ -10,8 +10,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.text.TextUtils;
 
-import com.hellen.baseframe.common.dlog.DLog;
-
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -193,7 +191,6 @@ public abstract class DateBaseHelper {
         @Override
         public void onCreate(SQLiteDatabase db) {
             //执行创建表语句
-            DLog.i("onCreate" + cSqls);
             if (cSqls != null) {
                 for (String sql : cSqls) {
                     db.execSQL(sql);
@@ -205,7 +202,6 @@ public abstract class DateBaseHelper {
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             //执行更新语句
-            DLog.i("onCreate" + uSqls);
             if (uSqls != null) {
                 for (String sql : uSqls) {
                     db.execSQL(sql);
@@ -223,7 +219,6 @@ public abstract class DateBaseHelper {
         Cursor c = findOne();
         if (c != null && c.getCount() != 0) {
             //有东西
-            DLog.i("更新数据");
             //可以更新
             while (c.moveToNext()) {
                 int id = c.getInt(c.getColumnIndex("id"));
@@ -232,7 +227,6 @@ public abstract class DateBaseHelper {
             c.close();
         } else {
             db.insert(getClass().getSimpleName(), null, getContentValues());
-            DLog.i("直接插入数据");
             //插入完成后，进行修改ID
             Cursor t = findOne();
             if (t != null) {
@@ -243,13 +237,11 @@ public abstract class DateBaseHelper {
                 t.close();
             }
         }
-        DLog.i("更新或插入完成后" + selectUrl());
     }
 
     public Cursor findOne() {
         Cursor c = null;
         String buffer = "id = " + findID();
-        DLog.i("findOne---" + buffer);
         c = db.query(getClass().getSimpleName(), null, buffer, null, null, null, null);
         if (c != null && c.getCount() != 0) {
             return c;
@@ -448,9 +440,9 @@ public abstract class DateBaseHelper {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
-        StringBuilder builder= new StringBuilder();
+        StringBuilder builder = new StringBuilder();
         builder.append("url = '");
-        builder.append(ob+"'");
+        builder.append(ob + "'");
         Cursor cursor = db.query(getClass().getSimpleName(), null, builder.toString(), null, null, null, null);
         //通过反射机制，设置每项参数值。
         List<Object> lis = new ArrayList<>();

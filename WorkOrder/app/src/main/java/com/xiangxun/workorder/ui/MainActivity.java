@@ -54,6 +54,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private Button select;
     @ViewsBinder(R.id.delete)
     private Button delete;
+    @ViewsBinder(R.id.down)
+    private Button down;
     /**
      * 上午9:29:04 TODO 调出选项的POP窗口，主要为相机，相册，取消
      */
@@ -93,13 +95,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     @Override
     protected void initListener() {
+
+        title.setRightOnClickListener(this);
+        gridView.setOnItemClickListener(this);
+
         button.setOnClickListener(this);
         insert.setOnClickListener(this);
         update.setOnClickListener(this);
         select.setOnClickListener(this);
         delete.setOnClickListener(this);
-        title.setRightOnClickListener(this);
-        gridView.setOnItemClickListener(this);
+        down.setOnClickListener(this);
     }
 
     @Override

@@ -1,17 +1,15 @@
 package com.xiangxun.workorder.base;
 
-import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.StrictMode;
-import android.text.TextUtils;
 import android.util.Log;
 
 import com.hellen.baseframe.application.FrameAPP;
+import com.hellen.baseframe.common.db.DBControler;
 import com.hellen.baseframe.common.dlog.DLog;
 import com.hellen.baseframe.common.obsinfo.ConApp;
 import com.xiangxun.workorder.BuildConfig;
-import com.xiangxun.workorder.db.DBControler;
 
 import java.io.File;
 

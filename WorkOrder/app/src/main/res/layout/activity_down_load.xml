@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?><!--设置页面内容-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.xiangxun.workorder.widget.header.HeaderView
+        android:id="@+id/multithread_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/multithread_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/app_login_shape" />
+
+        <com.xiangxun.workorder.widget.dialog.MultithreadProgressBar
+            android:id="@+id/multithread_bar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <EditText
+            android:id="@+id/multithread_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="线程数" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/multithread_down"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="10dp"
+                android:text="下載" />
+
+            <Button
+                android:id="@+id/multithread_pause"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="10dp"
+                android:text="暫停" />
+        </TableRow>
+    </LinearLayout>
+</LinearLayout>

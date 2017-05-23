@@ -23,7 +23,6 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:25.3.1'
-    compile files('libs/darlyframe_v1.0.1.jar')
     compile 'com.google.android.gms:play-services-appindexing:8.1.0'
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'io.reactivex:rxjava:1.2.3'
@@ -33,4 +32,5 @@ dependencies {
     compile 'com.squareup.okhttp3:logging-interceptor:3.5.0'
     compile files('libs/sunjce_provider.jar')
     compile files('libs/Amap_2DMap_V4.2.0_20170209.jar')
+    compile files('libs/darlyframe_v1.0.6.jar')
 }
