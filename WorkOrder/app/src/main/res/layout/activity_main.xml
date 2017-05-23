@@ -27,7 +27,7 @@
         android:divider="@null"
         android:horizontalSpacing="@dimen/margin_padding5"
         android:listSelector="@color/transparent_white"
-        android:numColumns="3"
+        android:numColumns="5"
         android:scrollbars="none"
         android:verticalSpacing="@dimen/margin_padding8" />
 
@@ -36,7 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <TextView
             android:layout_width="match_parent"

@@ -196,6 +196,7 @@ public class LoginListener implements FramePresenter {
                             SharePreferHelp.putValue(AppEnum.USERNAME.getDec(), username);
                             SharePreferHelp.putValue(AppEnum.PASSWORD.getDec(), password);
                             SharePreferHelp.putValue(AppEnum.USERID.getDec(), root.getData().getId());
+                            SharePreferHelp.putValue(AppEnum.COOKIE.getDec(), root.getData().getCookie());
                         }
                         return root;
                     }

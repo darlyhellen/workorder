@@ -19,7 +19,9 @@ public enum AppEnum {
 
     PASSWORD("password", 0),
 
-    USERID("userid", 0);
+    USERID("userid", 0),
+
+    COOKIE("cookie", 0);
 
 
     public static final String ROOT = Environment.getExternalStorageDirectory().getAbsolutePath() + "/WorkOrder/";

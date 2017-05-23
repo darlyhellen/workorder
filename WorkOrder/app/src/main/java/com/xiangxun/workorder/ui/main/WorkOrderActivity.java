@@ -22,6 +22,7 @@ import com.xiangxun.workorder.widget.xlistView.XListView;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -61,7 +62,7 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
         data = new ArrayList<>();
         adapter = new WorkOrderAdapter(data, R.layout.item_activity_work_order, this);
         xlist.setAdapter(adapter);
-        presenter.getWorkOrderByPage(currentPage, null);
+        presenter.getWorkOrderByPage(currentPage, new HashMap<String, String>());
     }
 
     @Override
@@ -84,7 +85,7 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
     public void onRefresh(View v) {
         currentPage = 1;
         listState = AppEnum.LISTSTATEREFRESH;
-        presenter.getWorkOrderByPage(currentPage, null);
+        presenter.getWorkOrderByPage(currentPage, new HashMap<String, String>());
     }
 
     @Override
@@ -95,7 +96,7 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
         } else {
             currentPage++;
             listState = AppEnum.LISTSTATELOADMORE;
-            presenter.getWorkOrderByPage(currentPage, null);
+            presenter.getWorkOrderByPage(currentPage, new HashMap<String, String>());
         }
     }
 

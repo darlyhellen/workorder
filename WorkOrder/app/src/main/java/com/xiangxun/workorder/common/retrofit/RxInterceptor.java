@@ -42,18 +42,20 @@ public class RxInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request.Builder builder = chain.request().newBuilder();
-        String userID = SharePreferHelp.getValue(AppEnum.USERID.getDec(),null);
-        if (TextUtils.isEmpty(userID)){
+        String userID = SharePreferHelp.getValue(AppEnum.USERID.getDec(), null);
+//        String cookie = SharePreferHelp.getValue(AppEnum.COOKIE.getDec(), null);
+        if (TextUtils.isEmpty(userID)) {
             builder.addHeader("Content-Type", "application/json;charset=UTF-8")
                     .addHeader("Accept", "application/json")
                     .addHeader("charset", "utf-8")
                     .addHeader("version", APPSYS_STRING + VersionCode)
                     .build();
-        }else {
+        } else {
             builder.addHeader("Content-Type", "application/json;charset=UTF-8")
                     .addHeader("Accept", "application/json")
                     .addHeader("charset", "utf-8")
-                    .addHeader("userID",userID)
+                    .addHeader("userID", userID)
+//                    .addHeader("Cookie", cookie)
                     .addHeader("version", APPSYS_STRING + VersionCode)
                     .build();
         }

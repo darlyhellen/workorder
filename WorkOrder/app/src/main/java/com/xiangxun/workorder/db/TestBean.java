@@ -56,9 +56,14 @@ public class TestBean extends DateBaseHelper {
         this.url = url;
     }
 
-
     @Override
     public String toString() {
-        return "int id=" + id + "\tString name=" + name + "\tString gender=" + gender + "\tint age=" + age + "\tString url=" + url;
+        return "TestBean{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", gender='" + gender + '\'' +
+                ", age=" + age +
+                ", url='" + url + '\'' +
+                '}';
     }
 }

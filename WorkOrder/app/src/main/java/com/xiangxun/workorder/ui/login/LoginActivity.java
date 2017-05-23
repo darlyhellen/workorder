@@ -82,10 +82,10 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Logi
 
     @Override
     public void onLoginFailed() {
-        if (!TextUtils.isEmpty(SharePreferHelp.getValue(AppEnum.USERID.getDec(), null))) {
-            startActivity(new Intent(this, MainActivity.class));
-            end();
-        }
+//        if (!TextUtils.isEmpty(SharePreferHelp.getValue(AppEnum.USERID.getDec(), null))) {
+//            startActivity(new Intent(this, MainActivity.class));
+//            end();
+//        }
     }
 
     @Override

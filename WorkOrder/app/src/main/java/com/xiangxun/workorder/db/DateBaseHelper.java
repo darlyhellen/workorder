@@ -244,6 +244,7 @@ public abstract class DateBaseHelper {
                 t.close();
             }
         }
+        DLog.i("更新或插入完成后" + selectUrl());
     }
 
     public Cursor findOne() {

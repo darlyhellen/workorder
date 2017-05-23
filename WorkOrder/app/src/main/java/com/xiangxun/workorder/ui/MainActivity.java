@@ -183,7 +183,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     @Override
     public TestBean getBean() {
-        int r = new Random().nextInt();
+        int r = new Random().nextInt(3);
         bean = new TestBean();
         bean.setName("qiangyu" + r);
         bean.setGender("male" + r);

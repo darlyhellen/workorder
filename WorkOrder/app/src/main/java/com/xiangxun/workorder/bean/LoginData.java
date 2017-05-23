@@ -47,6 +47,8 @@ public class LoginData {
 
     private String mobileRoles;
 
+    private String Cookie;
+
     public void setId(String id) {
         this.id = id;
     }
@@ -197,5 +199,13 @@ public class LoginData {
 
     public String getMobileRoles() {
         return this.mobileRoles;
+    }
+
+    public String getCookie() {
+        return Cookie;
+    }
+
+    public void setCookie(String cookie) {
+        Cookie = cookie;
     }
 }
