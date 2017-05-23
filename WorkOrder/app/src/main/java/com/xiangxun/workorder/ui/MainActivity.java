@@ -187,7 +187,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         bean = new TestBean();
         bean.setName("qiangyu" + r);
         bean.setGender("male" + r);
-        bean.setUrl("http://www.baidu.com/" + r);
+        bean.setUrl("https://www.baidu.com/" + r);
         bean.setAge(23 + r);
         return bean;
     }

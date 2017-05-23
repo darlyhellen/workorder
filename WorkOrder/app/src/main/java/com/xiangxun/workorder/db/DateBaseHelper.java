@@ -226,7 +226,6 @@ public abstract class DateBaseHelper {
             DLog.i("更新数据");
             //可以更新
             while (c.moveToNext()) {
-                c.getCount();
                 int id = c.getInt(c.getColumnIndex("id"));
                 db.update(getClass().getSimpleName(), getContentValues(), "id = ?", new String[]{id + ""});
             }
@@ -433,18 +432,26 @@ public abstract class DateBaseHelper {
         if (db == null) {
             open();
         }
-        Object ob = null;
+        String ob = null;
         try {
-            Field id = getClass().getDeclaredField("url");
-            id.setAccessible(true); //设置些属性是可以访问的
-            ob = id.get(this);
-
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
+            //得到类对象
+            Class userCla = (Class) getClass();
+            //得到类中的所有属性集合
+            Field[] fs = userCla.getDeclaredFields();
+            for (int i = 0; i < fs.length; i++) {
+                Field f = fs[i];
+                f.setAccessible(true); //设置些属性是可以访问的
+                if ("url".equals(f.getName())) {
+                    ob = String.valueOf(f.get(this).toString());
+                }
+            }
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
-        Cursor cursor = db.query(getClass().getSimpleName(), null, "url = ?", new String[]{ob + ""}, null, null, null);
+        StringBuilder builder= new StringBuilder();
+        builder.append("url = '");
+        builder.append(ob+"'");
+        Cursor cursor = db.query(getClass().getSimpleName(), null, builder.toString(), null, null, null, null);
         //通过反射机制，设置每项参数值。
         List<Object> lis = new ArrayList<>();
         try {
@@ -459,19 +466,19 @@ public abstract class DateBaseHelper {
                     f.setAccessible(true); //设置些属性是可以访问的
                     String type = f.getType().toString();
                     if (type.endsWith("String")) {
-                        f.set(this, cursor.getString(cursor.getColumnIndex(f.getName())));
+                        f.set(b, cursor.getString(cursor.getColumnIndex(f.getName())));
                     } else if (type.endsWith("Integer") || type.endsWith("int")) {
-                        f.set(this, cursor.getInt(cursor.getColumnIndex(f.getName())));
+                        f.set(b, cursor.getInt(cursor.getColumnIndex(f.getName())));
                     } else if (type.endsWith("Float") || type.endsWith("float")) {
-                        f.set(this, cursor.getFloat(cursor.getColumnIndex(f.getName())));
+                        f.set(b, cursor.getFloat(cursor.getColumnIndex(f.getName())));
                     } else if (type.endsWith("Double") || type.endsWith("double")) {
-                        f.set(this, cursor.getDouble(cursor.getColumnIndex(f.getName())));
+                        f.set(b, cursor.getDouble(cursor.getColumnIndex(f.getName())));
                     } else if (type.endsWith("Boolean") || type.endsWith("boolean")) {
-                        f.set(this, cursor.getBlob(cursor.getColumnIndex(f.getName())));
+                        f.set(b, cursor.getBlob(cursor.getColumnIndex(f.getName())));
                     } else if (type.endsWith("Long") || type.endsWith("long")) {
-                        f.set(this, cursor.getLong(cursor.getColumnIndex(f.getName())));
+                        f.set(b, cursor.getLong(cursor.getColumnIndex(f.getName())));
                     } else if (type.endsWith("Short") || type.endsWith("short")) {
-                        f.set(this, cursor.getShort(cursor.getColumnIndex(f.getName())));
+                        f.set(b, cursor.getShort(cursor.getColumnIndex(f.getName())));
                     }
                 }
                 lis.add(b);
