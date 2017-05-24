@@ -12,6 +12,7 @@ import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.base.BaseActivity;
+import com.xiangxun.workorder.bean.Patrol;
 import com.xiangxun.workorder.bean.WorkOrderData;
 import com.xiangxun.workorder.ui.adapter.WorkOrderAdapter;
 import com.xiangxun.workorder.ui.biz.WorkOrderListener;
@@ -32,6 +33,7 @@ import java.util.Random;
  * ©2017 XunXiang.Company. All rights reserved.
  *
  * @TODO:我的工单页面。传递给服务端用户ID，根据页码进行页面刷新加载。
+ * @TODO:修改V1(根据首页传递进来的参数来判断到底是什么列表,当然传递为空表示全部工单列表)
  */
 @ContentBinder(R.layout.activity_work_order)
 public class WorkOrderActivity extends BaseActivity implements View.OnClickListener, XListView.IXListViewListener, AdapterView.OnItemClickListener, WorkOrderListener.WorkOrderInterface {
@@ -46,6 +48,8 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
     private List<WorkOrderData> data;
 
     private WorkOrderPresenter presenter;
+    //至关重要的一个参数
+    private Patrol patrol;
 
     private int currentPage = 1;
     private int PageSize = 10;
@@ -56,13 +60,48 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
     @Override
     protected void initView(Bundle savedInstanceState) {
         presenter = new WorkOrderPresenter(this);
-        header.setTitle(R.string.main_work_order);
+        //获取完成
+
         header.setLeftBackgroundResource(R.mipmap.back_image);
         header.setRightBackgroundResource(R.mipmap.xw_title_search);
         data = new ArrayList<>();
         adapter = new WorkOrderAdapter(data, R.layout.item_activity_work_order, this);
         xlist.setAdapter(adapter);
-        presenter.getWorkOrderByPage(currentPage, new HashMap<String, String>());
+        patrol = (Patrol) getIntent().getSerializableExtra("PATROL");
+        if (patrol == null) {
+            header.setTitle(R.string.main_work_order);
+            presenter.getWorkOrderByPage(currentPage, new HashMap<String, String>());
+        } else {
+            //根据传递过来的参数,进行页面分类整理.请求不同的接口,
+            header.setTitle(patrol.getName());
+            classifyRequest(patrol.getListId());
+
+
+        }
+    }
+
+    /**
+     * @param listId
+     * @TODO:根据传递过来的参数,进行页面分类整理.请求不同的接口
+     */
+    private void classifyRequest(int listId) {
+        switch (listId) {
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                //请求全部的接口
+                presenter.getWorkOrderByPage(currentPage, new HashMap<String, String>());
+                break;
+            default:
+                break;
+        }
+
     }
 
     @Override

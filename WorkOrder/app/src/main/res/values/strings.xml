@@ -27,6 +27,11 @@
     <!-- 首页-->
     <string name="main_titile">工单系统</string>
     <string name="main_work_order">我的工单</string>
+    <string name="main_work_order_new">最新工单</string>
+    <string name="main_work_order_down">完成工单</string>
+    <string name="main_work_order_undown">未完成工单</string>
+    <string name="main_work_order_search">搜索工单</string>
+    <string name="main_work_order_all">全部工单</string>
     <string name="main_work_map">设备位置</string>
     <string name="main_work_set">设置</string>
 
@@ -48,7 +53,6 @@
     <string name="set_loginout_des">是否确认退出登录？</string>
     <string name="set_sure">确认</string>
     <string name="set_consel">取消</string>
-
 
 
     <string name="more_update">检查更新</string>

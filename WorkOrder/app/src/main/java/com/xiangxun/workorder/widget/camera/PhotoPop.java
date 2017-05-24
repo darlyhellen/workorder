@@ -361,6 +361,9 @@ public class PhotoPop extends PopupWindow implements OnClickListener {
      */
     public String getImagePath(Uri originalUri) {
         String[] proj = {MediaColumns.DATA};
+        if (originalUri==null){
+            return null;
+        }
 
         if (originalUri.toString().contains("file")) {
             String urlString = originalUri.toString().replaceAll("file://", "");

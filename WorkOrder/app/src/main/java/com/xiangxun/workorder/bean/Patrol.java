@@ -1,5 +1,7 @@
 package com.xiangxun.workorder.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by Zhangyuhui/Darly on 2017/5/17.
  * Copyright by [Zhangyuhui/Darly]
@@ -7,7 +9,7 @@ package com.xiangxun.workorder.bean;
  *
  * @TODO:首页model类
  */
-public class Patrol {
+public class Patrol implements Serializable {
     private int name;
     private int id;
     private int listId;

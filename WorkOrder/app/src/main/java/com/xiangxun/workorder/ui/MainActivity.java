@@ -90,11 +90,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         iv.setLayoutParams(new LinearLayout.LayoutParams(AppEnum.WIDTH.getLen(), (int) (AppEnum.WIDTH.getLen() * 0.61)));
 
         data = new ArrayList<>();
-        data.add(new Patrol(1, R.string.main_work_order, R.mipmap.work_order_search));
-        data.add(new Patrol(2, R.string.main_work_order, R.mipmap.man_user_manage));
-        data.add(new Patrol(3, R.string.main_work_order, R.mipmap.work_order_search));
-        data.add(new Patrol(4, R.string.main_work_order, R.mipmap.work_order_repor));
-        data.add(new Patrol(5, R.string.main_work_order, R.mipmap.contact_phone));
+        data.add(new Patrol(1, R.string.main_work_order_new, R.mipmap.work_order_search));
+        data.add(new Patrol(2, R.string.main_work_order_down, R.mipmap.man_user_manage));
+        data.add(new Patrol(3, R.string.main_work_order_undown, R.mipmap.work_order_search));
+        data.add(new Patrol(4, R.string.main_work_order_search, R.mipmap.work_order_repor));
+        data.add(new Patrol(5, R.string.main_work_order_all, R.mipmap.contact_phone));
 
         adapter = new PatrolHomeAdapter(data, R.layout.home_grideview_layout, this);
         gridView.setAdapter(adapter);
@@ -129,21 +129,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             ToastApp.showToast("数据错误！");
             return;
         }
-        switch (patrol.getListId()) {
-            case 1:
-                startActivity(new Intent(this, WorkOrderActivity.class));
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-            default:
-                break;
-        }
+        Intent intent = new Intent(this, WorkOrderActivity.class);
+        intent.putExtra("PATROL",patrol);
+        startActivity(intent);
     }
 
     @Override

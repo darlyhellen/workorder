@@ -23,7 +23,10 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:padding="10dp"
+        android:paddingBottom="@dimen/layoutSize20"
+        android:paddingLeft="@dimen/margin_padding10"
+        android:paddingRight="@dimen/margin_padding10"
+        android:paddingTop="@dimen/layoutSize20"
         android:textColor="@color/wel_text"
         android:textSize="@dimen/textview_normal" />
 
