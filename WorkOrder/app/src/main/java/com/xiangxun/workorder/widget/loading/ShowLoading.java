@@ -36,14 +36,6 @@ public class ShowLoading extends Dialog {
         init();
     }
 
-    /**
-     * 当窗口焦点改变时调用
-     */
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        progress = (CircleProgress) findViewById(R.id.progress);
-        progress.setRadius(20);
-    }
 
     @Override
     public void show() {
@@ -109,6 +101,8 @@ public class ShowLoading extends Dialog {
         // 监听返回键处理
         // setOnCancelListener(cancelListener);
         // 设置居中
+        progress = (CircleProgress) findViewById(R.id.progress);
+        progress.setRadius(20);
         getWindow().getAttributes().gravity = Gravity.CENTER;
         WindowManager.LayoutParams lp = getWindow().getAttributes();
         // 设置背景层透明度

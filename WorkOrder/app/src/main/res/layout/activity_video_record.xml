@@ -48,7 +48,8 @@
                 android:layout_centerHorizontal="true"
                 android:background="@mipmap/settings"
                 android:padding="@dimen/margin_padding10"
-                android:tag="setting" />
+                android:tag="setting"
+                android:visibility="gone"/>
 
         </RelativeLayout>
 

@@ -10,9 +10,11 @@ import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.ui.MainActivity;
 import com.xiangxun.workorder.ui.biz.MainListener;
+import com.xiangxun.workorder.ui.login.LoginActivity;
 import com.xiangxun.workorder.ui.main.DownLoadActivity;
 import com.xiangxun.workorder.ui.main.SetActivity;
 import com.xiangxun.workorder.ui.video.VideoRecordActivity;
+import com.xiangxun.workorder.widget.loading.ShowLoading;
 
 import java.util.List;
 
@@ -29,9 +31,14 @@ public class MainPresenter {
 
     private MainListener.MainView view;
 
+    private ShowLoading loading;
+
     public MainPresenter(MainListener.MainView view) {
         this.view = view;
         this.biz = new MainListener();
+        loading = new ShowLoading((MainActivity) view);
+        loading.setMessage(R.string.loading);
+        loading.show();
     }
 
 

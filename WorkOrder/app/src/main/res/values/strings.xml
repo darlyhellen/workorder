@@ -13,6 +13,7 @@
     <string name="mine_login_hine1">请输入账号</string>
     <string name="mine_login_hine2">密码</string>
     <string name="mine_login_login">登&#160;&#160;&#160;&#160;录</string>
+    <string name="login">登录</string>
     <string name="mine_login_loginning">登录中</string>
     <string name="splash_adv_logo">Copyright © 1993&#8211;2017\n西安翔迅科技有限责任公司版权所有</string>
     <string name="loginout">退出登录</string>

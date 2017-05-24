@@ -18,7 +18,9 @@
         <TextView
             android:id="@+id/id_set_item_title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/wel_text"
+            android:textSize="@dimen/textview_normal" />
 
         <View
             android:layout_width="0dp"
@@ -28,12 +30,16 @@
         <TextView
             android:id="@+id/id_set_item_decls"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/wel_text"
+            android:textSize="@dimen/textview_normal" />
 
         <TextView
             android:id="@+id/id_set_item_decl"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/wel_text"
+            android:textSize="@dimen/textview_normal" />
 
         <ImageView
             android:id="@+id/id_set_item_arrow"

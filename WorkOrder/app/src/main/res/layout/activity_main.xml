@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <!--首页内容-->
@@ -18,22 +19,26 @@
         android:background="@mipmap/patrol_manage"
         android:visibility="visible" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_padding5"
+        android:background="@color/divider" />
+
     <GridView
         android:id="@+id/gv_home"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_padding5"
         android:divider="@null"
-        android:horizontalSpacing="@dimen/margin_padding1"
+        android:horizontalSpacing="@dimen/margin_padding2"
         android:listSelector="@color/transparent_white"
         android:numColumns="3"
         android:scrollbars="none"
-        android:verticalSpacing="@dimen/margin_padding1" />
+        android:verticalSpacing="@dimen/margin_padding2" />
 
     <!--首页内容结束-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="horizontal"
         android:visibility="visible">
 
@@ -95,7 +100,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:padding="10dp"
-            android:text="down" />
+            android:text="down"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/video"
@@ -104,7 +110,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:padding="10dp"
-            android:text="video" />
+            android:text="video"
+            android:visibility="gone" />
 
     </LinearLayout>
 </LinearLayout>
