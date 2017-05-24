@@ -1,6 +1,7 @@
 package com.xiangxun.workorder.ui.video;
 
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.graphics.PixelFormat;
 import android.hardware.Camera;
 import android.media.CamcorderProfile;
@@ -27,7 +28,6 @@ import com.xiangxun.workorder.ui.presenter.VideoRecordPresenter;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Calendar;
 
 /**
  * Created by Zhangyuhui/Darly on 2017/5/23.
@@ -43,6 +43,8 @@ public class VideoRecordActivity extends BaseActivity implements SurfaceHolder.C
     private SurfaceView mSurfaceView;
     @ViewsBinder(R.id.id_video_ib_stop)
     private ImageButton mBtnStartStop;
+    @ViewsBinder(R.id.id_video_capture_imagebutton_switch)
+    private ImageButton mBtnSwitch;
     @ViewsBinder(R.id.id_video_capture_imagebutton_setting)
     private ImageButton mBtnSet;
     @ViewsBinder(R.id.id_video_capture_imagebutton_showfiles)
@@ -54,6 +56,7 @@ public class VideoRecordActivity extends BaseActivity implements SurfaceHolder.C
 
     private SurfaceHolder mHolder;
     private Camera mCamera;
+    private int CameraID = 1;
     private MediaRecorder mMediaRecorder;
     private Camera.Parameters mParameters;
 
@@ -72,29 +75,51 @@ public class VideoRecordActivity extends BaseActivity implements SurfaceHolder.C
     @Override
     protected void initView(Bundle savedInstanceState) {
         presenter = new VideoRecordPresenter(this);
+        //开启前必须初始化摄像头
         initCameraAndSurfaceViewHolder();
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                prepareMediaRecorder();
-            }
-        }, 500);
     }
 
+    public void switchCamera() {
+        releaseCamera();
+        CameraID = (CameraID + 1) % Camera.getNumberOfCameras();
+        mCamera = openCamera(CameraID);
+    }
+
+    /**
+     * 释放相机资源
+     */
+    public void releaseCamera() {
+        if (mCamera != null) {
+            mCamera.setPreviewCallback(null);
+            mCamera.stopPreview();
+            mCamera.release();
+            mCamera = null;
+        }
+    }
+
+
+    public static Camera openCamera(int cameraId) {
+        try {
+            return Camera.open(cameraId);
+        } catch (Exception e) {
+            return null;
+        }
+    }
 
     @Override
     protected void initListener() {
         mBtnStartStop.setOnClickListener(this);
         mBtnSet.setOnClickListener(this);
         mBtnShowFile.setOnClickListener(this);
+        mBtnSwitch.setOnClickListener(this);
     }
 
 
     private void initCameraAndSurfaceViewHolder() {
         mHolder = mSurfaceView.getHolder();
         mHolder.addCallback(this);
-        mCamera = Camera.open();
+        mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+        switchCamera();
     }
 
 
@@ -105,12 +130,26 @@ public class VideoRecordActivity extends BaseActivity implements SurfaceHolder.C
 
     private boolean prepareMediaRecorder() {
         mMediaRecorder = new MediaRecorder();
+        mMediaRecorder.reset();
         mCamera.unlock();
         mMediaRecorder.setCamera(mCamera);
-        mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.CAMCORDER);
-        mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
-        mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH/*QUALITY_1080P*/));
+        mMediaRecorder.setOnErrorListener(new MediaRecorder.OnErrorListener() {
+            @Override
+            public void onError(MediaRecorder mr, int what, int extra) {
+                DLog.i("setOnErrorListener");
+            }
+        });
+        mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);//设置声源
+        mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);//设置视频源
+        mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.DEFAULT);//设置音频输出格式为3gp  DEFAULT THREE_GPP
+        mMediaRecorder.setVideoFrameRate(100);//每秒3帧
+        mMediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.DEFAULT);//录制视频编码 264
+        mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT);//设置音频编码为amr_nb   AMR_NB DEFAULT AAC
+        mMediaRecorder.setVideoSize(640, 480);//设置录制视频尺寸     mWidth   mHeight
+        mMediaRecorder.setVideoEncodingBitRate(5 * 1024 * 1024);
+        mMediaRecorder.setOrientationHint(90);// 输出旋转90度，保持竖屏录制
         mMediaRecorder.setPreviewDisplay(mHolder.getSurface());
+
         File dir = new File(AppEnum.VIDEO);
         if (!dir.exists()) {
             dir.mkdir();
@@ -141,12 +180,58 @@ public class VideoRecordActivity extends BaseActivity implements SurfaceHolder.C
         presenter.onClickDown(this, v);
     }
 
+
+    public void followScreenOrientation() {
+        final int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            mCamera.setDisplayOrientation(180);
+        } else if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            mCamera.setDisplayOrientation(90);
+        }
+    }
+
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
+        setCamera();
+        startPreviewDisplay(holder);
+        //下面这个方法能帮我们获取到相机预览帧，我们可以在这里实时地处理每一帧
+        mCamera.setPreviewCallback(new Camera.PreviewCallback() {
+            @Override
+            public void onPreviewFrame(byte[] data, Camera camera) {
+//                DLog.i("获取预览帧...");
+//                presenter.showVideo(data);
+//                DLog.d("预览帧大小：" + String.valueOf(data.length));
+            }
+        });
+    }
 
+    @Override
+    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+
+        if (mHolder.getSurface() == null) {
+            return;
+        }
+        followScreenOrientation();
+        DLog.d("Restart preview display[SURFACE-CHANGED]");
+        stopPreviewDisplay();
+        startPreviewDisplay(mHolder);
+    }
+
+    @Override
+    public void surfaceDestroyed(SurfaceHolder holder) {
+        DLog.d("Stop preview display[SURFACE-DESTROYED]");
+        stopPreviewDisplay();
+        mHolder.removeCallback(this);
+        mCamera.setPreviewCallback(null);
+        mCamera.release();
+        mCamera = null;
+    }
+
+    public void setCamera() {
         mParameters = mCamera.getParameters();
         mParameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
         mCamera.setParameters(mParameters);
+        followScreenOrientation();
         mCamera.autoFocus(new Camera.AutoFocusCallback() {
             @Override
             public void onAutoFocus(boolean success, Camera camera) {
@@ -155,38 +240,32 @@ public class VideoRecordActivity extends BaseActivity implements SurfaceHolder.C
                 }
             }
         });
+    }
+
+
+    private void startPreviewDisplay(SurfaceHolder holder) {
+        checkCamera();
         try {
             mCamera.setPreviewDisplay(holder);
             mCamera.startPreview();
-
-            //下面这个方法能帮我们获取到相机预览帧，我们可以在这里实时地处理每一帧
-            mCamera.setPreviewCallback(new Camera.PreviewCallback() {
-                @Override
-                public void onPreviewFrame(byte[] data, Camera camera) {
-                    DLog.i("获取预览帧...");
-                    presenter.showVideo(data);
-                    DLog.d("预览帧大小：" + String.valueOf(data.length));
-                }
-            });
         } catch (IOException e) {
-            DLog.d("设置相机预览失败", e);
-            e.printStackTrace();
+            DLog.e("Error while START preview for camera", e);
         }
-
     }
 
-    @Override
-    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-
+    private void stopPreviewDisplay() {
+        checkCamera();
+        try {
+            mCamera.stopPreview();
+        } catch (Exception e) {
+            DLog.e("Error while STOP preview for camera", e);
+        }
     }
 
-    @Override
-    public void surfaceDestroyed(SurfaceHolder holder) {
-        mHolder.removeCallback(this);
-        mCamera.setPreviewCallback(null);
-        mCamera.stopPreview();
-        mCamera.release();
-        mCamera = null;
+    private void checkCamera() {
+        if (mCamera == null) {
+            throw new IllegalStateException("Camera must be set when start/stop preview, call <setCamera(Camera)> to set");
+        }
     }
 
     @Override
@@ -196,12 +275,18 @@ public class VideoRecordActivity extends BaseActivity implements SurfaceHolder.C
 
     @Override
     public void setDisableClick() {
-
+        mBtnStartStop.setClickable(false);
+        mBtnSet.setClickable(false);
+        mBtnShowFile.setClickable(false);
+        mBtnSwitch.setClickable(false);
     }
 
     @Override
     public void setEnableClick() {
-
+        mBtnStartStop.setClickable(true);
+        mBtnSet.setClickable(true);
+        mBtnShowFile.setClickable(true);
+        mBtnSwitch.setClickable(true);
     }
 
     @Override
@@ -217,19 +302,6 @@ public class VideoRecordActivity extends BaseActivity implements SurfaceHolder.C
     @Override
     public boolean startRecording() {
         if (prepareMediaRecorder()) {
-
-            mMediaRecorder.setOnInfoListener(new MediaRecorder.OnInfoListener() {
-                @Override
-                public void onInfo(MediaRecorder mr, int what, int extra) {
-
-                }
-            });
-            mMediaRecorder.setOnErrorListener(new MediaRecorder.OnErrorListener() {
-                @Override
-                public void onError(MediaRecorder mr, int what, int extra) {
-
-                }
-            });
             mMediaRecorder.start();
             return true;
         } else {

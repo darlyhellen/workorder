@@ -32,9 +32,14 @@ public class VideoRecordPresenter {
 
 
     public void onClickDown(Context context, View v) {
+        view.setDisableClick();
         switch (v.getId()) {
             case R.id.id_video_capture_imagebutton_showfiles:
                 DLog.i("id_video_capture_imagebutton_showfiles");
+                break;
+            case R.id.id_video_capture_imagebutton_switch:
+                DLog.i("id_video_capture_imagebutton_switch");
+                view.switchCamera();
                 break;
             case R.id.id_video_capture_imagebutton_setting:
                 DLog.i("id_video_capture_imagebutton_setting");
@@ -44,6 +49,7 @@ public class VideoRecordPresenter {
                 record();
                 break;
         }
+        view.setEnableClick();
     }
 
 
@@ -79,7 +85,7 @@ public class VideoRecordPresenter {
         return "" + year + (month + 1) + day + hour + minute + second;
     }
 
-    public void showVideo(byte[] data){
+    public void showVideo(byte[] data) {
         new ProcessFrameAsyncTask().execute(data);
     }
 
