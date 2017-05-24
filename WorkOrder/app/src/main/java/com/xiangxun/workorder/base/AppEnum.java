@@ -34,6 +34,8 @@ public enum AppEnum {
 
     public static final String DOWN = ROOT + "down/";
 
+    public static final String VIDEO = ROOT + "video/";
+
 
     public static String capUri;
 

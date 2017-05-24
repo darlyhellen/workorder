@@ -17,7 +17,6 @@ import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.bean.LoginRoot;
 import com.xiangxun.workorder.common.retrofit.RxjavaRetrofitRequestUtil;
 import com.xiangxun.workorder.common.urlencode.Tools;
-import com.xiangxun.workorder.db.UserInfo;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -243,7 +242,7 @@ public class LoginListener implements FramePresenter {
      * java.lang.String, com.hellen.base.BaseListener)
      */
     public void login_out(String username, String password,
-                          FrameListener<UserInfo> listener) {
+                          FrameListener<String> listener) {
     }
 
     @Override

@@ -62,6 +62,7 @@ public class DownLoadActivity extends BaseActivity implements View.OnClickListen
         header.setLeftBackOneListener(this);
         button.setOnClickListener(this);
         pause.setOnClickListener(this);
+
     }
 
     @Override
@@ -75,6 +76,9 @@ public class DownLoadActivity extends BaseActivity implements View.OnClickListen
                 break;
             case R.id.multithread_pause:
                 MultithreadDownLoadCommon.ISPUASE = true;
+                break;
+            case R.id.title_view_back_llayout:
+                finish();
                 break;
         }
     }

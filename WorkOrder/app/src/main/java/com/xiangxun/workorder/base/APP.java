@@ -98,6 +98,10 @@ public class APP extends FrameAPP {
         if (!down.exists()) {
             down.mkdir();
         }
+        File video = new File(AppEnum.VIDEO);
+        if (!video.exists()) {
+            video.mkdir();
+        }
     }
 
 

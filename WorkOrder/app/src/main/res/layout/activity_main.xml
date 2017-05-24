@@ -13,11 +13,11 @@
         android:layout_height="wrap_content" />
 
     <ImageView
+        android:id="@+id/comment_iv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@mipmap/patrol_manage"
-        android:visibility="visible"
-        tools:ignore="ContentDescription" />
+        android:visibility="visible"/>
 
     <GridView
         android:id="@+id/gv_home"
@@ -92,6 +92,14 @@
             android:gravity="center"
             android:padding="10dp"
             android:text="down" />
+        <Button
+            android:id="@+id/video"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="video" />
 
     </LinearLayout>
 </LinearLayout>

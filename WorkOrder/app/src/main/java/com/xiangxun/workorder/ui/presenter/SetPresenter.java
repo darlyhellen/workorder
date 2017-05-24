@@ -125,6 +125,7 @@ public class SetPresenter {
     }
 
     public void clickLoginOut(final Context context) {
+        //給服務端發送請求,判斷是否是最新的版本.
         APPDialg dialg = new APPDialg(context);
         dialg.setTitle(R.string.set_decl);
         dialg.setContent(R.string.set_loginout_des);

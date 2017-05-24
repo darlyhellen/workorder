@@ -4,7 +4,7 @@ import android.app.Dialog;
 
 import com.hellen.baseframe.application.FramePresenter;
 import com.hellen.baseframe.application.FrameView;
-import com.xiangxun.workorder.db.TestBean;
+import com.hellen.baseframe.common.db.ThreadInfo;
 import com.xiangxun.workorder.widget.camera.PhotoPop;
 
 /**
@@ -32,7 +32,7 @@ public class MainListener implements FramePresenter {
 
         PhotoPop getPop();
 
-        TestBean getBean();
+        ThreadInfo getBean();
 
         void end();
     }

@@ -219,4 +219,11 @@
     <color name="color_ffffff">#ffffff</color>
     <color name="color_eeeeee">#eeeeee</color>
 
+
+    <color name="white_overlay">#ffffffff</color>
+    <color name="black_overlay">#ff000000</color>
+    <color name="red_overlay">#ffff0000</color>
+    <color name="gray_overlay">#ff838b8b</color>
+    <color name="alpha_overlay">#a0000000</color>
+
 </resources>

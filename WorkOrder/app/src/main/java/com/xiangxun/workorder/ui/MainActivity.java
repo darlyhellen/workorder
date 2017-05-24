@@ -8,16 +8,18 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.hellen.baseframe.binder.ContentBinder;
 import com.hellen.baseframe.binder.ViewsBinder;
+import com.hellen.baseframe.common.db.ThreadInfo;
 import com.hellen.baseframe.common.dlog.DLog;
 import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.base.BaseActivity;
 import com.xiangxun.workorder.bean.Patrol;
-import com.xiangxun.workorder.db.TestBean;
 import com.xiangxun.workorder.ui.adapter.PatrolHomeAdapter;
 import com.xiangxun.workorder.ui.biz.MainListener;
 import com.xiangxun.workorder.ui.main.WorkOrderActivity;
@@ -56,16 +58,20 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private Button delete;
     @ViewsBinder(R.id.down)
     private Button down;
+    @ViewsBinder(R.id.video)
+    private Button video;
     /**
      * 上午9:29:04 TODO 调出选项的POP窗口，主要为相机，相册，取消
      */
     public PhotoPop pop;
-    TestBean bean;
+    ThreadInfo bean;
 
     private MainPresenter presenter;
     //首页参数集合
     @ViewsBinder(R.id.comment_title)
     private HeaderView title;
+    @ViewsBinder(R.id.comment_iv)
+    private ImageView iv;
     @ViewsBinder(R.id.gv_home)
     private GridView gridView;
     private PatrolHomeAdapter adapter;
@@ -81,6 +87,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
         title.setTitle(R.string.main_titile);
         title.setRightBackgroundResource(R.mipmap.set);
+        iv.setLayoutParams(new LinearLayout.LayoutParams(AppEnum.WIDTH.getLen(), (int) (AppEnum.WIDTH.getLen() * 0.61)));
+
         data = new ArrayList<>();
         data.add(new Patrol(1, R.string.main_work_order, R.mipmap.work_order_search));
         data.add(new Patrol(2, R.string.main_work_order, R.mipmap.man_user_manage));
@@ -105,6 +113,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         select.setOnClickListener(this);
         delete.setOnClickListener(this);
         down.setOnClickListener(this);
+        video.setOnClickListener(this);
     }
 
     @Override
@@ -187,13 +196,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     }
 
     @Override
-    public TestBean getBean() {
+    public ThreadInfo getBean() {
         int r = new Random().nextInt(3);
-        bean = new TestBean();
-        bean.setName("qiangyu" + r);
-        bean.setGender("male" + r);
+        bean = new ThreadInfo();
+        bean.setFileName("qiangyu" + r);
+        bean.setFilePath("male" + r);
         bean.setUrl("https://www.baidu.com/" + r);
-        bean.setAge(23 + r);
+        bean.setFinished(23 + r);
+        bean.setStart(r);
+        bean.setEnd(r);
+        bean.setLenght(r);
         return bean;
     }
 

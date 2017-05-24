@@ -910,6 +910,7 @@ public class Tools {
         str.append(pwd);
         str.append(PRIVATE_KEY);
         str.append(sdf.format(new Date()));
+        DLog.i(str.toString());
 
         try {
             DeEncryptUtil deu = new DeEncryptUtil();

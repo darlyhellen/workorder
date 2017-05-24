@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.hellen.baseframe.binder.ContentBinder;
 import com.hellen.baseframe.binder.ViewsBinder;
@@ -28,6 +30,9 @@ import com.xiangxun.workorder.ui.presenter.LoginPresenter;
 @ContentBinder(R.layout.login_activity_layout)
 public class LoginActivity extends BaseActivity implements OnClickListener, LoginListener.LoginView {
 
+
+    @ViewsBinder(R.id.edt_login_bg)
+    private ImageView iv;
     @ViewsBinder(R.id.edt_user_acount)
     private ClearEditText mEdtAcount;
     @ViewsBinder(R.id.edt_login_password)
@@ -47,6 +52,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Logi
         presenter = new LoginPresenter(this);
         mBtnLogin.setViewInit(R.string.mine_login_login, R.string.mine_login_loginning, mEdtAcount, mEdtPassWord);
         mBtnLogin_post.setViewInit(R.string.mine_login_login, R.string.mine_login_loginning, mEdtAcount, mEdtPassWord);
+        iv.setLayoutParams(new LinearLayout.LayoutParams(AppEnum.WIDTH.getLen(), (int) (AppEnum.WIDTH.getLen() * 0.64)));
         String account = SharePreferHelp.getValue(AppEnum.USERNAME.getDec(), null);
         String password = SharePreferHelp.getValue(AppEnum.PASSWORD.getDec(), null);
         mEdtAcount.setText(account);
@@ -69,7 +75,6 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Logi
             case R.id.btn_login:
                 acount = mEdtAcount.getText().toString().trim();
                 password = mEdtPassWord.getText().toString().trim();
-                //DcNetWorkUtils.login(this, acount, password, mHandler);
                 break;
         }
     }
