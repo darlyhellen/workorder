@@ -19,9 +19,11 @@ import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.base.BaseActivity;
+import com.xiangxun.workorder.base.StaticListener;
 import com.xiangxun.workorder.bean.Patrol;
+import com.xiangxun.workorder.service.WorkOrderNewService;
 import com.xiangxun.workorder.ui.adapter.PatrolHomeAdapter;
-import com.xiangxun.workorder.ui.biz.MainListener;
+import com.xiangxun.workorder.ui.biz.MainListener.MainInterface;
 import com.xiangxun.workorder.ui.main.WorkOrderActivity;
 import com.xiangxun.workorder.ui.presenter.MainPresenter;
 import com.xiangxun.workorder.widget.camera.PhotoPop;
@@ -34,6 +36,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+
 /**
  * Created by Zhangyuhui/Darly on 2017/5/17.
  * Copyright by [Zhangyuhui/Darly]
@@ -42,7 +45,7 @@ import java.util.Random;
  * @TODO: 首页静态页面, 暂时没有接口网络请求。
  */
 @ContentBinder(R.layout.activity_main)
-public class MainActivity extends BaseActivity implements View.OnClickListener, MainListener.MainView, AdapterView.OnItemClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener, MainInterface, AdapterView.OnItemClickListener, StaticListener.RefreshMainUIListener {
 
 
     public static final String 工单管理 = "工单管理";
@@ -83,6 +86,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     protected void initView(Bundle savedInstanceState) {
         pop = new PhotoPop(this);
 
+        Intent intent = new Intent(this, WorkOrderNewService.class);
+        startService(intent);
+        StaticListener.setRefreshMainUIListener(this);
+
         presenter = new MainPresenter(this);
 
         title.setTitle(R.string.main_titile);
@@ -90,11 +97,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         iv.setLayoutParams(new LinearLayout.LayoutParams(AppEnum.WIDTH.getLen(), (int) (AppEnum.WIDTH.getLen() * 0.61)));
 
         data = new ArrayList<>();
-        data.add(new Patrol(1, R.string.main_work_order_new, R.mipmap.work_order_search));
-        data.add(new Patrol(2, R.string.main_work_order_down, R.mipmap.man_user_manage));
-        data.add(new Patrol(3, R.string.main_work_order_undown, R.mipmap.work_order_search));
-        data.add(new Patrol(4, R.string.main_work_order_search, R.mipmap.work_order_repor));
-        data.add(new Patrol(5, R.string.main_work_order_all, R.mipmap.contact_phone));
+        data.add(new Patrol(1, R.string.main_work_order_new, R.mipmap.work_order_search, 3));
+        data.add(new Patrol(2, R.string.main_work_order_down, R.mipmap.man_user_manage, 0));
+        data.add(new Patrol(3, R.string.main_work_order_undown, R.mipmap.work_order_search, 0));
+        data.add(new Patrol(4, R.string.main_work_order_search, R.mipmap.work_order_repor, 0));
+        data.add(new Patrol(5, R.string.main_work_order_all, R.mipmap.contact_phone, 0));
 
         adapter = new PatrolHomeAdapter(data, R.layout.home_grideview_layout, this);
         gridView.setAdapter(adapter);
@@ -130,7 +137,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             return;
         }
         Intent intent = new Intent(this, WorkOrderActivity.class);
-        intent.putExtra("PATROL",patrol);
+        intent.putExtra("PATROL", patrol);
         startActivity(intent);
     }
 
@@ -210,5 +217,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     @Override
     public void setEnableClick() {
 
+    }
+
+    @Override
+    public void refreshMainUI(int num) {
+        DLog.i(getClass().getSimpleName()+"--->"+num);
     }
 }

@@ -17,7 +17,7 @@ public class LoginData {
 
     private String name;
 
-    private boolean disabled;
+    private int disabled;
 
     private String mobile;
 
@@ -81,12 +81,12 @@ public class LoginData {
         return this.name;
     }
 
-    public void setDisabled(boolean disabled) {
-        this.disabled = disabled;
+    public int getDisabled() {
+        return disabled;
     }
 
-    public boolean getDisabled() {
-        return this.disabled;
+    public void setDisabled(int disabled) {
+        this.disabled = disabled;
     }
 
     public void setMobile(String mobile) {

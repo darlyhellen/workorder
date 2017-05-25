@@ -2,7 +2,6 @@ package com.xiangxun.workorder.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -16,6 +15,7 @@ import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.base.BaseActivity;
 import com.xiangxun.workorder.ui.MainActivity;
 import com.xiangxun.workorder.ui.biz.LoginListener;
+import com.xiangxun.workorder.ui.biz.LoginListener.LoginInterface;
 import com.xiangxun.workorder.ui.login.edittext.ClearEditText;
 import com.xiangxun.workorder.ui.login.edittext.XSubButton;
 import com.xiangxun.workorder.ui.presenter.LoginPresenter;
@@ -28,7 +28,7 @@ import com.xiangxun.workorder.ui.presenter.LoginPresenter;
  * @TODO: 登陆页面
  */
 @ContentBinder(R.layout.login_activity_layout)
-public class LoginActivity extends BaseActivity implements OnClickListener, LoginListener.LoginView {
+public class LoginActivity extends BaseActivity implements OnClickListener, LoginInterface {
 
 
     @ViewsBinder(R.id.edt_login_bg)

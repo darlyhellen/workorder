@@ -25,7 +25,7 @@ public interface HttpRetrofitInterface {
      * @TODO:用户登录POST接口，传递参数为<b>route</b>
      */
     //@FormUrlEncoded//添加这行注解，否则参数报错。Post请求
-    @POST("login/login/authority/")
+    @POST("login")
     Observable<JsonObject> postlogin(@Body RequestBody route);
 
     /**
@@ -35,7 +35,7 @@ public interface HttpRetrofitInterface {
      * @return
      * @TODO:用户登录GET接口，传递参数为<b>username,password,sim</b>
      */
-    @GET("login/login/authority/")
+    @GET("login")
     Observable<JsonObject> getlogin(@Query("loginName") String loginName, @Query("password") String password, @Query("keyValue") String keyValue);
 
     /**
@@ -44,6 +44,6 @@ public interface HttpRetrofitInterface {
      * @return
      * @TODO:用户工单查询GET接口，传递参数为<b>page,map</b>
      */
-    @GET("refer/workorder/details/")
+    @GET("server/details/")
     Observable<JsonObject> getWorkOrder(@Query("page") int page, @Query("map") Map<String, String> map);
 }

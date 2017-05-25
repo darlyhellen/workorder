@@ -28,7 +28,7 @@ public class MainListener implements FramePresenter {
     }
 
 
-    public interface MainView extends FrameView {
+    public interface MainInterface extends FrameView {
 
         PhotoPop getPop();
 

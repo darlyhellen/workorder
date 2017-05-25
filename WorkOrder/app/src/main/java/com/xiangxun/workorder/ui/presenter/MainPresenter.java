@@ -7,14 +7,10 @@ import android.view.View;
 import com.hellen.baseframe.common.db.ThreadInfo;
 import com.hellen.baseframe.common.dlog.DLog;
 import com.xiangxun.workorder.R;
-import com.xiangxun.workorder.base.AppEnum;
-import com.xiangxun.workorder.ui.MainActivity;
 import com.xiangxun.workorder.ui.biz.MainListener;
-import com.xiangxun.workorder.ui.login.LoginActivity;
 import com.xiangxun.workorder.ui.main.DownLoadActivity;
 import com.xiangxun.workorder.ui.main.SetActivity;
 import com.xiangxun.workorder.ui.video.VideoRecordActivity;
-import com.xiangxun.workorder.widget.loading.ShowLoading;
 
 import java.util.List;
 
@@ -29,9 +25,9 @@ public class MainPresenter {
 
     private MainListener biz;
 
-    private MainListener.MainView view;
+    private MainListener.MainInterface view;
 
-    public MainPresenter(MainListener.MainView view) {
+    public MainPresenter(MainListener.MainInterface view) {
         this.view = view;
         this.biz = new MainListener();
     }

@@ -7,7 +7,6 @@ import com.hellen.baseframe.application.FrameListener;
 import com.hellen.baseframe.common.obsinfo.LogApp;
 import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.R;
-import com.xiangxun.workorder.base.APP;
 import com.xiangxun.workorder.bean.LoginRoot;
 import com.xiangxun.workorder.ui.biz.LoginListener;
 import com.xiangxun.workorder.ui.login.LoginActivity;
@@ -21,11 +20,11 @@ public class LoginPresenter {
 
     private String TAG = getClass().getSimpleName();
     private LoginListener userBiz;
-    private LoginListener.LoginView main;
+    private LoginListener.LoginInterface main;
     private ShowLoading loading;
 
 
-    public LoginPresenter(LoginListener.LoginView main) {
+    public LoginPresenter(LoginListener.LoginInterface main) {
         this.main = main;
         this.userBiz = new LoginListener();
         loading = new ShowLoading((LoginActivity) main);
@@ -109,10 +108,10 @@ public class LoginPresenter {
                         userBiz.onStop(loading);
                         switch (code) {
                             case 0:
-                                ToastApp.showToast(info);
+                                ToastApp.showToast("网络请求异常");
                                 break;
                             case 1:
-                                ToastApp.showToast("网络请求异常");
+                                ToastApp.showToast(info);
                                 break;
                             default:
                                 break;

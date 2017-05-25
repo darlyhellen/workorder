@@ -39,6 +39,11 @@ public class PatrolHomeAdapter extends ParentAdapter<Patrol> {
         }
 
         holder.modeButton.setIV(patrol.getId(), context.getResources().getString(patrol.getName()));
+        if (patrol.getNewOrder() > 0) {
+            holder.modeButton.setHint(patrol.getNewOrder());
+        } else {
+            holder.modeButton.reset();
+        }
         return view;
     }
 

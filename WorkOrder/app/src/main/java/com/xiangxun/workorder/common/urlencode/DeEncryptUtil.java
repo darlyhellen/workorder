@@ -30,7 +30,6 @@ public class DeEncryptUtil {
 
     public static String byteArr2HexStr(byte[] arrB) throws Exception {
         int iLen = arrB.length;
-        DLog.i(arrB.toString());
         StringBuffer sb = new StringBuffer(iLen * 2);
         for (int i = 0; i < iLen; i++) {
             int intTmp = arrB[i];
@@ -42,7 +41,6 @@ public class DeEncryptUtil {
             }
             sb.append(Integer.toString(intTmp, 16));
         }
-        DLog.i(sb.toString());
         return sb.toString();
     }
 

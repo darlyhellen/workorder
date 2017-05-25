@@ -82,10 +82,12 @@
             android:name=".ui.video.VideoRecordActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
-        <!--视频框架 -->
-        <activity
-            android:name="com.jmolsmobile.landscapevideocapture.VideoCaptureActivity"
-            android:screenOrientation="landscape" />
+
+
+        <service
+            android:name=".service.WorkOrderNewService"
+            android:enabled="true"
+            android:process=":service" />
 
         <meta-data
             android:name="DATABASE"
