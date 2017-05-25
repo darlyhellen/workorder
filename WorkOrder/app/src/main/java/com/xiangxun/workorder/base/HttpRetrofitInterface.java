@@ -44,6 +44,6 @@ public interface HttpRetrofitInterface {
      * @return
      * @TODO:用户工单查询GET接口，传递参数为<b>page,map</b>
      */
-    @GET("server/details/")
+    @GET("server/workorder/refer/details")
     Observable<JsonObject> getWorkOrder(@Query("page") int page, @Query("map") Map<String, String> map);
 }

@@ -30,10 +30,6 @@ public class MainListener implements FramePresenter {
 
     public interface MainInterface extends FrameView {
 
-        PhotoPop getPop();
-
-        ThreadInfo getBean();
-
         void end();
     }
 }

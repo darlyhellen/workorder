@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.hellen.baseframe.binder.ViewsBinder;
 import com.xiangxun.workorder.R;
@@ -34,15 +35,15 @@ public class SearchWorkOrderDialogFragment extends DialogFragment implements Vie
         void findParamers(Map<String, String> map);
     }
 
-    private HeaderView title;
     private View view;
-    private Button button;
-    private Button insert;
-    private Button update;
-    private Button select;
-    private Button delete;
-    private Button down;
-    private Button video;
+    private EditText editText;
+    private EditText insert;
+    private EditText update;
+    private EditText select;
+    private EditText delete;
+    private EditText down;
+    private EditText video;
+    private Button commit;
 
     private Map<String, String> map;
 
@@ -53,7 +54,7 @@ public class SearchWorkOrderDialogFragment extends DialogFragment implements Vie
         view = inflater.inflate(R.layout.fragment_dialog_search, container);
         Window dialogWindow = getDialog().getWindow();
         WindowManager.LayoutParams lp = dialogWindow.getAttributes();
-        dialogWindow.setGravity(Gravity.RIGHT|Gravity.TOP);
+        dialogWindow.setGravity(Gravity.RIGHT | Gravity.TOP);
         dialogWindow.setAttributes(lp);
         return view;
     }
@@ -67,59 +68,32 @@ public class SearchWorkOrderDialogFragment extends DialogFragment implements Vie
 
     private void initView() {
         map = new HashMap<String, String>();
-        title = (HeaderView) view.findViewById(R.id.comment_title);
-        title.setTitle(R.string.main_work_order_search);
-        title.setLeftBackgroundResource(R.mipmap.back_image);
-        button = (Button) view.findViewById(R.id.button);
-        insert = (Button) view.findViewById(R.id.insert);
-        update = (Button) view.findViewById(R.id.update);
-        select = (Button) view.findViewById(R.id.select);
-        delete = (Button) view.findViewById(R.id.delete);
-        down = (Button) view.findViewById(R.id.down);
-        video = (Button) view.findViewById(R.id.video);
+        editText = (EditText) view.findViewById(R.id.EditText);
+        insert = (EditText) view.findViewById(R.id.insert);
+        update = (EditText) view.findViewById(R.id.update);
+        select = (EditText) view.findViewById(R.id.select);
+        delete = (EditText) view.findViewById(R.id.delete);
+        down = (EditText) view.findViewById(R.id.down);
+        video = (EditText) view.findViewById(R.id.video);
+        commit = (Button) view.findViewById(R.id.commit);
+
     }
 
     private void initListener() {
-        title.setLeftBackOneListener(this);
-        button.setOnClickListener(this);
-        insert.setOnClickListener(this);
-        update.setOnClickListener(this);
-        select.setOnClickListener(this);
-        delete.setOnClickListener(this);
-        down.setOnClickListener(this);
-        video.setOnClickListener(this);
+        commit.setOnClickListener(this);
+
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.title_view_back_llayout:
-                break;
-            case R.id.button:
-                map.put(button.getText().toString(), "R.id.button");
-                ((SearchListener) getActivity()).findParamers(map);
-                break;
-            case R.id.insert:
+            case R.id.commit:
+                map.put(editText.getText().toString(), "R.id.editText");
                 map.put(insert.getText().toString(), "R.id.insert");
-                ((SearchListener) getActivity()).findParamers(map);
-                break;
-            case R.id.update:
                 map.put(update.getText().toString(), "R.id.update");
-                ((SearchListener) getActivity()).findParamers(map);
-                break;
-            case R.id.select:
                 map.put(select.getText().toString(), "R.id.select");
-                ((SearchListener) getActivity()).findParamers(map);
-                break;
-            case R.id.delete:
                 map.put(delete.getText().toString(), "R.id.delete");
-                ((SearchListener) getActivity()).findParamers(map);
-                break;
-            case R.id.down:
                 map.put(down.getText().toString(), "R.id.down");
-                ((SearchListener) getActivity()).findParamers(map);
-                break;
-            case R.id.video:
                 map.put(video.getText().toString(), "R.id.video");
                 ((SearchListener) getActivity()).findParamers(map);
                 break;

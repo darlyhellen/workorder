@@ -28,13 +28,14 @@
     <!-- 首页-->
     <string name="main_titile">工单系统</string>
     <string name="main_work_order">我的工单</string>
-    <string name="main_work_order_new">最新工单</string>
+    <string name="main_work_order_new">工单接收</string>
     <string name="main_work_order_down">完成工单</string>
     <string name="main_work_order_undown">未完成工单</string>
     <string name="main_work_order_search">搜索工单</string>
     <string name="main_work_order_all">全部工单</string>
     <string name="main_work_map">设备位置</string>
     <string name="main_work_set">设置</string>
+    <string name="main_work_not">没有新的工单</string>
 
     <!-- XListView -->
     <string name="xlistview_header_hint_normal">下拉刷新</string>mine_login_hine1

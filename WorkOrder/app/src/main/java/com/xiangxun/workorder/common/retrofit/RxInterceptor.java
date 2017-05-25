@@ -43,8 +43,8 @@ public class RxInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         Request.Builder builder = chain.request().newBuilder();
         String userID = SharePreferHelp.getValue(AppEnum.USERID.getDec(), null);
-//        String cookie = SharePreferHelp.getValue(AppEnum.COOKIE.getDec(), null);
-        if (TextUtils.isEmpty(userID)) {
+        String loginName = SharePreferHelp.getValue(AppEnum.USERNAME.getDec(), null);
+        if (TextUtils.isEmpty(userID) && TextUtils.isEmpty(loginName)) {
             builder.addHeader("Content-Type", "application/json;charset=UTF-8")
                     .addHeader("Accept", "application/json")
                     .addHeader("charset", "utf-8")
@@ -55,7 +55,7 @@ public class RxInterceptor implements Interceptor {
                     .addHeader("Accept", "application/json")
                     .addHeader("charset", "utf-8")
                     .addHeader("userID", userID)
-//                    .addHeader("Cookie", cookie)
+                    .addHeader("loginName", loginName)
                     .addHeader("version", APPSYS_STRING + VersionCode)
                     .build();
         }

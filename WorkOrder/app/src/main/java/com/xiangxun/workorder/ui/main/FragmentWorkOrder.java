@@ -2,21 +2,25 @@ package com.xiangxun.workorder.ui.main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.TextView;
 
-import com.hellen.baseframe.binder.ContentBinder;
+import com.hellen.baseframe.binder.InitBinder;
 import com.hellen.baseframe.binder.ViewsBinder;
 import com.hellen.baseframe.common.dlog.DLog;
 import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.AppEnum;
-import com.xiangxun.workorder.base.BaseActivity;
 import com.xiangxun.workorder.bean.Patrol;
 import com.xiangxun.workorder.bean.WorkOrderData;
 import com.xiangxun.workorder.ui.adapter.WorkOrderAdapter;
 import com.xiangxun.workorder.ui.biz.WorkOrderListener;
+import com.xiangxun.workorder.ui.presenter.WorkOrderFragmentPresenter;
 import com.xiangxun.workorder.ui.presenter.WorkOrderPresenter;
 import com.xiangxun.workorder.widget.header.HeaderView;
 import com.xiangxun.workorder.widget.xlistView.XListView;
@@ -30,15 +34,14 @@ import java.util.Map;
 import java.util.Random;
 
 /**
- * Created by Zhangyuhui/Darly on 2017/5/19.
+ * Created by Zhangyuhui/Darly on 2017/5/25.
  * Copyright by [Zhangyuhui/Darly]
  * ©2017 XunXiang.Company. All rights reserved.
  *
- * @TODO:我的工单页面。传递给服务端用户ID，根据页码进行页面刷新加载。
- * @TODO:修改V1(根据首页传递进来的参数来判断到底是什么列表,当然传递为空表示全部工单列表)
+ * @TODO:
  */
-@ContentBinder(R.layout.activity_work_order)
-public class WorkOrderActivity extends BaseActivity implements View.OnClickListener, XListView.IXListViewListener, AdapterView.OnItemClickListener, WorkOrderListener.WorkOrderInterface, SearchWorkOrderDialogFragment.SearchListener {
+public class FragmentWorkOrder extends Fragment implements View.OnClickListener, XListView.IXListViewListener, AdapterView.OnItemClickListener, WorkOrderListener.WorkOrderInterface, SearchWorkOrderDialogFragment.SearchListener {
+    private View root;
 
     @ViewsBinder(R.id.id_work_order_header)
     private HeaderView header;
@@ -51,7 +54,7 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
 
     private List<WorkOrderData> data;
 
-    private WorkOrderPresenter presenter;
+    private WorkOrderFragmentPresenter presenter;
     //至关重要的一个参数
     private Patrol patrol;
 
@@ -62,18 +65,31 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
 
     private Map<String, String> map;
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        root = inflater.inflate(R.layout.activity_work_order, null);
+        InitBinder.InitAll(this, root);
+        return root;
+    }
 
     @Override
-    protected void initView(Bundle savedInstanceState) {
-        presenter = new WorkOrderPresenter(this);
-        //获取完成
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        initView();
+        initListener();
+    }
 
+    protected void initView() {
+        presenter = new WorkOrderFragmentPresenter(this);
+        //获取完成
         header.setLeftBackgroundResource(R.mipmap.back_image);
         header.setRightBackgroundResource(R.mipmap.xw_title_search);
+        header.setVisibility(View.GONE);
+
         data = new ArrayList<>();
-        adapter = new WorkOrderAdapter(data, R.layout.item_activity_work_order, this);
+        adapter = new WorkOrderAdapter(data, R.layout.item_activity_work_order, getActivity());
         xlist.setAdapter(adapter);
-        patrol = (Patrol) getIntent().getSerializableExtra("PATROL");
+        patrol = (Patrol) getActivity().getIntent().getSerializableExtra("PATROL");
         map = new HashMap<String, String>();
         if (patrol == null) {
             header.setTitle(R.string.main_work_order);
@@ -111,7 +127,6 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
 
     }
 
-    @Override
     protected void initListener() {
         header.setLeftBackOneListener(this);
         header.setRightOnClickListener(this);
@@ -122,7 +137,7 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        presenter.onClickDown(this, v);
+        presenter.onClickDown(getActivity(), v);
     }
 
 
@@ -156,7 +171,7 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         DLog.i("onItemClick--" + position);
         WorkOrderData ds = (WorkOrderData) parent.getItemAtPosition(position);
-        Intent intent = new Intent(this, LbsAmapActivity.class);
+        Intent intent = new Intent(getActivity(), LbsAmapActivity.class);
         intent.putExtra("data", ds);
         startActivity(intent);
     }
@@ -192,9 +207,9 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
         stopXListView();
         DLog.i("onWorkOrderSuccess" + datas);
         setWorkOrderData(datas);
-        if (xlist.getCount()>0){
+        if (xlist.getCount() > 0) {
             textView.setVisibility(View.GONE);
-        }else {
+        } else {
             textView.setVisibility(View.GONE);
         }
     }
@@ -288,7 +303,6 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void end() {
-        finish();
     }
 
     @Override

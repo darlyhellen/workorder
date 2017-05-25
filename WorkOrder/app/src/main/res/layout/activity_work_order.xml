@@ -10,16 +10,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-
-    <com.xiangxun.workorder.widget.xlistView.XListView
-        android:id="@+id/id_work_order_xlist"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="@null"
-        android:dividerHeight="4dp"
-        android:listSelector="@color/color_e3e3e3"
-        android:padding="@dimen/margin_padding5"
-        android:scrollbars="none" />
+        android:layout_height="match_parent">
 
+        <TextView
+            android:id="@+id/id_work_order_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/main_work_not"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/textSize20"
+            android:visibility="gone" />
 
+        <com.xiangxun.workorder.widget.xlistView.XListView
+            android:id="@+id/id_work_order_xlist"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null"
+            android:dividerHeight="4dp"
+            android:listSelector="@color/color_e3e3e3"
+            android:padding="@dimen/margin_padding5"
+            android:scrollbars="none" />
+    </FrameLayout>
 </LinearLayout>

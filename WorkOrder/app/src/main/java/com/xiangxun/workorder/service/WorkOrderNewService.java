@@ -70,7 +70,7 @@ public class WorkOrderNewService extends Service {
                         presenter.refreshMainIcon();
                     }
                 }
-            }, delay, delay);
+            }, 0, delay);
         }
 
     }
