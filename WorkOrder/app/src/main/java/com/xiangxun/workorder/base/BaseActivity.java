@@ -10,6 +10,7 @@ import android.view.Window;
 
 import com.hellen.baseframe.binder.InitBinder;
 import com.hellen.baseframe.common.dlog.DLog;
+import com.xiangxun.workorder.R;
 
 /**
  * @author zhangyh2 BaseActivity $ 下午2:33:01 TODO
@@ -80,5 +81,32 @@ public abstract class BaseActivity extends FragmentActivity {
         // TODO Auto-generated method stub
         super.onPause();
         DLog.i(getClass().getSimpleName() + "onPause()");
+    }
+
+    @Override
+    public void startActivity(Intent intent) {
+        super.startActivity(intent);
+        intForRight();
+    }
+
+    @Override
+    public void startActivityForResult(Intent intent, int requestCode) {
+        super.startActivityForResult(intent, requestCode);
+        intForRight();
+    }
+
+
+    @Override
+    public void finish() {
+        super.finish();
+        outToLeft();
+    }
+
+    public void outToLeft() {
+        overridePendingTransition(R.anim.activity_nothing, R.anim.activity_out_to_buttom);
+    }
+
+    public void intForRight() {
+        overridePendingTransition(R.anim.right_in, R.anim.activity_nothing);
     }
 }

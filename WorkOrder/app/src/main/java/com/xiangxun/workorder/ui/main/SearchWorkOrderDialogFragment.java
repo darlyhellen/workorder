@@ -51,12 +51,9 @@ public class SearchWorkOrderDialogFragment extends DialogFragment implements Vie
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
         view = inflater.inflate(R.layout.fragment_dialog_search, container);
-
         Window dialogWindow = getDialog().getWindow();
         WindowManager.LayoutParams lp = dialogWindow.getAttributes();
-        dialogWindow.setGravity(Gravity.CENTER);
-        lp.width = AppEnum.WIDTH.getLen();
-        lp.height = AppEnum.HEIGHT.getLen();
+        dialogWindow.setGravity(Gravity.RIGHT|Gravity.TOP);
         dialogWindow.setAttributes(lp);
         return view;
     }
@@ -131,5 +128,4 @@ public class SearchWorkOrderDialogFragment extends DialogFragment implements Vie
         }
         dismiss();
     }
-
 }
