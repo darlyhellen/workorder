@@ -1,7 +1,6 @@
 package com.xiangxun.workorder.base;
 
 import com.hellen.baseframe.common.dlog.DLog;
-import com.xiangxun.workorder.service.WorkOrderNewService;
 
 /**
  * Created by Zhangyuhui/Darly on 2017/5/25.
@@ -21,23 +20,26 @@ public class StaticListener {
         if (instance == null) {
             instance = new StaticListener();
         }
+        DLog.i(instance);
         return instance;
     }
 
-    private static RefreshMainUIListener refreshMainUIListener;
+    private RefreshMainUIListener refreshMainUIListener;
 
-    public static void setRefreshMainUIListener(RefreshMainUIListener refreshMainUIListener) {
-        StaticListener.refreshMainUIListener = refreshMainUIListener;
+    public void setRefreshMainUIListener(RefreshMainUIListener refreshMainUIListener) {
+        this.refreshMainUIListener = refreshMainUIListener;
+        DLog.i("RefreshMainUIListener is instance！" + instance + this.refreshMainUIListener);
     }
 
-    public static RefreshMainUIListener getRefreshMainUIListener() {
+    public RefreshMainUIListener getRefreshMainUIListener() {
+        DLog.i("RefreshMainUIListener is use！" + instance + this.refreshMainUIListener);
         if (refreshMainUIListener == null) {
             DLog.i("RefreshMainUIListener is not instance！ Please instance to use");
         }
         return refreshMainUIListener;
     }
 
-    public static interface RefreshMainUIListener {
+    public interface RefreshMainUIListener {
 
         void refreshMainUI(int num);
     }

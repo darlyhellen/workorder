@@ -86,8 +86,7 @@
 
         <service
             android:name=".service.WorkOrderNewService"
-            android:enabled="true"
-            android:process=":service" />
+            android:enabled="true"/>
 
         <meta-data
             android:name="DATABASE"

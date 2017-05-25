@@ -85,13 +85,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     @Override
     protected void initView(Bundle savedInstanceState) {
         pop = new PhotoPop(this);
-
+        StaticListener.getInstance();
+        StaticListener.getInstance();
+        StaticListener.getInstance();
+        StaticListener.getInstance().setRefreshMainUIListener(this);
         Intent intent = new Intent(this, WorkOrderNewService.class);
         startService(intent);
-        StaticListener.setRefreshMainUIListener(this);
-
         presenter = new MainPresenter(this);
-
         title.setTitle(R.string.main_titile);
         title.setRightBackgroundResource(R.mipmap.set);
         iv.setLayoutParams(new LinearLayout.LayoutParams(AppEnum.WIDTH.getLen(), (int) (AppEnum.WIDTH.getLen() * 0.61)));
@@ -221,6 +221,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     @Override
     public void refreshMainUI(int num) {
-        DLog.i(getClass().getSimpleName()+"--->"+num);
+        DLog.i(getClass().getSimpleName() + "--->" + num);
     }
 }

@@ -21,17 +21,16 @@ public class WorkOrderNewPresenter {
     }
 
 
-
     public void refreshMainIcon() {
         biz.getWorkOrder(1, null, new FrameListener<WorkOrderRoot>() {
             @Override
             public void onSucces(WorkOrderRoot workOrderRoot) {
-                StaticListener.getRefreshMainUIListener().refreshMainUI(workOrderRoot.getData().size());
+                StaticListener.getInstance().getRefreshMainUIListener().refreshMainUI(workOrderRoot.getData().size());
             }
 
             @Override
             public void onFaild(int i, String s) {
-
+                StaticListener.getInstance().getRefreshMainUIListener().refreshMainUI(i);
             }
         });
     }

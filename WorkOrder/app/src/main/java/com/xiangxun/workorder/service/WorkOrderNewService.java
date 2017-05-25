@@ -22,7 +22,7 @@ public class WorkOrderNewService extends Service {
 
     private WorkOrderNewPresenter presenter;
 
-    private int delay = 60 * 100;
+    private int delay = 60 * 1000;
 
     /*
      * (non-Javadoc)
