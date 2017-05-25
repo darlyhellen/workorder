@@ -1,6 +1,7 @@
 package com.xiangxun.workorder.ui.adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -41,7 +42,11 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return viewList.get(position);
+        Fragment fragment = viewList.get(position);
+        Bundle bundle = new Bundle();
+        bundle.putInt("TITLE", title[position]);
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
 

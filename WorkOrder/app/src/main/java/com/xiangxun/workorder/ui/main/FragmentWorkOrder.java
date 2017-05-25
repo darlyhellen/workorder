@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,7 +57,6 @@ public class FragmentWorkOrder extends Fragment implements View.OnClickListener,
 
     private WorkOrderFragmentPresenter presenter;
     //至关重要的一个参数
-    private Patrol patrol;
 
     private int currentPage = 1;
     private int PageSize = 10;
@@ -89,15 +89,16 @@ public class FragmentWorkOrder extends Fragment implements View.OnClickListener,
         data = new ArrayList<>();
         adapter = new WorkOrderAdapter(data, R.layout.item_activity_work_order, getActivity());
         xlist.setAdapter(adapter);
-        patrol = (Patrol) getActivity().getIntent().getSerializableExtra("PATROL");
+        int titles = (int) getArguments().getInt("TITLE", 0);
+        DLog.i(getClass().getSimpleName(), titles);
         map = new HashMap<String, String>();
-        if (patrol == null) {
+        if (titles == 0) {
             header.setTitle(R.string.main_work_order);
             presenter.getWorkOrderByPage(currentPage, map);
         } else {
             //根据传递过来的参数,进行页面分类整理.请求不同的接口,
-            header.setTitle(patrol.getName());
-            classifyRequest(patrol.getListId());
+            header.setTitle(titles);
+            classifyRequest(titles);
 
 
         }
@@ -109,15 +110,11 @@ public class FragmentWorkOrder extends Fragment implements View.OnClickListener,
      */
     private void classifyRequest(int listId) {
         switch (listId) {
-            case 1:
+            case R.string.main_work_order_new:
                 break;
-            case 2:
+            case R.string.main_work_order_undown:
                 break;
-            case 3:
-                break;
-            case 4:
-                break;
-            case 5:
+            case R.string.main_work_order_all:
                 //请求全部的接口
                 presenter.getWorkOrderByPage(currentPage, map);
                 break;

@@ -74,16 +74,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private List<Fragment> list = new ArrayList<Fragment>();
 
 
-    private int[] titles = new int[]{R.string.main_work_order_new, R.string.main_work_order_undown, R.string.main_work_order_all};
+    private int[] titles = new int[]{R.string.main_work_order_new, R.string.main_work_order_all};
 
     @Override
     protected void initView(Bundle savedInstanceState) {
         presenter = new MainPresenter(this);
         title.setTitle(R.string.main_work_order);
         title.setRightBackgroundResource(R.mipmap.set);
-        //tab.setTabMode(TabLayout.MODE_SCROLLABLE);
+        tab.setTabMode(TabLayout.MODE_FIXED);
+        tab.setTabGravity(TabLayout.GRAVITY_FILL);
         for (int i = 0; i < titles.length; i++) {
             //设置未选中和选中时字体的颜色
+            tab.setTabMode(TabLayout.MODE_FIXED);
             tab.setTabTextColors(R.color.blue_btn_bg_color, R.color.text_color);
             tab.addTab(tab.newTab().setText(titles[i]));
             list.add(new FragmentWorkOrder());
