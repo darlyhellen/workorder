@@ -10,6 +10,7 @@ import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.bean.WorkOrderData;
 import com.xiangxun.workorder.bean.WorkOrderRoot;
 import com.xiangxun.workorder.ui.biz.WorkOrderListener;
+import com.xiangxun.workorder.ui.main.SearchWorkOrderDialogFragment;
 import com.xiangxun.workorder.ui.main.WorkOrderActivity;
 import com.xiangxun.workorder.widget.loading.ShowLoading;
 
@@ -47,7 +48,9 @@ public class WorkOrderPresenter {
                 view.end();
                 break;
             case R.id.xw_share:
-                DLog.i("搜索按钮点击");
+                DLog.i("搜索按钮点击，跳转到搜索页面。在搜索页面中显示搜索结果");
+                SearchWorkOrderDialogFragment dialog = new SearchWorkOrderDialogFragment();
+                dialog.show(((WorkOrderActivity) context).getFragmentManager(), "SearchWorkOrderDialogFragment");
                 break;
             default:
                 break;

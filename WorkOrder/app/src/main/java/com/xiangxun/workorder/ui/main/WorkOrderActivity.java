@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -36,7 +37,7 @@ import java.util.Random;
  * @TODO:修改V1(根据首页传递进来的参数来判断到底是什么列表,当然传递为空表示全部工单列表)
  */
 @ContentBinder(R.layout.activity_work_order)
-public class WorkOrderActivity extends BaseActivity implements View.OnClickListener, XListView.IXListViewListener, AdapterView.OnItemClickListener, WorkOrderListener.WorkOrderInterface {
+public class WorkOrderActivity extends BaseActivity implements View.OnClickListener, XListView.IXListViewListener, AdapterView.OnItemClickListener, WorkOrderListener.WorkOrderInterface, SearchWorkOrderDialogFragment.SearchListener {
 
     @ViewsBinder(R.id.id_work_order_header)
     private HeaderView header;
@@ -278,5 +279,10 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void end() {
         finish();
+    }
+
+    @Override
+    public void findParamers(Map<String, String> map) {
+        DLog.i(map);
     }
 }

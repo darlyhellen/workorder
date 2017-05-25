@@ -31,14 +31,9 @@ public class MainPresenter {
 
     private MainListener.MainView view;
 
-    private ShowLoading loading;
-
     public MainPresenter(MainListener.MainView view) {
         this.view = view;
         this.biz = new MainListener();
-        loading = new ShowLoading((MainActivity) view);
-        loading.setMessage(R.string.loading);
-        loading.show();
     }
 
 
