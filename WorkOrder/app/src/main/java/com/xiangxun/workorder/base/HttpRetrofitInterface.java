@@ -46,4 +46,12 @@ public interface HttpRetrofitInterface {
      */
     @GET("server/workorder/refer/details/")
     Observable<JsonObject> getWorkOrder(@Query("page") int page, @Query("status") String status, @Query("devicename") String devicename, @Query("devicecode") String devicecode, @Query("deviceip") String deviceip);
+
+    /**
+     * @param version
+     * @return
+     * @TODO:版本更新接口
+     */
+    @GET("server/version/")
+    Observable<JsonObject> getVersion(@Query("version") int version);
 }

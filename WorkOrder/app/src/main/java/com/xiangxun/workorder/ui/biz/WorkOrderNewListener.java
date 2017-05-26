@@ -37,6 +37,7 @@ import rx.schedulers.Schedulers;
  * @author zhangyh2 LoginUser 下午3:42:16 TODO 用户登录获取数据传递给了接口
  */
 public class WorkOrderNewListener implements FramePresenter {
+    private boolean serv = true;//服务端在修改东西.停止请求
 
     public void getWorkOrder(int page, String status, String devicename, String devicecode, String deviceip, final FrameListener<WorkOrderRoot> listener) {
 
@@ -44,8 +45,11 @@ public class WorkOrderNewListener implements FramePresenter {
             listener.onFaild(0, "网络异常,请检查网络");
             return;
         }
+        if (serv) {
+            return;
+        }
         //在这里进行数据请求
-        RxjavaRetrofitRequestUtil.getInstance().post().getWorkOrder(page, status, devicename, devicecode, deviceip).
+        RxjavaRetrofitRequestUtil.getInstance().get().getWorkOrder(page, status, devicename, devicecode, deviceip).
                 subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(new Func1<JsonObject, WorkOrderRoot>() {
