@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">工作流</string>
+    <string name="app_name">运维通</string>
     <string name="neterror">网络异常,请检查网络</string>
     <string name="loading">加载中....</string>
     <!-- popwindows -->
