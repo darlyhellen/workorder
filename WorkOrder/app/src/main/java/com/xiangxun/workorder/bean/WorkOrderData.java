@@ -11,7 +11,6 @@ import java.io.Serializable;
  */
 public class WorkOrderData implements Serializable {
 
-    public int workDays;
     public String position;
     public String isleave;
     public String offtime;
@@ -31,7 +30,4 @@ public class WorkOrderData implements Serializable {
     public String telephone;
     public String assetid;
     public String isreassign;
-    public double latitude;
-    public double longitude;
-
 }

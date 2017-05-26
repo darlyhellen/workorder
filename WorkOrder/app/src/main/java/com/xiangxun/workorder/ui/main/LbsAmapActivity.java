@@ -74,7 +74,7 @@ public class LbsAmapActivity extends BaseActivity implements View.OnClickListene
 
 
         if (data != null) {
-            if (data.longitude != 0 || data.latitude != 0) {
+            /*if (data.position != 0 || data.position != 0) {
                 latlng = new LatLng(data.latitude, data.longitude);
                 changeCamera(
                         CameraUpdateFactory.newCameraPosition(new CameraPosition(
@@ -89,7 +89,7 @@ public class LbsAmapActivity extends BaseActivity implements View.OnClickListene
                 aMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory
                         .defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
                         .draggable(true));
-            }
+            }*/
         } else {
             aMap.clear();
             aMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory
