@@ -13,13 +13,11 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.hellen.baseframe.binder.ViewsBinder;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.widget.header.HeaderView;
 
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by Zhangyuhui/Darly on 2017/5/24.
@@ -32,30 +30,22 @@ public class SearchWorkOrderDialogFragment extends DialogFragment implements Vie
 
 
     public interface SearchListener {
-        void findParamers(Map<String, String> map);
+        void findParamers(String name, String num, String ip);
     }
 
     private View view;
-    private EditText editText;
-    private EditText insert;
-    private EditText update;
-    private EditText select;
-    private EditText delete;
-    private EditText down;
-    private EditText video;
+    private HeaderView header;
+    private EditText name;
+    private EditText num;
+    private EditText ip;
     private Button commit;
-
-    private Map<String, String> map;
+    private Button consel;
 
     //重写onCreateView方法
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
         view = inflater.inflate(R.layout.fragment_dialog_search, container);
-        Window dialogWindow = getDialog().getWindow();
-        WindowManager.LayoutParams lp = dialogWindow.getAttributes();
-        dialogWindow.setGravity(Gravity.RIGHT | Gravity.TOP);
-        dialogWindow.setAttributes(lp);
         return view;
     }
 
@@ -66,36 +56,48 @@ public class SearchWorkOrderDialogFragment extends DialogFragment implements Vie
         initListener();
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        Window window = getDialog().getWindow();
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));//注意此处
+        window.setLayout(AppEnum.WIDTH.getLen(), AppEnum.HEIGHT.getLen());//这2行,和上面的一样,注意顺序就行;
+    }
+
     private void initView() {
-        map = new HashMap<String, String>();
-        editText = (EditText) view.findViewById(R.id.EditText);
-        insert = (EditText) view.findViewById(R.id.insert);
-        update = (EditText) view.findViewById(R.id.update);
-        select = (EditText) view.findViewById(R.id.select);
-        delete = (EditText) view.findViewById(R.id.delete);
-        down = (EditText) view.findViewById(R.id.down);
-        video = (EditText) view.findViewById(R.id.video);
-        commit = (Button) view.findViewById(R.id.commit);
+        header = (HeaderView) view.findViewById(R.id.id_search_header);
+        name = (EditText) view.findViewById(R.id.id_search_name);
+        num = (EditText) view.findViewById(R.id.id_search_num);
+        ip = (EditText) view.findViewById(R.id.id_search_ip);
+        commit = (Button) view.findViewById(R.id.id_search_commit);
+        consel = (Button) view.findViewById(R.id.id_search_consel);
+
+        header.setLeftBackgroundResource(R.mipmap.ic_title_back);
+        header.setTitle(R.string.main_work_order_search);
+        header.setRightBackgroundResource(0);
+
 
     }
 
     private void initListener() {
+        header.setLeftBackOneListener(this);
         commit.setOnClickListener(this);
+        consel.setOnClickListener(this);
 
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.commit:
-                map.put(editText.getText().toString(), "R.id.editText");
-                map.put(insert.getText().toString(), "R.id.insert");
-                map.put(update.getText().toString(), "R.id.update");
-                map.put(select.getText().toString(), "R.id.select");
-                map.put(delete.getText().toString(), "R.id.delete");
-                map.put(down.getText().toString(), "R.id.down");
-                map.put(video.getText().toString(), "R.id.video");
-                ((SearchListener) getActivity()).findParamers(map);
+            case R.id.id_search_commit:
+                String devicename = name.getText().toString().trim();
+                String devicenum = num.getText().toString().trim();
+                String deviceip = ip.getText().toString().trim();
+                ((SearchListener) getActivity()).findParamers(devicename, devicenum, deviceip);
+                break;
+            case R.id.title_view_back_llayout:
+                break;
+            case R.id.id_search_consel:
                 break;
             default:
                 break;

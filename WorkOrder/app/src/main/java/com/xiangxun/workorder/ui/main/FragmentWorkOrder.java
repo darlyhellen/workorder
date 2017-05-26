@@ -228,12 +228,10 @@ public class FragmentWorkOrder extends Fragment implements View.OnClickListener,
     public void end() {
     }
 
-    @Override
-    public void findParamers(Map<String, String> map) {
-        DLog.i(map);
-        currentPage = 1;
-        this.map = map;
-        presenter.getWorkOrderByPage(currentPage, null, null, null, null);
 
+    @Override
+    public void findParamers(String name, String num, String ip) {
+        currentPage = 1;
+        presenter.getWorkOrderByPage(currentPage, null, name, num, ip);
     }
 }

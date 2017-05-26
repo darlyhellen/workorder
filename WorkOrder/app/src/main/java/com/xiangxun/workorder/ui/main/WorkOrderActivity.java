@@ -59,10 +59,11 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
     private int currentPage = 1;
     private int PageSize = 10;
     private int totalSize = 0;
+    private String workorder;
+    private String devicename;
+    private String devicenum;
+    private String deviceip;
     private int listState = AppEnum.LISTSTATEFIRST;
-
-    private Map<String, String> map;
-
 
     @Override
     protected void initView(Bundle savedInstanceState) {
@@ -74,12 +75,10 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
         adapter = new WorkOrderAdapter(data, R.layout.item_activity_work_order, this);
         xlist.setAdapter(adapter);
         patrol = (Patrol) getIntent().getSerializableExtra("PATROL");
-        map = new HashMap<String, String>();
-        map.put("userId", SharePreferHelp.getValue(AppEnum.USERID.getDec(), null));
 
         if (patrol == null) {
             header.setTitle(R.string.main_work_order);
-            presenter.getWorkOrderByPage(currentPage, null, null, null, null);
+            presenter.getWorkOrderByPage(currentPage, workorder, devicename, devicenum, deviceip);
             header.setRightBackgroundResource(R.mipmap.ic_title_search);
         } else {
             //根据传递过来的参数,进行页面分类整理.请求不同的接口,
@@ -101,10 +100,17 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
      * @TODO:根据传递过来的参数,进行页面分类整理.请求不同的接口
      */
     private void classifyRequest(int listId) {
+        currentPage = 1;
         switch (listId) {
             case 1:
+                // 新工單(工单接收)根據接口規則。传递第二个参数为字符串0；
+                workorder = "0";
+                presenter.getWorkOrderByPage(currentPage, workorder, devicename, devicenum, deviceip);
                 break;
             case 2:
+                //完成的工单
+                workorder = "6";
+                presenter.getWorkOrderByPage(currentPage, workorder, devicename, devicenum, deviceip);
                 break;
             case 3:
                 break;
@@ -112,7 +118,8 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
                 break;
             case 5:
                 //请求全部的接口
-                presenter.getWorkOrderByPage(currentPage, null, null, null, null);
+                workorder = "";
+                presenter.getWorkOrderByPage(currentPage, workorder, devicename, devicenum, deviceip);
                 break;
             case 20:
                 //巡检页面工单列表
@@ -149,7 +156,7 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
     public void onRefresh(View v) {
         currentPage = 1;
         listState = AppEnum.LISTSTATEREFRESH;
-        presenter.getWorkOrderByPage(currentPage, null, null, null, null);
+        presenter.getWorkOrderByPage(currentPage, workorder, devicename, devicenum, deviceip);
     }
 
     @Override
@@ -160,7 +167,7 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
         } else {
             currentPage++;
             listState = AppEnum.LISTSTATELOADMORE;
-            presenter.getWorkOrderByPage(currentPage, null, null, null, null);
+            presenter.getWorkOrderByPage(currentPage, workorder, devicename, devicenum, deviceip);
         }
     }
 
@@ -210,10 +217,10 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
         stopXListView();
         DLog.i("onWorkOrderSuccess" + datas);
         setWorkOrderData(datas);
-        if (xlist.getCount() > 0) {
+        if (xlist.getCount() > 1) {
             textView.setVisibility(View.GONE);
         } else {
-            textView.setVisibility(View.GONE);
+            textView.setVisibility(View.VISIBLE);
         }
     }
 
@@ -238,12 +245,14 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
         finish();
     }
 
-    @Override
-    public void findParamers(Map<String, String> map) {
-        DLog.i(map);
-        currentPage = 1;
-        this.map = map;
-        presenter.getWorkOrderByPage(currentPage, null, null, null, null);
 
+    @Override
+    public void findParamers(String name, String num, String ip) {
+        DLog.i("name = " + name + ";num = " + num + ";ip = " + ip);
+        currentPage = 1;
+        devicename = name;
+        devicenum = num;
+        deviceip = ip;
+        presenter.getWorkOrderByPage(currentPage, workorder, devicename, devicenum, deviceip);
     }
 }

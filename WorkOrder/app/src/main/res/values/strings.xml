@@ -34,7 +34,7 @@
     <string name="main_work_order_new">工单接收</string>
     <string name="main_work_order_down">完成工单</string>
     <string name="main_work_order_undown">未完成工单</string>
-    <string name="main_work_order_search">搜索工单</string>
+    <string name="main_work_order_search">搜索条件</string>
     <string name="main_work_order_all">全部工单</string>
     <string name="main_work_map">设备位置</string>
     <string name="main_work_set">设置</string>
@@ -75,4 +75,10 @@
     <string name="st_tour_title">新增巡检工单</string>
     <string name="st_tour_commit">提交</string>
     <string name="description_hint">5~400字</string>
+
+
+    <!--SearchWorkOrderDIalogFragment-->
+    <string name="st_search_deviceName">设备名称:</string>
+    <string name="st_search_deviceNum">设备编号:</string>
+    <string name="st_search_deviceIp">设备IP  :</string>
 </resources>
