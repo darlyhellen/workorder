@@ -45,16 +45,16 @@ public class RxInterceptor implements Interceptor {
         Request.Builder builder = chain.request().newBuilder();
         String userID = SharePreferHelp.getValue(AppEnum.USERID.getDec(), null);
         String loginName = SharePreferHelp.getValue(AppEnum.USERNAME.getDec(), null);
-        DLog.i(userID+"--"+loginName);
+        DLog.i(userID + "--" + loginName);
         if (TextUtils.isEmpty(userID) && TextUtils.isEmpty(loginName)) {
             builder.addHeader("Content-Type", "application/json;charset=UTF-8")
-                    .addHeader("Accept", "application/json")
+                    //.addHeader("Accept", "text/json;charset=UTF-8")
                     .addHeader("charset", "utf-8")
                     .addHeader("version", APPSYS_STRING + VersionCode)
                     .build();
         } else {
             builder.addHeader("Content-Type", "application/json;charset=UTF-8")
-                    .addHeader("Accept", "application/json")
+                    //.addHeader("Accept", "text/json;charset=UTF-8")
                     .addHeader("charset", "utf-8")
                     .addHeader("userId", userID)
                     .addHeader("loginName", loginName)

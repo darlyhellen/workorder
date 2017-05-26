@@ -45,13 +45,13 @@ public class WorkOrderAdapter extends ParentAdapter<WorkOrderData> {
             hocker = (ViewHocker) view.getTag();
         }
 
-        hocker.id_tv_supplier_title.setText("工单编号:" + Tools.isEmpty(workOrderData.workOrderCode));
-        hocker.id_tv_supplier_contact.setText("责任单位: " + Tools.isEmpty(workOrderData.dutyOrgCode));
-        hocker.id_tv_supplier_product.setText("工单内容: " + Tools.isEmpty(workOrderData.workOrderText));
-        if (TextUtils.isEmpty(workOrderData.workEventState)) {
+        hocker.id_tv_supplier_title.setText("工单编号:" + Tools.isEmpty(workOrderData.id));
+        hocker.id_tv_supplier_contact.setText("责任单位: " + Tools.isEmpty(workOrderData.companyid));
+        hocker.id_tv_supplier_product.setText("工单内容: " + Tools.isEmpty(workOrderData.messages));
+        if (TextUtils.isEmpty(workOrderData.status)) {
             hocker.id_tv_appraise_man.setVisibility(View.INVISIBLE);
         } else {
-            if ("闭合".equals(workOrderData.workEventState)) {
+            if ("闭合".equals(workOrderData.status)) {
                 hocker.id_tv_background.setShowDisplay(false);
                 hocker.id_tv_background.setBackgroundResource(R.drawable.app_login_shape);
             } else {
@@ -59,9 +59,9 @@ public class WorkOrderAdapter extends ParentAdapter<WorkOrderData> {
                 hocker.id_tv_background.setBackgroundResource(R.color.red02);
             }
             hocker.id_tv_appraise_man.setVisibility(View.VISIBLE);
-            hocker.id_tv_appraise_man.setText(Tools.isEmpty(workOrderData.workEventState));
+            hocker.id_tv_appraise_man.setText(Tools.isEmpty(workOrderData.status));
         }
-        hocker.id_tv_appraise_date.setText("发布时间: " + Tools.isEmpty(workOrderData.workBeginTime));
+        hocker.id_tv_appraise_date.setText("发布时间: " + Tools.isEmpty(workOrderData.assigntime));
 
         return view;
     }

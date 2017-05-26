@@ -56,11 +56,11 @@ public class WorkOrderFragmentPresenter {
         }
     }
 
-    public void getWorkOrderByPage(int page, Map<String, String> map) {
+    public void getWorkOrderByPage(int page, String status, String devicename, String devicecode, String deviceip) {
 
         biz.onStart(loading);
 
-        biz.getWorkOrder(page, map, new FrameListener<WorkOrderRoot>() {
+        biz.getWorkOrder(page, status, devicename, devicecode, deviceip, new FrameListener<WorkOrderRoot>() {
             @Override
             public void onSucces(WorkOrderRoot data) {
                 biz.onStop(loading);

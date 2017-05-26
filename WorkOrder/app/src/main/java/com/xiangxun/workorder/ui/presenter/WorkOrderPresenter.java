@@ -19,6 +19,8 @@ import com.xiangxun.workorder.widget.loading.ShowLoading;
 
 import java.util.Map;
 
+import retrofit2.http.Query;
+
 /**
  * Created by Zhangyuhui/Darly on 2017/5/19.
  * Copyright by [Zhangyuhui/Darly]
@@ -66,11 +68,11 @@ public class WorkOrderPresenter {
         }
     }
 
-    public void getWorkOrderByPage(int page, Map<String, String> map) {
+    public void getWorkOrderByPage(int page, String status, String devicename, String devicecode, String deviceip) {
 
         biz.onStart(loading);
 
-        biz.getWorkOrder(page, map, new FrameListener<WorkOrderRoot>() {
+        biz.getWorkOrder(page, status, devicename, devicecode, deviceip, new FrameListener<WorkOrderRoot>() {
             @Override
             public void onSucces(WorkOrderRoot data) {
                 biz.onStop(loading);

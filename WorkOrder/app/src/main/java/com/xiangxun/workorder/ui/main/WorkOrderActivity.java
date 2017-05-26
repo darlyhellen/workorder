@@ -10,6 +10,7 @@ import com.hellen.baseframe.binder.ContentBinder;
 import com.hellen.baseframe.binder.ViewsBinder;
 import com.hellen.baseframe.common.dlog.DLog;
 import com.hellen.baseframe.common.obsinfo.ToastApp;
+import com.hellen.baseframe.common.utiltools.SharePreferHelp;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.base.BaseActivity;
@@ -74,10 +75,11 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
         xlist.setAdapter(adapter);
         patrol = (Patrol) getIntent().getSerializableExtra("PATROL");
         map = new HashMap<String, String>();
+        map.put("userId", SharePreferHelp.getValue(AppEnum.USERID.getDec(), null));
 
         if (patrol == null) {
             header.setTitle(R.string.main_work_order);
-            presenter.getWorkOrderByPage(currentPage, map);
+            presenter.getWorkOrderByPage(currentPage, null, null, null, null);
             header.setRightBackgroundResource(R.mipmap.ic_title_search);
         } else {
             //根据传递过来的参数,进行页面分类整理.请求不同的接口,
@@ -110,7 +112,7 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
                 break;
             case 5:
                 //请求全部的接口
-                presenter.getWorkOrderByPage(currentPage, map);
+                presenter.getWorkOrderByPage(currentPage, null, null, null, null);
                 break;
             case 20:
                 //巡检页面工单列表
@@ -147,7 +149,7 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
     public void onRefresh(View v) {
         currentPage = 1;
         listState = AppEnum.LISTSTATEREFRESH;
-        presenter.getWorkOrderByPage(currentPage, map);
+        presenter.getWorkOrderByPage(currentPage, null, null, null, null);
     }
 
     @Override
@@ -158,7 +160,7 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
         } else {
             currentPage++;
             listState = AppEnum.LISTSTATELOADMORE;
-            presenter.getWorkOrderByPage(currentPage, map);
+            presenter.getWorkOrderByPage(currentPage, null, null, null, null);
         }
     }
 
@@ -219,77 +221,6 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
     public void onWorkOrderFailed() {
         stopXListView();
         DLog.i("onWorkOrderFailed");
-        //异常情况下，进入假数据环节。
-        List<WorkOrderData> datas = new ArrayList<>();
-        SimpleDateFormat time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        for (int i = 0; i < 10; i++) {
-            WorkOrderData dd = new WorkOrderData();
-            dd.workDays = i;
-            dd.serveBackText = i + "" + currentPage;
-            dd.dutyOrgCode = i + "" + currentPage;
-            dd.complaintAddress = i + "" + currentPage;
-            dd.workAssess = i + "" + currentPage;
-            dd.updateId = i + "" + currentPage;
-            dd.workOrderText = i + "208省道22km北方向故障维护" + currentPage;
-            dd.backVisitId = i + "" + currentPage;
-            dd.employeeName = i + "" + currentPage;
-            dd.issuedRegName = i + "" + currentPage;
-            dd.annexNumber = i + currentPage;
-            dd.orgName = i + "" + currentPage;
-            dd.siteDescription = i + "" + currentPage;
-            dd.workEventType = i + "" + currentPage;
-            dd.disposePhotoId = i + "" + currentPage;
-            dd.localPhotoNumber = i + currentPage;
-            dd.localPhotoId = i + "" + currentPage;
-            dd.dutyOrgType = i + "" + currentPage;
-            dd.workEventPointLatlon = i + "" + currentPage;
-            dd.workOrderId = i + "" + currentPage;
-            dd.satisfactionDegree = i + "" + currentPage;
-            dd.workEventPointExplain = i + "" + currentPage;
-            dd.workIsChange = i + currentPage;
-            dd.checkDescription = i + "" + currentPage;
-            dd.workOrderCode = i + "17041008265709544d74" + currentPage;
-            dd.backOrgId = i + "" + currentPage;
-            dd.eventBackText = i + "" + currentPage;
-            dd.workOrderRemark = i + "" + currentPage;
-            dd.workEventSource = i + "" + currentPage;
-            dd.complaintTel = i + "" + currentPage;
-            dd.orgId = i + "" + currentPage;
-            dd.checkStatus = i + "" + currentPage;
-            dd.dealLimit = i + "" + currentPage;
-            dd.orgCode = i + "" + currentPage;
-            dd.complaintName = i + "" + currentPage;
-            dd.backVisitName = i + "" + currentPage;
-            dd.complaintEmail = i + "" + currentPage;
-            dd.localPhotoExplain = i + "" + currentPage;
-            dd.workEndTime = i + "" + currentPage;
-            dd.backOrgCode = i + "" + currentPage;
-            dd.dutyOrgName = i + "西安翔迅科技" + currentPage;
-            if (new Random().nextBoolean()) {
-                dd.workEventState = "闭合";
-            } else {
-                dd.workEventState = "打开";
-            }
-            dd.workIsNodus = i + "" + currentPage;
-            dd.dutyOrgId = i + "160321194637834dc78d" + currentPage;
-            dd.employeeId = i + "" + currentPage;
-            dd.updateTime = i + "" + currentPage;
-            dd.workIsIssued = i + "" + currentPage;
-            dd.workBackExplain = i + "" + currentPage;
-            dd.backOrgName = i + "" + currentPage;
-            dd.sceneAnnex = i + "" + currentPage;
-            dd.workIsBack = i + "" + currentPage;
-            dd.workReportType = i + "" + currentPage;
-            dd.createTime = i + "" + currentPage;
-            dd.workOrderName = i + "" + currentPage;
-            dd.workDisposeRequest = i + "" + currentPage;
-            dd.issuedRegId = i + "" + currentPage;
-            dd.workBeginTime = time.format(new Date());
-            dd.longitude = 108.928822 + 0.000001 * i;
-            dd.latitude = 34.273066 + 0.000001 * i;
-            datas.add(dd);
-        }
-        setWorkOrderData(datas);
     }
 
     @Override
@@ -312,7 +243,7 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
         DLog.i(map);
         currentPage = 1;
         this.map = map;
-        presenter.getWorkOrderByPage(currentPage, map);
+        presenter.getWorkOrderByPage(currentPage, null, null, null, null);
 
     }
 }
