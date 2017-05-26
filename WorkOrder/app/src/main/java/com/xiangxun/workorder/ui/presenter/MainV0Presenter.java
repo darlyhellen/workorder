@@ -41,7 +41,6 @@ public class MainV0Presenter {
         data.add(new Patrol(1, R.string.main_work_order_new, R.mipmap.work_order_search, num));
         data.add(new Patrol(2, R.string.main_work_order_down, R.mipmap.man_user_manage, 0));
         data.add(new Patrol(3, R.string.main_work_order_undown, R.mipmap.work_order_search, 0));
-        data.add(new Patrol(4, R.string.main_work_order_search, R.mipmap.work_order_repor, 0));
         data.add(new Patrol(5, R.string.main_work_order_all, R.mipmap.contact_phone, 0));
         return data;
     }

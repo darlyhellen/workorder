@@ -113,8 +113,9 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
                 presenter.getWorkOrderByPage(currentPage, workorder, devicename, devicenum, deviceip);
                 break;
             case 3:
-                break;
-            case 4:
+                //未完成的工单
+                workorder = "-6";
+                presenter.getWorkOrderByPage(currentPage, workorder, devicename, devicenum, deviceip);
                 break;
             case 5:
                 //请求全部的接口

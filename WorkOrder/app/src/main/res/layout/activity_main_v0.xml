@@ -31,7 +31,7 @@
         android:divider="@null"
         android:horizontalSpacing="@dimen/margin_padding2"
         android:listSelector="@color/transparent_white"
-        android:numColumns="3"
+        android:numColumns="2"
         android:scrollbars="none"
         android:verticalSpacing="@dimen/margin_padding2" />
 

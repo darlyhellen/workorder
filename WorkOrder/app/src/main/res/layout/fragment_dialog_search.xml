@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <com.xiangxun.workorder.widget.header.HeaderView
@@ -9,89 +10,135 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <TableRow
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_padding10"
+        android:background="@drawable/app_login_shape"
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="0dp"
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="10dp"
+                android:text="@string/st_search_deviceName" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_margin="2dp"
+                android:background="@color/wel_back_color" />
+
+            <EditText
+                android:id="@+id/id_search_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:background="@color/transparent"
+                android:hint="@string/st_search_deviceName"
+                android:padding="10dp"
+                android:textColor="#757575"
+                android:textSize="@dimen/textSize15" />
+        </TableRow>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/wel_back_color" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="10dp"
+                android:text="@string/st_search_deviceNum" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_margin="2dp"
+                android:background="@color/wel_back_color" />
+
+            <EditText
+                android:id="@+id/id_search_num"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:background="@color/transparent"
+                android:hint="@string/st_search_deviceNum"
+                android:padding="10dp"
+                android:textColor="#757575"
+                android:textSize="@dimen/textSize15" />
+        </TableRow>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/wel_back_color" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="10dp"
+                android:text="@string/st_search_deviceIp" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_margin="2dp"
+                android:background="@color/wel_back_color" />
+
+            <EditText
+                android:id="@+id/id_search_ip"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:background="@color/transparent"
+                android:hint="@string/st_search_deviceIp"
+                android:padding="10dp"
+                android:textColor="#757575"
+                android:textSize="@dimen/textSize15" />
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="10dp"
-            android:text="@string/st_search_deviceName" />
+            android:layout_margin="@dimen/margin_padding4"
+            android:visibility="gone">
 
-        <EditText
-            android:id="@+id/id_search_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:hint="@string/st_search_deviceName"
-            android:padding="10dp" />
-    </TableRow>
+            <Button
+                android:id="@+id/id_search_commit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/st_tour_commit" />
 
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="10dp"
-            android:text="@string/st_search_deviceNum" />
-
-        <EditText
-            android:id="@+id/id_search_num"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:hint="@string/st_search_deviceNum"
-            android:padding="10dp" />
-    </TableRow>
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="10dp"
-            android:text="@string/st_search_deviceIp" />
-
-        <EditText
-            android:id="@+id/id_search_ip"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:hint="@string/st_search_deviceIp"
-            android:padding="10dp" />
-    </TableRow>
-
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <Button
-            android:id="@+id/id_search_commit"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="@string/st_tour_commit" />
-
-        <Button
-            android:id="@+id/id_search_consel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="@string/set_consel" />
-    </TableRow>
-
+            <Button
+                android:id="@+id/id_search_consel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/set_consel" />
+        </TableRow>
+    </LinearLayout>
 
 </LinearLayout>

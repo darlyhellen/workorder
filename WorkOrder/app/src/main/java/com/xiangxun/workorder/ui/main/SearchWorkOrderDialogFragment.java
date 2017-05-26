@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.hellen.baseframe.common.dlog.DLog;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.widget.header.HeaderView;
@@ -74,13 +75,14 @@ public class SearchWorkOrderDialogFragment extends DialogFragment implements Vie
 
         header.setLeftBackgroundResource(R.mipmap.ic_title_back);
         header.setTitle(R.string.main_work_order_search);
-        header.setRightBackgroundResource(0);
+        header.getTitleViewOperationText().setText(R.string.st_tour_commit);
 
 
     }
 
     private void initListener() {
         header.setLeftBackOneListener(this);
+        header.setRightImageTextFlipper(this);
         commit.setOnClickListener(this);
         consel.setOnClickListener(this);
 
@@ -90,10 +92,13 @@ public class SearchWorkOrderDialogFragment extends DialogFragment implements Vie
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.id_search_commit:
+                break;
+            case R.id.title_view_right_Flipper01:
                 String devicename = name.getText().toString().trim();
                 String devicenum = num.getText().toString().trim();
                 String deviceip = ip.getText().toString().trim();
                 ((SearchListener) getActivity()).findParamers(devicename, devicenum, deviceip);
+                DLog.i("点击提交");
                 break;
             case R.id.title_view_back_llayout:
                 break;
@@ -103,5 +108,12 @@ public class SearchWorkOrderDialogFragment extends DialogFragment implements Vie
                 break;
         }
         dismiss();
+    }
+
+
+    @Override
+    public void dismiss() {
+        super.dismiss();
+        getActivity().overridePendingTransition(R.anim.activity_nothing, R.anim.activity_out_to_buttom);
     }
 }
