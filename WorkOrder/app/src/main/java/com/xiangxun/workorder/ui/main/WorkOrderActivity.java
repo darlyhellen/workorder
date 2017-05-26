@@ -67,21 +67,28 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
     protected void initView(Bundle savedInstanceState) {
         presenter = new WorkOrderPresenter(this);
         //获取完成
-
         header.setLeftBackgroundResource(R.mipmap.back_image);
-        header.setRightBackgroundResource(R.mipmap.xw_title_search);
+
         data = new ArrayList<>();
         adapter = new WorkOrderAdapter(data, R.layout.item_activity_work_order, this);
         xlist.setAdapter(adapter);
         patrol = (Patrol) getIntent().getSerializableExtra("PATROL");
         map = new HashMap<String, String>();
+
         if (patrol == null) {
             header.setTitle(R.string.main_work_order);
             presenter.getWorkOrderByPage(currentPage, map);
+            header.setRightBackgroundResource(R.mipmap.xw_title_search);
         } else {
             //根据传递过来的参数,进行页面分类整理.请求不同的接口,
             header.setTitle(patrol.getName());
             classifyRequest(patrol.getListId());
+            if (patrol.getListId() == 20) {
+                //巡检管理
+                header.setRightBackgroundResource(R.mipmap.iconfont_plus);
+            } else {
+                header.setRightBackgroundResource(R.mipmap.xw_title_search);
+            }
 
 
         }
@@ -122,7 +129,13 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        presenter.onClickDown(this, v);
+
+        if (patrol == null) {
+            presenter.onClickDown(this, 0, v);
+        } else {
+            presenter.onClickDown(this, patrol.getListId(), v);
+        }
+
     }
 
 
@@ -192,9 +205,9 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
         stopXListView();
         DLog.i("onWorkOrderSuccess" + datas);
         setWorkOrderData(datas);
-        if (xlist.getCount()>0){
+        if (xlist.getCount() > 0) {
             textView.setVisibility(View.GONE);
-        }else {
+        } else {
             textView.setVisibility(View.GONE);
         }
     }

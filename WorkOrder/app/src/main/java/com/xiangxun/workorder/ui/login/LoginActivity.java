@@ -14,6 +14,7 @@ import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.base.BaseActivity;
 import com.xiangxun.workorder.ui.MainActivity;
+import com.xiangxun.workorder.ui.MaintenanceActivity;
 import com.xiangxun.workorder.ui.biz.LoginListener;
 import com.xiangxun.workorder.ui.biz.LoginListener.LoginInterface;
 import com.xiangxun.workorder.ui.login.edittext.ClearEditText;
@@ -81,7 +82,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Logi
 
     @Override
     public void onLoginSuccess() {
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, MaintenanceActivity.class));
         end();
     }
 

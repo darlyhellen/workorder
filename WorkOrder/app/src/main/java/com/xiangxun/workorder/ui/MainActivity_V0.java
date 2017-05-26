@@ -79,40 +79,28 @@ public class MainActivity_V0 extends BaseActivity implements View.OnClickListene
     @ViewsBinder(R.id.gv_home)
     private GridView gridView;
     private PatrolHomeAdapter adapter;
-    private Map<String, Integer> map = new HashMap<String, Integer>();
-    private List<Patrol> data;
     //首页参数集合
 
     @Override
     protected void initView(Bundle savedInstanceState) {
         pop = new PhotoPop(this);
-        StaticListener.getInstance();
-        StaticListener.getInstance();
-        StaticListener.getInstance();
         StaticListener.getInstance().setRefreshMainUIListener(this);
         Intent intent = new Intent(this, WorkOrderNewService.class);
         startService(intent);
         presenter = new MainV0Presenter(this);
         title.setTitle(R.string.main_titile);
-        title.setRightBackgroundResource(R.mipmap.set);
+        title.setLeftBackgroundResource(R.mipmap.back_image);
+        title.setRightBackgroundResource(0);
         iv.setLayoutParams(new LinearLayout.LayoutParams(AppEnum.WIDTH.getLen(), (int) (AppEnum.WIDTH.getLen() * 0.61)));
 
-        data = new ArrayList<>();
-        data.add(new Patrol(1, R.string.main_work_order_new, R.mipmap.work_order_search, 3));
-        data.add(new Patrol(2, R.string.main_work_order_down, R.mipmap.man_user_manage, 0));
-        data.add(new Patrol(3, R.string.main_work_order_undown, R.mipmap.work_order_search, 0));
-        data.add(new Patrol(4, R.string.main_work_order_search, R.mipmap.work_order_repor, 0));
-        data.add(new Patrol(5, R.string.main_work_order_all, R.mipmap.contact_phone, 0));
-
-        adapter = new PatrolHomeAdapter(data, R.layout.home_grideview_layout, this);
+        adapter = new PatrolHomeAdapter(presenter.findMainV0(0), R.layout.home_grideview_layout, this);
         gridView.setAdapter(adapter);
 
     }
 
     @Override
     protected void initListener() {
-
-        title.setRightOnClickListener(this);
+        title.setLeftBackOneListener(this);
         gridView.setOnItemClickListener(this);
 
         button.setOnClickListener(this);
@@ -207,7 +195,7 @@ public class MainActivity_V0 extends BaseActivity implements View.OnClickListene
 
     @Override
     public void end() {
-
+        finish();
     }
 
     @Override
@@ -223,5 +211,8 @@ public class MainActivity_V0 extends BaseActivity implements View.OnClickListene
     @Override
     public void refreshMainUI(int num) {
         DLog.i(getClass().getSimpleName() + "--->" + num);
+        if (adapter != null) {
+            adapter.setData(presenter.findMainV0(num));
+        }
     }
 }

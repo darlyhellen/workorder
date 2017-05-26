@@ -2,6 +2,7 @@ package com.xiangxun.workorder.common.retrofit;
 
 import android.text.TextUtils;
 
+import com.hellen.baseframe.common.dlog.DLog;
 import com.hellen.baseframe.common.utiltools.SharePreferHelp;
 import com.xiangxun.workorder.base.APP;
 import com.xiangxun.workorder.base.AppEnum;
@@ -44,6 +45,7 @@ public class RxInterceptor implements Interceptor {
         Request.Builder builder = chain.request().newBuilder();
         String userID = SharePreferHelp.getValue(AppEnum.USERID.getDec(), null);
         String loginName = SharePreferHelp.getValue(AppEnum.USERNAME.getDec(), null);
+        DLog.i(userID+"--"+loginName);
         if (TextUtils.isEmpty(userID) && TextUtils.isEmpty(loginName)) {
             builder.addHeader("Content-Type", "application/json;charset=UTF-8")
                     .addHeader("Accept", "application/json")
@@ -54,7 +56,7 @@ public class RxInterceptor implements Interceptor {
             builder.addHeader("Content-Type", "application/json;charset=UTF-8")
                     .addHeader("Accept", "application/json")
                     .addHeader("charset", "utf-8")
-                    .addHeader("userID", userID)
+                    .addHeader("userId", userID)
                     .addHeader("loginName", loginName)
                     .addHeader("version", APPSYS_STRING + VersionCode)
                     .build();

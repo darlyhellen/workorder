@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <!--首页内容-->
+
+    <com.xiangxun.workorder.widget.header.HeaderView
+        android:id="@+id/id_maintenance_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/id_maintenance_iv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/ic_maintenance_background"
+        android:visibility="visible" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_padding5"
+        android:background="@color/divider" />
+
+    <GridView
+        android:id="@+id/id_maintenance_gv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@null"
+        android:horizontalSpacing="@dimen/margin_padding2"
+        android:listSelector="@color/transparent_white"
+        android:numColumns="2"
+        android:scrollbars="none"
+        android:verticalSpacing="@dimen/margin_padding2" />
+
+</LinearLayout>

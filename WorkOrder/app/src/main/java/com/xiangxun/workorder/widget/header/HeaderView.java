@@ -70,9 +70,14 @@ public class HeaderView extends FrameLayout {
     }
 
     public void setRightBackgroundResource(int drawable) {
-        title_view_right_Flipper01.setVisibility(View.VISIBLE);
-        title_view_right_Flipper01.setDisplayedChild(0);
-        mBtnShare.setBackgroundResource(drawable);
+        if (drawable == 0) {
+            title_view_right_Flipper01.setVisibility(View.INVISIBLE);
+            title_view_right_Flipper01.setDisplayedChild(0);
+        } else {
+            title_view_right_Flipper01.setVisibility(View.VISIBLE);
+            title_view_right_Flipper01.setDisplayedChild(0);
+            mBtnShare.setBackgroundResource(drawable);
+        }
     }
 
 
