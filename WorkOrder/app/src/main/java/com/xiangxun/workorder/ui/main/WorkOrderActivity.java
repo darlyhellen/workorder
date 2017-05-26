@@ -65,6 +65,12 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
     private String deviceip;
     private int listState = AppEnum.LISTSTATEFIRST;
 
+
+    /**
+     * 是否是巡检的工单列表
+     */
+    private boolean isTour;
+
     @Override
     protected void initView(Bundle savedInstanceState) {
         presenter = new WorkOrderPresenter(this);
@@ -77,6 +83,7 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
         patrol = (Patrol) getIntent().getSerializableExtra("PATROL");
 
         if (patrol == null) {
+            isTour = false;
             header.setTitle(R.string.main_work_order);
             presenter.getWorkOrderByPage(currentPage, workorder, devicename, devicenum, deviceip);
             header.setRightBackgroundResource(R.mipmap.ic_title_search);
@@ -84,8 +91,10 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
             //根据传递过来的参数,进行页面分类整理.请求不同的接口,
             if (patrol.getListId() == 20) {
                 //巡检管理
+                isTour = true;
                 header.setRightBackgroundResource(R.mipmap.ic_title_add);
             } else {
+                isTour = false;
                 header.setRightBackgroundResource(R.mipmap.ic_title_search);
             }
             header.setTitle(patrol.getName());
@@ -104,26 +113,31 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
         switch (listId) {
             case 1:
                 // 新工單(工单接收)根據接口規則。传递第二个参数为字符串0；
+                isTour = false;
                 workorder = "0";
                 presenter.getWorkOrderByPage(currentPage, workorder, devicename, devicenum, deviceip);
                 break;
             case 2:
                 //完成的工单
+                isTour = false;
                 workorder = "6";
                 presenter.getWorkOrderByPage(currentPage, workorder, devicename, devicenum, deviceip);
                 break;
             case 3:
                 //未完成的工单
+                isTour = false;
                 workorder = "-6";
                 presenter.getWorkOrderByPage(currentPage, workorder, devicename, devicenum, deviceip);
                 break;
             case 5:
                 //请求全部的接口
+                isTour = false;
                 workorder = "";
                 presenter.getWorkOrderByPage(currentPage, workorder, devicename, devicenum, deviceip);
                 break;
             case 20:
                 //巡检页面工单列表
+                isTour = true;
                 break;
             default:
                 break;
@@ -157,7 +171,11 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
     public void onRefresh(View v) {
         currentPage = 1;
         listState = AppEnum.LISTSTATEREFRESH;
-        presenter.getWorkOrderByPage(currentPage, workorder, devicename, devicenum, deviceip);
+        if (isTour) {
+
+        } else {
+            presenter.getWorkOrderByPage(currentPage, workorder, devicename, devicenum, deviceip);
+        }
     }
 
     @Override
@@ -168,7 +186,11 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
         } else {
             currentPage++;
             listState = AppEnum.LISTSTATELOADMORE;
-            presenter.getWorkOrderByPage(currentPage, workorder, devicename, devicenum, deviceip);
+            if (isTour) {
+
+            } else {
+                presenter.getWorkOrderByPage(currentPage, workorder, devicename, devicenum, deviceip);
+            }
         }
     }
 
@@ -182,8 +204,10 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         DLog.i("onItemClick--" + position);
         WorkOrderData ds = (WorkOrderData) parent.getItemAtPosition(position);
-        Intent intent = new Intent(this, LbsAmapActivity.class);
+        Intent intent = new Intent(this, WorkOrderDetailActivity.class);
+        intent.putExtra("isTour", isTour);
         intent.putExtra("data", ds);
+        intent.putExtra("des",patrol.getListId());
         startActivity(intent);
     }
 
@@ -254,6 +278,10 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
         devicename = name;
         devicenum = num;
         deviceip = ip;
-        presenter.getWorkOrderByPage(currentPage, workorder, devicename, devicenum, deviceip);
+        if (isTour) {
+
+        } else {
+            presenter.getWorkOrderByPage(currentPage, workorder, devicename, devicenum, deviceip);
+        }
     }
 }
