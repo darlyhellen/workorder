@@ -67,9 +67,9 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
     protected void initView(Bundle savedInstanceState) {
         presenter = new WorkOrderPresenter(this);
         //获取完成
-        header.setLeftBackgroundResource(R.mipmap.back_image);
+        header.setLeftBackgroundResource(R.mipmap.ic_title_back);
 
-        data = new ArrayList<>();
+        data = new ArrayList<WorkOrderData>();
         adapter = new WorkOrderAdapter(data, R.layout.item_activity_work_order, this);
         xlist.setAdapter(adapter);
         patrol = (Patrol) getIntent().getSerializableExtra("PATROL");
@@ -78,17 +78,17 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
         if (patrol == null) {
             header.setTitle(R.string.main_work_order);
             presenter.getWorkOrderByPage(currentPage, map);
-            header.setRightBackgroundResource(R.mipmap.xw_title_search);
+            header.setRightBackgroundResource(R.mipmap.ic_title_search);
         } else {
             //根据传递过来的参数,进行页面分类整理.请求不同的接口,
-            header.setTitle(patrol.getName());
-            classifyRequest(patrol.getListId());
             if (patrol.getListId() == 20) {
                 //巡检管理
-                header.setRightBackgroundResource(R.mipmap.iconfont_plus);
+                header.setRightBackgroundResource(R.mipmap.ic_title_add);
             } else {
-                header.setRightBackgroundResource(R.mipmap.xw_title_search);
+                header.setRightBackgroundResource(R.mipmap.ic_title_search);
             }
+            header.setTitle(patrol.getName());
+            classifyRequest(patrol.getListId());
 
 
         }
@@ -111,6 +111,9 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
             case 5:
                 //请求全部的接口
                 presenter.getWorkOrderByPage(currentPage, map);
+                break;
+            case 20:
+                //巡检页面工单列表
                 break;
             default:
                 break;

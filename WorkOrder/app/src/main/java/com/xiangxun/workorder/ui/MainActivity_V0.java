@@ -23,19 +23,13 @@ import com.xiangxun.workorder.base.StaticListener;
 import com.xiangxun.workorder.bean.Patrol;
 import com.xiangxun.workorder.service.WorkOrderNewService;
 import com.xiangxun.workorder.ui.adapter.PatrolHomeAdapter;
-import com.xiangxun.workorder.ui.biz.MainListener;
 import com.xiangxun.workorder.ui.biz.MainV0Listener;
 import com.xiangxun.workorder.ui.main.WorkOrderActivity;
-import com.xiangxun.workorder.ui.presenter.MainPresenter;
 import com.xiangxun.workorder.ui.presenter.MainV0Presenter;
 import com.xiangxun.workorder.widget.camera.PhotoPop;
 import com.xiangxun.workorder.widget.header.HeaderView;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 /**
@@ -89,7 +83,7 @@ public class MainActivity_V0 extends BaseActivity implements View.OnClickListene
         startService(intent);
         presenter = new MainV0Presenter(this);
         title.setTitle(R.string.main_titile);
-        title.setLeftBackgroundResource(R.mipmap.back_image);
+        title.setLeftBackgroundResource(R.mipmap.ic_title_back);
         title.setRightBackgroundResource(0);
         iv.setLayoutParams(new LinearLayout.LayoutParams(AppEnum.WIDTH.getLen(), (int) (AppEnum.WIDTH.getLen() * 0.61)));
 

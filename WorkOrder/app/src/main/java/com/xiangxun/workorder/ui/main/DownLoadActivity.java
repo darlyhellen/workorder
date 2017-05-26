@@ -54,7 +54,7 @@ public class DownLoadActivity extends BaseActivity implements View.OnClickListen
     @Override
     protected void initView(Bundle savedInstanceState) {
         header.setTitle(R.string.main_work_map);
-        header.setLeftBackgroundResource(R.mipmap.back_image);
+        header.setLeftBackgroundResource(R.mipmap.ic_title_back);
     }
 
     @Override

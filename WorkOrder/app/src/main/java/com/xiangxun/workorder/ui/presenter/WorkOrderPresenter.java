@@ -1,6 +1,7 @@
 package com.xiangxun.workorder.ui.presenter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 
 import com.hellen.baseframe.application.FrameListener;
@@ -12,6 +13,7 @@ import com.xiangxun.workorder.bean.WorkOrderData;
 import com.xiangxun.workorder.bean.WorkOrderRoot;
 import com.xiangxun.workorder.ui.biz.WorkOrderListener;
 import com.xiangxun.workorder.ui.main.SearchWorkOrderDialogFragment;
+import com.xiangxun.workorder.ui.main.TourActivity;
 import com.xiangxun.workorder.ui.main.WorkOrderActivity;
 import com.xiangxun.workorder.widget.loading.ShowLoading;
 
@@ -52,6 +54,7 @@ public class WorkOrderPresenter {
             case R.id.xw_share:
                 if (patrol == 20) {
                     DLog.i("新增按钮点击，跳转到新增巡检页面。在列表页面中显示巡检列表");
+                    context.startActivity(new Intent(context, TourActivity.class));
                 } else {
                     DLog.i("搜索按钮点击，跳转到搜索页面。在搜索页面中显示搜索结果");
                     SearchWorkOrderDialogFragment dialog = new SearchWorkOrderDialogFragment();

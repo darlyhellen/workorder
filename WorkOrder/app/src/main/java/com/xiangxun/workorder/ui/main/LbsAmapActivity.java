@@ -51,7 +51,7 @@ public class LbsAmapActivity extends BaseActivity implements View.OnClickListene
         MapsInitializer.sdcardDir = AppEnum.IMAGE;
         mapView.onCreate(savedInstanceState); // 此方法必须重写
         header.setTitle(R.string.main_work_map);
-        header.setLeftBackgroundResource(R.mipmap.back_image);
+        header.setLeftBackgroundResource(R.mipmap.ic_title_back);
 
         if (aMap == null) {
             aMap = mapView.getMap();

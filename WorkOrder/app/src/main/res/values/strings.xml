@@ -70,4 +70,9 @@
     <string name="no_clear">无需清除</string>
     <string name="clear_com">确认清空缓存？</string>
     <string name="cache_realy_cleat">缓存已经清除</string>
+
+    <!-- TourActivity-->
+    <string name="st_tour_title">新增巡检工单</string>
+    <string name="st_tour_commit">提交</string>
+    <string name="description_hint">5~400字</string>
 </resources>

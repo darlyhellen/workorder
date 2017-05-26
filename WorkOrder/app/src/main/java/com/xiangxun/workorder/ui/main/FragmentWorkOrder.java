@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,12 +16,10 @@ import com.hellen.baseframe.common.dlog.DLog;
 import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.AppEnum;
-import com.xiangxun.workorder.bean.Patrol;
 import com.xiangxun.workorder.bean.WorkOrderData;
 import com.xiangxun.workorder.ui.adapter.WorkOrderAdapter;
 import com.xiangxun.workorder.ui.biz.WorkOrderListener;
 import com.xiangxun.workorder.ui.presenter.WorkOrderFragmentPresenter;
-import com.xiangxun.workorder.ui.presenter.WorkOrderPresenter;
 import com.xiangxun.workorder.widget.header.HeaderView;
 import com.xiangxun.workorder.widget.xlistView.XListView;
 
@@ -82,8 +79,8 @@ public class FragmentWorkOrder extends Fragment implements View.OnClickListener,
     protected void initView() {
         presenter = new WorkOrderFragmentPresenter(this);
         //获取完成
-        header.setLeftBackgroundResource(R.mipmap.back_image);
-        header.setRightBackgroundResource(R.mipmap.xw_title_search);
+        header.setLeftBackgroundResource(R.mipmap.ic_title_back);
+        header.setRightBackgroundResource(R.mipmap.ic_title_search);
         header.setVisibility(View.GONE);
 
         data = new ArrayList<>();

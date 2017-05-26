@@ -16,7 +16,6 @@ import com.xiangxun.workorder.ui.biz.SetListener;
 import com.xiangxun.workorder.ui.presenter.SetPresenter;
 import com.xiangxun.workorder.widget.header.HeaderView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,7 +39,7 @@ public class SetActivity extends BaseActivity implements SetListener.SetInterfac
     @Override
     protected void initView(Bundle savedInstanceState) {
         header.setTitle(R.string.main_work_set);
-        header.setLeftBackgroundResource(R.mipmap.back_image);
+        header.setLeftBackgroundResource(R.mipmap.ic_title_back);
 
         presenter = new SetPresenter(this);
         presenter.findFileSize();

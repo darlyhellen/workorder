@@ -225,5 +225,10 @@
     <color name="red_overlay">#ffff0000</color>
     <color name="gray_overlay">#ff838b8b</color>
     <color name="alpha_overlay">#a0000000</color>
+    <!--TourActivity-->
+    <color name="publish_click">#d8d8d8</color>
+    <color name="full_line_tabbottom">#dcdcdc</color>
+    <color name="color333333">#333333</color>
+    <color name="color_d1d1d1">#d1d1d1</color>
 
 </resources>
