@@ -1,4 +1,4 @@
-package com.xiangxun.workorder.ui.main;
+package com.xiangxun.workorder.ui.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,17 +19,15 @@ import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.bean.WorkOrderData;
 import com.xiangxun.workorder.ui.adapter.WorkOrderAdapter;
 import com.xiangxun.workorder.ui.biz.WorkOrderListener;
+import com.xiangxun.workorder.ui.main.LbsAmapActivity;
 import com.xiangxun.workorder.ui.presenter.WorkOrderFragmentPresenter;
 import com.xiangxun.workorder.widget.header.HeaderView;
 import com.xiangxun.workorder.widget.xlistView.XListView;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 /**
  * Created by Zhangyuhui/Darly on 2017/5/25.
@@ -38,7 +36,7 @@ import java.util.Random;
  *
  * @TODO:
  */
-public class FragmentWorkOrder extends Fragment implements View.OnClickListener, XListView.IXListViewListener, AdapterView.OnItemClickListener, WorkOrderListener.WorkOrderInterface, SearchWorkOrderDialogFragment.SearchListener {
+public class FragmentWorkOrder extends Fragment implements View.OnClickListener, XListView.IXListViewListener, AdapterView.OnItemClickListener, WorkOrderListener.WorkOrderInterface, DetailOrderFragment.SearchWorkOrderDialogFragment.SearchListener {
     private View root;
 
     @ViewsBinder(R.id.id_work_order_header)

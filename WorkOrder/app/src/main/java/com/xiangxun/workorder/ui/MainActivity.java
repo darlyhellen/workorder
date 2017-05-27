@@ -1,49 +1,26 @@
 package com.xiangxun.workorder.ui;
 
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.design.widget.TabLayout.OnTabSelectedListener;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TableLayout;
 
 import com.hellen.baseframe.binder.ContentBinder;
 import com.hellen.baseframe.binder.ViewsBinder;
-import com.hellen.baseframe.common.db.ThreadInfo;
 import com.hellen.baseframe.common.dlog.DLog;
-import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.R;
-import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.base.BaseActivity;
 import com.xiangxun.workorder.base.StaticListener;
-import com.xiangxun.workorder.bean.Patrol;
-import com.xiangxun.workorder.service.WorkOrderNewService;
-import com.xiangxun.workorder.ui.adapter.PatrolHomeAdapter;
 import com.xiangxun.workorder.ui.adapter.ViewPagerAdapter;
 import com.xiangxun.workorder.ui.biz.MainListener.MainInterface;
-import com.xiangxun.workorder.ui.main.FragmentWorkOrder;
-import com.xiangxun.workorder.ui.main.WorkOrderActivity;
+import com.xiangxun.workorder.ui.fragment.FragmentWorkOrder;
 import com.xiangxun.workorder.ui.presenter.MainPresenter;
-import com.xiangxun.workorder.widget.camera.PhotoPop;
 import com.xiangxun.workorder.widget.header.HeaderView;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Random;
 
 
 /**

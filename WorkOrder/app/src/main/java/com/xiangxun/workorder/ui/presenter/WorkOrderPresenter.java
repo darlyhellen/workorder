@@ -8,18 +8,12 @@ import com.hellen.baseframe.application.FrameListener;
 import com.hellen.baseframe.common.dlog.DLog;
 import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.R;
-import com.xiangxun.workorder.bean.Patrol;
-import com.xiangxun.workorder.bean.WorkOrderData;
 import com.xiangxun.workorder.bean.WorkOrderRoot;
 import com.xiangxun.workorder.ui.biz.WorkOrderListener;
-import com.xiangxun.workorder.ui.main.SearchWorkOrderDialogFragment;
+import com.xiangxun.workorder.ui.fragment.DetailOrderFragment;
 import com.xiangxun.workorder.ui.main.TourActivity;
 import com.xiangxun.workorder.ui.main.WorkOrderActivity;
 import com.xiangxun.workorder.widget.loading.ShowLoading;
-
-import java.util.Map;
-
-import retrofit2.http.Query;
 
 /**
  * Created by Zhangyuhui/Darly on 2017/5/19.
@@ -59,7 +53,7 @@ public class WorkOrderPresenter {
                     context.startActivity(new Intent(context, TourActivity.class));
                 } else {
                     DLog.i("搜索按钮点击，跳转到搜索页面。在搜索页面中显示搜索结果");
-                    SearchWorkOrderDialogFragment dialog = new SearchWorkOrderDialogFragment();
+                    DetailOrderFragment.SearchWorkOrderDialogFragment dialog = new DetailOrderFragment.SearchWorkOrderDialogFragment();
                     dialog.show(((WorkOrderActivity) context).getFragmentManager(), "SearchWorkOrderDialogFragment");
                 }
                 break;
