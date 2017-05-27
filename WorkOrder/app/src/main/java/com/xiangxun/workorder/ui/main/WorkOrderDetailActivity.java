@@ -1,20 +1,33 @@
 package com.xiangxun.workorder.ui.main;
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
 import android.view.View.OnClickListener;
 
 import com.hellen.baseframe.binder.ContentBinder;
 import com.hellen.baseframe.binder.ViewsBinder;
 import com.hellen.baseframe.common.dlog.DLog;
+import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.R;
+import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.base.BaseActivity;
 import com.xiangxun.workorder.bean.WorkOrderData;
+import com.xiangxun.workorder.ui.adapter.ViewPagerAdapter;
 import com.xiangxun.workorder.ui.biz.WorkOrderDetailListener;
 import com.xiangxun.workorder.ui.biz.WorkOrderDetailListener.WorkOrderDetailInterface;
+import com.xiangxun.workorder.ui.fragment.DetailImageFragment;
+import com.xiangxun.workorder.ui.fragment.DetailLbsAmapFragment;
+import com.xiangxun.workorder.ui.fragment.DetailOrderFragment;
 import com.xiangxun.workorder.ui.presenter.TourPresenter;
 import com.xiangxun.workorder.ui.presenter.WorkOrderDetailPresenter;
 import com.xiangxun.workorder.widget.header.HeaderView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Zhangyuhui/Darly on 2017/5/26.
@@ -24,11 +37,20 @@ import com.xiangxun.workorder.widget.header.HeaderView;
  * @TODO: 工单详情页面，点击每个工单，都会进入到详情页面。不过是根据不同参数。展示效果不同而已。
  */
 @ContentBinder(R.layout.activity_detail_work_order)
-public class WorkOrderDetailActivity extends BaseActivity implements OnClickListener, WorkOrderDetailInterface {
+public class WorkOrderDetailActivity extends BaseActivity implements OnClickListener, WorkOrderDetailInterface, OnPageChangeListener {
 
     private WorkOrderDetailPresenter presenter;
     @ViewsBinder(R.id.id_detail_title)
     private HeaderView header;
+    @ViewsBinder(R.id.id_detail_table)
+    private TabLayout tab;
+    @ViewsBinder(R.id.id_detail_viewpager)
+    private ViewPager vp;
+
+    private ViewPagerAdapter adapter;
+    private List<Fragment> list = new ArrayList<Fragment>();
+    private int[] titles = new int[]{R.string.st_detail_detal, R.string.st_detail_image, R.string.st_detail_position};
+    private int[] titles_no = new int[]{R.string.st_detail_detal, R.string.st_detail_image};
 
     @Override
     protected void initView(Bundle savedInstanceState) {
@@ -37,22 +59,59 @@ public class WorkOrderDetailActivity extends BaseActivity implements OnClickList
         WorkOrderData data = (WorkOrderData) getIntent().getSerializableExtra("data");
         DLog.i(getClass().getSimpleName(), isTour + "--" + id + "---" + data);
         presenter = new WorkOrderDetailPresenter(this);
+        tab.setTabMode(TabLayout.MODE_FIXED);
+        tab.setTabGravity(TabLayout.GRAVITY_FILL);
+        tab.setTabTextColors(R.color.text_color, R.color.blue_btn_bg_color);
+        if (data == null) {
+            ToastApp.showToast("程序数据传递异常");
+            return;
+        }
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("data", data);
+        DetailOrderFragment order = new DetailOrderFragment();
+        order.setArguments(bundle);
+        list.add(order);
+        DetailImageFragment image = new DetailImageFragment();
+        image.setArguments(bundle);
+        list.add(image);
+
+        if (data.contact == null /*&& data.坐标参数*/) {
+            //有坐标
+            for (int i = 0; i < titles.length; i++) {
+                //设置未选中和选中时字体的颜色
+                tab.addTab(tab.newTab().setText(titles[i]));
+            }
+            DetailLbsAmapFragment lbs = new DetailLbsAmapFragment();
+            lbs.setArguments(bundle);
+            list.add(lbs);
+        } else {
+            //无坐标
+            for (int i = 0; i < titles_no.length; i++) {
+                //设置未选中和选中时字体的颜色
+                tab.addTab(tab.newTab().setText(titles[i]));
+            }
+        }
         if (isTour) {
             header.setTitle(R.string.st_tour_title_order);
             header.setLeftBackgroundResource(R.mipmap.ic_title_back);
             header.getTitleViewOperationText().setText(R.string.st_tour_commit);
-        }else {
+        } else {
             header.setTitle(R.string.st_detail_title);
             header.setLeftBackgroundResource(R.mipmap.ic_title_back);
-            header.getTitleViewOperationText().setText(R.string.st_tour_commit);
+            header.setRightBackgroundResource(0);
         }
-
+        //创建适配器(这个适配器是自定义的，我用的是FragmentPagerAdapger，根据需求自定义吧)
+        adapter = new ViewPagerAdapter(this, getSupportFragmentManager(), list, titles);
+        vp.setAdapter(adapter);
     }
 
     @Override
     protected void initListener() {
         header.setLeftBackOneListener(this);
         header.setRightImageTextFlipper(this);
+
+        tab.setupWithViewPager(vp);
+        vp.setOnPageChangeListener(this);
     }
 
     @Override
@@ -72,6 +131,21 @@ public class WorkOrderDetailActivity extends BaseActivity implements OnClickList
 
     @Override
     public void setEnableClick() {
+
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
 
     }
 }

@@ -89,4 +89,7 @@
 
     <!--WorkOrderDetailActivity-->
     <string name="st_detail_title">工单详情</string>
+    <string name="st_detail_detal">详情</string>
+    <string name="st_detail_image">图片</string>
+    <string name="st_detail_position">位置</string>
 </resources>

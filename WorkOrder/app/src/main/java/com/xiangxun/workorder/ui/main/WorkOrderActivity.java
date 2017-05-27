@@ -47,6 +47,7 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
     private XListView xlist;
     @ViewsBinder(R.id.id_work_order_text)
     private TextView textView;
+    private String textDes;
 
     private WorkOrderAdapter adapter;
 
@@ -115,30 +116,35 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
                 // 新工單(工单接收)根據接口規則。传递第二个参数为字符串0；
                 isTour = false;
                 workorder = "0";
+                textDes = "没有新的工单！";
                 presenter.getWorkOrderByPage(currentPage, workorder, devicename, devicenum, deviceip);
                 break;
             case 2:
                 //完成的工单
                 isTour = false;
                 workorder = "6";
+                textDes = "没有完成的工单！";
                 presenter.getWorkOrderByPage(currentPage, workorder, devicename, devicenum, deviceip);
                 break;
             case 3:
                 //未完成的工单
                 isTour = false;
                 workorder = "-6";
+                textDes = "没有未完成的工单！";
                 presenter.getWorkOrderByPage(currentPage, workorder, devicename, devicenum, deviceip);
                 break;
             case 5:
                 //请求全部的接口
                 isTour = false;
                 workorder = "";
+                textDes = "没有工单！";
                 presenter.getWorkOrderByPage(currentPage, workorder, devicename, devicenum, deviceip);
                 break;
             case 20:
                 //巡检页面工单列表
                 isTour = true;
-                workorder = "4";
+                workorder = "5";
+                textDes = "没有巡检工单！";
                 presenter.getWorkOrderByPage(currentPage, workorder, devicename, devicenum, deviceip);
                 break;
             default:
@@ -216,7 +222,7 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
 
     protected void setWorkOrderData(List<WorkOrderData> orderBeans) {
         xlist.removeFooterView(xlist.mFooterView);
-        if (orderBeans.size() > 9) {
+        if (orderBeans.size() > PageSize - 1) {
             xlist.addFooterView(xlist.mFooterView);
         }
         switch (listState) {
@@ -235,7 +241,7 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
                 adapter.setData(data);
                 break;
         }
-        totalSize += orderBeans.size();
+        totalSize = orderBeans.size();
     }
 
     //监听类实现方法
@@ -248,6 +254,7 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
             textView.setVisibility(View.GONE);
         } else {
             textView.setVisibility(View.VISIBLE);
+            textView.setText(textDes);
         }
     }
 
@@ -276,12 +283,16 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void findParamers(String name, String num, String ip) {
         DLog.i("name = " + name + ";num = " + num + ";ip = " + ip);
+        textDes = "没有搜索到工单！";
         currentPage = 1;
         devicename = name;
         devicenum = num;
         deviceip = ip;
+        //搜索的时候，清理以前的数据。
+        data.clear();
         if (isTour) {
-
+            //测试
+            presenter.getWorkOrderByPage(currentPage, workorder, devicename, devicenum, deviceip);
         } else {
             presenter.getWorkOrderByPage(currentPage, workorder, devicename, devicenum, deviceip);
         }
