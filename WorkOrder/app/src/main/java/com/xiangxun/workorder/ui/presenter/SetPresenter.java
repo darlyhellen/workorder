@@ -11,6 +11,7 @@ import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.APP;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.bean.SetModel;
+import com.xiangxun.workorder.bean.VersionData;
 import com.xiangxun.workorder.bean.VersionRoot;
 import com.xiangxun.workorder.service.VersionUpdateService;
 import com.xiangxun.workorder.service.WorkOrderNewService;
@@ -110,12 +111,13 @@ public class SetPresenter {
 
     public void clickUpdate(final Context context) {
         //先请求版本更新接口,获取版本更新内容,判断是否是最新版本,不是最新版本,提示更新.
+        final APPDialg dialg = new APPDialg(context);
+
         biz.findNewVersion(APP.getInstance().getVersionCode(), new FrameListener<VersionRoot>() {
             @Override
             public void onSucces(final VersionRoot versionRoot) {
                 if (versionRoot.getData().getVersion() > APP.getInstance().getVersionCode()) {
-
-                    APPDialg dialg = new APPDialg(context);
+                    dialg.setViewVisible();
                     dialg.setTitle(R.string.set_decl);
                     dialg.setContent(R.string.set_update_des);
                     dialg.setSure(R.string.set_sure);
@@ -125,7 +127,7 @@ public class SetPresenter {
                         public void onSureClick() {
                             DLog.i("启动服务进行下载");
                             Intent intent = new Intent(context, VersionUpdateService.class);
-                            intent.putExtra("Root",versionRoot.getData());
+                            intent.putExtra("Root", versionRoot.getData());
                             context.startService(intent);
                         }
 
@@ -135,7 +137,7 @@ public class SetPresenter {
                         }
                     });
                 } else {
-                    APPDialg dialg = new APPDialg(context);
+                    dialg.setViewInvisible();
                     dialg.setContent("已经是最新版本");
                     dialg.setSure(R.string.set_sure);
                     dialg.setOndialogListener(new OndialogListener() {
@@ -154,7 +156,31 @@ public class SetPresenter {
 
             @Override
             public void onFaild(int i, String s) {
-                APPDialg dialg = new APPDialg(context);
+                //测试正常。
+//                dialg.setViewVisible();
+//                dialg.setTitle(R.string.set_decl);
+//                dialg.setContent(R.string.set_update_des);
+//                dialg.setSure(R.string.set_sure);
+//                dialg.setConsel(R.string.consel);
+//                dialg.setOndialogListener(new OndialogListener() {
+//                    @Override
+//                    public void onSureClick() {
+//                        DLog.i("启动服务进行下载");
+//                        Intent intent = new Intent(context, VersionUpdateService.class);
+//                        VersionData data = new VersionData();
+//                        data.setUrl("http://gdown.baidu.com/data/wisegame/02ba8a69a5a792b1/QQ_500.apk");
+//                        intent.putExtra("Root", data);
+//                        context.startService(intent);
+//                    }
+//
+//                    @Override
+//                    public void onConselClick() {
+//
+//                    }
+//                });
+
+
+                dialg.setViewInvisible();
                 dialg.setContent("已经是最新版本");
                 dialg.setSure(R.string.set_sure);
                 dialg.setOndialogListener(new OndialogListener() {

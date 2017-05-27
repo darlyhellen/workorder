@@ -26,6 +26,9 @@ public class APPDialg extends AlertDialog {
     private Button sure;
     private Button consel;
 
+    private View titleLine;
+    private View conselLine;
+
     private OndialogListener ondialogListener;
 
     public APPDialg(Context context) {
@@ -55,6 +58,10 @@ public class APPDialg extends AlertDialog {
         title = (TextView) window.findViewById(R.id.out_dialog_title);
         content = (TextView) window.findViewById(R.id.out_dialog_content);
         sure = (Button) window.findViewById(R.id.out_dialog_sure);
+        titleLine = (View) window.findViewById(R.id.out_dialog_title_line);
+        conselLine = (View) window.findViewById(R.id.out_dialog_cancel_line);
+
+
         sure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,6 +82,20 @@ public class APPDialg extends AlertDialog {
         });
     }
 
+
+    public void setViewInvisible() {
+        title.setVisibility(View.GONE);
+        consel.setVisibility(View.GONE);
+        titleLine.setVisibility(View.GONE);
+        conselLine.setVisibility(View.GONE);
+    }
+
+    public void setViewVisible() {
+        title.setVisibility(View.VISIBLE);
+        consel.setVisibility(View.VISIBLE);
+        titleLine.setVisibility(View.VISIBLE);
+        conselLine.setVisibility(View.VISIBLE);
+    }
 
     public void setTitle(String title) {
         this.title.setText(title);

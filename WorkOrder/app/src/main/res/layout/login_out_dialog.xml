@@ -14,6 +14,7 @@
         android:textSize="@dimen/textview_large" />
 
     <View
+        android:id="@+id/out_dialog_title_line"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:background="@color/wel_back_color" />
@@ -49,6 +50,7 @@
             android:textSize="@dimen/textview_normal" />
 
         <View
+            android:id="@+id/out_dialog_cancel_line"
             android:layout_width="0.5dp"
             android:layout_height="fill_parent"
             android:background="@color/wel_back_color" />
