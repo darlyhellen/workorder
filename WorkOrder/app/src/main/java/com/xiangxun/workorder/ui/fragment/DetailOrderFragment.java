@@ -5,10 +5,14 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hellen.baseframe.binder.InitBinder;
+import com.hellen.baseframe.common.dlog.DLog;
 import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.bean.WorkOrderData;
@@ -20,7 +24,7 @@ import com.xiangxun.workorder.bean.WorkOrderData;
  *
  * @TODO: 固态详情展示页面。
  */
-public class DetailOrderFragment extends Fragment {
+public class DetailOrderFragment extends Fragment implements OnClickListener {
     private View root;
 
     private WorkOrderData data;
@@ -47,6 +51,9 @@ public class DetailOrderFragment extends Fragment {
     private TextView tvContent20;
     private TextView tvContent21;
     private TextView tvContent22;
+    private LinearLayout button;
+    private Button commit;
+    private Button consel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -91,6 +98,16 @@ public class DetailOrderFragment extends Fragment {
         tvContent20 = (TextView) root.findViewById(R.id.tv_content20);
         tvContent21 = (TextView) root.findViewById(R.id.tv_content21);
         tvContent22 = (TextView) root.findViewById(R.id.tv_content22);
+        button = (LinearLayout) root.findViewById(R.id.id_detail_fragment_button);
+        commit = (Button) root.findViewById(R.id.id_detail_fragment_config);
+        consel = (Button) root.findViewById(R.id.id_detail_fragment_consel);
+        if ("0".equals(data.status)) {
+            button.setVisibility(View.VISIBLE);
+            commit.setOnClickListener(this);
+            consel.setOnClickListener(this);
+        } else {
+            button.setVisibility(View.GONE);
+        }
         initData();
     }
 
@@ -121,5 +138,10 @@ public class DetailOrderFragment extends Fragment {
 
     private void initListener() {
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        DLog.i(v);
     }
 }

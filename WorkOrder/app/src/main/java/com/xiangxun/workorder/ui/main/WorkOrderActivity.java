@@ -139,7 +139,7 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
             case 20:
                 //巡检页面工单列表
                 isTour = true;
-                workorder = "5";
+                workorder = "6";
                 textDes = "没有巡检工单！";
                 presenter.getWorkOrderByPage(currentPage, workorder, devicename, devicenum, deviceip);
                 break;
