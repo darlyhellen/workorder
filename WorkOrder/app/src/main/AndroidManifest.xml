@@ -106,6 +106,9 @@
         <service
             android:name=".service.WorkOrderNewService"
             android:enabled="true" />
+        <service
+            android:name=".service.VersionUpdateService"
+            android:enabled="true" />
 
         <meta-data
             android:name="DATABASE"

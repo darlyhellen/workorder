@@ -12,6 +12,7 @@ import com.xiangxun.workorder.base.APP;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.bean.SetModel;
 import com.xiangxun.workorder.bean.VersionRoot;
+import com.xiangxun.workorder.service.VersionUpdateService;
 import com.xiangxun.workorder.service.WorkOrderNewService;
 import com.xiangxun.workorder.ui.biz.SetListener;
 import com.xiangxun.workorder.ui.login.LoginActivity;
@@ -123,7 +124,7 @@ public class SetPresenter {
                         @Override
                         public void onSureClick() {
                             DLog.i("启动服务进行下载");
-                            Intent intent = new Intent(context, WorkOrderNewService.class);
+                            Intent intent = new Intent(context, VersionUpdateService.class);
                             intent.putExtra("Root",versionRoot.getData());
                             context.startService(intent);
                         }
@@ -169,27 +170,10 @@ public class SetPresenter {
                 });
             }
         });
-
-        APPDialg dialg = new APPDialg(context);
-        dialg.setTitle(R.string.set_decl);
-        dialg.setContent(R.string.set_update_des);
-        dialg.setSure(R.string.set_sure);
-        dialg.setConsel(R.string.consel);
-        dialg.setOndialogListener(new OndialogListener() {
-            @Override
-            public void onSureClick() {
-
-            }
-
-            @Override
-            public void onConselClick() {
-
-            }
-        });
     }
 
     public void clickLoginOut(final Context context) {
-        //給服務端發送請求,判斷是否是最新的版本.
+        //退出登录，清空缓存
         APPDialg dialg = new APPDialg(context);
         dialg.setTitle(R.string.set_decl);
         dialg.setContent(R.string.set_loginout_des);
