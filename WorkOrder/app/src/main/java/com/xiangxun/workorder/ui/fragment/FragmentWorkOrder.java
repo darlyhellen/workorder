@@ -29,6 +29,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.xiangxun.workorder.ui.fragment.SearchWorkOrderDialogFragment.*;
+
 /**
  * Created by Zhangyuhui/Darly on 2017/5/25.
  * Copyright by [Zhangyuhui/Darly]
@@ -36,7 +38,7 @@ import java.util.Map;
  *
  * @TODO:
  */
-public class FragmentWorkOrder extends Fragment implements View.OnClickListener, XListView.IXListViewListener, AdapterView.OnItemClickListener, WorkOrderListener.WorkOrderInterface, DetailOrderFragment.SearchWorkOrderDialogFragment.SearchListener {
+public class FragmentWorkOrder extends Fragment implements View.OnClickListener, XListView.IXListViewListener, AdapterView.OnItemClickListener, WorkOrderListener.WorkOrderInterface, SearchListener {
     private View root;
 
     @ViewsBinder(R.id.id_work_order_header)

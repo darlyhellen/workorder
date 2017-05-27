@@ -11,6 +11,7 @@ import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.bean.WorkOrderRoot;
 import com.xiangxun.workorder.ui.biz.WorkOrderListener;
 import com.xiangxun.workorder.ui.fragment.DetailOrderFragment;
+import com.xiangxun.workorder.ui.fragment.SearchWorkOrderDialogFragment;
 import com.xiangxun.workorder.ui.main.TourActivity;
 import com.xiangxun.workorder.ui.main.WorkOrderActivity;
 import com.xiangxun.workorder.widget.loading.ShowLoading;
@@ -53,7 +54,7 @@ public class WorkOrderPresenter {
                     context.startActivity(new Intent(context, TourActivity.class));
                 } else {
                     DLog.i("搜索按钮点击，跳转到搜索页面。在搜索页面中显示搜索结果");
-                    DetailOrderFragment.SearchWorkOrderDialogFragment dialog = new DetailOrderFragment.SearchWorkOrderDialogFragment();
+                    SearchWorkOrderDialogFragment dialog = new SearchWorkOrderDialogFragment();
                     dialog.show(((WorkOrderActivity) context).getFragmentManager(), "SearchWorkOrderDialogFragment");
                 }
                 break;

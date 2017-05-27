@@ -18,6 +18,7 @@ import com.xiangxun.workorder.bean.WorkOrderData;
 import com.xiangxun.workorder.ui.adapter.WorkOrderAdapter;
 import com.xiangxun.workorder.ui.biz.WorkOrderListener;
 import com.xiangxun.workorder.ui.fragment.DetailOrderFragment;
+import com.xiangxun.workorder.ui.fragment.SearchWorkOrderDialogFragment;
 import com.xiangxun.workorder.ui.presenter.WorkOrderPresenter;
 import com.xiangxun.workorder.widget.header.HeaderView;
 import com.xiangxun.workorder.widget.xlistView.XListView;
@@ -34,7 +35,7 @@ import java.util.List;
  * @TODO:修改V1(根据首页传递进来的参数来判断到底是什么列表,当然传递为空表示全部工单列表)
  */
 @ContentBinder(R.layout.activity_work_order)
-public class WorkOrderActivity extends BaseActivity implements View.OnClickListener, XListView.IXListViewListener, AdapterView.OnItemClickListener, WorkOrderListener.WorkOrderInterface, DetailOrderFragment.SearchWorkOrderDialogFragment.SearchListener {
+public class WorkOrderActivity extends BaseActivity implements View.OnClickListener, XListView.IXListViewListener, AdapterView.OnItemClickListener, WorkOrderListener.WorkOrderInterface, SearchWorkOrderDialogFragment.SearchListener {
 
     @ViewsBinder(R.id.id_work_order_header)
     private HeaderView header;

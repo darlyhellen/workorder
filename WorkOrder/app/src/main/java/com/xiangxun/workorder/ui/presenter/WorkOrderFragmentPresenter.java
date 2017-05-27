@@ -11,6 +11,7 @@ import com.xiangxun.workorder.bean.WorkOrderRoot;
 import com.xiangxun.workorder.ui.biz.WorkOrderListener;
 import com.xiangxun.workorder.ui.fragment.DetailOrderFragment;
 import com.xiangxun.workorder.ui.fragment.FragmentWorkOrder;
+import com.xiangxun.workorder.ui.fragment.SearchWorkOrderDialogFragment;
 import com.xiangxun.workorder.widget.loading.ShowLoading;
 
 /**
@@ -46,7 +47,7 @@ public class WorkOrderFragmentPresenter {
                 break;
             case R.id.xw_share:
                 DLog.i("搜索按钮点击，跳转到搜索页面。在搜索页面中显示搜索结果");
-                DetailOrderFragment.SearchWorkOrderDialogFragment dialog = new DetailOrderFragment.SearchWorkOrderDialogFragment();
+                SearchWorkOrderDialogFragment dialog = new SearchWorkOrderDialogFragment();
                 dialog.show(context.getFragmentManager(), "SearchWorkOrderDialogFragment");
                 break;
             default:
