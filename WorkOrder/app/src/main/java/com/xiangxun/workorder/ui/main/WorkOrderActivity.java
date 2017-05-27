@@ -138,6 +138,8 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
             case 20:
                 //巡检页面工单列表
                 isTour = true;
+                workorder = "4";
+                presenter.getWorkOrderByPage(currentPage, workorder, devicename, devicenum, deviceip);
                 break;
             default:
                 break;
@@ -207,7 +209,7 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
         Intent intent = new Intent(this, WorkOrderDetailActivity.class);
         intent.putExtra("isTour", isTour);
         intent.putExtra("data", ds);
-        intent.putExtra("des",patrol.getListId());
+        intent.putExtra("des", patrol.getListId());
         startActivity(intent);
     }
 

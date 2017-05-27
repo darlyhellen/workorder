@@ -32,14 +32,21 @@ public class WorkOrderDetailActivity extends BaseActivity implements OnClickList
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        presenter = new WorkOrderDetailPresenter(this);
-        header.setTitle(R.string.st_tour_title);
-        header.setLeftBackgroundResource(R.mipmap.ic_title_back);
-        header.getTitleViewOperationText().setText(R.string.st_tour_commit);
         boolean isTour = getIntent().getBooleanExtra("isTour", false);
         int id = getIntent().getIntExtra("des", 0);
         WorkOrderData data = (WorkOrderData) getIntent().getSerializableExtra("data");
-        DLog.i(getClass().getSimpleName(), isTour + "\r\n" + id + "\r\n" + data);
+        DLog.i(getClass().getSimpleName(), isTour + "--" + id + "---" + data);
+        presenter = new WorkOrderDetailPresenter(this);
+        if (isTour) {
+            header.setTitle(R.string.st_tour_title_order);
+            header.setLeftBackgroundResource(R.mipmap.ic_title_back);
+            header.getTitleViewOperationText().setText(R.string.st_tour_commit);
+        }else {
+            header.setTitle(R.string.st_detail_title);
+            header.setLeftBackgroundResource(R.mipmap.ic_title_back);
+            header.getTitleViewOperationText().setText(R.string.st_tour_commit);
+        }
+
     }
 
     @Override
@@ -55,7 +62,7 @@ public class WorkOrderDetailActivity extends BaseActivity implements OnClickList
 
     @Override
     public void end() {
-
+        finish();
     }
 
     @Override

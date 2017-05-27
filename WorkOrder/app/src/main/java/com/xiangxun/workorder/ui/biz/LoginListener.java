@@ -110,10 +110,10 @@ public class LoginListener implements FramePresenter {
 
                         if (root != null && root.getStatus() == 1 && root.getData() != null) {
                             // 对其进行解析。当登录成功时
-                            SharePreferHelp.putValue(AppEnum.USERNAME.getDec(), username);
-                            SharePreferHelp.putValue(AppEnum.PASSWORD.getDec(), password);
-                            SharePreferHelp.putValue(AppEnum.USERID.getDec(), root.getData().getId());
-                        }
+                        SharePreferHelp.putValue(AppEnum.USERNAME.getDec(), username);
+                        SharePreferHelp.putValue(AppEnum.PASSWORD.getDec(), password);
+                        SharePreferHelp.putValue(AppEnum.USERID.getDec(), root.getData().getId());
+                    }
                         return root;
                     }
                 })

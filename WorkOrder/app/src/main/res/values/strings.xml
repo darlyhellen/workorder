@@ -73,6 +73,7 @@
 
     <!-- TourActivity-->
     <string name="st_tour_title">新增巡检工单</string>
+    <string name="st_tour_title_order">巡检工单详情</string>
     <string name="st_tour_commit">提交</string>
     <string name="description_hint">5~400字</string>
 
@@ -85,4 +86,7 @@
     <string name="st_search_deviceNum_hint">请输入设备编号</string>
     <string name="st_search_deviceIp">设备IP  :</string>
     <string name="st_search_deviceIp_hint">请输入设备IP</string>
+
+    <!--WorkOrderDetailActivity-->
+    <string name="st_detail_title">工单详情</string>
 </resources>

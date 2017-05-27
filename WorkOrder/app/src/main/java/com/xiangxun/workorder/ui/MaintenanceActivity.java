@@ -2,6 +2,7 @@ package com.xiangxun.workorder.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -103,4 +104,24 @@ public class MaintenanceActivity extends BaseActivity implements AdapterView.OnI
                 break;
         }
     }
+
+
+    private long time = 0;
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        // TODO Auto-generated method stub
+        if (KeyEvent.KEYCODE_BACK == keyCode) {
+            long dely = System.currentTimeMillis();
+            if (dely - time < 2000) {
+                System.exit(0);
+            } else {
+                ToastApp.showToast("再次点击退出程序");
+                time = dely;
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
 }

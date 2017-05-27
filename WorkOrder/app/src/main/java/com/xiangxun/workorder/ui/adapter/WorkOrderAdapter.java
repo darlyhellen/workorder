@@ -51,12 +51,12 @@ public class WorkOrderAdapter extends ParentAdapter<WorkOrderData> {
         if (TextUtils.isEmpty(workOrderData.status)) {
             hocker.id_tv_appraise_man.setVisibility(View.INVISIBLE);
         } else {
-            if ("闭合".equals(workOrderData.status)) {
+            if (!"0".equals(workOrderData.status)) {
                 hocker.id_tv_background.setShowDisplay(false);
                 hocker.id_tv_background.setBackgroundResource(R.drawable.app_login_shape);
             } else {
                 hocker.id_tv_background.setShowDisplay(true);
-                hocker.id_tv_background.setBackgroundResource(R.color.red02);
+                hocker.id_tv_background.setBackgroundResource(R.color.forgetpwd);
             }
             hocker.id_tv_appraise_man.setVisibility(View.VISIBLE);
             hocker.id_tv_appraise_man.setText(Tools.isEmpty(workOrderData.status));
