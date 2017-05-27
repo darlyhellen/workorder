@@ -1,11 +1,13 @@
 package com.xiangxun.workorder.ui.presenter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 
 import com.hellen.baseframe.common.dlog.DLog;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.ui.biz.WorkOrderDetailListener;
+import com.xiangxun.workorder.ui.main.LbsAmapActivity;
 
 /**
  * Created by Zhangyuhui/Darly on 2017/5/26.
@@ -33,7 +35,10 @@ public class WorkOrderDetailPresenter {
                 view.end();
                 break;
             case R.id.title_view_right_Flipper01:
-                DLog.i("点击提交");
+                DLog.i("点击位置");
+                Intent intent = new Intent(context, LbsAmapActivity.class);
+                intent.putExtra("data", view.getOrderData());
+                context.startActivity(intent);
                 break;
         }
     }

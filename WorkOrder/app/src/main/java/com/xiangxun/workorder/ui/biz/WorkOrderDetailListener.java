@@ -4,6 +4,7 @@ import android.app.Dialog;
 
 import com.hellen.baseframe.application.FramePresenter;
 import com.hellen.baseframe.application.FrameView;
+import com.xiangxun.workorder.bean.WorkOrderData;
 
 /**
  * Created by Zhangyuhui/Darly on 2017/5/17.
@@ -27,6 +28,9 @@ public class WorkOrderDetailListener implements FramePresenter {
 
 
     public interface WorkOrderDetailInterface extends FrameView {
+
+        WorkOrderData getOrderData();
+        
         void end();
     }
 }

@@ -30,4 +30,6 @@ public class WorkOrderData implements Serializable {
     public String telephone;
     public String assetid;
     public String isreassign;
+    public double latitude;
+    public double longitude;
 }

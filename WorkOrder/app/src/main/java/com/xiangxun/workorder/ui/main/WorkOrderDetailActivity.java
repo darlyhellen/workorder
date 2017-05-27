@@ -52,11 +52,13 @@ public class WorkOrderDetailActivity extends BaseActivity implements OnClickList
     private int[] titles = new int[]{R.string.st_detail_detal, R.string.st_detail_image, R.string.st_detail_position};
     private int[] titles_no = new int[]{R.string.st_detail_detal, R.string.st_detail_image};
 
+    private WorkOrderData data;
+
     @Override
     protected void initView(Bundle savedInstanceState) {
         boolean isTour = getIntent().getBooleanExtra("isTour", false);
         int id = getIntent().getIntExtra("des", 0);
-        WorkOrderData data = (WorkOrderData) getIntent().getSerializableExtra("data");
+        data = (WorkOrderData) getIntent().getSerializableExtra("data");
         DLog.i(getClass().getSimpleName(), isTour + "--" + id + "---" + data);
         presenter = new WorkOrderDetailPresenter(this);
         tab.setTabMode(TabLayout.MODE_FIXED);
@@ -94,11 +96,11 @@ public class WorkOrderDetailActivity extends BaseActivity implements OnClickList
         if (isTour) {
             header.setTitle(R.string.st_tour_title_order);
             header.setLeftBackgroundResource(R.mipmap.ic_title_back);
-            header.getTitleViewOperationText().setText(R.string.st_tour_commit);
+            header.getTitleViewOperationText().setText(R.string.st_detail_position);
         } else {
             header.setTitle(R.string.st_detail_title);
             header.setLeftBackgroundResource(R.mipmap.ic_title_back);
-            header.setRightBackgroundResource(0);
+            header.getTitleViewOperationText().setText(R.string.st_detail_position);
         }
         //创建适配器(这个适配器是自定义的，我用的是FragmentPagerAdapger，根据需求自定义吧)
         adapter = new ViewPagerAdapter(this, getSupportFragmentManager(), list, titles);
@@ -117,6 +119,11 @@ public class WorkOrderDetailActivity extends BaseActivity implements OnClickList
     @Override
     public void onClick(View v) {
         presenter.onClickDown(this, v);
+    }
+
+    @Override
+    public WorkOrderData getOrderData() {
+        return data;
     }
 
     @Override
