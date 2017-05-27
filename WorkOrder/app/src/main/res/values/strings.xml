@@ -78,7 +78,11 @@
 
 
     <!--SearchWorkOrderDIalogFragment-->
+    <string name="st_search_commit">搜索</string>
     <string name="st_search_deviceName">设备名称:</string>
+    <string name="st_search_deviceName_hint">请输入设备名称</string>
     <string name="st_search_deviceNum">设备编号:</string>
+    <string name="st_search_deviceNum_hint">请输入设备编号</string>
     <string name="st_search_deviceIp">设备IP  :</string>
+    <string name="st_search_deviceIp_hint">请输入设备IP</string>
 </resources>

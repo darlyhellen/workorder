@@ -75,7 +75,7 @@ public class SearchWorkOrderDialogFragment extends DialogFragment implements Vie
 
         header.setLeftBackgroundResource(R.mipmap.ic_title_back);
         header.setTitle(R.string.main_work_order_search);
-        header.getTitleViewOperationText().setText(R.string.st_tour_commit);
+        header.getTitleViewOperationText().setText(R.string.st_search_commit);
 
 
     }
@@ -108,12 +108,5 @@ public class SearchWorkOrderDialogFragment extends DialogFragment implements Vie
                 break;
         }
         dismiss();
-    }
-
-
-    @Override
-    public void dismiss() {
-        super.dismiss();
-        getActivity().overridePendingTransition(R.anim.activity_nothing, R.anim.activity_out_to_buttom);
     }
 }
