@@ -209,8 +209,11 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
         DLog.i("onItemClick--" + position);
         WorkOrderData ds = (WorkOrderData) parent.getItemAtPosition(position);
         Intent intent = new Intent(this, WorkOrderDetailActivity.class);
+        //是否是巡检工单
         intent.putExtra("isTour", isTour);
+        //工单详细信息
         intent.putExtra("data", ds);
+        //工单的id
         intent.putExtra("des", patrol.getListId());
         startActivity(intent);
     }

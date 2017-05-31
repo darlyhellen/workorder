@@ -63,9 +63,10 @@ public class LbsAmapActivity extends BaseActivity implements View.OnClickListene
         }
         if (getIntent() != null) {
             data = (WorkOrderData) getIntent().getSerializableExtra("data");
-            if (data == null) {
-                data = new WorkOrderData();
-                data.position = "ad";
+
+            if (AppEnum.TEST) {
+                //单独的测试数据,假数据.
+                data = AppEnum.getData();
             }
         }
         if (aMap != null) {
@@ -85,8 +86,10 @@ public class LbsAmapActivity extends BaseActivity implements View.OnClickListene
     private void addMarkersToMap() {
         if (data != null) {
             if (!TextUtils.isEmpty(data.position)) {
-                data.latitude = 34.164469;
-                data.longitude = 108.951279;
+                if (AppEnum.TEST) {
+                    data.latitude = 34.164469;
+                    data.longitude = 108.951279;
+                }
                 //108.951279,34.164469
                 latlng = new LatLng(data.latitude, data.longitude);
                 //这里进行视角，等参数调整。0度就是平面图

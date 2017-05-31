@@ -13,6 +13,7 @@ import com.hellen.baseframe.binder.ViewsBinder;
 import com.hellen.baseframe.common.dlog.DLog;
 import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.R;
+import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.base.BaseActivity;
 import com.xiangxun.workorder.bean.WorkOrderData;
 import com.xiangxun.workorder.ui.adapter.ViewPagerAdapter;
@@ -57,7 +58,11 @@ public class WorkOrderDetailActivity extends BaseActivity implements OnClickList
         boolean isTour = getIntent().getBooleanExtra("isTour", false);
         int id = getIntent().getIntExtra("des", 0);
         data = getIntent().getParcelableExtra("data");
-        data = presenter.getData();
+        if (AppEnum.TEST) {
+            //单独的测试数据,假数据.
+            data = AppEnum.getData();
+            header.getTitleViewOperationText().setText(R.string.st_detail_position);
+        }
         DLog.i(getClass().getSimpleName(), isTour + "--" + id + "---" + data);
 
         tab.setTabMode(TabLayout.MODE_FIXED);
@@ -95,11 +100,9 @@ public class WorkOrderDetailActivity extends BaseActivity implements OnClickList
         if (isTour) {
             header.setTitle(R.string.st_tour_title_order);
             header.setLeftBackgroundResource(R.mipmap.ic_title_back);
-            header.getTitleViewOperationText().setText(R.string.st_detail_position);
         } else {
             header.setTitle(R.string.st_detail_title);
             header.setLeftBackgroundResource(R.mipmap.ic_title_back);
-            header.getTitleViewOperationText().setText(R.string.st_detail_position);
         }
         //创建适配器(这个适配器是自定义的，我用的是FragmentPagerAdapger，根据需求自定义吧)
         adapter = new ViewPagerAdapter(this, getSupportFragmentManager(), list, titles);
