@@ -12,10 +12,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hellen.baseframe.binder.InitBinder;
-import com.hellen.baseframe.common.dlog.DLog;
+import com.hellen.baseframe.binder.ViewsBinder;
 import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.bean.WorkOrderData;
+import com.xiangxun.workorder.ui.biz.DetailOrderFragmentListener.DetailOrderFragmentInterface;
+import com.xiangxun.workorder.ui.presenter.DetailOrderFragmentPresenter;
 
 /**
  * Created by Zhangyuhui/Darly on 2017/5/27.
@@ -24,36 +26,63 @@ import com.xiangxun.workorder.bean.WorkOrderData;
  *
  * @TODO: 固态详情展示页面。
  */
-public class DetailOrderFragment extends Fragment implements OnClickListener {
+public class DetailOrderFragment extends Fragment implements OnClickListener, DetailOrderFragmentInterface {
     private View root;
 
     private WorkOrderData data;
 
+    @ViewsBinder(R.id.tv_content01)
     private TextView tvContent01;
+    @ViewsBinder(R.id.tv_content02)
     private TextView tvContent02;
+    @ViewsBinder(R.id.tv_content03)
     private TextView tvContent03;
+    @ViewsBinder(R.id.tv_content04)
     private TextView tvContent04;
+    @ViewsBinder(R.id.tv_content05)
     private TextView tvContent05;
+    @ViewsBinder(R.id.tv_content06)
     private TextView tvContent06;
+    @ViewsBinder(R.id.tv_content07)
     private TextView tvContent07;
+    @ViewsBinder(R.id.tv_content08)
     private TextView tvContent08;
+    @ViewsBinder(R.id.tv_content09)
     private TextView tvContent09;
+    @ViewsBinder(R.id.tv_content10)
     private TextView tvContent10;
+    @ViewsBinder(R.id.tv_content11)
     private TextView tvContent11;
+    @ViewsBinder(R.id.tv_content12)
     private TextView tvContent12;
+    @ViewsBinder(R.id.tv_content13)
     private TextView tvContent13;
+    @ViewsBinder(R.id.tv_content14)
     private TextView tvContent14;
+    @ViewsBinder(R.id.tv_content15)
     private TextView tvContent15;
+    @ViewsBinder(R.id.tv_content16)
     private TextView tvContent16;
+    @ViewsBinder(R.id.tv_content17)
     private TextView tvContent17;
+    @ViewsBinder(R.id.tv_content18)
     private TextView tvContent18;
+    @ViewsBinder(R.id.tv_content19)
     private TextView tvContent19;
+    @ViewsBinder(R.id.tv_content20)
     private TextView tvContent20;
+    @ViewsBinder(R.id.tv_content21)
     private TextView tvContent21;
+    @ViewsBinder(R.id.tv_content22)
     private TextView tvContent22;
+    @ViewsBinder(R.id.id_detail_fragment_button)
     private LinearLayout button;
+    @ViewsBinder(R.id.id_detail_fragment_config)
     private Button commit;
+    @ViewsBinder(R.id.id_detail_fragment_consel)
     private Button consel;
+
+    private DetailOrderFragmentPresenter presenter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -65,6 +94,7 @@ public class DetailOrderFragment extends Fragment implements OnClickListener {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        presenter = new DetailOrderFragmentPresenter(this);
         initView();
         initListener();
     }
@@ -76,31 +106,31 @@ public class DetailOrderFragment extends Fragment implements OnClickListener {
             ToastApp.showToast("页面数据错误");
             return;
         }
-        tvContent01 = (TextView) root.findViewById(R.id.tv_content01);
-        tvContent02 = (TextView) root.findViewById(R.id.tv_content02);
-        tvContent03 = (TextView) root.findViewById(R.id.tv_content03);
-        tvContent04 = (TextView) root.findViewById(R.id.tv_content04);
-        tvContent05 = (TextView) root.findViewById(R.id.tv_content05);
-        tvContent06 = (TextView) root.findViewById(R.id.tv_content06);
-        tvContent07 = (TextView) root.findViewById(R.id.tv_content07);
-        tvContent08 = (TextView) root.findViewById(R.id.tv_content08);
-        tvContent09 = (TextView) root.findViewById(R.id.tv_content09);
-        tvContent10 = (TextView) root.findViewById(R.id.tv_content10);
-        tvContent11 = (TextView) root.findViewById(R.id.tv_content11);
-        tvContent12 = (TextView) root.findViewById(R.id.tv_content12);
-        tvContent13 = (TextView) root.findViewById(R.id.tv_content13);
-        tvContent14 = (TextView) root.findViewById(R.id.tv_content14);
-        tvContent15 = (TextView) root.findViewById(R.id.tv_content15);
-        tvContent16 = (TextView) root.findViewById(R.id.tv_content16);
-        tvContent17 = (TextView) root.findViewById(R.id.tv_content17);
-        tvContent18 = (TextView) root.findViewById(R.id.tv_content18);
-        tvContent19 = (TextView) root.findViewById(R.id.tv_content19);
-        tvContent20 = (TextView) root.findViewById(R.id.tv_content20);
-        tvContent21 = (TextView) root.findViewById(R.id.tv_content21);
-        tvContent22 = (TextView) root.findViewById(R.id.tv_content22);
-        button = (LinearLayout) root.findViewById(R.id.id_detail_fragment_button);
-        commit = (Button) root.findViewById(R.id.id_detail_fragment_config);
-        consel = (Button) root.findViewById(R.id.id_detail_fragment_consel);
+//        tvContent01 = (TextView) root.findViewById(R.id.tv_content01);
+//        tvContent02 = (TextView) root.findViewById(R.id.tv_content02);
+//        tvContent03 = (TextView) root.findViewById(R.id.tv_content03);
+//        tvContent04 = (TextView) root.findViewById(R.id.tv_content04);
+//        tvContent05 = (TextView) root.findViewById(R.id.tv_content05);
+//        tvContent06 = (TextView) root.findViewById(R.id.tv_content06);
+//        tvContent07 = (TextView) root.findViewById(R.id.tv_content07);
+//        tvContent08 = (TextView) root.findViewById(R.id.tv_content08);
+//        tvContent09 = (TextView) root.findViewById(R.id.tv_content09);
+//        tvContent10 = (TextView) root.findViewById(R.id.tv_content10);
+//        tvContent11 = (TextView) root.findViewById(R.id.tv_content11);
+//        tvContent12 = (TextView) root.findViewById(R.id.tv_content12);
+//        tvContent13 = (TextView) root.findViewById(R.id.tv_content13);
+//        tvContent14 = (TextView) root.findViewById(R.id.tv_content14);
+//        tvContent15 = (TextView) root.findViewById(R.id.tv_content15);
+//        tvContent16 = (TextView) root.findViewById(R.id.tv_content16);
+//        tvContent17 = (TextView) root.findViewById(R.id.tv_content17);
+//        tvContent18 = (TextView) root.findViewById(R.id.tv_content18);
+//        tvContent19 = (TextView) root.findViewById(R.id.tv_content19);
+//        tvContent20 = (TextView) root.findViewById(R.id.tv_content20);
+//        tvContent21 = (TextView) root.findViewById(R.id.tv_content21);
+//        tvContent22 = (TextView) root.findViewById(R.id.tv_content22);
+//        button = (LinearLayout) root.findViewById(R.id.id_detail_fragment_button);
+//        commit = (Button) root.findViewById(R.id.id_detail_fragment_config);
+//        consel = (Button) root.findViewById(R.id.id_detail_fragment_consel);
         if ("0".equals(data.status)) {
             button.setVisibility(View.VISIBLE);
             commit.setOnClickListener(this);
@@ -142,6 +172,21 @@ public class DetailOrderFragment extends Fragment implements OnClickListener {
 
     @Override
     public void onClick(View v) {
-        DLog.i(v);
+        presenter.onClickDown(getActivity(), v);
+    }
+
+    @Override
+    public String getDataID() {
+        return data.id;
+    }
+
+    @Override
+    public void setDisableClick() {
+
+    }
+
+    @Override
+    public void setEnableClick() {
+
     }
 }
