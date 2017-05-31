@@ -10,6 +10,7 @@ import com.hellen.baseframe.common.db.DBControler;
 import com.hellen.baseframe.common.dlog.DLog;
 import com.hellen.baseframe.common.obsinfo.ConApp;
 import com.xiangxun.workorder.BuildConfig;
+import com.xiangxun.workorder.common.Aset;
 
 import java.io.File;
 
@@ -52,6 +53,7 @@ public class APP extends FrameAPP {
             initStrictMode();
         }
         DBControler.getInstance(this).init();
+
     }
 
     /**
@@ -81,6 +83,22 @@ public class APP extends FrameAPP {
         File boot = new File(AppEnum.ROOT);
         if (!boot.exists()) {
             boot.mkdir();
+        }
+        File cacch = new File(AppEnum.CACTH);
+        if (!cacch.exists()) {
+            cacch.mkdir();
+        }
+        File dos = new File(AppEnum.DOWNS);
+        if (!dos.exists()) {
+            dos.mkdir();
+        }
+        File da = new File(AppEnum.DATA);
+        if (!da.exists()) {
+            da.mkdir();
+        }
+        File map = new File(AppEnum.MAP);
+        if (!map.exists()) {
+            map.mkdir();
         }
         File main = new File(AppEnum.MAINRADIO);
         if (!main.exists()) {

@@ -97,7 +97,7 @@ public class SetPresenter {
         dialg.setOndialogListener(new OndialogListener() {
             @Override
             public void onSureClick() {
-                RecursionDeleteFile(new File(AppEnum.ROOT));
+                RecursionDeleteFile(new File(AppEnum.CACTH));
                 APP.getInstance().creatFile();
                 findFileSize();
             }

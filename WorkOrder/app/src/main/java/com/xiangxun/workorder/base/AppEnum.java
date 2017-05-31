@@ -26,15 +26,23 @@ public enum AppEnum {
 
     public static final String ROOT = Environment.getExternalStorageDirectory().getAbsolutePath() + "/WorkOrder/";
 
-    public static final String MAINRADIO = ROOT + "mainimage/";
+    public static final String CACTH = ROOT + "cache/";
 
-    public static final String IMAGE = ROOT + "image/";
+    public static final String DOWNS = ROOT + "local/";
 
-    public static final String LOG = ROOT + "log/";
+    public static final String DATA = DOWNS + "data/";
+    
+    public static final String MAP = DATA + "map/";
 
-    public static final String DOWN = ROOT + "down/";
+    public static final String MAINRADIO = CACTH + "mainimage/";
 
-    public static final String VIDEO = ROOT + "video/";
+    public static final String IMAGE = CACTH + "image/";
+
+    public static final String LOG = CACTH + "log/";
+
+    public static final String DOWN = CACTH + "down/";
+
+    public static final String VIDEO = CACTH + "video/";
 
 
     public static String capUri;

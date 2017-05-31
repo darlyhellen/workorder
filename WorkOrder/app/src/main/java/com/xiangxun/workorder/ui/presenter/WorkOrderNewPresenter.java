@@ -2,6 +2,7 @@ package com.xiangxun.workorder.ui.presenter;
 
 import com.hellen.baseframe.application.FrameListener;
 import com.xiangxun.workorder.base.StaticListener;
+import com.xiangxun.workorder.bean.NewServiceRoot;
 import com.xiangxun.workorder.bean.WorkOrderRoot;
 import com.xiangxun.workorder.ui.biz.WorkOrderNewListener;
 
@@ -22,10 +23,10 @@ public class WorkOrderNewPresenter {
 
 
     public void refreshMainIcon() {
-        biz.getWorkOrder(1, "6", null, null, null, new FrameListener<WorkOrderRoot>() {
+        biz.getWorkOrder(new FrameListener<NewServiceRoot>() {
             @Override
-            public void onSucces(WorkOrderRoot workOrderRoot) {
-                StaticListener.getInstance().getRefreshMainUIListener().refreshMainUI(workOrderRoot.getData().size());
+            public void onSucces(NewServiceRoot workOrderRoot) {
+                StaticListener.getInstance().getRefreshMainUIListener().refreshMainUI(workOrderRoot.getData());
             }
 
             @Override
