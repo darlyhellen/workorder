@@ -5,7 +5,6 @@ import android.text.TextUtils;
 import android.view.View;
 
 import com.amap.api.maps.AMap;
-import com.amap.api.maps.AMapException;
 import com.amap.api.maps.CameraUpdate;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.MapView;
@@ -14,8 +13,6 @@ import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.CameraPosition;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.MarkerOptions;
-import com.amap.api.maps.offlinemap.OfflineMapManager;
-import com.amap.api.maps.offlinemap.OfflineMapManager.OfflineMapDownloadListener;
 import com.hellen.baseframe.binder.ContentBinder;
 import com.hellen.baseframe.binder.ViewsBinder;
 import com.hellen.baseframe.common.dlog.DLog;
@@ -34,7 +31,7 @@ import com.xiangxun.workorder.widget.header.HeaderView;
  * @TODO: 高德地图测试页面
  */
 @ContentBinder(R.layout.activity_lbs_amap_marker)
-public class LbsAmapActivity extends BaseActivity implements View.OnClickListener, OfflineMapDownloadListener {
+public class LbsAmapActivity extends BaseActivity implements View.OnClickListener {
     @ViewsBinder(R.id.id_lbs_amap_title)
     private HeaderView header;
     @ViewsBinder(R.id.id_lbs_amap_map)
@@ -62,7 +59,7 @@ public class LbsAmapActivity extends BaseActivity implements View.OnClickListene
 
         if (aMap == null) {
             aMap = mapView.getMap();
-            aMap.setMapType(AMap.MAP_TYPE_NIGHT);
+            aMap.setMapType(AMap.MAP_TYPE_NORMAL);
         }
         if (getIntent() != null) {
             data = (WorkOrderData) getIntent().getSerializableExtra("data");
@@ -75,15 +72,6 @@ public class LbsAmapActivity extends BaseActivity implements View.OnClickListene
             addMarkersToMap();// 往地图上添加marker
         }
 
-//
-//        //构造OfflineMapManager对象
-//        OfflineMapManager amapManager = new OfflineMapManager(this, this);
-//        //按照citycode下载
-//        try {
-//            amapManager.downloadByCityName("西安市");
-//        } catch (AMapException e) {
-//            e.printStackTrace();
-//        }
     }
 
     @Override
@@ -101,9 +89,10 @@ public class LbsAmapActivity extends BaseActivity implements View.OnClickListene
                 data.longitude = 108.951279;
                 //108.951279,34.164469
                 latlng = new LatLng(data.latitude, data.longitude);
+                //这里进行视角，等参数调整。0度就是平面图
                 changeCamera(
                         CameraUpdateFactory.newCameraPosition(new CameraPosition(
-                                latlng, 18, 30, 0)));
+                                latlng, 14, 0, 0)));
                 aMap.clear();
                 aMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory
                         .defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
@@ -179,20 +168,5 @@ public class LbsAmapActivity extends BaseActivity implements View.OnClickListene
             default:
                 break;
         }
-    }
-
-    @Override
-    public void onDownload(int i, int i1, String s) {
-        DLog.i(getClass().getSimpleName(), "onDownload--" + i + "---" + i1 + "---" + s);
-    }
-
-    @Override
-    public void onCheckUpdate(boolean b, String s) {
-
-    }
-
-    @Override
-    public void onRemove(boolean b, String s, String s1) {
-
     }
 }
