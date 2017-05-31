@@ -2,7 +2,6 @@ package com.xiangxun.workorder.ui.biz;
 
 import android.app.Dialog;
 import android.os.AsyncTask;
-import android.os.Message;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -15,8 +14,6 @@ import com.xiangxun.workorder.base.APP;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.bean.SetModel;
 import com.xiangxun.workorder.bean.VersionRoot;
-import com.xiangxun.workorder.bean.WorkOrderData;
-import com.xiangxun.workorder.bean.WorkOrderRoot;
 import com.xiangxun.workorder.common.retrofit.RxjavaRetrofitRequestUtil;
 import com.xiangxun.workorder.common.urlencode.Tools;
 

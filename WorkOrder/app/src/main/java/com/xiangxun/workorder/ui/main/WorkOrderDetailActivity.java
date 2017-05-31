@@ -13,16 +13,13 @@ import com.hellen.baseframe.binder.ViewsBinder;
 import com.hellen.baseframe.common.dlog.DLog;
 import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.R;
-import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.base.BaseActivity;
 import com.xiangxun.workorder.bean.WorkOrderData;
 import com.xiangxun.workorder.ui.adapter.ViewPagerAdapter;
-import com.xiangxun.workorder.ui.biz.WorkOrderDetailListener;
 import com.xiangxun.workorder.ui.biz.WorkOrderDetailListener.WorkOrderDetailInterface;
 import com.xiangxun.workorder.ui.fragment.DetailImageFragment;
 import com.xiangxun.workorder.ui.fragment.DetailLbsAmapFragment;
 import com.xiangxun.workorder.ui.fragment.DetailOrderFragment;
-import com.xiangxun.workorder.ui.presenter.TourPresenter;
 import com.xiangxun.workorder.ui.presenter.WorkOrderDetailPresenter;
 import com.xiangxun.workorder.widget.header.HeaderView;
 
@@ -56,11 +53,13 @@ public class WorkOrderDetailActivity extends BaseActivity implements OnClickList
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+        presenter = new WorkOrderDetailPresenter(this);
         boolean isTour = getIntent().getBooleanExtra("isTour", false);
         int id = getIntent().getIntExtra("des", 0);
-        data = (WorkOrderData) getIntent().getSerializableExtra("data");
+        data = getIntent().getParcelableExtra("data");
+        data = presenter.getData();
         DLog.i(getClass().getSimpleName(), isTour + "--" + id + "---" + data);
-        presenter = new WorkOrderDetailPresenter(this);
+
         tab.setTabMode(TabLayout.MODE_FIXED);
         tab.setTabGravity(TabLayout.GRAVITY_FILL);
         tab.setTabTextColors(R.color.text_color, R.color.blue_btn_bg_color);
@@ -69,7 +68,7 @@ public class WorkOrderDetailActivity extends BaseActivity implements OnClickList
             return;
         }
         Bundle bundle = new Bundle();
-        bundle.putSerializable("data", data);
+        bundle.putParcelable("data", data);
         DetailOrderFragment order = new DetailOrderFragment();
         order.setArguments(bundle);
         list.add(order);

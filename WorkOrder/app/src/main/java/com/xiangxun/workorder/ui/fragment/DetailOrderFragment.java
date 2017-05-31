@@ -101,7 +101,7 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
 
 
     private void initView() {
-        data = (WorkOrderData) getActivity().getIntent().getSerializableExtra("data");
+        data =  getArguments().getParcelable("data");
         if (data == null) {
             ToastApp.showToast("页面数据错误");
             return;
