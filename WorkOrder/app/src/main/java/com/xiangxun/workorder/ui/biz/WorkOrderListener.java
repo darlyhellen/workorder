@@ -54,7 +54,7 @@ public class WorkOrderListener implements FramePresenter {
             dialog.show();
     }
 
-    public void getWorkOrder(int page, int status, String devicename, String devicecode, String deviceip, final FrameListener<WorkOrderRoot> listener) {
+    public void getWorkOrder(int page, String status, String devicename, String devicecode, String deviceip, final FrameListener<WorkOrderRoot> listener) {
 
         if (!APP.isNetworkConnected(APP.getInstance())) {
             listener.onFaild(0, "网络异常,请检查网络");

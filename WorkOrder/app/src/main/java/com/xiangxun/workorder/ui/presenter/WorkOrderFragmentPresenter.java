@@ -61,7 +61,7 @@ public class WorkOrderFragmentPresenter {
         }
     }
 
-    public void getWorkOrderByPage(int page, int status, String devicename, String devicecode, String deviceip) {
+    public void getWorkOrderByPage(int page, String status, String devicename, String devicecode, String deviceip) {
 
         biz.onStart(loading);
 

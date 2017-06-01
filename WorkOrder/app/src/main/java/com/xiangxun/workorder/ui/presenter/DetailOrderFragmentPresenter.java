@@ -40,15 +40,15 @@ public class DetailOrderFragmentPresenter {
     public void onClickDown(Context context, View v) {
         switch (v.getId()) {
             case R.id.id_detail_fragment_config:
-                getData(1, view.getDataID());
+                getData("1", view.getDataID());
                 break;
             case R.id.id_detail_fragment_consel:
-                getData(2, view.getDataID());
+                getData("2", view.getDataID());
                 break;
         }
     }
 
-    private void getData(int status, String id) {
+    private void getData(String status, String id) {
         biz.onStart(loading);
         view.setDisableClick();
         biz.commitConsel(status, id, view.getReason(), new FrameListener<DetailChangeRoot>() {
