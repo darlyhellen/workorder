@@ -13,9 +13,18 @@ import com.hellen.baseframe.common.dlog.DLog;
 import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.base.APP;
 import com.xiangxun.workorder.bean.DetailChangeRoot;
+import com.xiangxun.workorder.bean.WorkOrderData;
 import com.xiangxun.workorder.bean.WorkOrderRoot;
 import com.xiangxun.workorder.common.retrofit.RxjavaRetrofitRequestUtil;
+import com.xiangxun.workorder.common.urlencode.Tools;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.List;
+
+import okhttp3.RequestBody;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
@@ -39,6 +48,10 @@ public class DetailOrderFragmentListener implements FramePresenter {
         String getDataID();
 
         String getReason();
+
+        int getStatus();
+
+        List<String> getUrls();
     }
 
 
@@ -61,6 +74,80 @@ public class DetailOrderFragmentListener implements FramePresenter {
         }
         //在这里进行数据请求
         RxjavaRetrofitRequestUtil.getInstance().get().getOrder(status, id, reason).
+                subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map(new Func1<JsonObject, DetailChangeRoot>() {
+                    @Override
+                    public DetailChangeRoot call(JsonObject jsonObject) {
+                        DLog.json("Func1", jsonObject.toString());
+                        return new Gson().fromJson(jsonObject.toString(), new TypeToken<DetailChangeRoot>() {
+                        }.getType());
+                    }
+                })
+                .subscribe(new Observer<DetailChangeRoot>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        listener.onFaild(1, e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(DetailChangeRoot data) {
+                        if (data != null) {
+                            if (data.getStatus() == 1) {
+                                listener.onSucces(data);
+                            } else {
+                                listener.onFaild(0, data.getMessage());
+                            }
+                        } else {
+                            listener.onFaild(0, "解析错误");
+                        }
+                    }
+                });
+    }
+
+
+    public void upDataOrder(String status, String id, String reason, List<String> urls, final FrameListener<DetailChangeRoot> listener) {
+
+        if (!APP.isNetworkConnected(APP.getInstance())) {
+            listener.onFaild(0, "网络异常,请检查网络");
+            return;
+        }
+        if (TextUtils.isEmpty(reason)) {
+            listener.onFaild(0, "上报工单说明不能为空");
+            return;
+        }
+        if (urls == null) {
+            listener.onFaild(0, "上传图片不能为空");
+            return;
+        }
+        if (urls.size() == 0) {
+            listener.onFaild(0, "上传图片不能为空");
+            return;
+        }
+        JSONObject ob = new JSONObject();
+        try {
+            ob.put("status", status);
+            ob.put("id", id);
+
+
+            JSONArray array = new JSONArray();
+            for (String st: urls) {
+                array.put(st);
+            }
+            ob.put("urls",array);
+        } catch (JSONException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json;charset=UTF-8"), ob.toString());
+
+        //在这里进行数据请求
+        RxjavaRetrofitRequestUtil.getInstance().post().upDataOrder(body).
                 subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(new Func1<JsonObject, DetailChangeRoot>() {

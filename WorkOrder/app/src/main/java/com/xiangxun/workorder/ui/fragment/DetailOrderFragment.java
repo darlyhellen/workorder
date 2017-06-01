@@ -21,6 +21,9 @@ import com.xiangxun.workorder.common.WorkOrderUtils;
 import com.xiangxun.workorder.ui.biz.DetailOrderFragmentListener.DetailOrderFragmentInterface;
 import com.xiangxun.workorder.ui.presenter.DetailOrderFragmentPresenter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Zhangyuhui/Darly on 2017/5/27.
  * Copyright by [Zhangyuhui/Darly]
@@ -114,25 +117,38 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
         }
         switch (data.status) {
             case 0:
+                //派工的状态(接收工单，退回工单)
                 button.setVisibility(View.VISIBLE);
                 close.setVisibility(View.GONE);
                 except.setVisibility(View.GONE);
+                commit.setText("接收工单");
+                consel.setText("退回工单");
+                break;
+            case 1:
+                //已接收的状态(异常上报,正常上报)
+                button.setVisibility(View.VISIBLE);
+                except.setVisibility(View.GONE);
+                close.setVisibility(View.GONE);
+                commit.setText("正常上报");
+                consel.setText("异常上报");
                 break;
             case 5:
+                //遗留的状态
                 button.setVisibility(View.GONE);
                 except.setVisibility(View.VISIBLE);
                 close.setVisibility(View.GONE);
                 break;
             case 6:
+                //关闭的状态
                 button.setVisibility(View.GONE);
                 except.setVisibility(View.GONE);
                 close.setVisibility(View.VISIBLE);
                 break;
-            case 1:
             case 2:
             case 3:
             case 4:
             case 7:
+                //其他的状态
                 button.setVisibility(View.GONE);
                 except.setVisibility(View.GONE);
                 close.setVisibility(View.GONE);
@@ -162,17 +178,26 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
         } else {
             tvContent11.setText("是");
         }
-        tvContent12.setText(data.isreassign);
-        tvContent13.setText(data.isleave);
+        if ("0".equals(data.isreassign)) {
+            tvContent12.setText("否");
+        } else {
+            tvContent12.setText("是");
+        }
+
+        if ("0".equals(data.isleave)) {
+            tvContent13.setText("否");
+        } else {
+            tvContent13.setText("是");
+        }
         tvContent14.setText(data.messages);
 
         //异常状态
-        tvContent15.setText("");
+        tvContent15.setText(data.exceptionid);
         tvContent16.setText("");
         tvContent17.setText("");
         // 关闭情况
-        tvContent18.setText("");
-        tvContent19.setText("");
+        tvContent18.setText(data.offaccount);
+        tvContent19.setText(data.offtime);
         tvContent20.setText("");
         tvContent21.setText("");
     }
@@ -207,6 +232,20 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
     @Override
     public String getReason() {
         return reason.getText().toString().trim();
+    }
+
+    @Override
+    public int getStatus() {
+        return data.status;
+    }
+
+
+
+    @Override
+    public List<String> getUrls() {
+        List<String> url = new ArrayList<String>();
+        url.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1496297482491&di=7d96614c976b59569a4b415c5f118dad&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F13%2F96%2F55%2F16n58PICUMI_1024.jpg");
+        return url;
     }
 
     @Override

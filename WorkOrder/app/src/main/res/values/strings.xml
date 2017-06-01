@@ -119,5 +119,5 @@
     <string name="st_detail_own">关闭时间:</string>
     <string name="st_detail_back_declare"> </string>
     <string name="project_remark">备&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;注:</string>
-    <string name="st_detail_update_time">接收/退工说明:</string>
+    <string name="st_detail_update_time">说明:</string>
 </resources>

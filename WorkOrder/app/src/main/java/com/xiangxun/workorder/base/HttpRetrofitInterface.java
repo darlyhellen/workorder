@@ -2,6 +2,7 @@ package com.xiangxun.workorder.base;
 
 import com.google.gson.JsonObject;
 
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.RequestBody;
@@ -58,6 +59,13 @@ public interface HttpRetrofitInterface {
      */
     @GET("server/workorder/change/status/")
     Observable<JsonObject> getOrder(@Query("status") String status, @Query("id") String id, @Query("reason") String reason);
+
+    /**
+     * @param status id
+     * @TODO:上報工單接口
+     */
+    @POST("server/workorder/")
+    Observable<JsonObject> upDataOrder(@Body RequestBody args);
 
     /**
      * @param version

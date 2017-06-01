@@ -2,6 +2,7 @@
 <com.xiangxun.workorder.widget.scroll.WholeScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/divider"
     android:fillViewport="false"
     android:scrollbars="none">
 
@@ -17,9 +18,9 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_padding10"
-            android:layout_marginBottom="@dimen/margin_padding10"
             android:background="@drawable/business_detai_background"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="@dimen/margin_padding5">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -32,7 +33,6 @@
                 android:id="@+id/tv_declare"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_padding8"
                 android:background="@drawable/app_login_shape"
                 android:gravity="top"
                 android:minLines="4"
@@ -49,14 +49,20 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@drawable/btn_selecter_user"
+                    android:background="@drawable/xw_listview_item_selector"
                     android:text="接收" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/wel_back_color" />
 
                 <Button
                     android:id="@+id/id_detail_fragment_consel"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="@drawable/xw_listview_item_selector"
                     android:text="拒绝" />
             </TableRow>
         </LinearLayout>
