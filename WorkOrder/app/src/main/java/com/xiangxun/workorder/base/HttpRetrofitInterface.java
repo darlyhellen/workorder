@@ -44,7 +44,7 @@ public interface HttpRetrofitInterface {
      * @TODO:用户工单查询GET接口，传递参数为<b>page,map</b>
      */
     @GET("server/workorder/refer/details/")
-    Observable<JsonObject> getWorkOrder(@Query("pageNo") int page, @Query("status") String status, @Query("devicename") String devicename, @Query("devicecode") String devicecode, @Query("deviceip") String deviceip);
+    Observable<JsonObject> getWorkOrder(@Query("pageNo") int page, @Query("status") int status, @Query("devicename") String devicename, @Query("devicecode") String devicecode, @Query("deviceip") String deviceip);
 
     /**
      * @TODO:服务更新接口
@@ -57,7 +57,7 @@ public interface HttpRetrofitInterface {
      * @TODO:是否接收处理订单的接口
      */
     @GET("server/workorder/change/status/")
-    Observable<JsonObject> getOrder(@Query("status") String status, @Query("id") String id, @Query("reason") String reason);
+    Observable<JsonObject> getOrder(@Query("status") int status, @Query("id") String id, @Query("reason") String reason);
 
     /**
      * @param version

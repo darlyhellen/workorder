@@ -63,8 +63,6 @@ public class WorkOrderDetailActivity extends BaseActivity implements OnClickList
             data = AppEnum.getData();
             header.getTitleViewOperationText().setText(R.string.st_detail_position);
         }
-        DLog.i(getClass().getSimpleName(), isTour + "--" + id + "---" + data);
-
         tab.setTabMode(TabLayout.MODE_FIXED);
         tab.setTabGravity(TabLayout.GRAVITY_FILL);
         tab.setTabTextColors(R.color.text_color, R.color.blue_btn_bg_color);
@@ -81,7 +79,7 @@ public class WorkOrderDetailActivity extends BaseActivity implements OnClickList
         image.setArguments(bundle);
         list.add(image);
 
-        if (data.contact != null /*&& data.坐标参数*/) {
+        if (data.longitude != 0 && data.latitude != 0) {
             //有坐标
             for (int i = 0; i < titles.length; i++) {
                 //设置未选中和选中时字体的颜色

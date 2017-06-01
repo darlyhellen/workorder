@@ -94,34 +94,25 @@ public class DetailLbsAmapFragment extends Fragment {
      */
     private void addMarkersToMap() {
         if (data != null) {
-            if (!TextUtils.isEmpty(data.position)) {
-
-
-                if (AppEnum.TEST) {
-                    data.latitude = 34.164469;
-                    data.longitude = 108.951279;
-                }
-                if (data.latitude == 0) {
-                    data.latitude = 34.164469;
-                    data.longitude = 108.951279;
-                }
-                //108.951279,34.164469
-                latlng = new LatLng(data.latitude, data.longitude);
-                //这里进行视角，等参数调整。0度就是平面图
-                changeCamera(
-                        CameraUpdateFactory.newCameraPosition(new CameraPosition(
-                                latlng, 14, 0, 0)));
-                aMap.clear();
-                aMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory
-                        .defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
-                        .position(latlng)
-                        .draggable(true));
-            } else {
-                aMap.clear();
-                aMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory
-                        .defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
-                        .draggable(true));
+            if (AppEnum.TEST) {
+                data.latitude = 34.164469;
+                data.longitude = 108.951279;
             }
+            if (data.latitude == 0 || data.longitude == 0) {
+                //108.951279,34.164469
+                data.latitude = 34.164469;
+                data.longitude = 108.951279;
+            }
+            latlng = new LatLng(data.latitude, data.longitude);
+            //这里进行视角，等参数调整。0度就是平面图
+            changeCamera(
+                    CameraUpdateFactory.newCameraPosition(new CameraPosition(
+                            latlng, 14, 0, 0)));
+            aMap.clear();
+            aMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory
+                    .defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+                    .position(latlng)
+                    .draggable(true));
         } else {
             aMap.clear();
             aMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory

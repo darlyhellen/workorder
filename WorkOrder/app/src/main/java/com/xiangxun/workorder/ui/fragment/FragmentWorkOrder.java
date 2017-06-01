@@ -94,7 +94,7 @@ public class FragmentWorkOrder extends Fragment implements View.OnClickListener,
         map = new HashMap<String, String>();
         if (titles == 0) {
             header.setTitle(R.string.main_work_order);
-            presenter.getWorkOrderByPage(currentPage, null, null, null, null);
+            presenter.getWorkOrderByPage(currentPage, 100, null, null, null);
         } else {
             //根据传递过来的参数,进行页面分类整理.请求不同的接口,
             header.setTitle(titles);
@@ -116,7 +116,7 @@ public class FragmentWorkOrder extends Fragment implements View.OnClickListener,
                 break;
             case R.string.main_work_order_all:
                 //请求全部的接口
-                presenter.getWorkOrderByPage(currentPage, null, null, null, null);
+                presenter.getWorkOrderByPage(currentPage, 100, null, null, null);
                 break;
             default:
                 break;
@@ -143,7 +143,7 @@ public class FragmentWorkOrder extends Fragment implements View.OnClickListener,
     public void onRefresh(View v) {
         currentPage = 1;
         listState = AppEnum.LISTSTATEREFRESH;
-        presenter.getWorkOrderByPage(currentPage, null, null, null, null);
+        presenter.getWorkOrderByPage(currentPage, 100, null, null, null);
     }
 
     @Override
@@ -154,7 +154,7 @@ public class FragmentWorkOrder extends Fragment implements View.OnClickListener,
         } else {
             currentPage++;
             listState = AppEnum.LISTSTATELOADMORE;
-            presenter.getWorkOrderByPage(currentPage, null, null, null, null);
+            presenter.getWorkOrderByPage(currentPage, 100, null, null, null);
         }
     }
 
@@ -253,6 +253,6 @@ public class FragmentWorkOrder extends Fragment implements View.OnClickListener,
         devicename = name;
         devicenum = num;
         deviceip = ip;
-        presenter.getWorkOrderByPage(currentPage, null, name, num, ip);
+        presenter.getWorkOrderByPage(currentPage, 100, name, num, ip);
     }
 }

@@ -38,7 +38,22 @@ public class WorkOrderData implements Parcelable {
     public String orgid;
     public String reason;
     public String note;
-
+    //	联系人
+    public String contactname;
+    //所属部门
+    public String orgname;
+    //建设服务厂商
+    public String companyname;
+    //经度
+    public String mapx;
+    //纬度
+    public String mapy;
+    //图片1
+    public String photo1;
+    //图片2
+    public String photo2;
+    //图片3
+    public String photo3;
 
     public double latitude;
     public double longitude;
@@ -72,6 +87,14 @@ public class WorkOrderData implements Parcelable {
         orgid = in.readString();
         reason = in.readString();
         note = in.readString();
+        contactname = in.readString();
+        orgname = in.readString();
+        companyname = in.readString();
+        mapx = in.readString();
+        mapy = in.readString();
+        photo1 = in.readString();
+        photo2 = in.readString();
+        photo3 = in.readString();
         latitude = in.readDouble();
         longitude = in.readDouble();
     }
@@ -106,6 +129,16 @@ public class WorkOrderData implements Parcelable {
         dest.writeString(orgid);
         dest.writeString(reason);
         dest.writeString(note);
+
+        dest.writeString(contactname);
+        dest.writeString(orgname);
+        dest.writeString(companyname);
+        dest.writeString(mapx);
+        dest.writeString(mapy);
+        dest.writeString(photo1);
+        dest.writeString(photo2);
+        dest.writeString(photo3);
+
         dest.writeDouble(latitude);
         dest.writeDouble(longitude);
     }

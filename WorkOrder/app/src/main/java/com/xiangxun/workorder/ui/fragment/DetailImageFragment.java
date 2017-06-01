@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,9 +56,21 @@ public class DetailImageFragment extends Fragment implements OnItemClickListener
         data = getArguments().getParcelable("data");
         if (data != null) {
             List<String> urls = new ArrayList<String>();
-            urls.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1496297482491&di=7d96614c976b59569a4b415c5f118dad&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F13%2F96%2F55%2F16n58PICUMI_1024.jpg");
-            urls.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1496297511916&di=6fbb9547469e3cd8b6e2c5671305022f&imgtype=jpg&src=http%3A%2F%2Fimg1.imgtn.bdimg.com%2Fit%2Fu%3D1533961963%2C371326385%26fm%3D214%26gp%3D0.jpg");
-            urls.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1496297482490&di=eb4b3affb728f76ca1e82e5b7331f222&imgtype=0&src=http%3A%2F%2Fkyys.zj.cn%2FDocuments%2F5e692ec5-ebef-440c-8575-c0e32a5ec7ca%2FInstruments%2F20140926_092222%25281%2529.jpg");
+            if (TextUtils.isEmpty(data.photo1)) {
+                urls.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1496297482491&di=7d96614c976b59569a4b415c5f118dad&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F13%2F96%2F55%2F16n58PICUMI_1024.jpg");
+            } else {
+                urls.add(data.photo1);
+            }
+            if (TextUtils.isEmpty(data.photo2)) {
+                urls.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1496297511916&di=6fbb9547469e3cd8b6e2c5671305022f&imgtype=jpg&src=http%3A%2F%2Fimg1.imgtn.bdimg.com%2Fit%2Fu%3D1533961963%2C371326385%26fm%3D214%26gp%3D0.jpg");
+            } else {
+                urls.add(data.photo2);
+            }
+            if (TextUtils.isEmpty(data.photo3)) {
+                urls.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1496297482490&di=eb4b3affb728f76ca1e82e5b7331f222&imgtype=0&src=http%3A%2F%2Fkyys.zj.cn%2FDocuments%2F5e692ec5-ebef-440c-8575-c0e32a5ec7ca%2FInstruments%2F20140926_092222%25281%2529.jpg");
+            } else {
+                urls.add(data.photo3);
+            }
             gridView.setAdapter(new DetailImageFragmentAdapter(urls, R.layout.item_fragment_detail_image, getActivity()));
         }
     }

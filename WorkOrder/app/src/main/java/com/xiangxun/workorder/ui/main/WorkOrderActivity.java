@@ -55,7 +55,7 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
     private int currentPage = 1;
     private int PageSize = 10;
     private int totalSize = 0;
-    private String workorder;
+    private int workorder;
     private String devicename;
     private String devicenum;
     private String deviceip;
@@ -110,35 +110,35 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
             case 1:
                 // 新工單(工单接收)根據接口規則。传递第二个参数为字符串0；
                 isTour = false;
-                workorder = "0";
+                workorder = 0;
                 textDes = "没有新的工单！";
                 presenter.getWorkOrderByPage(currentPage, workorder, devicename, devicenum, deviceip);
                 break;
             case 2:
                 //完成的工单
                 isTour = false;
-                workorder = "6";
+                workorder = 6;
                 textDes = "没有完成的工单！";
                 presenter.getWorkOrderByPage(currentPage, workorder, devicename, devicenum, deviceip);
                 break;
             case 3:
                 //未完成的工单
                 isTour = false;
-                workorder = "-6";
+                workorder = -6;
                 textDes = "没有未完成的工单！";
                 presenter.getWorkOrderByPage(currentPage, workorder, devicename, devicenum, deviceip);
                 break;
             case 5:
                 //请求全部的接口
                 isTour = false;
-                workorder = "";
+                workorder = 100;
                 textDes = "没有工单！";
                 presenter.getWorkOrderByPage(currentPage, workorder, devicename, devicenum, deviceip);
                 break;
             case 20:
                 //巡检页面工单列表
                 isTour = true;
-                workorder = "6";
+                workorder = 6;
                 textDes = "没有巡检工单！";
                 presenter.getWorkOrderByPage(currentPage, workorder, devicename, devicenum, deviceip);
                 break;
