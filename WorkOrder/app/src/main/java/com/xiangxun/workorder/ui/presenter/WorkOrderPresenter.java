@@ -2,6 +2,7 @@ package com.xiangxun.workorder.ui.presenter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 
 import com.hellen.baseframe.application.FrameListener;
@@ -55,6 +56,11 @@ public class WorkOrderPresenter {
                 } else {
                     DLog.i("搜索按钮点击，跳转到搜索页面。在搜索页面中显示搜索结果");
                     SearchWorkOrderDialogFragment dialog = new SearchWorkOrderDialogFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("NAME", view.getDevicename());
+                    bundle.putString("NUM", view.getDevicenum());
+                    bundle.putString("IP", view.getDeviceip());
+                    dialog.setArguments(bundle);
                     dialog.show(((WorkOrderActivity) context).getFragmentManager(), "SearchWorkOrderDialogFragment");
                 }
                 break;

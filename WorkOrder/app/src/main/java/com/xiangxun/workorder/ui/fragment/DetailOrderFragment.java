@@ -108,7 +108,7 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
             ToastApp.showToast("页面数据错误");
             return;
         }
-        if ("0".equals(data.status)) {
+        if (data.status == 0) {
             button.setVisibility(View.VISIBLE);
         } else {
             button.setVisibility(View.GONE);
@@ -127,7 +127,7 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
             tvContent05.setText("室内设备");
         }
         tvContent06.setText(data.position);
-        tvContent07.setText(data.companyid);
+        tvContent07.setText(data.orgid);
         tvContent08.setText(data.companyid);
         tvContent09.setText(data.contact);
         tvContent10.setText(data.telephone);

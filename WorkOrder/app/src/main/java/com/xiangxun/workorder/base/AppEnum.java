@@ -26,7 +26,7 @@ public enum AppEnum {
     COOKIE("cookie", 0);
 
     //单页调试的假数据
-    public static final boolean TEST = true;
+    public static final boolean TEST = false;
 
 
     public static WorkOrderData getData() {
@@ -46,7 +46,7 @@ public enum AppEnum {
         data.assigntime = "2017-05-11 20:16:15";
         data.status = 0;
         data.isreassign = "0";
-        //data.orgid = "170405094524399e776b";
+        data.orgid = "170405094524399e776b";
         data.isleave = "0";
         data.assetid = "1704050945245628932d";
         return data;

@@ -17,7 +17,6 @@ import com.xiangxun.workorder.bean.Patrol;
 import com.xiangxun.workorder.bean.WorkOrderData;
 import com.xiangxun.workorder.ui.adapter.WorkOrderAdapter;
 import com.xiangxun.workorder.ui.biz.WorkOrderListener;
-import com.xiangxun.workorder.ui.fragment.DetailOrderFragment;
 import com.xiangxun.workorder.ui.fragment.SearchWorkOrderDialogFragment;
 import com.xiangxun.workorder.ui.presenter.WorkOrderPresenter;
 import com.xiangxun.workorder.widget.header.HeaderView;
@@ -261,6 +260,21 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
     public void onWorkOrderFailed() {
         stopXListView();
         DLog.i("onWorkOrderFailed");
+    }
+
+    @Override
+    public String getDevicename() {
+        return devicename;
+    }
+
+    @Override
+    public String getDevicenum() {
+        return devicenum;
+    }
+
+    @Override
+    public String getDeviceip() {
+        return deviceip;
     }
 
     @Override

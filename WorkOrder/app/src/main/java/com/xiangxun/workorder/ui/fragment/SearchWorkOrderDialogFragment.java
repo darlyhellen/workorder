@@ -73,6 +73,10 @@ public class SearchWorkOrderDialogFragment extends DialogFragment implements Vie
         header.setTitle(R.string.main_work_order_search);
         header.getTitleViewOperationText().setText(R.string.st_search_commit);
 
+        name.setText(getArguments().getString("NAME"));
+        num.setText(getArguments().getString("NUM"));
+        ip.setText(getArguments().getString("IP"));
+
 
     }
 

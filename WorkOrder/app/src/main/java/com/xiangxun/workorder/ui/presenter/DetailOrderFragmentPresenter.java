@@ -63,6 +63,16 @@ public class DetailOrderFragmentPresenter {
             public void onFaild(int i, String s) {
                 biz.onStop(loading);
                 view.setEnableClick();
+                switch (i) {
+                    case 0:
+                        ToastApp.showToast(s);
+                        break;
+                    case 1:
+                        ToastApp.showToast("网络请求异常");
+                        break;
+                    default:
+                        break;
+                }
             }
         });
 
