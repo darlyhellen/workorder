@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by Zhangyuhui/Darly on 2017/5/19.
@@ -18,8 +19,8 @@ public class WorkOrderData implements Parcelable {
     public String isleave;
     public String offtime;
     public String deviceip;
-    public String status;
-    public String isouter;
+    public int status;
+    public int isouter;//0:场外  1:场内
     public String contact;
     public String messages;
     public String id;
@@ -33,8 +34,15 @@ public class WorkOrderData implements Parcelable {
     public String telephone;
     public String assetid;
     public String isreassign;
+    public String exceptionid;
+    public String orgid;
+    public String reason;
+    public String note;
+
+
     public double latitude;
     public double longitude;
+
 
     public WorkOrderData() {
     }
@@ -45,8 +53,8 @@ public class WorkOrderData implements Parcelable {
         isleave = in.readString();
         offtime = in.readString();
         deviceip = in.readString();
-        status = in.readString();
-        isouter = in.readString();
+        status = in.readInt();
+        isouter = in.readInt();
         contact = in.readString();
         messages = in.readString();
         id = in.readString();
@@ -60,6 +68,10 @@ public class WorkOrderData implements Parcelable {
         telephone = in.readString();
         assetid = in.readString();
         isreassign = in.readString();
+        exceptionid = in.readString();
+        orgid = in.readString();
+        reason = in.readString();
+        note = in.readString();
         latitude = in.readDouble();
         longitude = in.readDouble();
     }
@@ -75,8 +87,8 @@ public class WorkOrderData implements Parcelable {
         dest.writeString(isleave);
         dest.writeString(offtime);
         dest.writeString(deviceip);
-        dest.writeString(status);
-        dest.writeString(isouter);
+        dest.writeInt(status);
+        dest.writeInt(isouter);
         dest.writeString(contact);
         dest.writeString(messages);
         dest.writeString(id);
@@ -90,6 +102,10 @@ public class WorkOrderData implements Parcelable {
         dest.writeString(telephone);
         dest.writeString(assetid);
         dest.writeString(isreassign);
+        dest.writeString(exceptionid);
+        dest.writeString(orgid);
+        dest.writeString(reason);
+        dest.writeString(note);
         dest.writeDouble(latitude);
         dest.writeDouble(longitude);
     }

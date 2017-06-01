@@ -51,7 +51,7 @@ public class DetailOrderFragmentPresenter {
     private void getData(String status, String id) {
         biz.onStart(loading);
         view.setDisableClick();
-        biz.commitConsel(status, id, new FrameListener<DetailChangeRoot>() {
+        biz.commitConsel(status, id, view.getReason(), new FrameListener<DetailChangeRoot>() {
             @Override
             public void onSucces(DetailChangeRoot s) {
                 biz.onStop(loading);

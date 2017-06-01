@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -16,6 +17,7 @@ import com.hellen.baseframe.binder.ViewsBinder;
 import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.bean.WorkOrderData;
+import com.xiangxun.workorder.common.WorkOrderUtils;
 import com.xiangxun.workorder.ui.biz.DetailOrderFragmentListener.DetailOrderFragmentInterface;
 import com.xiangxun.workorder.ui.presenter.DetailOrderFragmentPresenter;
 
@@ -73,8 +75,8 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
     private TextView tvContent20;
     @ViewsBinder(R.id.tv_content21)
     private TextView tvContent21;
-    @ViewsBinder(R.id.tv_content22)
-    private TextView tvContent22;
+    @ViewsBinder(R.id.tv_declare)
+    private EditText reason;
     @ViewsBinder(R.id.id_detail_fragment_button)
     private LinearLayout button;
     @ViewsBinder(R.id.id_detail_fragment_config)
@@ -101,40 +103,13 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
 
 
     private void initView() {
-        data =  getArguments().getParcelable("data");
+        data = getArguments().getParcelable("data");
         if (data == null) {
             ToastApp.showToast("页面数据错误");
             return;
         }
-//        tvContent01 = (TextView) root.findViewById(R.id.tv_content01);
-//        tvContent02 = (TextView) root.findViewById(R.id.tv_content02);
-//        tvContent03 = (TextView) root.findViewById(R.id.tv_content03);
-//        tvContent04 = (TextView) root.findViewById(R.id.tv_content04);
-//        tvContent05 = (TextView) root.findViewById(R.id.tv_content05);
-//        tvContent06 = (TextView) root.findViewById(R.id.tv_content06);
-//        tvContent07 = (TextView) root.findViewById(R.id.tv_content07);
-//        tvContent08 = (TextView) root.findViewById(R.id.tv_content08);
-//        tvContent09 = (TextView) root.findViewById(R.id.tv_content09);
-//        tvContent10 = (TextView) root.findViewById(R.id.tv_content10);
-//        tvContent11 = (TextView) root.findViewById(R.id.tv_content11);
-//        tvContent12 = (TextView) root.findViewById(R.id.tv_content12);
-//        tvContent13 = (TextView) root.findViewById(R.id.tv_content13);
-//        tvContent14 = (TextView) root.findViewById(R.id.tv_content14);
-//        tvContent15 = (TextView) root.findViewById(R.id.tv_content15);
-//        tvContent16 = (TextView) root.findViewById(R.id.tv_content16);
-//        tvContent17 = (TextView) root.findViewById(R.id.tv_content17);
-//        tvContent18 = (TextView) root.findViewById(R.id.tv_content18);
-//        tvContent19 = (TextView) root.findViewById(R.id.tv_content19);
-//        tvContent20 = (TextView) root.findViewById(R.id.tv_content20);
-//        tvContent21 = (TextView) root.findViewById(R.id.tv_content21);
-//        tvContent22 = (TextView) root.findViewById(R.id.tv_content22);
-//        button = (LinearLayout) root.findViewById(R.id.id_detail_fragment_button);
-//        commit = (Button) root.findViewById(R.id.id_detail_fragment_config);
-//        consel = (Button) root.findViewById(R.id.id_detail_fragment_consel);
         if ("0".equals(data.status)) {
             button.setVisibility(View.VISIBLE);
-            commit.setOnClickListener(this);
-            consel.setOnClickListener(this);
         } else {
             button.setVisibility(View.GONE);
         }
@@ -144,30 +119,34 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
     private void initData() {
         tvContent01.setText(data.id);
         tvContent02.setText(data.devicename);
-        tvContent03.setText(data.offtime);
-        tvContent04.setText(data.telephone);
-        tvContent05.setText(data.devicename);
-        tvContent06.setText(data.status);
-        tvContent07.setText(data.devicename);
+        tvContent03.setText(data.devicecode);
+        tvContent04.setText(data.deviceip);
+        if (0 == data.isouter) {
+            tvContent05.setText("场外设备");
+        } else {
+            tvContent05.setText("室内设备");
+        }
+        tvContent06.setText(data.position);
+        tvContent07.setText(data.companyid);
         tvContent08.setText(data.companyid);
-        tvContent09.setText(data.devicename);
-        tvContent10.setText(data.position);
-        tvContent11.setText(data.status);
-        tvContent12.setText(data.messages);
-        tvContent13.setText(data.devicename);
-        tvContent14.setText(data.devicename);
-        tvContent15.setText(data.devicename);
-        tvContent16.setText(data.devicename);
-        tvContent17.setText(data.devicename);
-        tvContent18.setText(data.devicename);
-        tvContent19.setText(data.devicename);
-        tvContent20.setText(data.devicename);
-        tvContent21.setText(data.devicename);
-        tvContent22.setText(data.assigntime);
+        tvContent09.setText(data.contact);
+        tvContent10.setText(data.telephone);
+        tvContent11.setText(data.messages);
+        tvContent12.setText(data.assigntime);
+        tvContent13.setText(WorkOrderUtils.findStatus(data.status));
+        tvContent14.setText("");
+        tvContent15.setText("");
+        tvContent16.setText("");
+        tvContent17.setText("");
+        tvContent18.setText("");
+        tvContent19.setText("");
+        tvContent20.setText("");
+        tvContent21.setText("");
     }
 
     private void initListener() {
-
+        commit.setOnClickListener(this);
+        consel.setOnClickListener(this);
     }
 
     @Override
@@ -181,12 +160,19 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
     }
 
     @Override
-    public void setDisableClick() {
+    public String getReason() {
+        return reason.getText().toString().trim();
+    }
 
+    @Override
+    public void setDisableClick() {
+        commit.setClickable(false);
+        consel.setClickable(false);
     }
 
     @Override
     public void setEnableClick() {
-
+        commit.setClickable(true);
+        consel.setClickable(true);
     }
 }

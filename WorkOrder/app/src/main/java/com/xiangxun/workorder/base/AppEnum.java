@@ -26,7 +26,7 @@ public enum AppEnum {
     COOKIE("cookie", 0);
 
     //单页调试的假数据
-    public static final boolean TEST = false;
+    public static final boolean TEST = true;
 
 
     public static WorkOrderData getData() {
@@ -36,7 +36,7 @@ public enum AppEnum {
         data.devicecode = "610000000007031075";
         data.deviceip = "172.159.91.133";
         data.devicetype = "device";
-        data.isouter = "0";
+        data.isouter = 0;
         data.position = "G70 K1741 900";
         data.companyid = "160321194637834dc78d";
         data.contact = "130521090208040c87f4ab27fd194da7";
@@ -44,7 +44,7 @@ public enum AppEnum {
         data.messages = "西安翔迅科技有限责任公司的李斯，你好：位于[G70 K1741 900]上的设备编号为[610000000007031075]的设备[G70 K1741 900]发生故障，请及时维修。";
         data.assignaccount = "00";
         data.assigntime = "2017-05-11 20:16:15";
-        data.status = "0";
+        data.status = 0;
         data.isreassign = "0";
         //data.orgid = "170405094524399e776b";
         data.isleave = "0";

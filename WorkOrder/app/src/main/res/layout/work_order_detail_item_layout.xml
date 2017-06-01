@@ -20,6 +20,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_padding10"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:orientation="horizontal">
 
                 <TextView
@@ -491,29 +493,6 @@
 
                 <TextView
                     android:id="@+id/tv_content21"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="@dimen/margin_padding8"
-                    android:text=""
-                    android:textColor="@color/color333333"
-                    android:textSize="@dimen/textSize16" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_padding10"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/st_detail_update_time"
-                    android:textColor="@color/text_color"
-                    android:textSize="@dimen/textSize16" />
-
-                <TextView
-                    android:id="@+id/tv_content22"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/margin_padding8"
