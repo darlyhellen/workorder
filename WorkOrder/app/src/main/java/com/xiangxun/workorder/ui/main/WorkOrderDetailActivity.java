@@ -81,7 +81,7 @@ public class WorkOrderDetailActivity extends BaseActivity implements OnClickList
         image.setArguments(bundle);
         list.add(image);
 
-        if (data.contact == null /*&& data.坐标参数*/) {
+        if (data.contact != null /*&& data.坐标参数*/) {
             //有坐标
             for (int i = 0; i < titles.length; i++) {
                 //设置未选中和选中时字体的颜色
