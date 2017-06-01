@@ -19,6 +19,7 @@ import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.bean.WorkOrderData;
 import com.xiangxun.workorder.common.WorkOrderUtils;
 import com.xiangxun.workorder.ui.biz.DetailOrderFragmentListener.DetailOrderFragmentInterface;
+import com.xiangxun.workorder.ui.main.WorkOrderDetailActivity;
 import com.xiangxun.workorder.ui.presenter.DetailOrderFragmentPresenter;
 
 /**
@@ -152,6 +153,18 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
     @Override
     public void onClick(View v) {
         presenter.onClickDown(getActivity(), v);
+    }
+
+    @Override
+    public void onLoginSuccess() {
+        //修改状态成功后，退出页面
+        getActivity().setResult(701);
+        getActivity().finish();
+    }
+
+    @Override
+    public void onLoginFailed() {
+
     }
 
     @Override

@@ -32,6 +32,10 @@ public class DetailOrderFragmentListener implements FramePresenter {
 
     public interface DetailOrderFragmentInterface extends FrameView {
 
+        void onLoginSuccess();
+
+        void onLoginFailed();
+
         String getDataID();
 
         String getReason();

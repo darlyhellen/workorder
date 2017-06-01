@@ -57,12 +57,14 @@ public class DetailOrderFragmentPresenter {
                 biz.onStop(loading);
                 view.setEnableClick();
                 ToastApp.showToast(s.getMessage());
+                view.onLoginSuccess();
             }
 
             @Override
             public void onFaild(int i, String s) {
                 biz.onStop(loading);
                 view.setEnableClick();
+                view.onLoginFailed();
                 switch (i) {
                     case 0:
                         ToastApp.showToast(s);
