@@ -9,15 +9,15 @@ import com.hellen.baseframe.common.dlog.DLog;
 import com.hellen.baseframe.common.utiltools.SharePreferHelp;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.APP;
+import com.xiangxun.workorder.base.Api;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.bean.SetModel;
-import com.xiangxun.workorder.bean.VersionData;
 import com.xiangxun.workorder.bean.VersionRoot;
 import com.xiangxun.workorder.service.VersionUpdateService;
-import com.xiangxun.workorder.service.WorkOrderNewService;
 import com.xiangxun.workorder.ui.biz.SetListener;
 import com.xiangxun.workorder.ui.login.LoginActivity;
 import com.xiangxun.workorder.ui.main.SetActivity;
+import com.xiangxun.workorder.ui.main.SetServiceAcitivity;
 import com.xiangxun.workorder.widget.dialog.APPDialg;
 import com.xiangxun.workorder.widget.dialog.OndialogListener;
 import com.xiangxun.workorder.widget.loading.ShowLoading;
@@ -49,16 +49,19 @@ public class SetPresenter {
         this.loading.setMessage(R.string.loading);
     }
 
-    public void findFileSize() {
+    public void findFileSize(final int login) {
         biz.onStart(loading);
         biz.getSize(new FrameListener<Long>() {
             @Override
             public void onSucces(Long aLong) {
                 biz.onStop(loading);
                 List<SetModel> datas = new ArrayList<>();
+                datas.add(new SetModel(R.string.set_service, R.string.curr_service, Api.getIp(), R.mipmap.arrows, false));
                 datas.add(new SetModel(R.string.set_clean_cache, R.string.curr_cache, (aLong / (1024 * 1024)) + "M", R.mipmap.arrows, false));
                 datas.add(new SetModel(R.string.set_update, R.string.curr_ver, APP.getAppVersionName(), R.mipmap.arrows, false));
-                datas.add(new SetModel(R.string.set_loginout, 0, null, 0, true));
+                if (login != 0) {
+                    datas.add(new SetModel(R.string.set_loginout, 0, null, 0, true));
+                }
                 view.getUserDate(datas);
             }
 
@@ -88,7 +91,7 @@ public class SetPresenter {
     }
 
 
-    public void clickClean(Context context) {
+    public void clickClean(final Context context, final int login) {
         APPDialg dialg = new APPDialg(context);
         dialg.setTitle(R.string.set_decl);
         dialg.setContent(R.string.set_clean_cache_des);
@@ -99,7 +102,7 @@ public class SetPresenter {
             public void onSureClick() {
                 RecursionDeleteFile(new File(AppEnum.CACTH));
                 APP.getInstance().creatFile();
-                findFileSize();
+                findFileSize(login);
             }
 
             @Override
@@ -246,5 +249,4 @@ public class SetPresenter {
             file.delete();
         }
     }
-
 }

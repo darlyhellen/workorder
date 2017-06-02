@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?><!--设置页面内容-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <com.xiangxun.workorder.widget.header.HeaderView
+        android:id="@+id/id_set_ser_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_padding10"
+        android:layout_marginRight="@dimen/margin_padding10"
+        android:layout_marginTop="@dimen/margin_padding10"
+        android:background="@drawable/business_detai_background"
+        android:orientation="horizontal"
+        android:padding="@dimen/margin_padding5">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/st_set_serv_ip"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/textSize16" />
+
+        <EditText
+            android:id="@+id/id_set_ser_ip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/app_login_shape"
+            android:padding="@dimen/margin_padding8"
+            android:textColor="@color/color333333"
+            android:textSize="@dimen/textSize16" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_padding10"
+        android:layout_marginRight="@dimen/margin_padding10"
+        android:layout_marginTop="@dimen/margin_padding10"
+        android:background="@drawable/business_detai_background"
+        android:orientation="horizontal"
+        android:padding="@dimen/margin_padding5">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/st_set_serv_port"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/textSize16" />
+
+        <EditText
+            android:id="@+id/id_set_ser_port"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/app_login_shape"
+            android:padding="@dimen/margin_padding8"
+            android:textColor="@color/color333333"
+            android:textSize="@dimen/textSize16" />
+
+    </LinearLayout>
+</LinearLayout>

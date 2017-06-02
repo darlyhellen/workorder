@@ -1,5 +1,8 @@
 package com.xiangxun.workorder.base;
 
+import android.text.TextUtils;
+
+import com.hellen.baseframe.common.dlog.DLog;
 import com.xiangxun.workorder.BuildConfig;
 import com.xiangxun.workorder.common.urlencode.EncodeTools;
 import com.xiangxun.workorder.common.urlencode.Tools;
@@ -13,12 +16,54 @@ import com.xiangxun.workorder.common.urlencode.Tools;
  */
 public class Api {
 
+    private static String root;
+
+    private static String ip;
+
+    private static String port;
+
+
     public static String getRoot() {
-        if (BuildConfig.DEBUG) {
-            return "http://193.169.100.153:8090/";
-        } else {
-            return "http://10.10.15.111:8090/";
+        if (root == null) {
+            return findMoe();
         }
+        return root;
+    }
+
+    public static void setRoot(String ip, String port) {
+        if (!TextUtils.isEmpty(ip)) {
+            Api.ip = ip;
+        }
+        if (!TextUtils.isEmpty(port)) {
+            Api.port = port;
+        }
+    }
+
+    public static String getIp() {
+        if (ip == null) {
+            if (BuildConfig.DEBUG) {
+                ip = "193.169.100.153";
+            } else {
+                ip = "10.10.15.111";
+            }
+        }
+        return ip;
+    }
+
+
+    public static String getPort() {
+        if (port == null) {
+            if (BuildConfig.DEBUG) {
+                port = "8090";
+            } else {
+                port = "8090";
+            }
+        }
+        return port;
+    }
+
+    public static String findMoe() {
+        return "http://" + getIp() + ":" + getPort() + "/";
     }
 
     public static String getUrl() {

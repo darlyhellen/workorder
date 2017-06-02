@@ -1,13 +1,16 @@
 package com.xiangxun.workorder.ui.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import com.amap.api.maps.model.LatLng;
 import com.hellen.baseframe.binder.ContentBinder;
 import com.hellen.baseframe.binder.ViewsBinder;
 import com.hellen.baseframe.common.dlog.DLog;
@@ -51,6 +54,7 @@ public class WorkOrderDetailActivity extends BaseActivity implements OnClickList
     private int[] titles_no = new int[]{R.string.st_detail_detal, R.string.st_detail_image};
 
     private WorkOrderData data;
+    private DetailOrderFragment order;
 
     @Override
     protected void initView(Bundle savedInstanceState) {
@@ -62,9 +66,16 @@ public class WorkOrderDetailActivity extends BaseActivity implements OnClickList
             //单独的测试数据,假数据.
             data = AppEnum.getData();
             header.getTitleViewOperationText().setText(R.string.st_detail_position);
+<<<<<<< HEAD
         }
         DLog.i(getClass().getSimpleName(), isTour + "--" + id + "---" + data);
 
+=======
+            header.setRightImageTextFlipper(this);
+        }else {
+            header.setRightBackgroundResource(0);
+        }
+>>>>>>> f9757719696d8632a6d88228ebda0cd326936f4d
         tab.setTabMode(TabLayout.MODE_FIXED);
         tab.setTabGravity(TabLayout.GRAVITY_FILL);
         tab.setTabTextColors(R.color.text_color, R.color.blue_btn_bg_color);
@@ -74,14 +85,17 @@ public class WorkOrderDetailActivity extends BaseActivity implements OnClickList
         }
         Bundle bundle = new Bundle();
         bundle.putParcelable("data", data);
+<<<<<<< HEAD
         DetailOrderFragment order = new DetailOrderFragment();
+=======
+        order = new DetailOrderFragment();
+>>>>>>> f9757719696d8632a6d88228ebda0cd326936f4d
         order.setArguments(bundle);
         list.add(order);
         DetailImageFragment image = new DetailImageFragment();
         image.setArguments(bundle);
         list.add(image);
-
-        if (data.contact == null /*&& data.坐标参数*/) {
+        if (!TextUtils.isEmpty(data.mapx) && !TextUtils.isEmpty(data.mapy)) {
             //有坐标
             for (int i = 0; i < titles.length; i++) {
                 //设置未选中和选中时字体的颜色
@@ -112,7 +126,7 @@ public class WorkOrderDetailActivity extends BaseActivity implements OnClickList
     @Override
     protected void initListener() {
         header.setLeftBackOneListener(this);
-        header.setRightImageTextFlipper(this);
+
 
         tab.setupWithViewPager(vp);
         vp.setOnPageChangeListener(this);
@@ -156,5 +170,11 @@ public class WorkOrderDetailActivity extends BaseActivity implements OnClickList
     @Override
     public void onPageScrollStateChanged(int state) {
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        order.onActivityResult(requestCode,resultCode,data);
     }
 }

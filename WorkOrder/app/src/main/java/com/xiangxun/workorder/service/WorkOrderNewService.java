@@ -22,7 +22,7 @@ public class WorkOrderNewService extends Service {
 
     private WorkOrderNewPresenter presenter;
 
-    private int delay = 60 * 1000;
+    private int delay = 1200 * 1000;
 
     /*
      * (non-Javadoc)
@@ -66,7 +66,6 @@ public class WorkOrderNewService extends Service {
                 public void run() {
                     //在线程中启动请求，获取参数
                     if (presenter != null) {
-                        DLog.i("在线程中启动请求，获取新任务数量");
                         presenter.refreshMainIcon();
                     }
                 }

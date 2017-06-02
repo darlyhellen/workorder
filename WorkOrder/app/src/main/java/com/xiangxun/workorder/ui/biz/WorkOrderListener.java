@@ -39,6 +39,12 @@ public class WorkOrderListener implements FramePresenter {
 
         void onWorkOrderFailed();
 
+        String getDevicename();
+
+        String getDevicenum();
+
+        String getDeviceip();
+
         void end();
     }
 

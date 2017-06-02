@@ -1,6 +1,7 @@
 package com.xiangxun.workorder.ui.presenter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 
 import com.hellen.baseframe.application.FrameListener;
@@ -10,6 +11,7 @@ import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.bean.LoginRoot;
 import com.xiangxun.workorder.ui.biz.LoginListener;
 import com.xiangxun.workorder.ui.login.LoginActivity;
+import com.xiangxun.workorder.ui.main.SetActivity;
 import com.xiangxun.workorder.widget.loading.ShowLoading;
 
 
@@ -43,6 +45,11 @@ public class LoginPresenter {
                 break;
             case R.id.btn_login_post:
                 login_post(context);
+                break;
+            case R.id.id_login_set:
+                Intent intent = new Intent(context, SetActivity.class);
+                intent.putExtra("LOGIN", 0);
+                context.startActivity(intent);
                 break;
             default:
                 break;
@@ -108,10 +115,10 @@ public class LoginPresenter {
                         userBiz.onStop(loading);
                         switch (code) {
                             case 0:
-                                ToastApp.showToast("网络请求异常");
+                                ToastApp.showToast(info);
                                 break;
                             case 1:
-                                ToastApp.showToast(info);
+                                ToastApp.showToast("网络请求异常");
                                 break;
                             default:
                                 break;

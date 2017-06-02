@@ -11,6 +11,10 @@ import com.hellen.baseframe.common.dlog.DLog;
 import com.hellen.baseframe.common.obsinfo.ConApp;
 import com.xiangxun.workorder.BuildConfig;
 import com.xiangxun.workorder.common.Aset;
+<<<<<<< HEAD
+=======
+import com.xiangxun.workorder.common.image.ImageLoaderUtil;
+>>>>>>> f9757719696d8632a6d88228ebda0cd326936f4d
 
 import java.io.File;
 
@@ -53,7 +57,12 @@ public class APP extends FrameAPP {
             initStrictMode();
         }
         DBControler.getInstance(this).init();
+<<<<<<< HEAD
 
+=======
+        //初始化图片工具类
+        ImageLoaderUtil.init(this);
+>>>>>>> f9757719696d8632a6d88228ebda0cd326936f4d
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.xiangxun.workorder.ui.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -42,7 +43,7 @@ public class SetActivity extends BaseActivity implements SetListener.SetInterfac
         header.setLeftBackgroundResource(R.mipmap.ic_title_back);
 
         presenter = new SetPresenter(this);
-        presenter.findFileSize();
+        presenter.findFileSize(getIntent().getIntExtra("LOGIN", -1));
 
 
         adapter = new SetAdapter(null, R.layout.item_activity_set, this);
@@ -85,9 +86,9 @@ public class SetActivity extends BaseActivity implements SetListener.SetInterfac
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         SetModel model = (SetModel) parent.getItemAtPosition(position);
 
-        switch (model.getTitle()){
+        switch (model.getTitle()) {
             case R.string.set_clean_cache:
-                presenter.clickClean(this);
+                presenter.clickClean(this, getIntent().getIntExtra("LOGIN", -1));
                 break;
             case R.string.set_update:
                 presenter.clickUpdate(this);
@@ -95,8 +96,22 @@ public class SetActivity extends BaseActivity implements SetListener.SetInterfac
             case R.string.set_loginout:
                 presenter.clickLoginOut(this);
                 break;
+            case R.string.set_service:
+                //设置服务器IP地址和端口。
+                Intent in = new Intent(this, SetServiceAcitivity.class);
+                startActivityForResult(in, 700);
+                break;
             default:
                 break;
+        }
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == 700) {
+            presenter.findFileSize(getIntent().getIntExtra("LOGIN", -1));
         }
     }
 }

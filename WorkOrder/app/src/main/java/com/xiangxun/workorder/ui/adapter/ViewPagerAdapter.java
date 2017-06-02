@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.hellen.baseframe.common.dlog.DLog;
@@ -55,5 +56,16 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         String name = context.getResources().getString(title[position]);
         DLog.i(getClass().getSimpleName(), name);
         return name;
+    }
+
+
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+        //super.destroyItem(container, position, object);
+    }
+
+    @Override
+    public void destroyItem(View container, int position, Object object) {
+        //super.destroyItem(container, position, object);
     }
 }

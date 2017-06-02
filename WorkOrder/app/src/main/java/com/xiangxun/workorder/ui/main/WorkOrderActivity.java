@@ -17,7 +17,6 @@ import com.xiangxun.workorder.bean.Patrol;
 import com.xiangxun.workorder.bean.WorkOrderData;
 import com.xiangxun.workorder.ui.adapter.WorkOrderAdapter;
 import com.xiangxun.workorder.ui.biz.WorkOrderListener;
-import com.xiangxun.workorder.ui.fragment.DetailOrderFragment;
 import com.xiangxun.workorder.ui.fragment.SearchWorkOrderDialogFragment;
 import com.xiangxun.workorder.ui.presenter.WorkOrderPresenter;
 import com.xiangxun.workorder.widget.header.HeaderView;
@@ -162,9 +161,9 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
     public void onClick(View v) {
 
         if (patrol == null) {
-            presenter.onClickDown(this, 0, v);
+            presenter.onClickDown(this, 0, v, workorder);
         } else {
-            presenter.onClickDown(this, patrol.getListId(), v);
+            presenter.onClickDown(this, patrol.getListId(), v, workorder);
         }
 
     }
@@ -215,7 +214,7 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
         intent.putExtra("data", ds);
         //工单的id
         intent.putExtra("des", patrol.getListId());
-        startActivity(intent);
+        startActivityForResult(intent, 700);
     }
 
 
@@ -264,6 +263,21 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
     }
 
     @Override
+    public String getDevicename() {
+        return devicename;
+    }
+
+    @Override
+    public String getDevicenum() {
+        return devicenum;
+    }
+
+    @Override
+    public String getDeviceip() {
+        return deviceip;
+    }
+
+    @Override
     public void setDisableClick() {
 
     }
@@ -280,19 +294,31 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
 
 
     @Override
-    public void findParamers(String name, String num, String ip) {
+    public void findParamers(String stat, String name, String num, String ip) {
         DLog.i("name = " + name + ";num = " + num + ";ip = " + ip);
         textDes = "没有搜索到工单！";
         currentPage = 1;
         devicename = name;
         devicenum = num;
         deviceip = ip;
+        workorder = stat;
         //搜索的时候，清理以前的数据。
         data.clear();
         if (isTour) {
             //测试
             presenter.getWorkOrderByPage(currentPage, workorder, devicename, devicenum, deviceip);
         } else {
+            presenter.getWorkOrderByPage(currentPage, workorder, devicename, devicenum, deviceip);
+        }
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        DLog.i(getClass().getSimpleName(), requestCode + "---" + resultCode + "---" + data);
+
+        if (resultCode == 701) {
+            currentPage = 1;
             presenter.getWorkOrderByPage(currentPage, workorder, devicename, devicenum, deviceip);
         }
     }

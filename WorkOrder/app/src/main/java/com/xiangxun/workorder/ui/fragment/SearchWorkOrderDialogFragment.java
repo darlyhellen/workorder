@@ -4,12 +4,17 @@ import android.app.DialogFragment;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TableRow;
 
 import com.hellen.baseframe.common.dlog.DLog;
 import com.xiangxun.workorder.R;
@@ -23,11 +28,10 @@ import com.xiangxun.workorder.widget.header.HeaderView;
  *
  * @TODO:搜索条件列表窗口。
  */
-public class SearchWorkOrderDialogFragment extends DialogFragment implements View.OnClickListener {
-
+public class SearchWorkOrderDialogFragment extends DialogFragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     public interface SearchListener {
-        void findParamers(String name, String num, String ip);
+        void findParamers(String statu, String name, String num, String ip);
     }
 
     private View view;
@@ -35,8 +39,13 @@ public class SearchWorkOrderDialogFragment extends DialogFragment implements Vie
     private EditText name;
     private EditText num;
     private EditText ip;
+
+    private Spinner sp;
     private Button commit;
     private Button consel;
+
+
+    private String status;
 
     //重写onCreateView方法
     @Override
@@ -66,13 +75,40 @@ public class SearchWorkOrderDialogFragment extends DialogFragment implements Vie
         name = (EditText) view.findViewById(R.id.id_search_name);
         num = (EditText) view.findViewById(R.id.id_search_num);
         ip = (EditText) view.findViewById(R.id.id_search_ip);
+        sp = (Spinner) view.findViewById(R.id.id_search_sp);
+
         commit = (Button) view.findViewById(R.id.id_search_commit);
         consel = (Button) view.findViewById(R.id.id_search_consel);
+
+        TableRow row = (TableRow) view.findViewById(R.id.id_search_status);
 
         header.setLeftBackgroundResource(R.mipmap.ic_title_back);
         header.setTitle(R.string.main_work_order_search);
         header.getTitleViewOperationText().setText(R.string.st_search_commit);
 
+        name.setText(getArguments().getString("NAME"));
+        num.setText(getArguments().getString("NUM"));
+        ip.setText(getArguments().getString("IP"));
+        if (getArguments().getInt("PATROL") == 5) {
+            //展示列表
+            status = getArguments().getString("WORKORDER");
+            row.setVisibility(View.VISIBLE);
+            // 建立数据源
+            String[] mItems = getResources().getStringArray(R.array.Status);
+            // 建立Adapter并且绑定数据源
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, mItems);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            //绑定 Adapter到控件
+            sp.setAdapter(adapter);
+            if (TextUtils.isEmpty(status)) {
+                sp.setSelection(0);
+            } else {
+                sp.setSelection(Integer.parseInt(status) + 1);
+            }
+        } else {
+            //不展示信息
+            row.setVisibility(View.GONE);
+        }
 
     }
 
@@ -81,6 +117,7 @@ public class SearchWorkOrderDialogFragment extends DialogFragment implements Vie
         header.setRightImageTextFlipper(this);
         commit.setOnClickListener(this);
         consel.setOnClickListener(this);
+        sp.setOnItemSelectedListener(this);
 
     }
 
@@ -93,7 +130,7 @@ public class SearchWorkOrderDialogFragment extends DialogFragment implements Vie
                 String devicename = name.getText().toString().trim();
                 String devicenum = num.getText().toString().trim();
                 String deviceip = ip.getText().toString().trim();
-                ((SearchListener) getActivity()).findParamers(devicename, devicenum, deviceip);
+                ((SearchListener) getActivity()).findParamers(status, devicename, devicenum, deviceip);
                 DLog.i("点击提交");
                 break;
             case R.id.title_view_back_llayout:
@@ -104,5 +141,19 @@ public class SearchWorkOrderDialogFragment extends DialogFragment implements Vie
                 break;
         }
         dismiss();
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        if (position == 0) {
+            status = "";
+        } else {
+            status = position - 1 + "";
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

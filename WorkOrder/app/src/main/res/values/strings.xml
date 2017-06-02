@@ -53,13 +53,14 @@
     <string name="set_clean_cache">清理缓存</string>
     <string name="set_clean_cache_des">是否确认清理缓存？</string>
     <string name="set_update">版本更新</string>
+    <string name="set_service">配置服务</string>
     <string name="set_update_des">是否确认新版本升级？</string>
     <string name="set_loginout">退出登录</string>
     <string name="set_loginout_des">是否确认退出登录？</string>
     <string name="set_sure">确认</string>
     <string name="set_consel">取消</string>
 
-
+    <string name="curr_service">当前地址：</string>
     <string name="more_update">检查更新</string>
     <string name="more_clear_cache">清空缓存</string>
     <string name="curr_ver">当前版本号：V</string>
@@ -86,32 +87,57 @@
     <string name="st_search_deviceNum_hint">请输入设备编号</string>
     <string name="st_search_deviceIp">设备IP  :</string>
     <string name="st_search_deviceIp_hint">请输入设备IP</string>
+    <string name="st_search_deviceStatus">查询状态  :</string>
 
     <!--WorkOrderDetailActivity-->
     <string name="st_detail_title">工单详情</string>
     <string name="st_detail_detal">详情</string>
     <string name="st_detail_image">图片</string>
     <string name="st_detail_position">位置</string>
-    <string name="project_remark">备&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;注:</string>
+    <!--工单详情信息-->
+    <string name="st_detail_detail">工单详情信息</string>
     <string name="st_detail_orderid">工单编号:</string>
-    <string name="st_detail_complainant">投诉人:</string>
-    <string name="st_detail_complainant_time">投诉时间:</string>
-    <string name="st_detail_complainant_tel">投诉电话:</string>
-    <string name="st_detail_come">工单来源:</string>
-    <string name="st_detail_type">工单类型:</string>
-    <string name="st_detail_inout">市政内/外:</string>
-    <string name="st_detail_company">责任单位:</string>
-    <string name="st_detail_worktime">处理时限:</string>
-    <string name="st_detail_postion">工单位置:</string>
-    <string name="st_detail_ordertype">工单状态:</string>
-    <string name="st_detail_order_content">工单内容:</string>
-    <string name="st_detail_request">处理要求:</string>
-    <string name="st_detail_declare">现场说明:</string>
-    <string name="st_detail_hardorder">难点工单:</string>
-    <string name="st_detail_isdown">是否下发:</string>
-    <string name="st_detail_satisfaction">回访满意度:</string>
-    <string name="st_detail_ordertime_type">处理时限状态:</string>
-    <string name="st_detail_own">工单创建人:</string>
-    <string name="st_detail_back_declare">退单说明:</string>
-    <string name="st_detail_update_time">更新时间:</string>
+    <string name="st_detail_complainant">设备名称:</string>
+    <string name="st_detail_complainant_time">设备编码:</string>
+    <string name="st_detail_complainant_tel">设备IP:</string>
+    <string name="st_detail_come">设备类型:</string>
+    <string name="st_detail_type">位置信息:</string>
+    <string name="st_detail_inout">所属部门:</string>
+    <string name="st_detail_company">派发人:</string>
+    <string name="st_detail_worktime">派发时间:</string>
+    <string name="st_detail_postion">工单状态:</string>
+    <string name="st_detail_ordertype">是否场内:</string>
+    <string name="st_detail_order_content">是否转派:</string>
+    <string name="st_detail_request">是否遗留:</string>
+    <string name="st_detail_declare">短信内容</string>
+    <!--工单异常信息-->
+    <string name="st_detail_except">工单异常信息</string>
+    <string name="st_detail_hardorder">上报人:</string>
+    <string name="st_detail_isdown">上报时间:</string>
+    <string name="st_detail_satisfaction">上报内容:</string>
+    <!--工单关闭信息-->
+    <string name="st_detail_close">工单关闭信息</string>
+    <string name="st_detail_ordertime_type">关闭人:</string>
+    <string name="st_detail_own">关闭时间:</string>
+    <string name="st_detail_back_declare"> </string>
+    <string name="project_remark">备&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;注:</string>
+    <string name="st_detail_update_time">说明:</string>
+    <!--SetServiceActivity-->
+    <string name="st_set_serv_title">设置服务</string>
+    <string name="st_set_serv_set">设置</string>
+    <string name="st_set_serv_ip">IP地址:</string>
+    <string name="st_set_serv_port">端口:</string>
+
+
+    <array name="Status">
+        <item>"全  部"</item>
+        <item>"已派发"</item>
+        <item>"已接收"</item>
+        <item>"已退回"</item>
+        <item>"已转派"</item>
+        <item>"已上报"</item>
+        <item>"遗留中"</item>
+        <item>"已关闭"</item>
+        <item>"已评估"</item>
+    </array>
 </resources>

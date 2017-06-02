@@ -59,6 +59,9 @@ public class FragmentWorkOrder extends Fragment implements View.OnClickListener,
     private int PageSize = 10;
     private int totalSize = 0;
     private int listState = AppEnum.LISTSTATEFIRST;
+    private String devicename;
+    private String devicenum;
+    private String deviceip;
 
     private Map<String, String> map;
 
@@ -215,6 +218,21 @@ public class FragmentWorkOrder extends Fragment implements View.OnClickListener,
     }
 
     @Override
+    public String getDevicename() {
+        return devicename;
+    }
+
+    @Override
+    public String getDevicenum() {
+        return devicenum;
+    }
+
+    @Override
+    public String getDeviceip() {
+        return deviceip;
+    }
+
+    @Override
     public void setDisableClick() {
 
     }
@@ -230,8 +248,11 @@ public class FragmentWorkOrder extends Fragment implements View.OnClickListener,
 
 
     @Override
-    public void findParamers(String name, String num, String ip) {
+    public void findParamers(String stat,String name, String num, String ip) {
         currentPage = 1;
-        presenter.getWorkOrderByPage(currentPage, null, name, num, ip);
+        devicename = name;
+        devicenum = num;
+        deviceip = ip;
+        presenter.getWorkOrderByPage(currentPage, stat, name, num, ip);
     }
 }
