@@ -42,7 +42,7 @@ public class SetActivity extends BaseActivity implements SetListener.SetInterfac
         header.setLeftBackgroundResource(R.mipmap.ic_title_back);
 
         presenter = new SetPresenter(this);
-        presenter.findFileSize();
+        presenter.findFileSize(getIntent().getIntExtra("LOGIN", -1));
 
 
         adapter = new SetAdapter(null, R.layout.item_activity_set, this);
@@ -85,15 +85,18 @@ public class SetActivity extends BaseActivity implements SetListener.SetInterfac
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         SetModel model = (SetModel) parent.getItemAtPosition(position);
 
-        switch (model.getTitle()){
+        switch (model.getTitle()) {
             case R.string.set_clean_cache:
-                presenter.clickClean(this);
+                presenter.clickClean(this, getIntent().getIntExtra("LOGIN", -1));
                 break;
             case R.string.set_update:
                 presenter.clickUpdate(this);
                 break;
             case R.string.set_loginout:
                 presenter.clickLoginOut(this);
+                break;
+            case R.string.set_service:
+                presenter.clickService(this);
                 break;
             default:
                 break;

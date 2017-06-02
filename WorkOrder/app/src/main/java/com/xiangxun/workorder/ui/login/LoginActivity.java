@@ -44,6 +44,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Logi
     private XSubButton mBtnLogin_post;
     private String password;
     private String acount;
+    @ViewsBinder(R.id.id_login_set)
+    private ImageView setiv;
 
 
     private LoginPresenter presenter;
@@ -64,6 +66,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Logi
     public void initListener() {
         mBtnLogin.setOnClickListener(this);
         mBtnLogin_post.setOnClickListener(this);
+        setiv.setOnClickListener(this);
     }
 
     @Override
@@ -71,13 +74,12 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Logi
 
         presenter.onClickDown(this, v);
 
-
-        switch (v.getId()) {
-            case R.id.btn_login:
-                acount = mEdtAcount.getText().toString().trim();
-                password = mEdtPassWord.getText().toString().trim();
-                break;
-        }
+//        switch (v.getId()) {
+//            case R.id.btn_login:
+//                acount = mEdtAcount.getText().toString().trim();
+//                password = mEdtPassWord.getText().toString().trim();
+//                break;
+//        }
     }
 
     @Override

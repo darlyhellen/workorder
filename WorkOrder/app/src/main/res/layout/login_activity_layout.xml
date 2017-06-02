@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/xw_edit_normal"
                 android:drawableLeft="@drawable/btn_selecter_user"
-                android:drawablePadding="@dimen/margin_padding10"
+                android:drawablePadding="@dimen/margin_padding15"
                 android:ems="10"
                 android:hint="@string/mine_login_hine1"
                 android:inputType="text"
@@ -70,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/xw_edit_normal"
                 android:drawableLeft="@drawable/btn_selecter_pwd"
-                android:drawablePadding="@dimen/margin_padding10"
+                android:drawablePadding="@dimen/margin_padding15"
                 android:ems="10"
                 android:hint="@string/mine_login_hine2"
                 android:inputType="textPassword"
@@ -94,6 +94,23 @@
             android:layout_height="@dimen/view_height40"
             android:layout_marginTop="@dimen/margin_padding40" />
     </LinearLayout>
+
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/id_login_set"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/set" />
+    </TableRow>
 
     <TextView
         style="@style/more_about_text"
