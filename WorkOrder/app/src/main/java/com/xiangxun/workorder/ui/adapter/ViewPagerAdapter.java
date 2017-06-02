@@ -43,7 +43,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         Fragment fragment = viewList.get(position);
-        Bundle bundle = new Bundle();
+        Bundle bundle = fragment.getArguments();
         bundle.putInt("TITLE", title[position]);
         fragment.setArguments(bundle);
         return fragment;

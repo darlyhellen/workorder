@@ -15,6 +15,7 @@ import com.hellen.baseframe.common.utiltools.SharePreferHelp;
 import com.xiangxun.workorder.base.APP;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.bean.LoginRoot;
+import com.xiangxun.workorder.bean.NewServiceRoot;
 import com.xiangxun.workorder.bean.WorkOrderRoot;
 import com.xiangxun.workorder.common.retrofit.RxjavaRetrofitRequestUtil;
 import com.xiangxun.workorder.common.urlencode.Tools;
@@ -37,31 +38,26 @@ import rx.schedulers.Schedulers;
  * @author zhangyh2 LoginUser 下午3:42:16 TODO 用户登录获取数据传递给了接口
  */
 public class WorkOrderNewListener implements FramePresenter {
-    private boolean serv = true;//服务端在修改东西.停止请求
 
-    public void getWorkOrder(int page, String status, String devicename, String devicecode, String deviceip, final FrameListener<WorkOrderRoot> listener) {
+    public void getWorkOrder(final FrameListener<NewServiceRoot> listener) {
 
         if (!APP.isNetworkConnected(APP.getInstance())) {
             listener.onFaild(0, "网络异常,请检查网络");
             return;
         }
-        if (serv) {
-            return;
-        }
         //在这里进行数据请求
-        RxjavaRetrofitRequestUtil.getInstance().get().getWorkOrder(page, status, devicename, devicecode, deviceip).
+        RxjavaRetrofitRequestUtil.getInstance().get().totalCount().
                 subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .map(new Func1<JsonObject, WorkOrderRoot>() {
+                .map(new Func1<JsonObject, NewServiceRoot>() {
                     @Override
-                    public WorkOrderRoot call(JsonObject jsonObject) {
+                    public NewServiceRoot call(JsonObject jsonObject) {
                         DLog.json("Func1", jsonObject.toString());
-                        WorkOrderRoot root = new Gson().fromJson(jsonObject, new TypeToken<WorkOrderRoot>() {
+                        return new Gson().fromJson(jsonObject, new TypeToken<NewServiceRoot>() {
                         }.getType());
-                        return root;
                     }
                 })
-                .subscribe(new Observer<WorkOrderRoot>() {
+                .subscribe(new Observer<NewServiceRoot>() {
                     @Override
                     public void onCompleted() {
 
@@ -73,15 +69,11 @@ public class WorkOrderNewListener implements FramePresenter {
                     }
 
                     @Override
-                    public void onNext(WorkOrderRoot data) {
+                    public void onNext(NewServiceRoot data) {
                         if (data != null) {
-                            if (data.getData() != null && data.getStatus() == 1) {
+                            if (data.getStatus() == 1) {
                                 listener.onSucces(data);
-                            } else {
-                                listener.onFaild(0, data.getMessage());
                             }
-                        } else {
-                            listener.onFaild(0, "解析错误");
                         }
                     }
                 });

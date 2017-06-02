@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.hellen.baseframe.common.dlog.DLog;
 import com.xiangxun.workorder.R;
+import com.xiangxun.workorder.bean.WorkOrderData;
 import com.xiangxun.workorder.ui.biz.WorkOrderDetailListener;
 import com.xiangxun.workorder.ui.main.LbsAmapActivity;
 

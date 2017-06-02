@@ -41,15 +41,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity
-            android:name=".ui.MaintenanceActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" />
-
-        <activity
-            android:name=".ui.MainActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" />
 
         <activity
             android:name=".ui.login.LoginActivity"
@@ -61,7 +52,28 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.main.WorkOrderDetailActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.main.LbsAmapActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
+        <activity
+            android:name=".ui.MaintenanceActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name=".ui.MainActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.MainActivity_V0"
             android:screenOrientation="portrait"
@@ -74,9 +86,7 @@
             android:name=".ui.main.SetActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name=".ui.main.LbsAmapActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
+
         <activity
             android:name=".ui.main.DownLoadActivity"
             android:screenOrientation="portrait"
@@ -87,10 +97,6 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.main.TourActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name=".ui.main.WorkOrderDetailActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
 
@@ -112,7 +118,11 @@
         <!--高德地图APIKEY-->
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="f31962d3f32bcac1f5ff82f353f9e5c8" />
+            android:value="f31962d3f32bcac1f5ff82f353f9e5c8" /><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
     </application>
 
 </manifest>
