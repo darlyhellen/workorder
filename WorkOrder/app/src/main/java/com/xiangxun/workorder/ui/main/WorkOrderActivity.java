@@ -161,9 +161,9 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
     public void onClick(View v) {
 
         if (patrol == null) {
-            presenter.onClickDown(this, 0, v);
+            presenter.onClickDown(this, 0, v, workorder);
         } else {
-            presenter.onClickDown(this, patrol.getListId(), v);
+            presenter.onClickDown(this, patrol.getListId(), v, workorder);
         }
 
     }
@@ -294,13 +294,14 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
 
 
     @Override
-    public void findParamers(String name, String num, String ip) {
+    public void findParamers(String stat, String name, String num, String ip) {
         DLog.i("name = " + name + ";num = " + num + ";ip = " + ip);
         textDes = "没有搜索到工单！";
         currentPage = 1;
         devicename = name;
         devicenum = num;
         deviceip = ip;
+        workorder = stat;
         //搜索的时候，清理以前的数据。
         data.clear();
         if (isTour) {

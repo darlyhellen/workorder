@@ -8,9 +8,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_padding10"
-        android:layout_marginLeft="@dimen/margin_padding10"
-        android:layout_marginRight="@dimen/margin_padding10"
+        android:layout_marginTop="@dimen/margin_padding5"
+        android:layout_marginLeft="@dimen/margin_padding5"
+        android:layout_marginRight="@dimen/margin_padding5"
         android:background="@drawable/business_detai_background"
         android:orientation="vertical"
         android:padding="@dimen/margin_padding5">
@@ -21,7 +21,8 @@
             android:gravity="center"
             android:text="@string/st_detail_detail"
             android:textColor="@color/text_color"
-            android:textSize="@dimen/textSize16" />
+            android:layout_margin="@dimen/margin_padding4"
+            android:textSize="@dimen/textSize18" />
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -303,7 +304,7 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_padding10"
+            android:layout_marginBottom="@dimen/margin_padding5"
             android:orientation="horizontal">
 
             <TextView
@@ -351,9 +352,9 @@
         android:id="@+id/id_detail_fragment_exception"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_padding10"
-        android:layout_marginLeft="@dimen/margin_padding10"
-        android:layout_marginRight="@dimen/margin_padding10"
+        android:layout_marginTop="@dimen/margin_padding5"
+        android:layout_marginLeft="@dimen/margin_padding5"
+        android:layout_marginRight="@dimen/margin_padding5"
         android:background="@drawable/business_detai_background"
         android:orientation="vertical"
         android:padding="@dimen/margin_padding5">
@@ -364,12 +365,13 @@
             android:gravity="center"
             android:text="@string/st_detail_except"
             android:textColor="@color/text_color"
-            android:textSize="@dimen/textSize16" />
+            android:layout_margin="@dimen/margin_padding4"
+            android:textSize="@dimen/textSize18" />
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_padding10"
+            android:layout_marginBottom="@dimen/margin_padding5"
             android:orientation="horizontal">
 
             <TextView
@@ -392,7 +394,7 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_padding10"
+            android:layout_marginBottom="@dimen/margin_padding5"
             android:orientation="horizontal">
 
             <TextView
@@ -441,9 +443,9 @@
         android:id="@+id/id_detail_fragment_close"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_padding10"
-        android:layout_marginLeft="@dimen/margin_padding10"
-        android:layout_marginRight="@dimen/margin_padding10"
+        android:layout_marginTop="@dimen/margin_padding5"
+        android:layout_marginLeft="@dimen/margin_padding5"
+        android:layout_marginRight="@dimen/margin_padding5"
         android:background="@drawable/business_detai_background"
         android:orientation="vertical"
         android:padding="@dimen/margin_padding5">
@@ -454,12 +456,13 @@
             android:gravity="center"
             android:text="@string/st_detail_close"
             android:textColor="@color/text_color"
-            android:textSize="@dimen/textSize16" />
+            android:layout_margin="@dimen/margin_padding4"
+            android:textSize="@dimen/textSize18" />
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_padding10"
+            android:layout_marginBottom="@dimen/margin_padding5"
             android:orientation="horizontal">
 
             <TextView
@@ -482,7 +485,7 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_padding10"
+            android:layout_marginBottom="@dimen/margin_padding5"
             android:orientation="horizontal">
 
             <TextView
@@ -528,9 +531,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_padding10"
-        android:layout_marginLeft="@dimen/margin_padding10"
-        android:layout_marginRight="@dimen/margin_padding10"
+        android:layout_marginTop="@dimen/margin_padding5"
+        android:layout_marginLeft="@dimen/margin_padding5"
+        android:layout_marginRight="@dimen/margin_padding5"
         android:background="@drawable/business_detai_background"
         android:orientation="vertical"
         android:padding="@dimen/margin_padding5">

@@ -248,11 +248,11 @@ public class FragmentWorkOrder extends Fragment implements View.OnClickListener,
 
 
     @Override
-    public void findParamers(String name, String num, String ip) {
+    public void findParamers(String stat,String name, String num, String ip) {
         currentPage = 1;
         devicename = name;
         devicenum = num;
         deviceip = ip;
-        presenter.getWorkOrderByPage(currentPage, null, name, num, ip);
+        presenter.getWorkOrderByPage(currentPage, stat, name, num, ip);
     }
 }

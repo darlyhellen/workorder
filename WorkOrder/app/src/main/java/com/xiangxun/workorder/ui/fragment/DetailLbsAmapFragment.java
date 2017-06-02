@@ -95,15 +95,15 @@ public class DetailLbsAmapFragment extends Fragment {
     private void addMarkersToMap() {
         if (data != null) {
             if (AppEnum.TEST) {
-                data.latitude = 34.164469;
-                data.longitude = 108.951279;
+                data.mapx = "34.164469";
+                data.mapy = "108.951279";
             }
-            if (data.latitude == 0 || data.longitude == 0) {
+            if (TextUtils.isEmpty(data.mapx) || TextUtils.isEmpty(data.mapy)) {
                 //108.951279,34.164469
-                data.latitude = 34.164469;
-                data.longitude = 108.951279;
+                data.mapx = "34.164469";
+                data.mapy = "108.951279";
             }
-            latlng = new LatLng(data.latitude, data.longitude);
+            latlng = new LatLng(Double.parseDouble(data.mapx), Double.parseDouble(data.mapy));
             //这里进行视角，等参数调整。0度就是平面图
             changeCamera(
                     CameraUpdateFactory.newCameraPosition(new CameraPosition(

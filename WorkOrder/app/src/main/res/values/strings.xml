@@ -87,6 +87,7 @@
     <string name="st_search_deviceNum_hint">请输入设备编号</string>
     <string name="st_search_deviceIp">设备IP  :</string>
     <string name="st_search_deviceIp_hint">请输入设备IP</string>
+    <string name="st_search_deviceStatus">查询状态  :</string>
 
     <!--WorkOrderDetailActivity-->
     <string name="st_detail_title">工单详情</string>
@@ -126,4 +127,17 @@
     <string name="st_set_serv_set">设置</string>
     <string name="st_set_serv_ip">IP地址:</string>
     <string name="st_set_serv_port">端口:</string>
+
+
+    <array name="Status">
+        <item>"全  部"</item>
+        <item>"已派发"</item>
+        <item>"已接收"</item>
+        <item>"已退回"</item>
+        <item>"已转派"</item>
+        <item>"已上报"</item>
+        <item>"遗留中"</item>
+        <item>"已关闭"</item>
+        <item>"已评估"</item>
+    </array>
 </resources>

@@ -5,9 +5,11 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import com.amap.api.maps.model.LatLng;
 import com.hellen.baseframe.binder.ContentBinder;
 import com.hellen.baseframe.binder.ViewsBinder;
 import com.hellen.baseframe.common.dlog.DLog;
@@ -62,6 +64,9 @@ public class WorkOrderDetailActivity extends BaseActivity implements OnClickList
             //单独的测试数据,假数据.
             data = AppEnum.getData();
             header.getTitleViewOperationText().setText(R.string.st_detail_position);
+            header.setRightImageTextFlipper(this);
+        }else {
+            header.setRightBackgroundResource(0);
         }
         tab.setTabMode(TabLayout.MODE_FIXED);
         tab.setTabGravity(TabLayout.GRAVITY_FILL);
@@ -78,8 +83,7 @@ public class WorkOrderDetailActivity extends BaseActivity implements OnClickList
         DetailImageFragment image = new DetailImageFragment();
         image.setArguments(bundle);
         list.add(image);
-
-        if (data.longitude != 0 && data.latitude != 0) {
+        if (!TextUtils.isEmpty(data.mapx) && !TextUtils.isEmpty(data.mapy)) {
             //有坐标
             for (int i = 0; i < titles.length; i++) {
                 //设置未选中和选中时字体的颜色
@@ -110,7 +114,7 @@ public class WorkOrderDetailActivity extends BaseActivity implements OnClickList
     @Override
     protected void initListener() {
         header.setLeftBackOneListener(this);
-        header.setRightImageTextFlipper(this);
+
 
         tab.setupWithViewPager(vp);
         vp.setOnPageChangeListener(this);

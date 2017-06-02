@@ -43,9 +43,10 @@ public class WorkOrderPresenter {
     /**
      * @param context
      * @param patrol
-     * @param v       TODO点击事件在这里进行处理
+     * @param v         TODO点击事件在这里进行处理
+     * @param workorder
      */
-    public void onClickDown(Context context, int patrol, View v) {
+    public void onClickDown(Context context, int patrol, View v, String workorder) {
         switch (v.getId()) {
             case R.id.title_view_back_llayout:
                 view.end();
@@ -61,6 +62,11 @@ public class WorkOrderPresenter {
                     bundle.putString("NAME", view.getDevicename());
                     bundle.putString("NUM", view.getDevicenum());
                     bundle.putString("IP", view.getDeviceip());
+                    if (patrol == 5) {
+                        //查询全部工单信息
+                        bundle.putInt("PATROL", patrol);
+                        bundle.putString("WORKORDER", workorder);
+                    }
                     dialog.setArguments(bundle);
                     dialog.show(((WorkOrderActivity) context).getFragmentManager(), "SearchWorkOrderDialogFragment");
                 }

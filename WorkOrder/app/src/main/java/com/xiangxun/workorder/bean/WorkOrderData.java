@@ -55,9 +55,6 @@ public class WorkOrderData implements Parcelable {
     //图片3
     public String photo3;
 
-    public double latitude;
-    public double longitude;
-
 
     public WorkOrderData() {
     }
@@ -95,8 +92,6 @@ public class WorkOrderData implements Parcelable {
         photo1 = in.readString();
         photo2 = in.readString();
         photo3 = in.readString();
-        latitude = in.readDouble();
-        longitude = in.readDouble();
     }
 
     @Override
@@ -129,7 +124,6 @@ public class WorkOrderData implements Parcelable {
         dest.writeString(orgid);
         dest.writeString(reason);
         dest.writeString(note);
-
         dest.writeString(contactname);
         dest.writeString(orgname);
         dest.writeString(companyname);
@@ -138,9 +132,6 @@ public class WorkOrderData implements Parcelable {
         dest.writeString(photo1);
         dest.writeString(photo2);
         dest.writeString(photo3);
-
-        dest.writeDouble(latitude);
-        dest.writeDouble(longitude);
     }
 
     public static final Parcelable.Creator<WorkOrderData> CREATOR = new Parcelable.Creator<WorkOrderData>() {

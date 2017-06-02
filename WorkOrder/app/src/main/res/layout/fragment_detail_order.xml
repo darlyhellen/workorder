@@ -17,7 +17,7 @@
             android:id="@+id/id_detail_fragment_button"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_padding10"
+            android:layout_margin="@dimen/margin_padding5"
             android:background="@drawable/business_detai_background"
             android:orientation="vertical"
             android:padding="@dimen/margin_padding5">
@@ -42,15 +42,17 @@
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:padding="-5dp">
 
                 <Button
                     android:id="@+id/id_detail_fragment_config"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="44dp"
                     android:layout_weight="1"
                     android:background="@drawable/xw_listview_item_selector"
-                    android:text="接收" />
+                    android:text="接收"
+                    android:textSize="@dimen/font_size_16" />
 
                 <View
                     android:layout_width="1dp"
@@ -60,10 +62,11 @@
                 <Button
                     android:id="@+id/id_detail_fragment_consel"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="44dp"
                     android:layout_weight="1"
                     android:background="@drawable/xw_listview_item_selector"
-                    android:text="拒绝" />
+                    android:text="拒绝"
+                    android:textSize="@dimen/font_size_16" />
             </TableRow>
         </LinearLayout>
     </LinearLayout>

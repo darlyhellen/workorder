@@ -121,14 +121,6 @@ public class DetailOrderFragmentListener implements FramePresenter {
             listener.onFaild(0, "上报工单说明不能为空");
             return;
         }
-        if (urls == null) {
-            listener.onFaild(0, "上传图片不能为空");
-            return;
-        }
-        if (urls.size() == 0) {
-            listener.onFaild(0, "上传图片不能为空");
-            return;
-        }
         JSONObject ob = new JSONObject();
         try {
             ob.put("status", status);
@@ -136,10 +128,10 @@ public class DetailOrderFragmentListener implements FramePresenter {
 
 
             JSONArray array = new JSONArray();
-            for (String st: urls) {
+            for (String st : urls) {
                 array.put(st);
             }
-            ob.put("urls",array);
+            ob.put("urls", array);
         } catch (JSONException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

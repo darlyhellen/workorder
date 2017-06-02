@@ -87,11 +87,15 @@ public class LbsAmapActivity extends BaseActivity implements View.OnClickListene
         if (data != null) {
             if (!TextUtils.isEmpty(data.position)) {
                 if (AppEnum.TEST) {
-                    data.latitude = 34.164469;
-                    data.longitude = 108.951279;
+                    data.mapx = "34.164469";
+                    data.mapy = "108.951279";
                 }
-                //108.951279,34.164469
-                latlng = new LatLng(data.latitude, data.longitude);
+                if (TextUtils.isEmpty(data.mapx) || TextUtils.isEmpty(data.mapy)) {
+                    //108.951279,34.164469
+                    data.mapx = "34.164469";
+                    data.mapy = "108.951279";
+                }
+                latlng = new LatLng(Double.parseDouble(data.mapx), Double.parseDouble(data.mapy));
                 //这里进行视角，等参数调整。0度就是平面图
                 changeCamera(
                         CameraUpdateFactory.newCameraPosition(new CameraPosition(

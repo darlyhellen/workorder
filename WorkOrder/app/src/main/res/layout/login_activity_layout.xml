@@ -50,6 +50,7 @@
             </com.xiangxun.workorder.ui.login.edittext.ClearEditText>
         </LinearLayout>
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -81,6 +82,24 @@
                 android:textSize="@dimen/textSize17" />
         </LinearLayout>
 
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_padding10">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/id_login_set"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="系统设置"
+                android:textColor="@color/link_color" />
+        </TableRow>
+
         <com.xiangxun.workorder.ui.login.edittext.XSubButton
             android:id="@+id/btn_login"
             android:layout_width="fill_parent"
@@ -95,23 +114,6 @@
             android:layout_marginTop="@dimen/margin_padding40" />
     </LinearLayout>
 
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/margin_padding10">
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_weight="1" />
-
-        <ImageView
-            android:id="@+id/id_login_set"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/tab_setting_pressed" />
-    </TableRow>
 
     <TextView
         style="@style/more_about_text"

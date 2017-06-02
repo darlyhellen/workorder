@@ -242,9 +242,7 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
 
     @Override
     public List<String> getUrls() {
-        List<String> url = new ArrayList<String>();
-        url.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1496297482491&di=7d96614c976b59569a4b415c5f118dad&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F13%2F96%2F55%2F16n58PICUMI_1024.jpg");
-        return url;
+        return null;
     }
 
     @Override

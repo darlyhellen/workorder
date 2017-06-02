@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.hellen.baseframe.binder.ContentBinder;
 import com.hellen.baseframe.binder.ViewsBinder;
@@ -45,7 +46,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Logi
     private String password;
     private String acount;
     @ViewsBinder(R.id.id_login_set)
-    private ImageView setiv;
+    private TextView setiv;
 
 
     private LoginPresenter presenter;
