@@ -115,10 +115,10 @@ public class LoginPresenter {
                         userBiz.onStop(loading);
                         switch (code) {
                             case 0:
-                                ToastApp.showToast("网络请求异常");
+                                ToastApp.showToast(info);
                                 break;
                             case 1:
-                                ToastApp.showToast(info);
+                                ToastApp.showToast("网络请求异常");
                                 break;
                             default:
                                 break;

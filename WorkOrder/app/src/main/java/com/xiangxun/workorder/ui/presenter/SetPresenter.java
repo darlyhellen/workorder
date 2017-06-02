@@ -56,7 +56,7 @@ public class SetPresenter {
             public void onSucces(Long aLong) {
                 biz.onStop(loading);
                 List<SetModel> datas = new ArrayList<>();
-                datas.add(new SetModel(R.string.set_service, R.string.curr_service, Api.getRoot(), R.mipmap.arrows, false));
+                datas.add(new SetModel(R.string.set_service, R.string.curr_service, Api.getIp(), R.mipmap.arrows, false));
                 datas.add(new SetModel(R.string.set_clean_cache, R.string.curr_cache, (aLong / (1024 * 1024)) + "M", R.mipmap.arrows, false));
                 datas.add(new SetModel(R.string.set_update, R.string.curr_ver, APP.getAppVersionName(), R.mipmap.arrows, false));
                 if (login != 0) {
@@ -248,10 +248,5 @@ public class SetPresenter {
             }
             file.delete();
         }
-    }
-
-    public void clickService(final Context context) {
-        //设置服务器IP地址和端口。
-        context.startActivity(new Intent(context, SetServiceAcitivity.class));
     }
 }

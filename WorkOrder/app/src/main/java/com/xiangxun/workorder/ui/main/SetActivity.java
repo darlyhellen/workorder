@@ -1,5 +1,6 @@
 package com.xiangxun.workorder.ui.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -96,10 +97,21 @@ public class SetActivity extends BaseActivity implements SetListener.SetInterfac
                 presenter.clickLoginOut(this);
                 break;
             case R.string.set_service:
-                presenter.clickService(this);
+                //设置服务器IP地址和端口。
+                Intent in = new Intent(this, SetServiceAcitivity.class);
+                startActivityForResult(in, 700);
                 break;
             default:
                 break;
+        }
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == 700) {
+            presenter.findFileSize(getIntent().getIntExtra("LOGIN", -1));
         }
     }
 }

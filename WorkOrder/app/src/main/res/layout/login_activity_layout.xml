@@ -98,7 +98,8 @@
 
     <TableRow
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_padding10">
 
         <View
             android:layout_width="0dp"
@@ -109,7 +110,7 @@
             android:id="@+id/id_login_set"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/set" />
+            android:src="@mipmap/tab_setting_pressed" />
     </TableRow>
 
     <TextView

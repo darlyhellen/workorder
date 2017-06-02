@@ -32,9 +32,11 @@ public class SetServiceAcitivity extends BaseActivity implements OnClickListener
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        header.getTitleViewOperationText().setText(R.string.st_detail_position);
-        header.setTitle(R.string.st_tour_title_order);
+        header.getTitleViewOperationText().setText(R.string.st_set_serv_set);
+        header.setTitle(R.string.st_set_serv_title);
         header.setLeftBackgroundResource(R.mipmap.ic_title_back);
+        ip.setText(Api.getIp());
+        port.setText(Api.getPort());
     }
 
     @Override
@@ -52,7 +54,8 @@ public class SetServiceAcitivity extends BaseActivity implements OnClickListener
                 //设置输入的IP地址和端口。
                 String oip = ip.getText().toString().trim();
                 String opr = port.getText().toString().trim();
-                Api.setRoot(oip + ":" + opr);
+                Api.setRoot(oip, opr);
+                setResult(700);
                 break;
         }
         finish();

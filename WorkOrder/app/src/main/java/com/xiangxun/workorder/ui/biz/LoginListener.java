@@ -57,10 +57,6 @@ public class LoginListener implements FramePresenter {
     public void login_in(Context context, final String username, final String password,
                          final FrameListener<LoginRoot> listener) {
         // TODO Auto-generated method stub
-        if (!APP.isNetworkConnected(APP.getInstance())) {
-            listener.onFaild(0, "网络异常,请检查网络");
-            return;
-        }
 //        if (!MatcherUtil.isMobile(username)) {
 //            listener.onFaild(0, "请输入正确的手机号码");
 //            return;
@@ -84,6 +80,11 @@ public class LoginListener implements FramePresenter {
         Matcher matcher = pattern.matcher(username);
         if (matcher.matches()) {
             listener.onFaild(0, "用户名不能包含表情");
+            return;
+        }
+
+        if (!APP.isNetworkConnected(APP.getInstance())) {
+            listener.onFaild(0, "网络异常,请检查网络");
             return;
         }
 
