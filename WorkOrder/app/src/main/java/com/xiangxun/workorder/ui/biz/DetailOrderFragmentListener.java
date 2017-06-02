@@ -125,13 +125,13 @@ public class DetailOrderFragmentListener implements FramePresenter {
         try {
             ob.put("status", status);
             ob.put("id", id);
-
-
-            JSONArray array = new JSONArray();
-            for (String st : urls) {
-                array.put(st);
+            if (urls != null) {
+                JSONArray array = new JSONArray();
+                for (String st : urls) {
+                    array.put(st);
+                }
+                ob.put("urls", array);
             }
-            ob.put("urls", array);
         } catch (JSONException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

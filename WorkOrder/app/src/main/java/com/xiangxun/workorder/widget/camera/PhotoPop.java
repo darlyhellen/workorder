@@ -29,7 +29,9 @@ import net.bither.util.NativeUtil;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class PhotoPop extends PopupWindow implements OnClickListener {
 
@@ -191,18 +193,57 @@ public class PhotoPop extends PopupWindow implements OnClickListener {
         switch (tag) {
             case AppEnum.REQUESTCODE_CAP:
                 // 照相机程序返回的
-                return /* capUri */getImagePathForCAP(capUri);
+                String url = copyFile(getImagePathForCAP(capUri), AppEnum.IMAGE + System.currentTimeMillis() + ".png");
+                //需要删除以前文件。
+                File file = new File(getImagePathForCAP(capUri));
+                if (file.exists()) {
+                    file.delete();
+                }
+                return /* capUri */url;
+
             case AppEnum.REQUESTCODE_CAM:
                 // 照片的原始资源地址
                 photoUri = data.getData();
                 DLog.i(getImagePath(photoUri));
-                return getImagePath(photoUri);
+                String cam = copyFile(getImagePath(photoUri), AppEnum.IMAGE + System.currentTimeMillis() + ".png");
+                return cam;
             default:
                 break;
         }
 
         return null;
 
+    }
+
+
+    /**
+     * @param oldPath
+     * @param newPath
+     * @TODO:对文件进行复制备份操作
+     */
+    public String copyFile(String oldPath, String newPath) {
+        try {
+            int bytesum = 0;
+            int byteread = 0;
+            File oldfile = new File(oldPath);
+            if (oldfile.exists()) { //文件存在时
+                InputStream inStream = new FileInputStream(oldPath); //读入原文件
+                FileOutputStream fs = new FileOutputStream(newPath);
+                byte[] buffer = new byte[1444];
+                int length;
+                while ((byteread = inStream.read(buffer)) != -1) {
+                    bytesum += byteread; //字节数 文件大小
+                    System.out.println(bytesum);
+                    fs.write(buffer, 0, byteread);
+                }
+                inStream.close();
+            }
+            return newPath;
+        } catch (Exception e) {
+            System.out.println("复制单个文件操作出错");
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**
@@ -237,7 +278,7 @@ public class PhotoPop extends PopupWindow implements OnClickListener {
             int file_size = (int) (file.length() / 1024);
             Bitmap bit = null;
             if (file_size > 320) {
-                bit = decodeSampledBitmapFromFile(capUri, 480, 640);
+                bit = decodeSampledBitmapFromFile(capUri);
                 // 获取图片大小的比对关系。是100KB的多少。
                 int quality = 1024 * 100 / file_size;
                 return compressBitmap(bit, quality);
@@ -259,18 +300,14 @@ public class PhotoPop extends PopupWindow implements OnClickListener {
     /**
      * 官网：获取压缩后的图片
      *
-     * @param reqWidth  所需图片压缩尺寸最小宽度
-     * @param reqHeight 所需图片压缩尺寸最小高度
      * @return
      */
-    public Bitmap decodeSampledBitmapFromFile(String filepath, int reqWidth,
-                                              int reqHeight) {
+    public Bitmap decodeSampledBitmapFromFile(String filepath) {
         final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(filepath, options);
         // 计算压缩比例。
-        options.inSampleSize = calculateInSampleSize(options, reqWidth,
-                reqHeight);
+        options.inSampleSize = calculateInSampleSize(options);
         options.inJustDecodeBounds = false;
         options.inPreferredConfig = Config.RGB_565;
         options.inDither = true;
@@ -280,21 +317,18 @@ public class PhotoPop extends PopupWindow implements OnClickListener {
     /**
      * 计算压缩比例值(改进版 by touch_ping) 原版2>4>8...倍压缩 当前2>3>4...倍压缩
      *
-     * @param options   解析图片的配置信息
-     * @param reqWidth  所需图片压缩尺寸最小宽度O
-     * @param reqHeight 所需图片压缩尺寸最小高度
+     * @param options 解析图片的配置信息
      * @return
      */
-    public int calculateInSampleSize(BitmapFactory.Options options,
-                                     int reqWidth, int reqHeight) {
+    public int calculateInSampleSize(BitmapFactory.Options options) {
 
         final int picheight = options.outHeight;
         final int picwidth = options.outWidth;
         int targetheight = picheight;
         int targetwidth = picwidth;
         int inSampleSize = 1;
-        if (targetheight > reqHeight || targetwidth > reqWidth) {
-            while (targetheight >= reqHeight && targetwidth >= reqWidth) {
+        if (targetheight > AppEnum.HEIGHT.getLen() || targetwidth > AppEnum.WIDTH.getLen()) {
+            while (targetheight >= AppEnum.HEIGHT.getLen() && targetwidth >= AppEnum.WIDTH.getLen()) {
                 inSampleSize += 1;
                 targetheight = picheight / inSampleSize;
                 targetwidth = picwidth / inSampleSize;
@@ -361,7 +395,7 @@ public class PhotoPop extends PopupWindow implements OnClickListener {
      */
     public String getImagePath(Uri originalUri) {
         String[] proj = {MediaColumns.DATA};
-        if (originalUri==null){
+        if (originalUri == null) {
             return null;
         }
 

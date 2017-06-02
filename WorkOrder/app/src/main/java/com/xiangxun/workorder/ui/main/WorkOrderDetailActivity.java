@@ -1,5 +1,6 @@
 package com.xiangxun.workorder.ui.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -53,6 +54,7 @@ public class WorkOrderDetailActivity extends BaseActivity implements OnClickList
     private int[] titles_no = new int[]{R.string.st_detail_detal, R.string.st_detail_image};
 
     private WorkOrderData data;
+    private DetailOrderFragment order;
 
     @Override
     protected void initView(Bundle savedInstanceState) {
@@ -77,7 +79,7 @@ public class WorkOrderDetailActivity extends BaseActivity implements OnClickList
         }
         Bundle bundle = new Bundle();
         bundle.putParcelable("data", data);
-        DetailOrderFragment order = new DetailOrderFragment();
+        order = new DetailOrderFragment();
         order.setArguments(bundle);
         list.add(order);
         DetailImageFragment image = new DetailImageFragment();
@@ -158,5 +160,11 @@ public class WorkOrderDetailActivity extends BaseActivity implements OnClickList
     @Override
     public void onPageScrollStateChanged(int state) {
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        order.onActivityResult(requestCode,resultCode,data);
     }
 }
