@@ -87,13 +87,6 @@ public class LbsAmapActivity extends BaseActivity implements View.OnClickListene
         if (data != null) {
             if (!TextUtils.isEmpty(data.position)) {
                 if (AppEnum.TEST) {
-<<<<<<< HEAD
-                    data.latitude = 34.164469;
-                    data.longitude = 108.951279;
-                }
-                //108.951279,34.164469
-                latlng = new LatLng(data.latitude, data.longitude);
-=======
                     data.mapx = "34.164469";
                     data.mapy = "108.951279";
                 }
@@ -103,7 +96,6 @@ public class LbsAmapActivity extends BaseActivity implements View.OnClickListene
                     data.mapy = "108.951279";
                 }
                 latlng = new LatLng(Double.parseDouble(data.mapx), Double.parseDouble(data.mapy));
->>>>>>> f9757719696d8632a6d88228ebda0cd326936f4d
                 //这里进行视角，等参数调整。0度就是平面图
                 changeCamera(
                         CameraUpdateFactory.newCameraPosition(new CameraPosition(

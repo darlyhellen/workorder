@@ -66,16 +66,10 @@ public class WorkOrderDetailActivity extends BaseActivity implements OnClickList
             //单独的测试数据,假数据.
             data = AppEnum.getData();
             header.getTitleViewOperationText().setText(R.string.st_detail_position);
-<<<<<<< HEAD
-        }
-        DLog.i(getClass().getSimpleName(), isTour + "--" + id + "---" + data);
-
-=======
             header.setRightImageTextFlipper(this);
         }else {
             header.setRightBackgroundResource(0);
         }
->>>>>>> f9757719696d8632a6d88228ebda0cd326936f4d
         tab.setTabMode(TabLayout.MODE_FIXED);
         tab.setTabGravity(TabLayout.GRAVITY_FILL);
         tab.setTabTextColors(R.color.text_color, R.color.blue_btn_bg_color);
@@ -85,11 +79,7 @@ public class WorkOrderDetailActivity extends BaseActivity implements OnClickList
         }
         Bundle bundle = new Bundle();
         bundle.putParcelable("data", data);
-<<<<<<< HEAD
-        DetailOrderFragment order = new DetailOrderFragment();
-=======
         order = new DetailOrderFragment();
->>>>>>> f9757719696d8632a6d88228ebda0cd326936f4d
         order.setArguments(bundle);
         list.add(order);
         DetailImageFragment image = new DetailImageFragment();

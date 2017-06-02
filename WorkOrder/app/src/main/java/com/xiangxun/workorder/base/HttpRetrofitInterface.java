@@ -58,9 +58,6 @@ public interface HttpRetrofitInterface {
      * @TODO:是否接收处理订单的接口
      */
     @GET("server/workorder/change/status/")
-<<<<<<< HEAD
-    Observable<JsonObject> getOrder(@Query("status") String status, @Query("id") String id);
-=======
     Observable<JsonObject> getOrder(@Query("status") String status, @Query("id") String id, @Query("reason") String reason);
 
     /**
@@ -69,7 +66,6 @@ public interface HttpRetrofitInterface {
      */
     @POST("server/workorder/")
     Observable<JsonObject> upDataOrder(@Body RequestBody args);
->>>>>>> f9757719696d8632a6d88228ebda0cd326936f4d
 
     /**
      * @param version

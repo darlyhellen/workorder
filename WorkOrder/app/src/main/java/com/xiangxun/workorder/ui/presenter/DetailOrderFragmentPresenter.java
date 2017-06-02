@@ -12,11 +12,8 @@ import com.xiangxun.workorder.ui.biz.DetailOrderFragmentListener.DetailOrderFrag
 import com.xiangxun.workorder.ui.fragment.DetailOrderFragment;
 import com.xiangxun.workorder.widget.loading.ShowLoading;
 
-<<<<<<< HEAD
-=======
 import java.util.List;
 
->>>>>>> f9757719696d8632a6d88228ebda0cd326936f4d
 /**
  * Created by Zhangyuhui/Darly on 2017/5/31.
  * Copyright by [Zhangyuhui/Darly]
@@ -45,12 +42,6 @@ public class DetailOrderFragmentPresenter {
     public void onClickDown(Context context, View v) {
         switch (v.getId()) {
             case R.id.id_detail_fragment_config:
-<<<<<<< HEAD
-                getData("1", view.getDataID());
-                break;
-            case R.id.id_detail_fragment_consel:
-                getData("2", view.getDataID());
-=======
                 switch (view.getStatus()) {
                     case 0:
                         getData("1", view.getDataID());
@@ -69,7 +60,6 @@ public class DetailOrderFragmentPresenter {
                         updataOrder("4", view.getDataID(),  view.getUrls());
                         break;
                 }
->>>>>>> f9757719696d8632a6d88228ebda0cd326936f4d
                 break;
         }
     }
@@ -77,31 +67,19 @@ public class DetailOrderFragmentPresenter {
     private void getData(String status, String id) {
         biz.onStart(loading);
         view.setDisableClick();
-<<<<<<< HEAD
-        biz.commitConsel(status, id, new FrameListener<DetailChangeRoot>() {
-=======
         biz.commitConsel(status, id, view.getReason(), new FrameListener<DetailChangeRoot>() {
->>>>>>> f9757719696d8632a6d88228ebda0cd326936f4d
             @Override
             public void onSucces(DetailChangeRoot s) {
                 biz.onStop(loading);
                 view.setEnableClick();
                 ToastApp.showToast(s.getMessage());
-<<<<<<< HEAD
-=======
                 view.onLoginSuccess();
->>>>>>> f9757719696d8632a6d88228ebda0cd326936f4d
             }
 
             @Override
             public void onFaild(int i, String s) {
                 biz.onStop(loading);
                 view.setEnableClick();
-<<<<<<< HEAD
-            }
-        });
-
-=======
                 view.onLoginFailed();
                 switch (i) {
                     case 0:
@@ -146,6 +124,5 @@ public class DetailOrderFragmentPresenter {
                 }
             }
         });
->>>>>>> f9757719696d8632a6d88228ebda0cd326936f4d
     }
 }

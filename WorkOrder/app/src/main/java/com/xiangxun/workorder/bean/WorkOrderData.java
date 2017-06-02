@@ -34,10 +34,8 @@ public class WorkOrderData implements Parcelable {
     public String telephone;
     public String assetid;
     public String isreassign;
-<<<<<<< HEAD
     public double latitude;
     public double longitude;
-=======
     public String exceptionid;
     public String orgid;
     public String reason;
@@ -59,7 +57,6 @@ public class WorkOrderData implements Parcelable {
     //图片3
     public String photo3;
 
->>>>>>> f9757719696d8632a6d88228ebda0cd326936f4d
 
     public WorkOrderData() {
     }
@@ -70,13 +67,8 @@ public class WorkOrderData implements Parcelable {
         isleave = in.readString();
         offtime = in.readString();
         deviceip = in.readString();
-<<<<<<< HEAD
-        status = in.readString();
-        isouter = in.readString();
-=======
         status = in.readInt();
         isouter = in.readInt();
->>>>>>> f9757719696d8632a6d88228ebda0cd326936f4d
         contact = in.readString();
         messages = in.readString();
         id = in.readString();
@@ -90,10 +82,8 @@ public class WorkOrderData implements Parcelable {
         telephone = in.readString();
         assetid = in.readString();
         isreassign = in.readString();
-<<<<<<< HEAD
         latitude = in.readDouble();
         longitude = in.readDouble();
-=======
         exceptionid = in.readString();
         orgid = in.readString();
         reason = in.readString();
@@ -106,7 +96,6 @@ public class WorkOrderData implements Parcelable {
         photo1 = in.readString();
         photo2 = in.readString();
         photo3 = in.readString();
->>>>>>> f9757719696d8632a6d88228ebda0cd326936f4d
     }
 
     @Override
@@ -120,13 +109,8 @@ public class WorkOrderData implements Parcelable {
         dest.writeString(isleave);
         dest.writeString(offtime);
         dest.writeString(deviceip);
-<<<<<<< HEAD
-        dest.writeString(status);
-        dest.writeString(isouter);
-=======
         dest.writeInt(status);
         dest.writeInt(isouter);
->>>>>>> f9757719696d8632a6d88228ebda0cd326936f4d
         dest.writeString(contact);
         dest.writeString(messages);
         dest.writeString(id);
@@ -140,10 +124,8 @@ public class WorkOrderData implements Parcelable {
         dest.writeString(telephone);
         dest.writeString(assetid);
         dest.writeString(isreassign);
-<<<<<<< HEAD
         dest.writeDouble(latitude);
         dest.writeDouble(longitude);
-=======
         dest.writeString(exceptionid);
         dest.writeString(orgid);
         dest.writeString(reason);
@@ -156,7 +138,6 @@ public class WorkOrderData implements Parcelable {
         dest.writeString(photo1);
         dest.writeString(photo2);
         dest.writeString(photo3);
->>>>>>> f9757719696d8632a6d88228ebda0cd326936f4d
     }
 
     public static final Parcelable.Creator<WorkOrderData> CREATOR = new Parcelable.Creator<WorkOrderData>() {
