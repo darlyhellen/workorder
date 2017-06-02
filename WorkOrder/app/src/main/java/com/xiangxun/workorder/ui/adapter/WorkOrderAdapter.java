@@ -1,7 +1,6 @@
 package com.xiangxun.workorder.ui.adapter;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,9 +53,9 @@ public class WorkOrderAdapter extends ParentAdapter<WorkOrderData> {
             hocker.id_tv_background.setBackgroundResource(R.drawable.app_login_shape);
         } else {
             hocker.id_tv_background.setShowDisplay(true);
-            hocker.id_tv_background.setBackgroundResource(R.color.forgetpwd);
+            hocker.id_tv_background.setBackgroundResource(R.color.color_d1d1d1);
         }
-        hocker.id_tv_appraise_man.setText(WorkOrderUtils.findStatus(workOrderData.status));
+        WorkOrderUtils.findStatus(workOrderData.status, hocker.id_tv_appraise_man);
         hocker.id_tv_appraise_date.setText("发布时间: " + Tools.isEmpty(workOrderData.assigntime));
 
         return view;

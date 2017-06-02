@@ -50,7 +50,6 @@
             android:id="@+id/id_tv_appraise_man"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_line_orange"
             android:padding="@dimen/margin_padding5"
             android:singleLine="true"
             android:text=""

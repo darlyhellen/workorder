@@ -172,7 +172,7 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
         tvContent07.setText(data.orgname);
         tvContent08.setText(data.contactname);
         tvContent09.setText(data.assigntime);
-        tvContent10.setText(WorkOrderUtils.findStatus(data.status));
+        WorkOrderUtils.findStatus(data.status, tvContent10);
         if (0 == data.isouter) {
             tvContent11.setText("否");
         } else {
@@ -238,7 +238,6 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
     public int getStatus() {
         return data.status;
     }
-
 
 
     @Override

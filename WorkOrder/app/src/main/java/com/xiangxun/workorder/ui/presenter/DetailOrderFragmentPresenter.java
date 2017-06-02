@@ -47,7 +47,7 @@ public class DetailOrderFragmentPresenter {
                         getData("1", view.getDataID());
                         break;
                     case 1:
-                        updataOrder("4", view.getDataID(), view.getUrls());
+                        updataOrder("8", view.getDataID(), view.getUrls());
                         break;
                 }
                 break;
@@ -57,7 +57,7 @@ public class DetailOrderFragmentPresenter {
                         getData("2", view.getDataID());
                         break;
                     case 1:
-                        updataOrder("5", view.getDataID(),  view.getUrls());
+                        updataOrder("4", view.getDataID(),  view.getUrls());
                         break;
                 }
                 break;

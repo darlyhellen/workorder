@@ -231,4 +231,15 @@
     <color name="color333333">#333333</color>
     <color name="color_d1d1d1">#d1d1d1</color>
 
+    <!--Status-->
+    <color name="status_bg_0">#ABF0FC</color>
+    <color name="status_bg_1">#A6D94E</color>
+    <color name="status_bg_2">#FF0033</color>
+    <color name="status_bg_3">#44C6F8</color>
+    <color name="status_bg_4">#FF00FF</color>
+    <color name="status_bg_5">#2C2255</color>
+    <color name="status_bg_6">#008000</color>
+    <color name="status_bg_7">#8E468E</color>
+    <color name="status_bg_8">#d8d8d8</color>
+
 </resources>

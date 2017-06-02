@@ -249,10 +249,8 @@
                 android:id="@+id/tv_content10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_line_orange"
-                android:paddingLeft="@dimen/margin_padding8"
-                android:paddingRight="@dimen/margin_padding8"
-                android:textColor="@color/color333333"
+                android:padding="@dimen/margin_padding5"
+                android:textColor="@color/white"
                 android:textSize="@dimen/textSize16" />
         </LinearLayout>
 
