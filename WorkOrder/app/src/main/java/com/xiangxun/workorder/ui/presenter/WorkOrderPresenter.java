@@ -9,6 +9,7 @@ import com.hellen.baseframe.application.FrameListener;
 import com.hellen.baseframe.common.dlog.DLog;
 import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.R;
+import com.xiangxun.workorder.base.StaticListener;
 import com.xiangxun.workorder.bean.WorkOrderRoot;
 import com.xiangxun.workorder.ui.biz.WorkOrderListener;
 import com.xiangxun.workorder.ui.fragment.DetailOrderFragment;
@@ -69,7 +70,7 @@ public class WorkOrderPresenter {
         }
     }
 
-    public void getWorkOrderByPage(int page, String status, String devicename, String devicecode, String deviceip) {
+    public void getWorkOrderByPage(int page, final String status, String devicename, String devicecode, String deviceip) {
 
         biz.onStart(loading);
 
@@ -77,6 +78,9 @@ public class WorkOrderPresenter {
             @Override
             public void onSucces(WorkOrderRoot data) {
                 biz.onStop(loading);
+                if ("0".equals(status)) {
+                    StaticListener.getInstance().getRefreshMainUIListener().refreshMainUI(data.getTotalSize());
+                }
                 view.onWorkOrderSuccess(data.getData());
             }
 
