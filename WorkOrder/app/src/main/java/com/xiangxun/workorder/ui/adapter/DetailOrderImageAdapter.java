@@ -11,6 +11,7 @@ import android.widget.AbsoluteLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.hellen.baseframe.baseadapter.ParentAdapter;
 import com.hellen.baseframe.common.dlog.DLog;
@@ -43,41 +44,66 @@ public class DetailOrderImageAdapter extends ParentAdapter<String> {
     }
 
     @Override
-    public View HockView(int i, View view, ViewGroup viewGroup, int i1, Context context, String url) {
-        ViewHocker hocker = null;
+    public View HockView(int position, View view, ViewGroup viewGroup, int i1, Context context, String url) {
+//        ViewHocker hocker = null;
+//        if (view == null) {
+//            view = LayoutInflater.from(context).inflate(i1, null);
+//            hocker = new ViewHocker();
+//            hocker.lin = (LinearLayout) view.findViewById(R.id.id_item_fragment_detail_lin);
+//            hocker.lin.setLayoutParams(new AbsListView.LayoutParams(AppEnum.WIDTH.getLen() / 4, AppEnum.WIDTH.getLen() / 4));
+//            hocker.image = (ImageView) view.findViewById(R.id.id_item_fragment_detail_image);
+//            view.setTag(hocker);
+//        } else {
+//            hocker = (ViewHocker) view.getTag();
+//        }
+//
+//        if (position == (data.size() - 1)) {
+//            hocker.image.setBackgroundResource(R.drawable.add_publish_image);
+//        } else {
+//            ImageLoader.getInstance().displayImage(
+//                    "file://" + url, hocker.image);
+//        }
+
+        ViewHocker viewHolder = null;
         if (view == null) {
-            view = LayoutInflater.from(context).inflate(i1, null);
-            hocker = new ViewHocker();
-            hocker.lin = (LinearLayout) view.findViewById(R.id.id_item_fragment_detail_lin);
-            hocker.lin.setLayoutParams(new AbsListView.LayoutParams(AppEnum.WIDTH.getLen() / 4, AppEnum.WIDTH.getLen() / 4));
-            hocker.image = (ImageView) view.findViewById(R.id.id_item_fragment_detail_image);
-            view.setTag(hocker);
+            view = LayoutInflater.from(context).inflate(
+                    R.layout.item_main_detail_image_adapter, null);
+            viewHolder = new ViewHocker();
+            viewHolder.photo = (ImageView) view
+                    .findViewById(R.id.id_iv_photo);
+            viewHolder.close = (ImageView) view
+                    .findViewById(R.id.id_iv_close);
+            viewHolder.desc = (TextView) view
+                    .findViewById(R.id.id_tv_desc);
+            view.setTag(viewHolder);
         } else {
-            hocker = (ViewHocker) view.getTag();
+            viewHolder = (ViewHocker) view.getTag();
         }
 
-        if ("add".equals(url)) {
-            hocker.image.setBackgroundResource(R.drawable.add_publish_image);
+
+        if (position == (data.size() - 1)) {
+            viewHolder.photo.setImageResource(R.drawable.add_publish_image);
+            viewHolder.photo.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            viewHolder.close.setVisibility(View.GONE);
         } else {
-//            DLog.i(getClass().getSimpleName(), url);
-//            hocker.image.setImageBitmap(getLoaclImage(url));
-            ImageLoaderUtil.getInstance().loadImageNor(url,hocker.image);
+            viewHolder.close.setVisibility(View.VISIBLE);
+            viewHolder.desc.setText("");
+            ImageLoader.getInstance().displayImage(
+                    "file://" + data.get(position), viewHolder.photo);
+
         }
+
+
+
         return view;
     }
 
     class ViewHocker {
         LinearLayout lin;
         ImageView image;
-    }
 
-    public Bitmap getLoaclImage(String url) {
-        try {
-            FileInputStream fis = new FileInputStream(url);
-            return BitmapFactory.decodeStream(fis);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        return null;
+        ImageView photo;
+        ImageView close;
+        TextView desc;
     }
 }

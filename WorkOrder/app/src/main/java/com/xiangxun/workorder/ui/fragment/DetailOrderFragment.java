@@ -2,7 +2,6 @@ package com.xiangxun.workorder.ui.fragment;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,10 +11,8 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -34,10 +31,6 @@ import com.xiangxun.workorder.ui.presenter.DetailOrderFragmentPresenter;
 import com.xiangxun.workorder.widget.camera.PhotoPop;
 import com.xiangxun.workorder.widget.grid.WholeGridView;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,7 +41,7 @@ import java.util.List;
  *
  * @TODO: 固态详情展示页面。
  */
-public class DetailOrderFragment extends Fragment implements OnClickListener, DetailOrderFragmentInterface, OnItemClickListener, OnItemLongClickListener {
+public class DetailOrderFragment extends Fragment implements OnClickListener, DetailOrderFragmentInterface, OnItemClickListener {
     private View root;
 
     private WorkOrderData data;
@@ -255,7 +248,6 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
         commit.setOnClickListener(this);
         consel.setOnClickListener(this);
         images.setOnItemClickListener(this);
-        images.setOnItemLongClickListener(this);
     }
 
     @Override
@@ -312,7 +304,7 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String st = (String) parent.getItemAtPosition(position);
-        if ("添加图片".equals(st)) {
+        if (position == (imageData.size() - 1)) {
             pop.show(view);
         } else {
             Intent intent = new Intent(getActivity(), ShowImageViewActivity.class);
@@ -325,22 +317,9 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
             intent.putExtra("width", view.getWidth());//必须
             intent.putExtra("height", view.getHeight());//必须
             startActivity(intent);
-            getActivity().overridePendingTransition(0, 0);
         }
     }
 
-
-    @Override
-    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-        if (imageData.size() != 1) {
-            imageData.remove(parent.getItemAtPosition(position));
-            images.removeAllViews();
-            adapter.setData(imageData);
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -372,13 +351,10 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
                 return;
             }
 
-            imageData.add(imageData.size() - 1, "http://img0.imgtn.bdimg.com/it/u=4195805644,827754888&fm=23&gp=0.jpg");
-            images.removeAllViews();
-            adapter.setData(imageData);
+            imageData.add(imageData.size() - 1, head_path);
+            adapter.notifyDataSetChanged();
             //pop.cropPhoto(Uri.fromFile(temp));// 裁剪图片
             //这里不需要裁剪图片。
         }
     }
-
-
 }

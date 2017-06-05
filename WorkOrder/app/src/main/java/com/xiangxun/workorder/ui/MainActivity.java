@@ -3,14 +3,10 @@ package com.xiangxun.workorder.ui;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.view.Gravity;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.GridView;
 
 import com.hellen.baseframe.binder.ContentBinder;
 import com.hellen.baseframe.binder.ViewsBinder;
@@ -18,8 +14,6 @@ import com.hellen.baseframe.common.dlog.DLog;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.base.BaseActivity;
-import com.xiangxun.workorder.base.StaticListener;
-import com.xiangxun.workorder.ui.adapter.DetailOrderImageAdapter;
 import com.xiangxun.workorder.ui.adapter.MainDetailImageAdapter;
 import com.xiangxun.workorder.ui.adapter.MainDetailImageAdapter.Callback;
 import com.xiangxun.workorder.ui.biz.MainListener.MainInterface;
@@ -41,7 +35,7 @@ import java.util.List;
  * @TODO: 首页静态页面, 暂时没有接口网络请求。
  */
 @ContentBinder(R.layout.activity_main)
-public class MainActivity extends BaseActivity implements View.OnClickListener, MainInterface, OnItemLongClickListener, OnItemClickListener, Callback {
+public class MainActivity extends BaseActivity implements View.OnClickListener, MainInterface, OnItemClickListener, Callback {
 
 
     /**
@@ -132,17 +126,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
 
     @Override
-    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-        if (position != parent.getChildCount() - 1) {
-            data.remove(parent.getItemAtPosition(position));
-            adapter.setData(data);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         DLog.i("onActivityResult" + requestCode + resultCode);
@@ -174,7 +157,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
             this.data.add(this.data.size() - 1, head_path);
             //this.data.add(this.data.size() - 1, "http://img0.imgtn.bdimg.com/it/u=4195805644,827754888&fm=23&gp=0.jpg");
-            adapter.setData(this.data);
+            adapter.notifyDataSetChanged();
             //pop.cropPhoto(Uri.fromFile(temp));// 裁剪图片
             //这里不需要裁剪图片。
         }
