@@ -25,12 +25,21 @@
     <TextView
         android:id="@+id/id_maintenance_username"
         android:layout_width="match_parent"
-        android:padding="@dimen/margin_padding10"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:padding="@dimen/margin_padding10"
         android:textColor="@color/text_color"
         android:textSize="@dimen/textSize16" />
 
+
+    <ViewFlipper
+        android:id="@+id/id_maintenance_flipper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autoStart="true"
+        android:flipInterval="5000"
+        android:inAnimation="@anim/anim_in"
+        android:outAnimation="@anim/anim_out" />
 
     <View
         android:layout_width="match_parent"
