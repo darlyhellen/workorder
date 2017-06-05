@@ -36,6 +36,8 @@ public class MaintenancePresenter {
         List<Patrol> data = new ArrayList<>();
         data.add(new Patrol(10, R.string.maintenance_order, R.mipmap.work_order_search, 0));
         data.add(new Patrol(20, R.string.maintenance_tour, R.mipmap.patrol_normal, 0));
+        data.add(new Patrol(30, R.string.maintenance_equipment, R.mipmap.work_order_search, 0));
+        data.add(new Patrol(40, R.string.maintenance_notification, R.mipmap.patrol_normal, 0));
         return data;
     }
 

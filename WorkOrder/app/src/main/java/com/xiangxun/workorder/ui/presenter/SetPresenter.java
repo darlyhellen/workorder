@@ -83,7 +83,6 @@ public class SetPresenter {
                 view.end();
                 break;
             case R.id.xw_share:
-                DLog.i("搜索按钮点击");
                 break;
             default:
                 break;
@@ -114,12 +113,13 @@ public class SetPresenter {
 
     public void clickUpdate(final Context context) {
         //先请求版本更新接口,获取版本更新内容,判断是否是最新版本,不是最新版本,提示更新.
-        final APPDialg dialg = new APPDialg(context);
-
+        biz.onStart(loading);
         biz.findNewVersion(APP.getInstance().getVersionCode(), new FrameListener<VersionRoot>() {
             @Override
             public void onSucces(final VersionRoot versionRoot) {
+                biz.onStop(loading);
                 if (versionRoot.getData().getVersion() > APP.getInstance().getVersionCode()) {
+                    APPDialg dialg = new APPDialg(context);
                     dialg.setViewVisible();
                     dialg.setTitle(R.string.set_decl);
                     dialg.setContent(R.string.set_update_des);
@@ -140,25 +140,16 @@ public class SetPresenter {
                         }
                     });
                 } else {
+                    APPDialg dialg = new APPDialg(context);
                     dialg.setViewInvisible();
                     dialg.setContent("已经是最新版本");
                     dialg.setSure(R.string.set_sure);
-                    dialg.setOndialogListener(new OndialogListener() {
-                        @Override
-                        public void onSureClick() {
-
-                        }
-
-                        @Override
-                        public void onConselClick() {
-
-                        }
-                    });
                 }
             }
 
             @Override
             public void onFaild(int i, String s) {
+                biz.onStop(loading);
                 //测试正常。
 //                dialg.setViewVisible();
 //                dialg.setTitle(R.string.set_decl);
@@ -182,21 +173,10 @@ public class SetPresenter {
 //                    }
 //                });
 
-
+                APPDialg dialg = new APPDialg(context);
                 dialg.setViewInvisible();
                 dialg.setContent("已经是最新版本");
                 dialg.setSure(R.string.set_sure);
-                dialg.setOndialogListener(new OndialogListener() {
-                    @Override
-                    public void onSureClick() {
-
-                    }
-
-                    @Override
-                    public void onConselClick() {
-
-                    }
-                });
             }
         });
     }

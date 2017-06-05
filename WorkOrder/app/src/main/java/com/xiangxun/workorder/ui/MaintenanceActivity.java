@@ -8,10 +8,12 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.hellen.baseframe.binder.ContentBinder;
 import com.hellen.baseframe.binder.ViewsBinder;
 import com.hellen.baseframe.common.obsinfo.ToastApp;
+import com.hellen.baseframe.common.utiltools.SharePreferHelp;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.base.BaseActivity;
@@ -40,6 +42,10 @@ public class MaintenanceActivity extends BaseActivity implements AdapterView.OnI
     private HeaderView title;
     @ViewsBinder(R.id.id_maintenance_iv)
     private ImageView iv;
+    @ViewsBinder(R.id.id_maintenance_username)
+    private TextView name;
+
+
     @ViewsBinder(R.id.id_maintenance_gv)
     private GridView gridView;
 
@@ -52,7 +58,8 @@ public class MaintenanceActivity extends BaseActivity implements AdapterView.OnI
         presenter = new MaintenancePresenter(this);
         title.setTitle(R.string.maintenance_title);
         title.setRightBackgroundResource(R.mipmap.set);
-        iv.setLayoutParams(new LinearLayout.LayoutParams(AppEnum.WIDTH.getLen(), (int) (AppEnum.WIDTH.getLen() * 0.64)));
+        iv.setLayoutParams(new LinearLayout.LayoutParams(AppEnum.WIDTH.getLen() / 3, AppEnum.WIDTH.getLen() / 3));
+        name.setText(SharePreferHelp.getValue(AppEnum.USERREALNAME.getDec(), null));
         adapter = new PatrolHomeAdapter(presenter.findMaintenance(), R.layout.home_grideview_layout, this);
         gridView.setAdapter(adapter);
     }

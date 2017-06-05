@@ -243,7 +243,6 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
     private void initListener() {
         commit.setOnClickListener(this);
         consel.setOnClickListener(this);
-
         images.setOnItemClickListener(this);
     }
 

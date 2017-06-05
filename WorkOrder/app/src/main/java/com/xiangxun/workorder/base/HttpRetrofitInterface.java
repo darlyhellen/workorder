@@ -54,14 +54,14 @@ public interface HttpRetrofitInterface {
     Observable<JsonObject> totalCount();
 
     /**
-     * @param status id
+     * @param status
      * @TODO:是否接收处理订单的接口
      */
     @GET("server/workorder/change/status/")
     Observable<JsonObject> getOrder(@Query("status") String status, @Query("id") String id, @Query("reason") String reason);
 
     /**
-     * @param status id
+     * @param args
      * @TODO:上報工單接口
      */
     @POST("server/workorder/")
