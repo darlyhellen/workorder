@@ -6,16 +6,22 @@ import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.AbsoluteLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.hellen.baseframe.baseadapter.ParentAdapter;
+import com.hellen.baseframe.common.dlog.DLog;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.common.image.ImageLoaderUtil;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.net.URI;
 import java.util.List;
 
 /**
@@ -42,22 +48,26 @@ public class DetailOrderImageAdapter extends ParentAdapter<String> {
         if (view == null) {
             view = LayoutInflater.from(context).inflate(i1, null);
             hocker = new ViewHocker();
+            hocker.lin = (LinearLayout) view.findViewById(R.id.id_item_fragment_detail_lin);
+            hocker.lin.setLayoutParams(new AbsListView.LayoutParams(AppEnum.WIDTH.getLen() / 4, AppEnum.WIDTH.getLen() / 4));
             hocker.image = (ImageView) view.findViewById(R.id.id_item_fragment_detail_image);
-            hocker.image.setLayoutParams(new LinearLayout.LayoutParams(AppEnum.WIDTH.getLen() / 4, AppEnum.WIDTH.getLen() / 4));
             view.setTag(hocker);
         } else {
             hocker = (ViewHocker) view.getTag();
         }
 
-        if ("添加图片".equals(url)) {
+        if ("add".equals(url)) {
             hocker.image.setBackgroundResource(R.drawable.add_publish_image);
         } else {
-            ImageLoaderUtil.getInstance().loadImageNor(url, hocker.image);
+//            DLog.i(getClass().getSimpleName(), url);
+//            hocker.image.setImageBitmap(getLoaclImage(url));
+            ImageLoaderUtil.getInstance().loadImageNor(url,hocker.image);
         }
         return view;
     }
 
     class ViewHocker {
+        LinearLayout lin;
         ImageView image;
     }
 

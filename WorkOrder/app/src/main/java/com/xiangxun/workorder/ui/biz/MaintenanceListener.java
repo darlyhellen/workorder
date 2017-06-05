@@ -38,14 +38,14 @@ public class MaintenanceListener implements FramePresenter {
             dialog.show();
     }
 
-    public void getWorkOrder(int page, String status, String devicename, String devicecode, String deviceip, final FrameListener<WorkOrderRoot> listener) {
+    public void getWorkOrder(final FrameListener<WorkOrderRoot> listener) {
 
         if (!APP.isNetworkConnected(APP.getInstance())) {
             listener.onFaild(0, "网络异常,请检查网络");
             return;
         }
         //在这里进行数据请求
-        RxjavaRetrofitRequestUtil.getInstance().get().getWorkOrder(page, status, devicename, devicecode, deviceip).
+        RxjavaRetrofitRequestUtil.getInstance().get().totalWorkOrder().
                 subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(new Func1<JsonObject, WorkOrderRoot>() {

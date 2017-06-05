@@ -63,11 +63,11 @@ public class MaintenancePresenter {
         }
     }
 
-    public void getWorkOrderByPage(int page, final String status, String devicename, String devicecode, String deviceip) {
+    public void getWorkOrderByPage() {
 
         biz.onStart(loading);
 
-        biz.getWorkOrder(page, status, devicename, devicecode, deviceip, new FrameListener<WorkOrderRoot>() {
+        biz.getWorkOrder(new FrameListener<WorkOrderRoot>() {
             @Override
             public void onSucces(WorkOrderRoot data) {
                 biz.onStop(loading);

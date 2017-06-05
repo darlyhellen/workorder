@@ -1,22 +1,32 @@
 package com.xiangxun.workorder.ui;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.view.Gravity;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.GridView;
 
 import com.hellen.baseframe.binder.ContentBinder;
 import com.hellen.baseframe.binder.ViewsBinder;
 import com.hellen.baseframe.common.dlog.DLog;
 import com.xiangxun.workorder.R;
+import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.base.BaseActivity;
 import com.xiangxun.workorder.base.StaticListener;
-import com.xiangxun.workorder.ui.adapter.ViewPagerAdapter;
+import com.xiangxun.workorder.ui.adapter.DetailOrderImageAdapter;
+import com.xiangxun.workorder.ui.adapter.MainDetailImageAdapter;
+import com.xiangxun.workorder.ui.adapter.MainDetailImageAdapter.Callback;
 import com.xiangxun.workorder.ui.biz.MainListener.MainInterface;
-import com.xiangxun.workorder.ui.fragment.FragmentWorkOrder;
+import com.xiangxun.workorder.ui.main.ShowImageViewActivity;
 import com.xiangxun.workorder.ui.presenter.MainPresenter;
+import com.xiangxun.workorder.widget.camera.PhotoPop;
+import com.xiangxun.workorder.widget.grid.WholeGridView;
 import com.xiangxun.workorder.widget.header.HeaderView;
 
 import java.util.ArrayList;
@@ -31,7 +41,7 @@ import java.util.List;
  * @TODO: 首页静态页面, 暂时没有接口网络请求。
  */
 @ContentBinder(R.layout.activity_main)
-public class MainActivity extends BaseActivity implements View.OnClickListener, MainInterface, StaticListener.RefreshMainUIListener, OnPageChangeListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener, MainInterface, OnItemLongClickListener, OnItemClickListener, Callback {
 
 
     /**
@@ -42,42 +52,41 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     //首页参数集合
     @ViewsBinder(R.id.comment_title)
     private HeaderView title;
-    @ViewsBinder(R.id.comment_table)
-    private TabLayout tab;
-    @ViewsBinder(R.id.comment_viewpager)
-    private ViewPager vp;
-
-    private ViewPagerAdapter adapter;
-    private List<Fragment> list = new ArrayList<Fragment>();
 
 
-    private int[] titles = new int[]{R.string.main_work_order_new, R.string.main_work_order_all};
+    @ViewsBinder(R.id.id_detail_fragment_age)
+    private WholeGridView gridView;
+    private List<String> data;
+    private MainDetailImageAdapter adapter;
+
+
+    /**
+     * 上午9:29:04 TODO 调出选项的POP窗口，主要为相机，相册，取消
+     */
+    public PhotoPop pop;
 
     @Override
     protected void initView(Bundle savedInstanceState) {
         presenter = new MainPresenter(this);
-        title.setTitle(R.string.main_work_order);
+        title.setTitle("測試頁面");
         title.setRightBackgroundResource(R.mipmap.set);
-        tab.setTabMode(TabLayout.MODE_FIXED);
-        tab.setTabGravity(TabLayout.GRAVITY_FILL);
-        for (int i = 0; i < titles.length; i++) {
-            //设置未选中和选中时字体的颜色
-            tab.setTabMode(TabLayout.MODE_FIXED);
-            tab.setTabTextColors(R.color.blue_btn_bg_color, R.color.text_color);
-            tab.addTab(tab.newTab().setText(titles[i]));
-            list.add(new FragmentWorkOrder());
-        }
-        //创建适配器(这个适配器是自定义的，我用的是FragmentPagerAdapger，根据需求自定义吧)
-        adapter = new ViewPagerAdapter(this, getSupportFragmentManager(), list, titles);
-        vp.setAdapter(adapter);
+        pop = new PhotoPop(this);
+        //添加图片的功能模块
+//        imageData = new ArrayList<String>();
+//        imageData.add("add");
+//        adapter = new DetailOrderImageAdapter(imageData, R.layout.item_fragment_detail_image, this);
+//        images.setAdapter(adapter);
+
+        data = new ArrayList<String>();
+        data.add("file:///android_asset/add.png");
+        adapter = new MainDetailImageAdapter(data, R.layout.item_fragment_detail_image, this, this);
+        gridView.setAdapter(adapter);
     }
 
     @Override
     protected void initListener() {
         title.setRightOnClickListener(this);
-        tab.setupWithViewPager(vp);
-        vp.setOnPageChangeListener(this);
-        DLog.i(getClass().getSimpleName(), tab);
+        gridView.setOnItemClickListener(this);
     }
 
     @Override
@@ -100,22 +109,81 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     }
 
+    //图片加载类
     @Override
-    public void refreshMainUI(int num) {
-        DLog.i(getClass().getSimpleName() + "--->" + num);
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        String st = (String) parent.getItemAtPosition(position);
+        if (position == (data.size() - 1)) {
+            pop.show(view);
+        } else {
+            Intent intent = new Intent(this, ShowImageViewActivity.class);
+            intent.putExtra("position", position);
+            int[] location = new int[2];
+            view.getLocationOnScreen(location);
+            intent.putExtra("locationX", location[0]);//必须
+            intent.putExtra("locationY", location[1]);//必须
+            intent.putExtra("url", (String) parent.getItemAtPosition(position));
+            intent.putExtra("width", view.getWidth());//必须
+            intent.putExtra("height", view.getHeight());//必须
+            startActivity(intent);
+            overridePendingTransition(0, 0);
+        }
+    }
+
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        if (position != parent.getChildCount() - 1) {
+            data.remove(parent.getItemAtPosition(position));
+            adapter.setData(data);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        DLog.i("onActivityResult" + requestCode + resultCode);
+        if (requestCode == AppEnum.REQUESTCODE_CUT) {
+            // 裁剪
+            if (data != null) {
+                Bundle extras = data.getExtras();
+                Bitmap head = extras.getParcelable("data");
+            }
+        } else if (requestCode == AppEnum.REQUESTCODE_CAM
+                || requestCode == AppEnum.REQUESTCODE_CAP) {
 
+            // 拍照或相册
+            String head_path = null;
+            if (data == null) {
+                if (pop == null) {
+                    head_path = AppEnum.capUri;
+                } else {
+                    head_path = pop.PopStringActivityResult(null,
+                            AppEnum.REQUESTCODE_CAP);
+                }
+            } else {
+                head_path = pop.PopStringActivityResult(data,
+                        AppEnum.REQUESTCODE_CAM);
+            }
+            if (head_path == null) {
+                return;
+            }
+
+            this.data.add(this.data.size() - 1, head_path);
+            //this.data.add(this.data.size() - 1, "http://img0.imgtn.bdimg.com/it/u=4195805644,827754888&fm=23&gp=0.jpg");
+            adapter.setData(this.data);
+            //pop.cropPhoto(Uri.fromFile(temp));// 裁剪图片
+            //这里不需要裁剪图片。
+        }
     }
 
     @Override
-    public void onPageSelected(int position) {
-    }
-
-    @Override
-    public void onPageScrollStateChanged(int state) {
-
+    public void click(View v, int position) {
+        data.remove(position);
+        // gridView.setAdapter(new PhotoGridViewAdapter(this, listData, this));
+        adapter.setData(data);
     }
 }

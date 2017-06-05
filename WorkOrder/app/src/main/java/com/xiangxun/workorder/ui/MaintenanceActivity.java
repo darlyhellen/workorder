@@ -74,11 +74,11 @@ public class MaintenanceActivity extends BaseActivity implements AdapterView.OnI
     @Override
     protected void initView(Bundle savedInstanceState) {
         presenter = new MaintenancePresenter(this);
-        presenter.getWorkOrderByPage(1, "0", null, null, null);
+        presenter.getWorkOrderByPage();
         title.setTitle(R.string.maintenance_title);
         title.setRightBackgroundResource(R.mipmap.set);
         iv.setLayoutParams(new LinearLayout.LayoutParams(AppEnum.WIDTH.getLen() / 5, AppEnum.WIDTH.getLen() / 5));
-        name.setText("用户名称：" + SharePreferHelp.getValue(AppEnum.USERREALNAME.getDec(), null));
+        name.setText(SharePreferHelp.getValue(AppEnum.USERREALNAME.getDec(), null));
         adapter = new PatrolHomeAdapter(presenter.findMaintenance(), R.layout.home_grideview_layout, this);
         gridView.setAdapter(adapter);
     }
@@ -161,7 +161,7 @@ public class MaintenanceActivity extends BaseActivity implements AdapterView.OnI
     public void onWorkOrderSuccess(List<WorkOrderData> datas) {
         for (final WorkOrderData da : datas) {
             View view = LayoutInflater.from(this).inflate(R.layout.item_activity_flipper, null);
-            ((TextView) view.findViewById(R.id.id_maintenance_flp_tv)).setText("工单编号：" + da.id + "  设备名称：" + da.devicename + "  请点击查看详情！");
+            ((TextView) view.findViewById(R.id.id_maintenance_flp_tv)).setText("工单编号：" + da.id + "  设备名称：" + da.devicename);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -189,7 +189,7 @@ public class MaintenanceActivity extends BaseActivity implements AdapterView.OnI
         DLog.i(getClass().getSimpleName(), requestCode + "---" + resultCode + "---" + data);
 
         if (resultCode == 701) {
-            presenter.getWorkOrderByPage(1, "0", null, null, null);
+            presenter.getWorkOrderByPage();
         }
     }
 }

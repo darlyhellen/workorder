@@ -42,8 +42,6 @@ public class MainPresenter {
         switch (v.getId()) {
             case R.id.xw_share:
                 //進入設置頁面
-                DLog.i("设置按钮点击");
-                context.startActivity(new Intent(context, SetActivity.class));
                 break;
         }
     }

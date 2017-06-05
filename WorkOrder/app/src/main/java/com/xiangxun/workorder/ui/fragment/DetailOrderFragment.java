@@ -200,7 +200,17 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
         tvContent02.setText(data.devicename);
         tvContent03.setText(data.devicecode);
         tvContent04.setText(data.deviceip);
-        tvContent05.setText(data.devicetype);
+        if ("device".equals(data.devicetype)) {
+            tvContent05.setText("卡口");
+        } else if ("ftp".equals(data.devicetype)) {
+            tvContent05.setText("FTP");
+        } else if ("project".equals(data.devicetype)) {
+            tvContent05.setText("平台");
+        } else if ("database".equals(data.devicetype)) {
+            tvContent05.setText("数据库");
+        } else {
+            tvContent05.setText("机柜");
+        }
         tvContent06.setText(data.position);
         tvContent07.setText(data.orgname);
         tvContent08.setText(data.contactname);

@@ -12,16 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/comment_viewpager"
+    <com.xiangxun.workorder.widget.grid.WholeGridView
+        android:id="@+id/id_detail_fragment_age"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <android.support.design.widget.TabLayout
-            android:id="@+id/comment_table"
-            android:layout_width="match_parent"
-            android:layout_height="48dp" />
-    </android.support.v4.view.ViewPager>
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_padding4"
+        android:numColumns="4" />
 
 </LinearLayout>
