@@ -65,7 +65,9 @@ public class APPDialg extends AlertDialog {
         sure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ondialogListener.onSureClick();
+                if (ondialogListener != null) {
+                    ondialogListener.onSureClick();
+                }
                 cancel();
             }
         });
@@ -75,7 +77,9 @@ public class APPDialg extends AlertDialog {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                ondialogListener.onConselClick();
+                if (ondialogListener != null) {
+                    ondialogListener.onConselClick();
+                }
                 cancel();
 
             }

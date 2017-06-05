@@ -29,6 +29,8 @@
     <string name="maintenance_title">运维通</string>
     <string name="maintenance_order">工单管理</string>
     <string name="maintenance_tour">巡检管理</string>
+    <string name="maintenance_equipment">设备管理</string>
+    <string name="maintenance_notification">通知公告</string>
     <string name="main_titile">工单系统</string>
     <string name="main_work_order">我的工单</string>
     <string name="main_work_order_new">工单接收</string>

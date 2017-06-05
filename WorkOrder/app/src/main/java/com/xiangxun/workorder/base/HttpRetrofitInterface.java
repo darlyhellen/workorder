@@ -52,16 +52,21 @@ public interface HttpRetrofitInterface {
      */
     @GET("server/workorder/refer/totalCount")
     Observable<JsonObject> totalCount();
+    /**
+     * @TODO:http://localhost:8090/server/workorder/refer/totalWorkOrder/ 首頁滚动的接口
+     */
+    @GET("server/workorder/refer/totalWorkOrder/")
+    Observable<JsonObject> totalWorkOrder();
 
     /**
-     * @param status id
+     * @param status
      * @TODO:是否接收处理订单的接口
      */
     @GET("server/workorder/change/status/")
     Observable<JsonObject> getOrder(@Query("status") String status, @Query("id") String id, @Query("reason") String reason);
 
     /**
-     * @param status id
+     * @param args
      * @TODO:上報工單接口
      */
     @POST("server/workorder/")

@@ -65,7 +65,7 @@ public class HeaderView extends FrameLayout {
     }
 
     public void setRightOnClickListener(OnClickListener listener) {
-        title_view_right_Flipper01.setVisibility(View.VISIBLE);
+        //title_view_right_Flipper01.setVisibility(View.VISIBLE);
         mBtnShare.setOnClickListener(listener);
     }
 

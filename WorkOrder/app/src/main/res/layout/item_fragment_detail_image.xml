@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?><!--新增巡检页面布局-->
-<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/id_item_fragment_detail_image"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/id_item_fragment_detail_lin"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:gravity="center">
 
 
-</ImageView>
+    <ImageView
+        android:id="@+id/id_item_fragment_detail_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_padding4" />
+</LinearLayout>
 

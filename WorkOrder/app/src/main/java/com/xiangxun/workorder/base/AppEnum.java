@@ -17,6 +17,8 @@ public enum AppEnum {
 
     HEIGHT("screen height", 0),
 
+    USERREALNAME("userrealname", 0),
+
     USERNAME("loginName", 0),
 
     PASSWORD("password", 0),

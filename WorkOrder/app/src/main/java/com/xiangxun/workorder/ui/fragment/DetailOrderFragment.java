@@ -200,7 +200,17 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
         tvContent02.setText(data.devicename);
         tvContent03.setText(data.devicecode);
         tvContent04.setText(data.deviceip);
-        tvContent05.setText(data.devicetype);
+        if ("device".equals(data.devicetype)) {
+            tvContent05.setText("卡口");
+        } else if ("ftp".equals(data.devicetype)) {
+            tvContent05.setText("FTP");
+        } else if ("project".equals(data.devicetype)) {
+            tvContent05.setText("平台");
+        } else if ("database".equals(data.devicetype)) {
+            tvContent05.setText("数据库");
+        } else {
+            tvContent05.setText("机柜");
+        }
         tvContent06.setText(data.position);
         tvContent07.setText(data.orgname);
         tvContent08.setText(data.contactname);
@@ -235,7 +245,7 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
         tvContent21.setText("");
         //添加图片的功能模块
         imageData = new ArrayList<String>();
-        imageData.add("add");
+        imageData.add("添加图片");
         adapter = new DetailOrderImageAdapter(imageData, R.layout.item_fragment_detail_image, getActivity());
         images.setAdapter(adapter);
 
@@ -244,7 +254,6 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
     private void initListener() {
         commit.setOnClickListener(this);
         consel.setOnClickListener(this);
-
         images.setOnItemClickListener(this);
     }
 
@@ -302,7 +311,7 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String st = (String) parent.getItemAtPosition(position);
-        if ("add".equals(st)) {
+        if (position == (imageData.size() - 1)) {
             pop.show(view);
         } else {
             Intent intent = new Intent(getActivity(), ShowImageViewActivity.class);
@@ -315,9 +324,9 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
             intent.putExtra("width", view.getWidth());//必须
             intent.putExtra("height", view.getHeight());//必须
             startActivity(intent);
-            getActivity().overridePendingTransition(0, 0);
         }
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -348,13 +357,11 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
             if (head_path == null) {
                 return;
             }
-            DLog.i(head_path);
+
             imageData.add(imageData.size() - 1, head_path);
-            adapter.setData(imageData);
+            adapter.notifyDataSetChanged();
             //pop.cropPhoto(Uri.fromFile(temp));// 裁剪图片
             //这里不需要裁剪图片。
         }
     }
-
-
 }

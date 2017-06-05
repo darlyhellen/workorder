@@ -4,15 +4,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 
-import com.hellen.baseframe.common.db.ThreadInfo;
+import com.hellen.baseframe.application.FrameListener;
 import com.hellen.baseframe.common.dlog.DLog;
+import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.R;
+import com.xiangxun.workorder.base.StaticListener;
 import com.xiangxun.workorder.bean.Patrol;
+import com.xiangxun.workorder.bean.WorkOrderRoot;
 import com.xiangxun.workorder.ui.MaintenanceActivity;
+import com.xiangxun.workorder.ui.biz.MaintenanceListener;
 import com.xiangxun.workorder.ui.biz.MaintenanceListener.MaintenanceInterface;
-import com.xiangxun.workorder.ui.main.DownLoadActivity;
 import com.xiangxun.workorder.ui.main.SetActivity;
-import com.xiangxun.workorder.ui.video.VideoRecordActivity;
+import com.xiangxun.workorder.widget.loading.ShowLoading;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,14 +31,23 @@ public class MaintenancePresenter {
 
     private MaintenanceInterface view;
 
+    private MaintenanceListener biz;
+
+    private ShowLoading loading;
+
     public MaintenancePresenter(MaintenanceInterface view) {
         this.view = view;
+        this.biz = new MaintenanceListener();
+        loading = new ShowLoading((MaintenanceActivity) view);
+        loading.setMessage(R.string.loading);
     }
 
     public List<Patrol> findMaintenance() {
         List<Patrol> data = new ArrayList<>();
         data.add(new Patrol(10, R.string.maintenance_order, R.mipmap.work_order_search, 0));
         data.add(new Patrol(20, R.string.maintenance_tour, R.mipmap.patrol_normal, 0));
+        data.add(new Patrol(30, R.string.maintenance_equipment, R.mipmap.work_order_search, 0));
+        data.add(new Patrol(40, R.string.maintenance_notification, R.mipmap.patrol_normal, 0));
         return data;
     }
 
@@ -49,5 +61,35 @@ public class MaintenancePresenter {
             default:
                 break;
         }
+    }
+
+    public void getWorkOrderByPage() {
+
+        biz.onStart(loading);
+
+        biz.getWorkOrder(new FrameListener<WorkOrderRoot>() {
+            @Override
+            public void onSucces(WorkOrderRoot data) {
+                biz.onStop(loading);
+                view.onWorkOrderSuccess(data.getData());
+            }
+
+            @Override
+            public void onFaild(int i, String s) {
+                biz.onStop(loading);
+                view.onWorkOrderFailed();
+                switch (i) {
+                    case 0:
+                        ToastApp.showToast(s);
+                        break;
+                    case 1:
+                        ToastApp.showToast("网络请求异常");
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+
     }
 }

@@ -115,7 +115,7 @@ public class SetListener implements FramePresenter {
         @Override
         protected Long doInBackground(Object... params) {
             long lenth = 0;
-            File imageCacheFile = new File(AppEnum.ROOT);
+            File imageCacheFile = new File(AppEnum.CACTH);
             if (imageCacheFile.exists()) {
                 try {
                     lenth = Tools.getFileSize(imageCacheFile);

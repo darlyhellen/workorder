@@ -89,6 +89,9 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
                 //巡检管理
                 isTour = true;
                 header.setRightBackgroundResource(R.mipmap.ic_title_add);
+            } else if (patrol.getListId() == 40) {
+                isTour = false;
+                header.setRightBackgroundResource(0);
             } else {
                 isTour = false;
                 header.setRightBackgroundResource(R.mipmap.ic_title_search);
@@ -142,10 +145,17 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
                 textDes = "没有巡检工单！";
                 presenter.getWorkOrderByPage(currentPage, workorder, devicename, devicenum, deviceip);
                 break;
+            case 40:
+                //通知公告页面列表
+                isTour = false;
+                workorder = "";
+                textDes = "没有通知公告！";
+                textView.setVisibility(View.VISIBLE);
+                textView.setText(textDes);
+                break;
             default:
                 break;
         }
-
     }
 
     @Override
