@@ -77,7 +77,7 @@ public class MaintenanceActivity extends BaseActivity implements AdapterView.OnI
         presenter.getWorkOrderByPage(1, "0", null, null, null);
         title.setTitle(R.string.maintenance_title);
         title.setRightBackgroundResource(R.mipmap.set);
-        iv.setLayoutParams(new LinearLayout.LayoutParams(AppEnum.WIDTH.getLen() / 3, AppEnum.WIDTH.getLen() / 3));
+        iv.setLayoutParams(new LinearLayout.LayoutParams(AppEnum.WIDTH.getLen() / 5, AppEnum.WIDTH.getLen() / 5));
         name.setText("用户名称：" + SharePreferHelp.getValue(AppEnum.USERREALNAME.getDec(), null));
         adapter = new PatrolHomeAdapter(presenter.findMaintenance(), R.layout.home_grideview_layout, this);
         gridView.setAdapter(adapter);
@@ -125,6 +125,13 @@ public class MaintenanceActivity extends BaseActivity implements AdapterView.OnI
                 Intent intent = new Intent(this, WorkOrderActivity.class);
                 intent.putExtra("PATROL", patrol);
                 startActivity(intent);
+                break;
+            case 30:
+                break;
+            case 40:
+                Intent ask = new Intent(this, WorkOrderActivity.class);
+                ask.putExtra("PATROL", patrol);
+                startActivity(ask);
                 break;
             default:
                 break;

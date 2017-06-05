@@ -8,18 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import com.hellen.baseframe.baseadapter.ParentAdapter;
-import com.hellen.baseframe.common.dlog.DLog;
-import com.nostra13.universalimageloader.core.ImageLoader;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.common.image.ImageLoaderUtil;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.net.URI;
 import java.util.List;
 
 /**
@@ -53,11 +49,10 @@ public class DetailOrderImageAdapter extends ParentAdapter<String> {
             hocker = (ViewHocker) view.getTag();
         }
 
-        if ("add".equals(url)) {
+        if ("添加图片".equals(url)) {
             hocker.image.setBackgroundResource(R.drawable.add_publish_image);
         } else {
-            DLog.i(getClass().getSimpleName(), url);
-            hocker.image.setImageBitmap(getLoaclImage(url));
+            ImageLoaderUtil.getInstance().loadImageNor(url, hocker.image);
         }
         return view;
     }
