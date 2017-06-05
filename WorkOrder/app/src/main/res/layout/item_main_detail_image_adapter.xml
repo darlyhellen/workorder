@@ -22,7 +22,6 @@
         android:layout_centerHorizontal="true"
         android:layout_margin="5dp"
         android:singleLine="true"
-        android:text="上传疾病照片"
         android:textSize="12sp" />
 
 </RelativeLayout>

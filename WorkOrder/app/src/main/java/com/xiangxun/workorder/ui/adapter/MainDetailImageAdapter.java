@@ -61,20 +61,20 @@ public class MainDetailImageAdapter extends ParentAdapter<String> {
         } else {
             viewHolder = (ViewHolder) view.getTag();
         }
+        if (viewGroup.getChildCount() == position) { // 里面就是正常的position
 
+            if (position == (data.size() - 1)) {
+                viewHolder.photo.setImageResource(R.drawable.add_publish_image);
+                viewHolder.photo.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                viewHolder.close.setVisibility(View.GONE);
+            } else {
+                viewHolder.close.setVisibility(View.VISIBLE);
+                viewHolder.desc.setText("");
+                ImageLoader.getInstance().displayImage(
+                        "file://" + data.get(position), viewHolder.photo);
 
-        if (position == (data.size() - 1)) {
-            viewHolder.photo.setImageResource(R.drawable.add_publish_image);
-            viewHolder.photo.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            viewHolder.close.setVisibility(View.GONE);
-        } else {
-            viewHolder.close.setVisibility(View.VISIBLE);
-            viewHolder.desc.setText("");
-            ImageLoader.getInstance().displayImage(
-                    "file://" + data.get(position), viewHolder.photo);
-
+            }
         }
-
         // 给删除绑定点击监听器，点击触发OnClickListener的onClick()方法
         // 响应按钮点击事件,调用子定义接口，并传入View
         viewHolder.close.setOnClickListener(new View.OnClickListener() {
