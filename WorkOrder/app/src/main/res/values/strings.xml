@@ -132,7 +132,7 @@
 
 
     <array name="Status">
-        <item>"全  部"</item>
+        <item>"全 部"</item>
         <item>"已派发"</item>
         <item>"已接收"</item>
         <item>"已退回"</item>
@@ -141,5 +141,6 @@
         <item>"遗留中"</item>
         <item>"已关闭"</item>
         <item>"已评估"</item>
+        <item>"已完成"</item>
     </array>
 </resources>

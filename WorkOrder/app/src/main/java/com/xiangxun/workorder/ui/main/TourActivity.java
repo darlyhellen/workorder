@@ -3,15 +3,22 @@ package com.xiangxun.workorder.ui.main;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.hellen.baseframe.binder.ContentBinder;
 import com.hellen.baseframe.binder.ViewsBinder;
 import com.hellen.baseframe.common.dlog.DLog;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.BaseActivity;
+import com.xiangxun.workorder.bean.BaseModel;
 import com.xiangxun.workorder.ui.biz.TourListener.TourInterface;
 import com.xiangxun.workorder.ui.presenter.TourPresenter;
+import com.xiangxun.workorder.widget.dialog.TourSelectDialog;
+import com.xiangxun.workorder.widget.grid.WholeGridView;
 import com.xiangxun.workorder.widget.header.HeaderView;
+
+import java.util.ArrayList;
 
 /**
  * Created by Zhangyuhui/Darly on 2017/5/26.
@@ -26,6 +33,24 @@ public class TourActivity extends BaseActivity implements OnClickListener, TourI
 
     @ViewsBinder(R.id.id_tour_title)
     private HeaderView title;
+    @ViewsBinder(R.id.id_order_equip_code)
+    private TextView id_order_equip_code;
+    @ViewsBinder(R.id.id_order_equip_ip)
+    private TextView id_order_equip_ip;
+    @ViewsBinder(R.id.id_order_equip_type)
+    private TextView id_order_equip_type;
+    @ViewsBinder(R.id.id_order_equip_position)
+    private TextView id_order_equip_position;
+    @ViewsBinder(R.id.id_order_equip_deptment)
+    private TextView id_order_equip_deptment;
+    @ViewsBinder(R.id.id_order_equip_image)
+    private WholeGridView id_order_equip_image;
+    @ViewsBinder(R.id.id_order_equip_declare)
+    private EditText id_order_equip_declare;
+    @ViewsBinder(R.id.tv_order_name)
+    private TextView tv_order_name;
+
+    private TourSelectDialog nameType;
 
     private TourPresenter presenter;
 
@@ -35,6 +60,7 @@ public class TourActivity extends BaseActivity implements OnClickListener, TourI
         title.setTitle(R.string.st_tour_title);
         title.setLeftBackgroundResource(R.mipmap.ic_title_back);
         title.getTitleViewOperationText().setText(R.string.st_tour_commit);
+        nameType = new TourSelectDialog(this, new ArrayList<BaseModel.Type>(), tv_order_name, "请选择工单类型");
     }
 
     @Override
@@ -45,7 +71,7 @@ public class TourActivity extends BaseActivity implements OnClickListener, TourI
 
     @Override
     public void onClick(View v) {
-        presenter.onClickDown(this,v);
+        presenter.onClickDown(this, v);
     }
 
     @Override
