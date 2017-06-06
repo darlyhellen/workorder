@@ -122,6 +122,7 @@ public class MaintenanceActivity extends BaseActivity implements AdapterView.OnI
                 startActivity(intent);
                 break;
             case 30:
+                startActivity(new Intent(this, EquipmentMenuAcitvity.class));
                 break;
             case 40:
                 Intent ask = new Intent(this, WorkOrderActivity.class);

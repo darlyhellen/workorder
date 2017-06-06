@@ -280,7 +280,7 @@ public class PhotoPop extends PopupWindow implements OnClickListener {
             if (file_size > 320) {
                 bit = decodeSampledBitmapFromFile(capUri);
                 // 获取图片大小的比对关系。是100KB的多少。
-                int quality = 1024 * 1000 / file_size;
+                int quality = (int) (AppEnum.WIDTH.getLen() * AppEnum.HEIGHT.getLen() / file.length());
                 DLog.i(getClass().getSimpleName(), quality + "----" + file_size);
                 return compressBitmap(bit, quality);
             } else {

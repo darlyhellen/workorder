@@ -39,7 +39,7 @@ public class EquipmentMenuAcitvity extends BaseActivity implements OnClickListen
     @Override
     protected void initView(Bundle savedInstanceState) {
 
-        header.setTitle("測試用戶列表");
+        header.setTitle("设备列表");
         header.setLeftBackgroundResource(R.mipmap.ic_title_back);
         header.setRightBackgroundResource(0);
         groupList = new ArrayList<>();
@@ -88,11 +88,8 @@ public class EquipmentMenuAcitvity extends BaseActivity implements OnClickListen
         };
 
         List<String> group = new ArrayList<>();
-        group.add("我的设备");
-        group.add("我的好友");
-        group.add("初中同学");
-        group.add("高中同学");
-        group.add("大学同学");
+        group.add("场外设备");
+        group.add("场内设备");
 
         for (int i = 0; i < group.size(); i++) {
             GroupData gd = new GroupData(group.get(i), (i + 2) + "/" + (2 * i + 2));
@@ -101,17 +98,37 @@ public class EquipmentMenuAcitvity extends BaseActivity implements OnClickListen
 
         for (int i = 0; i < group.size(); i++) {
             List<ChildData> list = new ArrayList<>();
-            for (int j = 0; j < 2 * i + 2; j++) {
-                ChildData cd = null;
-                if (i == 0) {
-                    cd = new ChildData("null", "我的手机", "上次登录");
-                    list.add(cd);
-                    cd = new ChildData("null", "发现新设备", "玩转只能信设备，发现新生活");
-                    list.add(cd);
-                    break;
-                } else {
-                    cd = new ChildData(url[j % url.length], "张三" + j, "你好！！！");
-                    list.add(cd);
+            if (i%2 == 0) {
+                for (int j = 0; j < 2 * i + 2; j++) {
+                    ChildData cd = null;
+                    if (i == 0) {
+                        cd = new ChildData("null", "卡口设备", "");
+                        list.add(cd);
+                        cd = new ChildData("null", "智能机柜", "");
+                        list.add(cd);
+                        break;
+                    } else {
+                        cd = new ChildData(url[j % url.length], "其他设备" + j, "");
+                        list.add(cd);
+                    }
+                }
+            }else {
+                for (int j = 0; j < 2 * i + 2; j++) {
+                    ChildData cd = null;
+                    if (i == 1) {
+                        cd = new ChildData("null", "服务器", "");
+                        list.add(cd);
+                        cd = new ChildData("null", "数据库", "");
+                        list.add(cd);
+                        cd = new ChildData("null", "平台信息", "");
+                        list.add(cd);
+                        cd = new ChildData("null", "FTP信息", "");
+                        list.add(cd);
+                        break;
+                    } else {
+                        cd = new ChildData(url[j % url.length], "其他设备" + j, "");
+                        list.add(cd);
+                    }
                 }
             }
             childList.add(list);
