@@ -34,8 +34,15 @@ import java.util.List;
  */
 public class DetailOrderImageAdapter extends ParentAdapter<String> {
 
-    public DetailOrderImageAdapter(List<String> data, int resID, Context context) {
+    public interface OnDetailOrderConsListener {
+        void onConsListener(View v, int position);
+    }
+
+    private OnDetailOrderConsListener listener;
+
+    public DetailOrderImageAdapter(List<String> data, int resID, Context context, OnDetailOrderConsListener listener) {
         super(data, resID, context);
+        this.listener = listener;
     }
 
     @Override
@@ -44,7 +51,7 @@ public class DetailOrderImageAdapter extends ParentAdapter<String> {
     }
 
     @Override
-    public View HockView(int position, View view, ViewGroup viewGroup, int i1, Context context, String url) {
+    public View HockView(final int position, View view, ViewGroup viewGroup, int i1, Context context, String url) {
 //        ViewHocker hocker = null;
 //        if (view == null) {
 //            view = LayoutInflater.from(context).inflate(i1, null);
@@ -66,42 +73,44 @@ public class DetailOrderImageAdapter extends ParentAdapter<String> {
 
         ViewHocker viewHolder = null;
         if (view == null) {
-            view = LayoutInflater.from(context).inflate(
-                    R.layout.item_main_detail_image_adapter, null);
+            view = LayoutInflater.from(context).inflate(i1, null);
             viewHolder = new ViewHocker();
-            viewHolder.photo = (ImageView) view
-                    .findViewById(R.id.id_iv_photo);
-            viewHolder.close = (ImageView) view
-                    .findViewById(R.id.id_iv_close);
-            viewHolder.desc = (TextView) view
-                    .findViewById(R.id.id_tv_desc);
+            viewHolder.relative = (RelativeLayout) view.findViewById(R.id.id_iv_relative);
+            viewHolder.relative.setLayoutParams(new AbsListView.LayoutParams(AppEnum.WIDTH.getLen() / 4, AppEnum.WIDTH.getLen() / 4));
+            viewHolder.photo = (ImageView) view.findViewById(R.id.id_iv_photo);
+            viewHolder.close = (ImageView) view.findViewById(R.id.id_iv_close);
+            viewHolder.desc = (TextView) view.findViewById(R.id.id_tv_desc);
             view.setTag(viewHolder);
         } else {
             viewHolder = (ViewHocker) view.getTag();
         }
 
+        if (viewGroup.getChildCount() == position) { // 里面就是正常的position
+            if (position == (data.size() - 1)) {
+                viewHolder.photo.setImageResource(R.drawable.add_publish_image);
+                viewHolder.photo.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                viewHolder.close.setVisibility(View.GONE);
+            } else {
+                viewHolder.close.setVisibility(View.VISIBLE);
+                viewHolder.desc.setText("");
+                ImageLoader.getInstance().displayImage(
+                        "file://" + data.get(position), viewHolder.photo);
+                viewHolder.close.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        listener.onConsListener(v, position);
+                    }
+                });
 
-        if (position == (data.size() - 1)) {
-            viewHolder.photo.setImageResource(R.drawable.add_publish_image);
-            viewHolder.photo.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            viewHolder.close.setVisibility(View.GONE);
-        } else {
-            viewHolder.close.setVisibility(View.VISIBLE);
-            viewHolder.desc.setText("");
-            ImageLoader.getInstance().displayImage(
-                    "file://" + data.get(position), viewHolder.photo);
-
+            }
         }
-
-
-
         return view;
     }
 
     class ViewHocker {
         LinearLayout lin;
         ImageView image;
-
+        RelativeLayout relative;
         ImageView photo;
         ImageView close;
         TextView desc;

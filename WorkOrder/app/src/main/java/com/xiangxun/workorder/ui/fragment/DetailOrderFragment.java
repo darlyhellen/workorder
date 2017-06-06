@@ -25,6 +25,7 @@ import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.bean.WorkOrderData;
 import com.xiangxun.workorder.common.WorkOrderUtils;
 import com.xiangxun.workorder.ui.adapter.DetailOrderImageAdapter;
+import com.xiangxun.workorder.ui.adapter.DetailOrderImageAdapter.OnDetailOrderConsListener;
 import com.xiangxun.workorder.ui.biz.DetailOrderFragmentListener.DetailOrderFragmentInterface;
 import com.xiangxun.workorder.ui.main.ShowImageViewActivity;
 import com.xiangxun.workorder.ui.presenter.DetailOrderFragmentPresenter;
@@ -41,7 +42,7 @@ import java.util.List;
  *
  * @TODO: 固态详情展示页面。
  */
-public class DetailOrderFragment extends Fragment implements OnClickListener, DetailOrderFragmentInterface, OnItemClickListener {
+public class DetailOrderFragment extends Fragment implements OnClickListener, DetailOrderFragmentInterface, OnItemClickListener, OnDetailOrderConsListener {
     private View root;
 
     private WorkOrderData data;
@@ -239,7 +240,7 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
         //添加图片的功能模块
         imageData = new ArrayList<String>();
         imageData.add("添加图片");
-        adapter = new DetailOrderImageAdapter(imageData, R.layout.item_fragment_detail_image, getActivity());
+        adapter = new DetailOrderImageAdapter(imageData, R.layout.item_main_detail_image_adapter, getActivity(), this);
         images.setAdapter(adapter);
 
     }
@@ -352,9 +353,16 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
             }
 
             imageData.add(imageData.size() - 1, head_path);
-            adapter.notifyDataSetChanged();
+            adapter.setData(imageData);
             //pop.cropPhoto(Uri.fromFile(temp));// 裁剪图片
             //这里不需要裁剪图片。
         }
+    }
+
+    //点击删除图片按钮，进行图片删除操作。
+    @Override
+    public void onConsListener(View v, int position) {
+        imageData.remove(position);
+        adapter.setData(imageData);
     }
 }

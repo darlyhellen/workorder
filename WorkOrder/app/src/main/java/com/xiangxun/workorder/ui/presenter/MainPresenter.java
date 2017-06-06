@@ -8,6 +8,7 @@ import com.hellen.baseframe.common.db.ThreadInfo;
 import com.hellen.baseframe.common.dlog.DLog;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.bean.Patrol;
+import com.xiangxun.workorder.ui.EquipmentMenuAcitvity;
 import com.xiangxun.workorder.ui.biz.MainListener;
 import com.xiangxun.workorder.ui.main.DownLoadActivity;
 import com.xiangxun.workorder.ui.main.SetActivity;
@@ -42,6 +43,7 @@ public class MainPresenter {
         switch (v.getId()) {
             case R.id.xw_share:
                 //進入設置頁面
+                context.startActivity(new Intent(context, EquipmentMenuAcitvity.class));
                 break;
         }
     }

@@ -40,7 +40,7 @@ import java.util.Random;
  * @TODO: 首页静态页面, 暂时没有接口网络请求。
  */
 @ContentBinder(R.layout.activity_main_v0)
-public class MainActivity_V0 extends BaseActivity implements View.OnClickListener, MainV0Listener.MainV0Interface, AdapterView.OnItemClickListener, StaticListener.RefreshMainUIListener {
+public class WorkOrderMenuActivity extends BaseActivity implements View.OnClickListener, MainV0Listener.MainV0Interface, AdapterView.OnItemClickListener, StaticListener.RefreshMainUIListener {
 
 
     public static final String 工单管理 = "工单管理";

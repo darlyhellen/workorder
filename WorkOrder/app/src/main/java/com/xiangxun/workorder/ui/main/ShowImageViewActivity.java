@@ -6,6 +6,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.xiangxun.workorder.base.BaseActivity;
 import com.xiangxun.workorder.common.image.ImageLoaderUtil;
 import com.xiangxun.workorder.widget.image.SmoothImageView;
@@ -35,7 +36,11 @@ public class ShowImageViewActivity extends BaseActivity implements OnClickListen
         imageView.setLayoutParams(new ViewGroup.LayoutParams(-1, -1));
         imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
         setContentView(imageView);
-        ImageLoaderUtil.getInstance().loadImageNor(url, imageView);
+        if (url.startsWith("http")) {
+            ImageLoaderUtil.getInstance().loadImageNor(url, imageView);
+        } else {
+            ImageLoader.getInstance().displayImage("file://" + url, imageView);
+        }
     }
 
     @Override

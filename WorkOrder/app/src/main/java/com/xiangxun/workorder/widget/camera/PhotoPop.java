@@ -135,7 +135,7 @@ public class PhotoPop extends PopupWindow implements OnClickListener {
      */
     private void capPhoto() {
         // 照相
-        capUri = AppEnum.ROOT + System.currentTimeMillis() + ".png";
+        capUri = AppEnum.ROOT + rota;
         AppEnum.capUri = capUri;
         File destDir = new File(AppEnum.ROOT);
         if (!destDir.exists()) {
@@ -205,7 +205,12 @@ public class PhotoPop extends PopupWindow implements OnClickListener {
                 // 照片的原始资源地址
                 photoUri = data.getData();
                 DLog.i(getImagePath(photoUri));
-                String cam = copyFile(getImagePath(photoUri), AppEnum.IMAGE + System.currentTimeMillis() + ".png");
+                String cam = copyFile(getImagePathForCAP(getImagePath(photoUri)), AppEnum.IMAGE + System.currentTimeMillis() + ".png");
+                //需要删除以前文件。
+                File idk = new File(getImagePathForCAP(getImagePath(photoUri)));
+                if (idk.exists()) {
+                    idk.delete();
+                }
                 return cam;
             default:
                 break;
@@ -233,7 +238,6 @@ public class PhotoPop extends PopupWindow implements OnClickListener {
                 int length;
                 while ((byteread = inStream.read(buffer)) != -1) {
                     bytesum += byteread; //字节数 文件大小
-                    System.out.println(bytesum);
                     fs.write(buffer, 0, byteread);
                 }
                 inStream.close();
@@ -257,13 +261,9 @@ public class PhotoPop extends PopupWindow implements OnClickListener {
         }
         // 由于相机拍照照片过大。故而必须进行压缩。
         int degree = getBitmapDegree(capUri);
-        if (degree == 0) {
-            return capUri;
-        } else {
-            // 先压缩图片。然后旋转图片。最后保存图片。
-            rotateBitmapByDegree(compressImageCap(capUri), degree);
-            return AppEnum.ROOT + rota;
-        }
+        // 先压缩图片。然后旋转图片。最后保存图片。
+        rotateBitmapByDegree(compressImageCap(capUri), degree);
+        return AppEnum.ROOT + rota;
     }
 
     /**
@@ -280,7 +280,8 @@ public class PhotoPop extends PopupWindow implements OnClickListener {
             if (file_size > 320) {
                 bit = decodeSampledBitmapFromFile(capUri);
                 // 获取图片大小的比对关系。是100KB的多少。
-                int quality = 1024 * 100 / file_size;
+                int quality = 1024 * 1000 / file_size;
+                DLog.i(getClass().getSimpleName(), quality + "----" + file_size);
                 return compressBitmap(bit, quality);
             } else {
                 try {

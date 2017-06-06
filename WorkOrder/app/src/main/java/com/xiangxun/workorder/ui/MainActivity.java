@@ -157,7 +157,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
             this.data.add(this.data.size() - 1, head_path);
             //this.data.add(this.data.size() - 1, "http://img0.imgtn.bdimg.com/it/u=4195805644,827754888&fm=23&gp=0.jpg");
-            adapter.notifyDataSetChanged();
+            adapter.setData(this.data);
             //pop.cropPhoto(Uri.fromFile(temp));// 裁剪图片
             //这里不需要裁剪图片。
         }

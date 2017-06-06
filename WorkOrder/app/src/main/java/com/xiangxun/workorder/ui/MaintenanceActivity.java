@@ -1,7 +1,6 @@
 package com.xiangxun.workorder.ui;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -10,12 +9,9 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.hellen.baseframe.binder.ContentBinder;
 import com.hellen.baseframe.binder.ViewsBinder;
@@ -28,7 +24,6 @@ import com.xiangxun.workorder.base.BaseActivity;
 import com.xiangxun.workorder.bean.Patrol;
 import com.xiangxun.workorder.bean.WorkOrderData;
 import com.xiangxun.workorder.ui.adapter.PatrolHomeAdapter;
-import com.xiangxun.workorder.ui.adapter.WorkOrderAdapter;
 import com.xiangxun.workorder.ui.biz.MaintenanceListener.MaintenanceInterface;
 import com.xiangxun.workorder.ui.main.WorkOrderActivity;
 import com.xiangxun.workorder.ui.main.WorkOrderDetailActivity;
@@ -119,7 +114,7 @@ public class MaintenanceActivity extends BaseActivity implements AdapterView.OnI
         }
         switch (patrol.getListId()) {
             case 10:
-                startActivity(new Intent(this, MainActivity_V0.class));
+                startActivity(new Intent(this, WorkOrderMenuActivity.class));
                 break;
             case 20:
                 Intent intent = new Intent(this, WorkOrderActivity.class);
