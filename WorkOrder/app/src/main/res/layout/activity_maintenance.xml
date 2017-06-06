@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@mipmap/ic_mainentance"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
@@ -31,29 +31,23 @@
         android:textColor="@color/text_color"
         android:textSize="@dimen/textSize16" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/margin_padding5"
-        android:background="@color/divider" />
-
     <ViewFlipper
         android:id="@+id/id_maintenance_flipper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_padding10"
         android:autoStart="true"
+        android:background="@drawable/app_login_shape"
         android:flipInterval="5000"
         android:inAnimation="@anim/anim_in"
         android:outAnimation="@anim/anim_out" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/margin_padding5"
-        android:background="@color/divider" />
 
     <GridView
         android:id="@+id/id_maintenance_gv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_padding20"
         android:divider="@null"
         android:horizontalSpacing="@dimen/margin_padding2"
         android:listSelector="@color/transparent_white"

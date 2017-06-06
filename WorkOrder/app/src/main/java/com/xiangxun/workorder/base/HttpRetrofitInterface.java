@@ -72,6 +72,13 @@ public interface HttpRetrofitInterface {
     Observable<JsonObject> upLoadImage(@Body RequestBody args);
 
     /**
+     * @TODO:图片下载接口。
+     */
+    @GET("server/workorder/refer/watchPicture/")
+    Observable<JsonObject> downImage(@Query("id") String id);
+
+
+    /**
      * @TODO:正常上报和异常上报接口
      */
     @GET("server/workorder/change/workorderUp/")

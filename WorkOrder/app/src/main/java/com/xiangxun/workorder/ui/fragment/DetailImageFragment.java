@@ -1,6 +1,7 @@
 package com.xiangxun.workorder.ui.fragment;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,11 +15,21 @@ import android.widget.GridView;
 
 import com.hellen.baseframe.binder.InitBinder;
 import com.hellen.baseframe.binder.ViewsBinder;
+import com.hellen.baseframe.common.dlog.DLog;
 import com.xiangxun.workorder.R;
+import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.bean.WorkOrderData;
+import com.xiangxun.workorder.common.image.BitmapChangeUtil;
 import com.xiangxun.workorder.ui.adapter.DetailImageFragmentAdapter;
+import com.xiangxun.workorder.ui.biz.DetailImageFragmentListener;
+import com.xiangxun.workorder.ui.biz.DetailImageFragmentListener.DetailImageFragmentInterface;
 import com.xiangxun.workorder.ui.main.ShowImageViewActivity;
+import com.xiangxun.workorder.ui.presenter.DetailImageFragmentPresenter;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,13 +40,17 @@ import java.util.List;
  *
  * @TODO:展示服务端传递图片的位置
  */
-public class DetailImageFragment extends Fragment implements OnItemClickListener {
+public class DetailImageFragment extends Fragment implements OnItemClickListener, DetailImageFragmentInterface {
 
     private View root;
 
     @ViewsBinder(R.id.id_detail_fragment_grid)
     private GridView gridView;
     private WorkOrderData data;
+    private DetailImageFragmentAdapter adapter;
+    private List<String> urls;
+
+    private DetailImageFragmentPresenter presenter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -53,20 +68,23 @@ public class DetailImageFragment extends Fragment implements OnItemClickListener
 
 
     private void initView() {
+        presenter = new DetailImageFragmentPresenter(this);
         data = getArguments().getParcelable("data");
         if (data != null) {
-            List<String> urls = new ArrayList<String>();
-            if (!TextUtils.isEmpty(data.photo1)) {
-            urls.add(data.photo1);
+            urls = new ArrayList<String>();
+            File f = new File(AppEnum.IMAGE, data.id);
+            if (f.exists()) {
+                File[] lis = f.listFiles();
+                for (int i = 0; i < lis.length; i++) {
+                    urls.add(lis[i].getAbsolutePath());
+                }
+            } else {
+                presenter.getData();
+            }
+            adapter = new DetailImageFragmentAdapter(urls, R.layout.item_fragment_detail_image, getActivity());
+            gridView.setAdapter(adapter);
         }
-        if (!TextUtils.isEmpty(data.photo2)) {
-            urls.add(data.photo2);
-        }
-        if (!TextUtils.isEmpty(data.photo3)) {
-            urls.add(data.photo3);
-        }
-            gridView.setAdapter(new DetailImageFragmentAdapter(urls, R.layout.item_fragment_detail_image, getActivity()));
-        }
+
     }
 
     private void initListener() {
@@ -87,5 +105,59 @@ public class DetailImageFragment extends Fragment implements OnItemClickListener
         intent.putExtra("height", view.getHeight());//必须
         startActivity(intent);
         getActivity().overridePendingTransition(0, 0);
+    }
+
+    @Override
+    public void onLoginSuccess(List<String> data) {
+        if (data == null) {
+            return;
+        }
+        File id = new File(AppEnum.IMAGE, getDataID());
+        if (!id.exists()) {
+            id.mkdir();
+        }
+        for (String sr : data) {
+            Bitmap bt = BitmapChangeUtil.convertStringToIcon(sr);
+            if (bt != null) {
+                //通过工单ID建立文件夹，保存下载下来的图片。
+                File file = new File(AppEnum.IMAGE + getDataID(), "/" + System.currentTimeMillis() + ".png");
+                try {
+                    file.createNewFile();
+                    FileOutputStream out = new FileOutputStream(file);
+                    bt.compress(Bitmap.CompressFormat.PNG, 90, out);
+                    urls.add(file.getPath());
+                    out.flush();
+                    out.close();
+                } catch (FileNotFoundException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        }
+        DLog.i(getClass().getSimpleName(), urls);
+        adapter.setData(urls);
+    }
+
+    @Override
+    public void onLoginFailed() {
+
+    }
+
+    @Override
+    public String getDataID() {
+        return data.id;
+    }
+
+    @Override
+    public void setDisableClick() {
+
+    }
+
+    @Override
+    public void setEnableClick() {
+
     }
 }
