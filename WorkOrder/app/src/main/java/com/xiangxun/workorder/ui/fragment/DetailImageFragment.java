@@ -125,6 +125,7 @@ public class DetailImageFragment extends Fragment implements OnItemClickListener
                     file.createNewFile();
                     FileOutputStream out = new FileOutputStream(file);
                     bt.compress(Bitmap.CompressFormat.PNG, 90, out);
+                    bt.recycle();
                     urls.add(file.getPath());
                     out.flush();
                     out.close();
