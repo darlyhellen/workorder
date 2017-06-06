@@ -64,13 +64,18 @@ public interface HttpRetrofitInterface {
      */
     @GET("server/workorder/change/status/")
     Observable<JsonObject> getOrder(@Query("status") String status, @Query("id") String id, @Query("reason") String reason);
-
     /**
      * @param args
-     * @TODO:上報工單接口
+     * @TODO:上图片接口
      */
-    @POST("server/workorder/")
-    Observable<JsonObject> upDataOrder(@Body RequestBody args);
+    @POST("server/workorder/change/upLoadPicture/")
+    Observable<JsonObject> upLoadImage(@Body RequestBody args);
+
+    /**
+     * @TODO:正常上报和异常上报接口
+     */
+    @GET("server/workorder/change/workorderUp/")
+    Observable<JsonObject> upDataOrder(@Query("status") String status, @Query("id") String id, @Query("reason") String reason);
 
     /**
      * @param version

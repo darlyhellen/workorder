@@ -306,7 +306,13 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String st = (String) parent.getItemAtPosition(position);
         if (position == (imageData.size() - 1)) {
-            pop.show(view);
+            if (position == 3) {
+                //上传图片
+                DLog.i(getClass().getSimpleName(), position + "上传图片");
+                presenter.upLoadImage(imageData);
+            } else {
+                pop.show(view);
+            }
         } else {
             Intent intent = new Intent(getActivity(), ShowImageViewActivity.class);
             intent.putExtra("position", position);
@@ -314,7 +320,7 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
             view.getLocationOnScreen(location);
             intent.putExtra("locationX", location[0]);//必须
             intent.putExtra("locationY", location[1]);//必须
-            intent.putExtra("url", (String) parent.getItemAtPosition(position));
+            intent.putExtra("url", st);
             intent.putExtra("width", view.getWidth());//必须
             intent.putExtra("height", view.getHeight());//必须
             startActivity(intent);
@@ -356,6 +362,7 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
             adapter.setData(imageData);
             //pop.cropPhoto(Uri.fromFile(temp));// 裁剪图片
             //这里不需要裁剪图片。
+
         }
     }
 

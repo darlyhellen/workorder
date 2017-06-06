@@ -47,7 +47,7 @@ public class DetailOrderImageAdapter extends ParentAdapter<String> {
 
     @Override
     public int getCount() {
-        return data.size() > 3 ? 3 : data.size();
+        return data.size() > 4 ? 4 : data.size();
     }
 
     @Override
@@ -87,7 +87,13 @@ public class DetailOrderImageAdapter extends ParentAdapter<String> {
 
         if (viewGroup.getChildCount() == position) { // 里面就是正常的position
             if (position == (data.size() - 1)) {
-                viewHolder.photo.setImageResource(R.drawable.add_publish_image);
+                if (position == 3) {
+                    viewHolder.photo.setVisibility(View.INVISIBLE);
+                    viewHolder.desc.setText("点击上传选中图片");
+                } else {
+                    viewHolder.photo.setVisibility(View.VISIBLE);
+                    viewHolder.photo.setImageResource(R.drawable.add_publish_image);
+                }
                 viewHolder.photo.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 viewHolder.close.setVisibility(View.GONE);
             } else {

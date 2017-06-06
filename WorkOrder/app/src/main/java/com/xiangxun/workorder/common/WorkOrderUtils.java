@@ -49,7 +49,7 @@ public class WorkOrderUtils {
                 tv.setBackgroundResource(R.drawable.status_bg_7);
                 break;
             default:
-                result = "";
+                result = "已完成";
                 tv.setBackgroundResource(R.drawable.status_bg_8);
                 break;
         }

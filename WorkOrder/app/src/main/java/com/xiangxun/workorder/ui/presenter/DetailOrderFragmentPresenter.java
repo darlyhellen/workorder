@@ -57,13 +57,18 @@ public class DetailOrderFragmentPresenter {
                         getData("2", view.getDataID());
                         break;
                     case 1:
-                        updataOrder("4", view.getDataID(),  view.getUrls());
+                        updataOrder("4", view.getDataID(), view.getUrls());
                         break;
                 }
                 break;
         }
     }
 
+    /**
+     * @param status
+     * @param id
+     * @TODO：接收工单和拒绝工单接口。
+     */
     private void getData(String status, String id) {
         biz.onStart(loading);
         view.setDisableClick();
@@ -95,6 +100,12 @@ public class DetailOrderFragmentPresenter {
         });
     }
 
+    /**
+     * @TODO:正常上报和异常上报接口内容。
+     * @param status
+     * @param id
+     * @param urls
+     */
     private void updataOrder(String status, String id, List<String> urls) {
         biz.onStart(loading);
         view.setDisableClick();
@@ -112,6 +123,38 @@ public class DetailOrderFragmentPresenter {
                 biz.onStop(loading);
                 view.setEnableClick();
                 view.onLoginFailed();
+                switch (i) {
+                    case 0:
+                        ToastApp.showToast(s);
+                        break;
+                    case 1:
+                        ToastApp.showToast("网络请求异常");
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+    }
+
+    /**
+     * @param url
+     * @TODO:图片上传测试。
+     */
+    public void upLoadImage(List<String> url) {
+        biz.onStart(loading);
+        biz.upLoadImage(view.getDataID(), url, new FrameListener<DetailChangeRoot>() {
+            @Override
+            public void onSucces(DetailChangeRoot s) {
+                biz.onStop(loading);
+                view.setEnableClick();
+                ToastApp.showToast(s.getMessage());
+            }
+
+            @Override
+            public void onFaild(int i, String s) {
+                biz.onStop(loading);
+                view.setEnableClick();
                 switch (i) {
                     case 0:
                         ToastApp.showToast(s);
