@@ -57,28 +57,22 @@ public class EquipmentMenuPresenter {
         for (int i = 0; i < groupDatas.size(); i++) {
             List<EquipMenuChildData> list = new ArrayList<EquipMenuChildData>();
             if (i % 2 == 0) {
-                for (int j = 0; j < 2 * i + 2; j++) {
-                    EquipMenuChildData cd = null;
-                    if (i == 1) {
-                        cd = new EquipMenuChildData("卡口设备", "device", 0);
-                        list.add(cd);
-                        cd = new EquipMenuChildData("智能机柜", "icabinef", 0);
-                        list.add(cd);
-                    }
-                }
+                EquipMenuChildData cd = null;
+                cd = new EquipMenuChildData("卡口设备", "device", 0);
+                list.add(cd);
+                cd = new EquipMenuChildData("智能机柜", "icabinef", 0);
+                list.add(cd);
             } else {
-                for (int j = 0; j < 2 * i + 2; j++) {
-                    EquipMenuChildData cd = null;
-                    if (i == 1) {
-                        cd = new EquipMenuChildData("服务器", "server", 0);
-                        list.add(cd);
-                        cd = new EquipMenuChildData("数据库", "database", 0);
-                        list.add(cd);
-                        cd = new EquipMenuChildData("平台信息", "project", 0);
-                        list.add(cd);
-                        cd = new EquipMenuChildData("FTP信息", "ftp", 0);
-                        list.add(cd);
-                    }
+                EquipMenuChildData cd = null;
+                if (i == 1) {
+                    cd = new EquipMenuChildData("服务器", "server", 0);
+                    list.add(cd);
+                    cd = new EquipMenuChildData("数据库", "database", 0);
+                    list.add(cd);
+                    cd = new EquipMenuChildData("平台信息", "project", 0);
+                    list.add(cd);
+                    cd = new EquipMenuChildData("FTP信息", "ftp", 0);
+                    list.add(cd);
                 }
             }
             groupDatas.get(i).setData(list);

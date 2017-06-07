@@ -1,5 +1,6 @@
 package com.xiangxun.workorder.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -25,6 +26,7 @@ import com.xiangxun.workorder.ui.adapter.ExpandableListViewAdapter;
 import com.xiangxun.workorder.ui.adapter.RootExpandableListViewAdapter;
 import com.xiangxun.workorder.ui.biz.EquipmentMenuListener;
 import com.xiangxun.workorder.ui.biz.EquipmentMenuListener.EquipmentMenuInterface;
+import com.xiangxun.workorder.ui.main.EquipmentListActivity;
 import com.xiangxun.workorder.ui.presenter.EquipmentMenuPresenter;
 import com.xiangxun.workorder.widget.header.HeaderView;
 
@@ -80,6 +82,9 @@ public class EquipmentMenuAcitvity extends BaseActivity implements OnClickListen
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 EquipMenuChildData data = (EquipMenuChildData) adapter.getChild(groupPosition, childPosition);
                 DLog.i(getClass().getSimpleName(), groupPosition + "---" + childPosition + "---" + data.getName());
+                Intent intent = new Intent(EquipmentMenuAcitvity.this, EquipmentListActivity.class);
+                intent.putExtra("EquipMenuChildData", data);
+                startActivity(intent);
                 return false;
             }
         });

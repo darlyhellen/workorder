@@ -129,6 +129,7 @@ public class EquipmentMenuAdapter extends BaseExpandableListAdapter {
         EquipMenuChildData childData = groupData.get(groupPosition).getData().get(childPosition);
         holder.img.setImageResource(childData.getRes());
         holder.tv_name.setText(childData.getName());
+        holder.tv_content.setVisibility(View.GONE);
         return convertView;
     }
 

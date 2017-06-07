@@ -14,122 +14,121 @@
         android:layout_height="wrap_content" />
 
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/ic_maintenance_up" />
+
+    <ImageView
+        android:id="@+id/id_maintenance_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_padding10"
+        android:src="@mipmap/ic_maintenance_background_1"
+        android:visibility="visible" />
+
+
+    <TextView
+        android:id="@+id/id_maintenance_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/margin_padding10"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textSize20" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_padding20"
+        android:background="@mipmap/ic_maintenance_mid" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:orientation="vertical">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <ImageView
-            android:id="@+id/id_maintenance_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/margin_padding10"
-            android:src="@mipmap/ic_maintenance_background_1"
-            android:visibility="visible" />
-
-
-        <TextView
-            android:id="@+id/id_maintenance_username"
+        <TableRow
+            android:id="@+id/id_maintenance_table"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="@dimen/margin_padding10"
-            android:textColor="@color/white"
-            android:textSize="@dimen/textSize20" />
+            android:gravity="center">
 
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical">
-
-            <TableRow
-                android:id="@+id/id_maintenance_table"
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/id_maintenance_order"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center">
-
-                <ImageView
-                    android:id="@+id/id_maintenance_order"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_maintenance_order" />
-
-                <View
-                    android:layout_width="20dp"
-                    android:layout_height="1dp" />
-
-                <ImageView
-                    android:id="@+id/id_maintenance_tour"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_maintenance_order" />
-
-            </TableRow>
+                android:src="@mipmap/ic_maintenance_order" />
 
             <View
-                android:layout_width="1dp"
-                android:layout_height="20dp" />
+                android:layout_width="20dp"
+                android:layout_height="1dp" />
 
-            <TableRow
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/id_maintenance_tour"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center">
+                android:src="@mipmap/ic_maintenance_order" />
 
-                <ImageView
-                    android:id="@+id/id_maintenance_equip"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_maintenance_order" />
-
-                <View
-                    android:layout_width="20dp"
-                    android:layout_height="1dp" />
-
-                <ImageView
-                    android:id="@+id/id_maintenance_notifi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_maintenance_order" />
-
-            </TableRow>
-
-
-        </LinearLayout>
+        </TableRow>
 
         <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="4" />
+            android:layout_width="1dp"
+            android:layout_height="20dp" />
 
-        <ViewFlipper
-            android:id="@+id/id_maintenance_flipper"
+        <TableRow
             android:layout_width="match_parent"
-            android:layout_height="44dp"
-            android:layout_margin="@dimen/margin_padding10"
-            android:autoStart="true"
-            android:background="@mipmap/ic_maintenance_warning"
-            android:flipInterval="5000"
-            android:inAnimation="@anim/anim_in"
-            android:outAnimation="@anim/anim_out" />
+            android:layout_height="wrap_content"
+            android:gravity="center">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+            <ImageView
+                android:id="@+id/id_maintenance_equip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_maintenance_order" />
+
+            <View
+                android:layout_width="20dp"
+                android:layout_height="1dp" />
+
+            <ImageView
+                android:id="@+id/id_maintenance_notifi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_maintenance_order" />
+
+        </TableRow>
+
+
     </LinearLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_padding20"
+        android:background="@mipmap/ic_maintenance_down" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <ViewFlipper
+        android:id="@+id/id_maintenance_flipper"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginLeft="@dimen/margin_padding10"
+        android:layout_marginRight="@dimen/margin_padding10"
+        android:autoStart="true"
+        android:background="@mipmap/ic_maintenance_warning"
+        android:flipInterval="5000"
+        android:inAnimation="@anim/anim_in"
+        android:outAnimation="@anim/anim_out" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 </LinearLayout>
