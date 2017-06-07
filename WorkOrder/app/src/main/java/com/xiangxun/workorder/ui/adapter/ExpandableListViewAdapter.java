@@ -23,12 +23,12 @@ import java.util.List;
 public class ExpandableListViewAdapter implements ExpandableListAdapter {
     private Context context;
     private List<GroupData> groupData;
-    private List<List<ChildData>> childData;
-    public ExpandableListViewAdapter(Context context, List<GroupData> groupData, List<List<ChildData>> childData) {
+
+    public ExpandableListViewAdapter(Context context, List<GroupData> groupData) {
         this.context = context;
         this.groupData = groupData;
-        this.childData = childData;
     }
+
     @Override
     public void registerDataSetObserver(DataSetObserver observer) {
 
@@ -51,8 +51,8 @@ public class ExpandableListViewAdapter implements ExpandableListAdapter {
     @Override
     public int getChildrenCount(int groupPosition) {
         int ret = 0;
-        if (childData != null) {
-            ret = childData.get(groupPosition).size();
+        if (groupData != null && groupData.get(groupPosition).getData() != null) {
+            ret = groupData.get(groupPosition).getData().size();
         }
         return ret;
     }
@@ -64,7 +64,7 @@ public class ExpandableListViewAdapter implements ExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return childData.get(groupPosition).get(childPosition);
+        return groupData.get(groupPosition).getData().get(childPosition);
     }
 
     @Override
@@ -120,8 +120,8 @@ public class ExpandableListViewAdapter implements ExpandableListAdapter {
         } else {
             holder = (ChildViewHolder) convertView.getTag();
         }
-        ChildData childData = this.childData.get(groupPosition).get(childPosition);
-        ImageLoaderUtil.getInstance().loadImageNor(childData.getUrl(),holder.img);
+        ChildData childData = groupData.get(groupPosition).getData().get(childPosition);
+        ImageLoaderUtil.getInstance().loadImageNor(childData.getUrl(), holder.img);
         holder.tv_name.setText(childData.getName());
         holder.tv_content.setText(childData.getContent());
         return convertView;
@@ -161,6 +161,7 @@ public class ExpandableListViewAdapter implements ExpandableListAdapter {
     public long getCombinedGroupId(long groupId) {
         return 0;
     }
+
     class GroupViewHolder {
         ImageView img;
         TextView tv_name, tv_num;

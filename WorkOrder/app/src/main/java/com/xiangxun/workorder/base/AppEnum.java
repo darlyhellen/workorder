@@ -24,8 +24,10 @@ public enum AppEnum {
     PASSWORD("password", 0),
 
     USERID("userid", 0),
-
+    //巡检使用的所有设备信息
     EQUIPMENTMATION("equipmentinfomaition", 0),
+    //设备管理页面的首个列表
+    EQUIPMENTLIST("equipmentlist", 0),
 
     COOKIE("cookie", 0);
 

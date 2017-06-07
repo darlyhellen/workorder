@@ -44,7 +44,7 @@ public class MainPresenter {
         switch (v.getId()) {
             case R.id.xw_share:
                 //進入設置頁面
-                context.startActivity(new Intent(context, TourActivity.class));
+                context.startActivity(new Intent(context, EquipmentMenuAcitvity.class));
                 break;
         }
     }

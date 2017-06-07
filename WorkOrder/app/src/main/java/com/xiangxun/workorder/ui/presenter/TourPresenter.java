@@ -8,6 +8,7 @@ import com.hellen.baseframe.application.FrameListener;
 import com.hellen.baseframe.common.dlog.DLog;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.bean.BaseModel;
+import com.xiangxun.workorder.bean.ObjectData;
 import com.xiangxun.workorder.ui.biz.MainListener;
 import com.xiangxun.workorder.ui.biz.TourListener;
 import com.xiangxun.workorder.ui.main.SetActivity;
@@ -62,9 +63,9 @@ public class TourPresenter {
      */
     public void getEquipment() {
         biz.onStart(loading);
-        biz.getEquipment(new FrameListener<Object>() {
+        biz.getEquipment(new FrameListener<ObjectData>() {
             @Override
-            public void onSucces(Object o) {
+            public void onSucces(ObjectData o) {
 
             }
 

@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * Created by Administrator on 2017/6/5.
+ * 底层列表集合
  */
 
 public class ChildData implements Serializable {

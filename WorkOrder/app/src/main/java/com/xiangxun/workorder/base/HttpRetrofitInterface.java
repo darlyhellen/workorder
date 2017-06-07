@@ -52,6 +52,7 @@ public interface HttpRetrofitInterface {
      */
     @GET("server/workorder/refer/totalCount")
     Observable<JsonObject> totalCount();
+
     /**
      * @TODO:http://localhost:8090/server/workorder/refer/totalWorkOrder/ 首頁滚动的接口
      */
@@ -64,6 +65,7 @@ public interface HttpRetrofitInterface {
      */
     @GET("server/workorder/change/status/")
     Observable<JsonObject> getOrder(@Query("status") String status, @Query("id") String id, @Query("reason") String reason);
+
     /**
      * @param args
      * @TODO:上图片接口
@@ -90,4 +92,10 @@ public interface HttpRetrofitInterface {
      */
     @GET("server/version/")
     Observable<JsonObject> getVersion(@Query("version") int version);
+
+    /**
+     * @TODO:测试接口，替换接口。
+     */
+    @GET("server")
+    Observable<JsonObject> test();
 }
