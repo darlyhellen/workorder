@@ -11,12 +11,12 @@ import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.hellen.baseframe.common.dlog.DLog;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.bean.ChildData;
+import com.xiangxun.workorder.bean.EquipMenuChildData;
+import com.xiangxun.workorder.bean.EquipMenuGroupData;
 import com.xiangxun.workorder.bean.EquipmentRoot;
 import com.xiangxun.workorder.bean.GroupData;
-import com.xiangxun.workorder.common.image.ImageLoaderUtil;
 import com.xiangxun.workorder.widget.scroll.CustomExpandableListView;
 
 import java.util.List;
@@ -26,18 +26,18 @@ import java.util.List;
  * 在外层Expand中，他的所有二级条目都是一个，为什么，因为他具体的显示都交给了子ExpandableListView，二级条目的目的是为了把子ExpandableListView显示出来。
  */
 
-public class RootExpandableListViewAdapter extends BaseExpandableListAdapter {
+public class EquipmentMenuAdapter extends BaseExpandableListAdapter {
 
     private Context context;
-    private List<GroupData> groupData;
+    private List<EquipMenuGroupData> groupData;
 
-    public RootExpandableListViewAdapter(Context context, List<GroupData> groupData) {
+    public EquipmentMenuAdapter(Context context, List<EquipMenuGroupData> groupData) {
         this.context = context;
         this.groupData = groupData;
     }
 
 
-    public void setData(List<GroupData> groupData) {
+    public void setData(List<EquipMenuGroupData> groupData) {
         this.groupData = groupData;
         this.notifyDataSetChanged();
     }
@@ -63,8 +63,11 @@ public class RootExpandableListViewAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        // 很关键，，一定要返回  1
-        return 1;
+        int ret = 0;
+        if (groupData != null && groupData.get(groupPosition).getData() != null) {
+            ret = groupData.get(groupPosition).getData().size();
+        }
+        return ret;
     }
 
     @Override
@@ -105,45 +108,28 @@ public class RootExpandableListViewAdapter extends BaseExpandableListAdapter {
         } else {
             holder = (GroupViewHolder) convertView.getTag();
         }
-        GroupData groupData = this.groupData.get(groupPosition);
-        //是否展开
-//        if (isExpanded) {
-//            holder.img.setImageResource(R.drawable.img_bottom);
-//        } else {
-//            holder.img.setImageResource(R.drawable.img_right);
-//        }
+        EquipMenuGroupData groupData = this.groupData.get(groupPosition);
         holder.tv_name.setText(groupData.getName());
-        holder.tv_num.setText(groupData.getNum());
         return convertView;
     }
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        AbsListView.LayoutParams layoutParams = new AbsListView.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
-
-        CustomExpandableListView view = new CustomExpandableListView(context);
-        // 加载班级的适配器
-        final ExpandableListViewAdapter adapter = new ExpandableListViewAdapter(groupData.get(groupPosition).getData(), context);
-        view.setAdapter(adapter);
-        view.setPadding(20, 0, 0, 0);
-        //重写OnGroupClickListener，实现当展开时，ExpandableListView不自动滚动
-        view.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-            @Override
-            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                if (parent.isGroupExpanded(groupPosition)) {
-                    parent.collapseGroup(groupPosition);
-                } else {
-                    //第二个参数false表示展开时是否触发默认滚动动画
-                    parent.expandGroup(groupPosition, false);
-                }
-                //telling the listView we have handled the group click, and don't want the default actions.
-                return true;
-            }
-        });
-
-        return view;
+        ChildViewHolder holder = null;
+        if (convertView == null) {
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_child_expandablelistview, null);
+            holder = new ChildViewHolder();
+            holder.img = (ImageView) convertView.findViewById(R.id.id_item_equip_child_head);
+            holder.tv_name = (TextView) convertView.findViewById(R.id.id_item_equip_child_name);
+            holder.tv_content = (TextView) convertView.findViewById(R.id.id_item_equip_child_content);
+            convertView.setTag(holder);
+        } else {
+            holder = (ChildViewHolder) convertView.getTag();
+        }
+        EquipMenuChildData childData = groupData.get(groupPosition).getData().get(childPosition);
+        holder.img.setImageResource(childData.getRes());
+        holder.tv_name.setText(childData.getName());
+        return convertView;
     }
 
     @Override
@@ -186,4 +172,8 @@ public class RootExpandableListViewAdapter extends BaseExpandableListAdapter {
         TextView tv_name, tv_num;
     }
 
+    class ChildViewHolder {
+        ImageView img;
+        TextView tv_name, tv_content;
+    }
 }

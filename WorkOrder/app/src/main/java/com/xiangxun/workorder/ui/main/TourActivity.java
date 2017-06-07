@@ -20,12 +20,14 @@ import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.base.BaseActivity;
 import com.xiangxun.workorder.bean.BaseModel;
+import com.xiangxun.workorder.bean.EquipmentRoot;
 import com.xiangxun.workorder.ui.adapter.TourImageAdapter;
 import com.xiangxun.workorder.ui.adapter.TourImageAdapter.OnTourConsListener;
 import com.xiangxun.workorder.ui.biz.TourListener.TourInterface;
 import com.xiangxun.workorder.ui.presenter.TourPresenter;
 import com.xiangxun.workorder.widget.camera.PhotoPop;
 import com.xiangxun.workorder.widget.dialog.TourSelectDialog;
+import com.xiangxun.workorder.widget.dialog.TourSelectDialog.onSelectItemClick;
 import com.xiangxun.workorder.widget.grid.WholeGridView;
 import com.xiangxun.workorder.widget.header.HeaderView;
 
@@ -40,7 +42,7 @@ import java.util.List;
  * @TODO:新增巡检工单
  */
 @ContentBinder(R.layout.activity_tour)
-public class TourActivity extends BaseActivity implements OnClickListener, TourInterface, OnTourConsListener, OnItemClickListener {
+public class TourActivity extends BaseActivity implements OnClickListener, TourInterface, OnTourConsListener, OnItemClickListener, onSelectItemClick {
 
 
     @ViewsBinder(R.id.id_tour_title)
@@ -75,13 +77,12 @@ public class TourActivity extends BaseActivity implements OnClickListener, TourI
     @Override
     protected void initView(Bundle savedInstanceState) {
         presenter = new TourPresenter(this);
-        String cach = SharePreferHelp.getValue(AppEnum.EQUIPMENTMATION.getDec(),null);
-        if (TextUtils.isEmpty(cach)){
+        String cach = SharePreferHelp.getValue(AppEnum.EQUIPMENTMATION.getDec(), null);
+        if (TextUtils.isEmpty(cach)) {
             //没有缓存，进行网络请求接口。
-            presenter.getEquipment();
-        }else {
+           // presenter.getEquipment();
+        } else {
             //有缓存，进行数据解析。
-
         }
         title.setTitle(R.string.st_tour_title);
         title.setLeftBackgroundResource(R.mipmap.ic_title_back);
@@ -106,7 +107,15 @@ public class TourActivity extends BaseActivity implements OnClickListener, TourI
 
     @Override
     public void onClick(View v) {
-        presenter.onClickDown(this, v);
+        switch (v.getId()) {
+            case R.id.id_order_name_click:
+                new TourSelectDialog(this, tv_order_name, "请选择设备名称", this).show();
+                break;
+            default:
+                presenter.onClickDown(this, v);
+                break;
+        }
+
     }
 
     @Override
@@ -193,4 +202,8 @@ public class TourActivity extends BaseActivity implements OnClickListener, TourI
         }
     }
 
+    @Override
+    public void changeState(EquipmentRoot type) {
+        //点击选中的设备信息。
+    }
 }

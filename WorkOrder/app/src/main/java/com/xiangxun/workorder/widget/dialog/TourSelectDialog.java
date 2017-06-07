@@ -3,6 +3,7 @@ package com.xiangxun.workorder.widget.dialog;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,12 +12,20 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.hellen.baseframe.common.dlog.DLog;
+import com.hellen.baseframe.common.utiltools.SharePreferHelp;
 import com.xiangxun.workorder.R;
+import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.bean.BaseModel.Type;
+import com.xiangxun.workorder.bean.ChildData;
+import com.xiangxun.workorder.bean.EquipmentRoot;
 import com.xiangxun.workorder.common.urlencode.Tools;
+import com.xiangxun.workorder.ui.adapter.RootExpandableListViewAdapter;
+import com.xiangxun.workorder.ui.presenter.EquipmentMenuPresenter;
 
 import java.util.List;
 
@@ -29,25 +38,30 @@ import java.util.List;
  * @TODO:
  */
 public class TourSelectDialog extends Dialog {
+
+
+    public interface onSelectItemClick {
+        void changeState(EquipmentRoot type);
+    }
+
+    private onSelectItemClick selectItemClick;
     private Context mContext = null;
     private View mCustomView = null;
-    private List<Type> types;
-    private TextView mTvFinalStyle = null;
+    private TextView textView = null;
     private String mTitle = null;
     private TextView mTvCancle = null;
     private TextView mTvPublishSelectTitle = null;
-    private ListView mLvPublishTypes = null;
+    private ExpandableListView mLvPublishTypes = null;
     private StringBuffer mFinalStyle = new StringBuffer();
-    private Type type;
-    private AffairsTypeAdapter adapter;
+    private RootExpandableListViewAdapter adapter;
     private int selectedItemPosition = 0;
 
-    public TourSelectDialog(Context context, List<Type> types, TextView finalStyle, String mTitle) {
+    public TourSelectDialog(Context context, TextView textView, String mTitle, onSelectItemClick selectItemClick) {
         super(context, R.style.PublishDialog);
         this.mContext = context;
-        this.types = types;
-        this.mTvFinalStyle = finalStyle;
+        this.textView = textView;
         this.mTitle = mTitle;
+        this.selectItemClick = selectItemClick;
         init();
     }
 
@@ -73,27 +87,35 @@ public class TourSelectDialog extends Dialog {
         mTvCancle = (TextView) mCustomView.findViewById(R.id.tv_publish_select_dialog_cancle);
         mTvPublishSelectTitle = (TextView) mCustomView.findViewById(R.id.tv_publish_select_dialog_title);
         mTvPublishSelectTitle.setText(mTitle);
-        mLvPublishTypes = (ListView) mCustomView.findViewById(R.id.lv_publish_select_dialog);
-        adapter = new AffairsTypeAdapter(mContext, types);
+        mLvPublishTypes = (ExpandableListView) mCustomView.findViewById(R.id.lv_publish_select_dialog);
+        adapter = new RootExpandableListViewAdapter(mContext, EquipmentMenuPresenter.testData().getData());
         mLvPublishTypes.setAdapter(adapter);
-        mLvPublishTypes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
+        //重写OnGroupClickListener，实现当展开时，ExpandableListView不自动滚动
+        mLvPublishTypes.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                selectedItemPosition = position;
-                mFinalStyle.delete(0, mFinalStyle.length());
-                Type type = types.get(position);
-                mFinalStyle.append(type.name);
-                mTvFinalStyle.setText("");
-                mTvFinalStyle.setText(mFinalStyle.toString());
-                mTvFinalStyle.setTag(type);
-                if (selectItemClick != null) {
-                    selectItemClick.changeState(type);
+            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+                if (parent.isGroupExpanded(groupPosition)) {
+                    parent.collapseGroup(groupPosition);
+                } else {
+                    //第二个参数false表示展开时是否触发默认滚动动画
+                    parent.expandGroup(groupPosition, false);
                 }
-                dismiss();
+                //telling the listView we have handled the group click, and don't want the default actions.
+                return true;
             }
         });
 
+        mLvPublishTypes.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                EquipmentRoot data = (EquipmentRoot) adapter.getChild(groupPosition, childPosition);
+                if (selectItemClick != null) {
+                    selectItemClick.changeState(data);
+                }
+                dismiss();
+                return false;
+            }
+        });
         mTvCancle.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -102,16 +124,6 @@ public class TourSelectDialog extends Dialog {
             }
         });
 
-    }
-
-    public Type getSelectedTypeItem() {
-        return type;
-    }
-
-    public void setSelection(int position) {
-        selectedItemPosition = position;
-        mTvFinalStyle.setText(types.get(position).name);
-        mTvFinalStyle.setTag(types.get(position));
     }
 
     public int getSelectedItemPosition() {
@@ -167,14 +179,5 @@ public class TourSelectDialog extends Dialog {
         }
     }
 
-    private onSelectItemClick selectItemClick;
-
-    public void setSelectItemClick(onSelectItemClick selectItemClick) {
-        this.selectItemClick = selectItemClick;
-    }
-
-    public interface onSelectItemClick {
-        public void changeState(Type type);
-    }
 
 }

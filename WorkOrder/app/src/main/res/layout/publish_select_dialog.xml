@@ -41,7 +41,7 @@
         android:layout_height="1px"
         android:background="#c8c8c8" />
 
-    <ListView
+    <ExpandableListView
         android:id="@+id/lv_publish_select_dialog"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

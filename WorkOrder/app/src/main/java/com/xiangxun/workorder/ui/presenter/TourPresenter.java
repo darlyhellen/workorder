@@ -52,9 +52,6 @@ public class TourPresenter {
             case R.id.title_view_right_Flipper01:
                 DLog.i("点击提交");
                 break;
-            case R.id.id_order_name_click:
-                new TourSelectDialog(context, new ArrayList<BaseModel.Type>(), view.findName(), "请选择设备名称").show();
-                break;
         }
     }
 

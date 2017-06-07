@@ -32,10 +32,6 @@ public class EquipmentMenuListener implements FramePresenter {
 
     public interface EquipmentMenuInterface extends FrameView {
 
-        void onLoginSuccess(List<GroupData> data);
-
-        void onLoginFailed();
-
         void end();
     }
 
@@ -44,54 +40,6 @@ public class EquipmentMenuListener implements FramePresenter {
         if (dialog != null) {
             dialog.show();
         }
-    }
-
-    /**
-     * @TODO:获取设备信息接口。
-     */
-    public void getEquipment(final FrameListener<ObjectData> listener) {
-        if (!APP.isNetworkConnected(APP.getInstance())) {
-            listener.onFaild(0, "网络异常,请检查网络");
-            return;
-        }
-        //在这里进行数据请求
-        RxjavaRetrofitRequestUtil.getInstance().get().test().
-                subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .map(new Func1<JsonObject, ObjectData>() {
-                    @Override
-                    public ObjectData call(JsonObject jsonObject) {
-                        DLog.json("Func1", jsonObject.toString());
-                        return new Gson().fromJson(jsonObject.toString(), new TypeToken<ObjectData>() {
-                        }.getType());
-                    }
-                })
-                .subscribe(new Observer<ObjectData>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        listener.onFaild(1, e.getMessage());
-                    }
-
-                    @Override
-                    public void onNext(ObjectData data) {
-                        if (data != null) {
-
-                            if (data.getStatus() == 1 && data.getData() != null) {
-                                listener.onSucces(data);
-                            } else {
-                                listener.onFaild(0, data.getMessage());
-                            }
-
-                        } else {
-                            listener.onFaild(0, "解析错误");
-                        }
-                    }
-                });
     }
 
     @Override
