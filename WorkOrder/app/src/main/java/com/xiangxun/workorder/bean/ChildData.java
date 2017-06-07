@@ -1,6 +1,7 @@
 package com.xiangxun.workorder.bean;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/6/5.
@@ -11,6 +12,7 @@ public class ChildData implements Serializable {
     private String url;
     private String name;
     private String content;
+    private List<EquipmentRoot> data;
 
     public ChildData(String url, String name, String content) {
         this.url = url;
@@ -40,5 +42,13 @@ public class ChildData implements Serializable {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public List<EquipmentRoot> getData() {
+        return data;
+    }
+
+    public void setData(List<EquipmentRoot> data) {
+        this.data = data;
     }
 }

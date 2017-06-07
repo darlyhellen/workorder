@@ -16,9 +16,11 @@ import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.base.BaseActivity;
 import com.xiangxun.workorder.bean.ChildData;
+import com.xiangxun.workorder.bean.EquipmentRoot;
 import com.xiangxun.workorder.bean.GroupData;
 import com.xiangxun.workorder.bean.ObjectData;
 import com.xiangxun.workorder.ui.adapter.ExpandableListViewAdapter;
+import com.xiangxun.workorder.ui.adapter.RootExpandableListViewAdapter;
 import com.xiangxun.workorder.ui.biz.EquipmentMenuListener;
 import com.xiangxun.workorder.ui.biz.EquipmentMenuListener.EquipmentMenuInterface;
 import com.xiangxun.workorder.ui.presenter.EquipmentMenuPresenter;
@@ -38,19 +40,38 @@ public class EquipmentMenuAcitvity extends BaseActivity implements OnClickListen
     private HeaderView header;
     @ViewsBinder(R.id.id_equipment_listview)
     private ExpandableListView listView;
-    private ExpandableListViewAdapter adapter;
+    private RootExpandableListViewAdapter adapter;
 
     private EquipmentMenuPresenter presenter;
 
     private ObjectData data;
-    private String[] url;
 
     @Override
     protected void initView(Bundle savedInstanceState) {
         presenter = new EquipmentMenuPresenter(this);
         String equip = SharePreferHelp.getValue(AppEnum.EQUIPMENTLIST.getDec(), null);
         if (TextUtils.isEmpty(equip)) {
-            presenter.getEquipment();
+            //presenter.getEquipment();
+            testData();
+            adapter = new RootExpandableListViewAdapter(this, data.getData());
+            listView.setAdapter(adapter);
+
+            //重写OnGroupClickListener，实现当展开时，ExpandableListView不自动滚动
+            listView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+                @Override
+                public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+                    if (parent.isGroupExpanded(groupPosition)) {
+                        parent.collapseGroup(groupPosition);
+                    } else {
+                        //第二个参数false表示展开时是否触发默认滚动动画
+                        parent.expandGroup(groupPosition, false);
+                    }
+                    //telling the listView we have handled the group click, and don't want the default actions.
+                    return true;
+                }
+            });
+
+
         } else {
             //对数据进行解析。
             data = new Gson().fromJson(equip, new TypeToken<ObjectData>() {
@@ -78,15 +99,6 @@ public class EquipmentMenuAcitvity extends BaseActivity implements OnClickListen
 
     private void testData() {
 
-        url = new String[]{
-                "http://cdn.duitang.com/uploads/item/201506/07/20150607125903_vFWC5.png",
-                "http://upload.qqbody.com/ns/20160915/202359954jalrg3mqoei.jpg",
-                "http://tupian.qqjay.com/tou3/2016/0726/8529f425cf23fd5afaa376c166b58e29.jpg",
-                "http://cdn.duitang.com/uploads/item/201607/13/20160713094718_Xe3Tc.png",
-                "http://img3.imgtn.bdimg.com/it/u=1808104956,526590423&fm=11&gp=0.jpg",
-                "http://tupian.qqjay.com/tou3/2016/0725/5d6272a4acd7e21b2391aff92f765018.jpg"
-        };
-
 
         List<GroupData> groupDatas = new ArrayList<GroupData>();
 
@@ -111,12 +123,14 @@ public class EquipmentMenuAcitvity extends BaseActivity implements OnClickListen
                     ChildData cd = null;
                     if (i == 0) {
                         cd = new ChildData("null", "卡口设备", "");
+                        cd.setData(getRoot(j, cd.getName()));
                         list.add(cd);
                         cd = new ChildData("null", "智能机柜", "");
+                        cd.setData(getRoot(j, cd.getName()));
                         list.add(cd);
                         break;
                     } else {
-                        cd = new ChildData(url[j % url.length], "其他设备" + j, "");
+                        cd = new ChildData(null, "其他设备" + j, "");
                         list.add(cd);
                     }
                 }
@@ -125,16 +139,20 @@ public class EquipmentMenuAcitvity extends BaseActivity implements OnClickListen
                     ChildData cd = null;
                     if (i == 1) {
                         cd = new ChildData("null", "服务器", "");
+                        cd.setData(getRoot(j, cd.getName()));
                         list.add(cd);
                         cd = new ChildData("null", "数据库", "");
+                        cd.setData(getRoot(j, cd.getName()));
                         list.add(cd);
                         cd = new ChildData("null", "平台信息", "");
+                        cd.setData(getRoot(j, cd.getName()));
                         list.add(cd);
                         cd = new ChildData("null", "FTP信息", "");
+                        cd.setData(getRoot(j, cd.getName()));
                         list.add(cd);
                         break;
                     } else {
-                        cd = new ChildData(url[j % url.length], "其他设备" + j, "");
+                        cd = new ChildData(null, "其他设备" + j, "");
                         list.add(cd);
                     }
                 }
@@ -148,6 +166,16 @@ public class EquipmentMenuAcitvity extends BaseActivity implements OnClickListen
         data.setStatus(1);
     }
 
+    private List<EquipmentRoot> getRoot(int j, String name) {
+        List<EquipmentRoot> ka = new ArrayList<>();
+        for (int k = 0; k < 2 * j + 2; k++) {
+            EquipmentRoot root = new EquipmentRoot();
+            root.setName(name + "编号:" + k);
+            ka.add(root);
+        }
+        return ka;
+    }
+
     @Override
     public void onClick(View v) {
         finish();
@@ -155,7 +183,7 @@ public class EquipmentMenuAcitvity extends BaseActivity implements OnClickListen
 
     @Override
     public void onLoginSuccess(List<GroupData> data) {
-        adapter = new ExpandableListViewAdapter(this, data);
+        adapter = new RootExpandableListViewAdapter(this, data);
         listView.setAdapter(adapter);
 
         //重写OnGroupClickListener，实现当展开时，ExpandableListView不自动滚动
@@ -177,7 +205,7 @@ public class EquipmentMenuAcitvity extends BaseActivity implements OnClickListen
     @Override
     public void onLoginFailed() {
         testData();
-        adapter = new ExpandableListViewAdapter(this, data.getData());
+        adapter = new RootExpandableListViewAdapter(this, data.getData());
         listView.setAdapter(adapter);
 
         //重写OnGroupClickListener，实现当展开时，ExpandableListView不自动滚动
