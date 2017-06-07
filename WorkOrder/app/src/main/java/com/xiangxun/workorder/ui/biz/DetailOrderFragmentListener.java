@@ -114,7 +114,7 @@ public class DetailOrderFragmentListener implements FramePresenter {
     }
 
 
-    public void upDataOrder(String status, String id, String reason, List<String> urls, final FrameListener<DetailChangeRoot> listener) {
+    public void upDataOrder(String status, String id, String reason, final FrameListener<DetailChangeRoot> listener) {
 
         if (!APP.isNetworkConnected(APP.getInstance())) {
             listener.onFaild(0, "网络异常,请检查网络");

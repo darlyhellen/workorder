@@ -50,7 +50,7 @@ public class TourActivity extends BaseActivity implements OnClickListener, TourI
     @ViewsBinder(R.id.id_order_name_click)
     private LinearLayout id_order_name_click;
     @ViewsBinder(R.id.id_order_equip_code)
-    private TextView id_order_equip_code;
+    private TextView id_order_equip_code;//名称
     @ViewsBinder(R.id.id_order_equip_ip)
     private TextView id_order_equip_ip;
     @ViewsBinder(R.id.id_order_equip_type)
@@ -64,13 +64,11 @@ public class TourActivity extends BaseActivity implements OnClickListener, TourI
     @ViewsBinder(R.id.id_order_equip_declare)
     private EditText id_order_equip_declare;
     @ViewsBinder(R.id.tv_order_name)
-    private TextView tv_order_name;
+    private EditText tv_order_name;//编码
 
     private List<String> imageData;
     private TourImageAdapter adapter;
     private PhotoPop pop;
-
-    private TourSelectDialog nameType;
 
     private TourPresenter presenter;
 
@@ -80,7 +78,7 @@ public class TourActivity extends BaseActivity implements OnClickListener, TourI
         String cach = SharePreferHelp.getValue(AppEnum.EQUIPMENTMATION.getDec(), null);
         if (TextUtils.isEmpty(cach)) {
             //没有缓存，进行网络请求接口。
-           // presenter.getEquipment();
+            // presenter.getEquipment();
         } else {
             //有缓存，进行数据解析。
         }
@@ -102,15 +100,11 @@ public class TourActivity extends BaseActivity implements OnClickListener, TourI
         title.setLeftBackOneListener(this);
         title.setRightImageTextFlipper(this);
         id_order_equip_image.setOnItemClickListener(this);
-        id_order_name_click.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.id_order_name_click:
-                new TourSelectDialog(this, tv_order_name, "请选择设备名称", this).show();
-                break;
             default:
                 presenter.onClickDown(this, v);
                 break;

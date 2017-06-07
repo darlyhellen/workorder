@@ -106,7 +106,6 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
     private List<String> imageData;
     private DetailOrderImageAdapter adapter;
 
-
     /**
      * 上午9:29:04 TODO 调出选项的POP窗口，主要为相机，相册，取消
      */
@@ -286,7 +285,7 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
 
     @Override
     public List<String> getUrls() {
-        return null;
+        return imageData;
     }
 
     @Override

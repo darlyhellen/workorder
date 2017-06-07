@@ -28,6 +28,8 @@ public class DetailOrderFragmentPresenter {
 
     private ShowLoading loading;
 
+    private boolean isUpImage = false;//图片是否已经上传.
+
     public DetailOrderFragmentPresenter(DetailOrderFragmentInterface view) {
         this.view = view;
         this.biz = new DetailOrderFragmentListener();
@@ -101,15 +103,19 @@ public class DetailOrderFragmentPresenter {
     }
 
     /**
-     * @TODO:正常上报和异常上报接口内容。
      * @param status
      * @param id
      * @param urls
+     * @TODO:正常上报和异常上报接口内容。
      */
     private void updataOrder(String status, String id, List<String> urls) {
+        if (urls != null && urls.size() > 1 && !isUpImage) {
+            //有圖片但是沒有上傳的判斷。
+            upLoadImage(urls);
+        }
         biz.onStart(loading);
         view.setDisableClick();
-        biz.upDataOrder(status, id, view.getReason(), urls, new FrameListener<DetailChangeRoot>() {
+        biz.upDataOrder(status, id, view.getReason(), new FrameListener<DetailChangeRoot>() {
             @Override
             public void onSucces(DetailChangeRoot s) {
                 biz.onStop(loading);
@@ -148,6 +154,7 @@ public class DetailOrderFragmentPresenter {
             public void onSucces(DetailChangeRoot s) {
                 biz.onStop(loading);
                 view.setEnableClick();
+                isUpImage = true;
                 ToastApp.showToast(s.getMessage());
             }
 
@@ -155,6 +162,7 @@ public class DetailOrderFragmentPresenter {
             public void onFaild(int i, String s) {
                 biz.onStop(loading);
                 view.setEnableClick();
+                isUpImage = false;
                 switch (i) {
                     case 0:
                         ToastApp.showToast(s);

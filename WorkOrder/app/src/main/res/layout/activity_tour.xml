@@ -36,7 +36,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/margin_padding10"
-                    android:text="设备名称:"
+                    android:text="设备编码:"
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/textSize16" />
 
@@ -49,28 +49,27 @@
                         android:id="@+id/id_order_name_click"
                         android:layout_width="fill_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/publish_click_selector"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <EditText
                             android:id="@+id/tv_order_name"
                             android:layout_width="0dp"
                             android:layout_height="fill_parent"
                             android:layout_marginLeft="@dimen/margin_padding10"
                             android:layout_weight="1"
+                            android:background="@drawable/app_login_shape"
                             android:gravity="center_vertical"
-                            android:hint="请选择设备名称"
+                            android:hint="请输入设备编码"
                             android:textColor="@color/color333333"
                             android:textColorHint="#cccccc"
                             android:textSize="@dimen/textSize15" />
 
-                        <ImageView
-                            android:layout_width="10dp"
-                            android:layout_height="10dp"
-                            android:layout_gravity="bottom"
-                            android:layout_marginBottom="10dp"
-                            android:layout_marginRight="10dp"
-                            android:background="@mipmap/ic_tour_pull" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/margin_padding10"
+                            android:background="@drawable/app_login_shape"
+                            android:text="@string/set_sure" />
                     </LinearLayout>
 
                     <ImageView
@@ -93,7 +92,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/st_detail_complainant_time"
+                    android:text="@string/st_detail_complainant"
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/textSize16" />
 
