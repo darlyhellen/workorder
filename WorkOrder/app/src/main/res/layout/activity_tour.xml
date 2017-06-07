@@ -19,17 +19,15 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/margin_padding10"
             android:background="@drawable/publish_item_background"
             android:gravity="center_vertical"
-            android:orientation="vertical">
-
+            android:orientation="vertical"
+            android:padding="@dimen/margin_padding10">
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/publish_item_background"
-                android:padding="@dimen/margin_padding10"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -37,22 +35,22 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:padding="@dimen/margin_padding10"
                     android:text="设备名称:"
                     android:textColor="@color/text_color"
                     android:textSize="@dimen/textSize16" />
+
                 <FrameLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/margin_padding10"
+                    android:layout_height="match_parent"
                     android:layout_weight="1">
 
                     <LinearLayout
                         android:id="@+id/id_order_name_click"
                         android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@drawable/publish_click_selector"
                         android:orientation="horizontal">
-
 
                         <TextView
                             android:id="@+id/tv_order_name"
@@ -69,7 +67,7 @@
                         <ImageView
                             android:layout_width="10dp"
                             android:layout_height="10dp"
-                            android:layout_gravity="bottom|right"
+                            android:layout_gravity="bottom"
                             android:layout_marginBottom="10dp"
                             android:layout_marginRight="10dp"
                             android:background="@mipmap/ic_tour_pull" />
@@ -89,8 +87,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/publish_item_background"
                 android:gravity="center_vertical"
-                android:padding="@dimen/margin_padding10"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="@dimen/margin_padding10">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -114,8 +112,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/publish_item_background"
                 android:gravity="center_vertical"
-                android:padding="@dimen/margin_padding10"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="@dimen/margin_padding10">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -139,8 +137,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/publish_item_background"
                 android:gravity="center_vertical"
-                android:padding="@dimen/margin_padding10"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="@dimen/margin_padding10">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -164,8 +162,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/publish_item_background"
                 android:gravity="center_vertical"
-                android:padding="@dimen/margin_padding10"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="@dimen/margin_padding10">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -189,8 +187,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/publish_item_background"
                 android:gravity="center_vertical"
-                android:padding="@dimen/margin_padding10"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="@dimen/margin_padding10">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -215,15 +213,17 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/publish_item_background"
                 android:gravity="center_vertical"
-                android:padding="@dimen/margin_padding10"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="@dimen/margin_padding10">
 
                 <com.xiangxun.workorder.widget.grid.WholeGridView
                     android:id="@+id/id_order_equip_image"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/margin_padding4"
-                    android:numColumns="4" />
+                    android:horizontalSpacing="@dimen/margin_padding4"
+                    android:numColumns="3"
+                    android:verticalSpacing="@dimen/margin_padding4" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -247,8 +247,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@drawable/publish_item_background"
-                />
+                android:background="@drawable/publish_item_background" />
 
         </LinearLayout>
     </com.xiangxun.workorder.widget.scroll.WholeScrollView>

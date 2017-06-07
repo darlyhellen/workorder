@@ -12,6 +12,7 @@ import com.xiangxun.workorder.ui.EquipmentMenuAcitvity;
 import com.xiangxun.workorder.ui.biz.MainListener;
 import com.xiangxun.workorder.ui.main.DownLoadActivity;
 import com.xiangxun.workorder.ui.main.SetActivity;
+import com.xiangxun.workorder.ui.main.TourActivity;
 import com.xiangxun.workorder.ui.video.VideoRecordActivity;
 
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ public class MainPresenter {
         switch (v.getId()) {
             case R.id.xw_share:
                 //進入設置頁面
-                context.startActivity(new Intent(context, EquipmentMenuAcitvity.class));
+                context.startActivity(new Intent(context, TourActivity.class));
                 break;
         }
     }

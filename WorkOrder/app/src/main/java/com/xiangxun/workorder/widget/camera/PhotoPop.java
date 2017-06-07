@@ -36,6 +36,7 @@ import java.io.InputStream;
 public class PhotoPop extends PopupWindow implements OnClickListener {
 
     private String rota = "ROTATE.png";
+    private int qualityCompress = AppEnum.WIDTH.getLen() * AppEnum.HEIGHT.getLen() /  10;//设备屏幕像素的1/10
 
     public PhotoPop(Context context) {
         super();
@@ -280,9 +281,9 @@ public class PhotoPop extends PopupWindow implements OnClickListener {
             if (file_size > 320) {
                 bit = decodeSampledBitmapFromFile(capUri);
                 // 获取图片大小的比对关系。是100KB的多少。
-                int quality = AppEnum.WIDTH.getLen() * AppEnum.HEIGHT.getLen() / file_size;
+                int quality = qualityCompress/file_size * 10;
                 DLog.i(getClass().getSimpleName(), quality + "----" + file_size);
-                return compressBitmap(bit, 100);
+                return compressBitmap(bit, quality);
             } else {
                 try {
                     FileInputStream is = new FileInputStream(capUri);
@@ -335,6 +336,7 @@ public class PhotoPop extends PopupWindow implements OnClickListener {
                 targetwidth = picwidth / inSampleSize;
             }
         }
+        DLog.i(getClass().getSimpleName(), "压缩比例" + inSampleSize);
         return inSampleSize;
     }
 

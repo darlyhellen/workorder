@@ -1,28 +1,20 @@
 package com.xiangxun.workorder.ui.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.AbsoluteLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hellen.baseframe.baseadapter.ParentAdapter;
-import com.hellen.baseframe.common.dlog.DLog;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.AppEnum;
-import com.xiangxun.workorder.common.image.ImageLoaderUtil;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.net.URI;
 import java.util.List;
 
 /**
@@ -32,51 +24,33 @@ import java.util.List;
  *
  * @TODO: 详情页面图片展示
  */
-public class DetailOrderImageAdapter extends ParentAdapter<String> {
+public class TourImageAdapter extends ParentAdapter<String> {
 
-    public interface OnDetailOrderConsListener {
+    public interface OnTourConsListener {
         void onConsListener(View v, int position);
     }
 
-    private OnDetailOrderConsListener listener;
+    private OnTourConsListener listener;
 
-    public DetailOrderImageAdapter(List<String> data, int resID, Context context, OnDetailOrderConsListener listener) {
+    public TourImageAdapter(List<String> data, int resID, Context context, OnTourConsListener listener) {
         super(data, resID, context);
         this.listener = listener;
     }
 
     @Override
     public int getCount() {
-        return data.size() > 4 ? 4 : data.size();
+        return data.size() > 3 ? 3 : data.size();
     }
 
     @Override
     public View HockView(final int position, View view, ViewGroup viewGroup, int i1, Context context, String url) {
-//        ViewHocker hocker = null;
-//        if (view == null) {
-//            view = LayoutInflater.from(context).inflate(i1, null);
-//            hocker = new ViewHocker();
-//            hocker.lin = (LinearLayout) view.findViewById(R.id.id_item_fragment_detail_lin);
-//            hocker.lin.setLayoutParams(new AbsListView.LayoutParams(AppEnum.WIDTH.getLen() / 4, AppEnum.WIDTH.getLen() / 4));
-//            hocker.image = (ImageView) view.findViewById(R.id.id_item_fragment_detail_image);
-//            view.setTag(hocker);
-//        } else {
-//            hocker = (ViewHocker) view.getTag();
-//        }
-//
-//        if (position == (data.size() - 1)) {
-//            hocker.image.setBackgroundResource(R.drawable.add_publish_image);
-//        } else {
-//            ImageLoader.getInstance().displayImage(
-//                    "file://" + url, hocker.image);
-//        }
 
         ViewHocker viewHolder = null;
         if (view == null) {
             view = LayoutInflater.from(context).inflate(i1, null);
             viewHolder = new ViewHocker();
             viewHolder.relative = (RelativeLayout) view.findViewById(R.id.id_iv_relative);
-            viewHolder.relative.setLayoutParams(new AbsListView.LayoutParams(AppEnum.WIDTH.getLen() / 5, AppEnum.WIDTH.getLen() / 5));
+            viewHolder.relative.setLayoutParams(new AbsListView.LayoutParams(AppEnum.WIDTH.getLen() / 4, AppEnum.WIDTH.getLen() / 4));
             viewHolder.photo = (ImageView) view.findViewById(R.id.id_iv_photo);
             viewHolder.close = (ImageView) view.findViewById(R.id.id_iv_close);
             viewHolder.desc = (TextView) view.findViewById(R.id.id_tv_desc);
@@ -87,13 +61,7 @@ public class DetailOrderImageAdapter extends ParentAdapter<String> {
 
         if (viewGroup.getChildCount() == position) { // 里面就是正常的position
             if (position == (data.size() - 1)) {
-                if (position == 3) {
-                    viewHolder.photo.setVisibility(View.INVISIBLE);
-                    viewHolder.desc.setText("上传图片");
-                } else {
-                    viewHolder.photo.setVisibility(View.VISIBLE);
-                    viewHolder.photo.setImageResource(R.drawable.add_publish_image);
-                }
+                viewHolder.photo.setImageResource(R.drawable.add_publish_image);
                 viewHolder.photo.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 viewHolder.close.setVisibility(View.GONE);
             } else {

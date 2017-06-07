@@ -25,6 +25,8 @@ public enum AppEnum {
 
     USERID("userid", 0),
 
+    EQUIPMENTMATION("equipmentinfomaition", 0),
+
     COOKIE("cookie", 0);
 
     //单页调试的假数据
@@ -62,7 +64,7 @@ public enum AppEnum {
     public static final String DOWNS = ROOT + "local/";
 
     public static final String DATA = DOWNS + "data/";
-    
+
     public static final String MAP = DATA + "map/";
 
     public static final String MAINRADIO = CACTH + "mainimage/";
@@ -119,6 +121,5 @@ public enum AppEnum {
     public void setDec(String dec) {
         this.dec = dec;
     }
-
 
 }
