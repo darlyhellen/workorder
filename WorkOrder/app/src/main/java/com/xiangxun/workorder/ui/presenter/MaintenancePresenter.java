@@ -13,6 +13,7 @@ import com.xiangxun.workorder.bean.Patrol;
 import com.xiangxun.workorder.bean.WorkOrderRoot;
 import com.xiangxun.workorder.ui.EquipmentMenuAcitvity;
 import com.xiangxun.workorder.ui.MaintenanceActivity;
+import com.xiangxun.workorder.ui.TourListActivity;
 import com.xiangxun.workorder.ui.WorkOrderMenuActivity;
 import com.xiangxun.workorder.ui.biz.MaintenanceListener;
 import com.xiangxun.workorder.ui.biz.MaintenanceListener.MaintenanceInterface;
@@ -65,7 +66,7 @@ public class MaintenancePresenter {
                 context.startActivity(new Intent(context, WorkOrderMenuActivity.class));
                 break;
             case R.id.id_maintenance_tour:
-                Intent intent = new Intent(context, WorkOrderActivity.class);
+                Intent intent = new Intent(context, TourListActivity.class);
                 intent.putExtra("PATROL", (new Patrol(20, R.string.maintenance_tour, R.mipmap.patrol_normal, R.mipmap.ic_maintenance_tour)));
                 context.startActivity(intent);
                 break;
