@@ -221,7 +221,7 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
         //是否是巡检工单
         intent.putExtra("isTour", isTour);
         //工单详细信息
-        intent.putExtra("data", ds);
+        intent.putExtra("WorkOrderData", ds);
         //工单的id
         intent.putExtra("des", patrol.getListId());
         startActivityForResult(intent, 700);

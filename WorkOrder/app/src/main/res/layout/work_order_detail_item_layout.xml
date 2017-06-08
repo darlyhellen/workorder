@@ -16,12 +16,13 @@
         android:padding="@dimen/margin_padding5">
 
         <TextView
+            android:id="@+id/id_detail_tv_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/st_detail_detail"
             android:textColor="@color/text_color"
-            android:layout_margin="@dimen/margin_padding4"
+            android:layout_margin="@dimen/margin_padding10"
             android:textSize="@dimen/textSize18" />
 
         <LinearLayout

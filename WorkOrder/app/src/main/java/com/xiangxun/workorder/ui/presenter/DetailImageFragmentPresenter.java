@@ -43,19 +43,19 @@ public class DetailImageFragmentPresenter {
      * @TODO：接收工单和拒绝工单接口。
      */
     public void getData() {
-        biz.onStart(loading);
+       // biz.onStart(loading);
         view.setDisableClick();
         biz.downImage(view.getDataID(), new FrameListener<DetailImageRoot>() {
             @Override
             public void onSucces(DetailImageRoot s) {
-                biz.onStop(loading);
+               // biz.onStop(loading);
                 view.setEnableClick();
                 view.onLoginSuccess(s.getData());
             }
 
             @Override
             public void onFaild(int i, String s) {
-                biz.onStop(loading);
+               // biz.onStop(loading);
                 view.setEnableClick();
                 view.onLoginFailed();
                 switch (i) {

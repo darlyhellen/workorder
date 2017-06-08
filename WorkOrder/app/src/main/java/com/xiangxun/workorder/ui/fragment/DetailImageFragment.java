@@ -18,6 +18,7 @@ import com.hellen.baseframe.binder.ViewsBinder;
 import com.hellen.baseframe.common.dlog.DLog;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.AppEnum;
+import com.xiangxun.workorder.bean.EquipmentInfo;
 import com.xiangxun.workorder.bean.WorkOrderData;
 import com.xiangxun.workorder.common.image.BitmapChangeUtil;
 import com.xiangxun.workorder.ui.adapter.DetailImageFragmentAdapter;
@@ -46,11 +47,14 @@ public class DetailImageFragment extends Fragment implements OnItemClickListener
 
     @ViewsBinder(R.id.id_detail_fragment_grid)
     private GridView gridView;
-    private WorkOrderData data;
     private DetailImageFragmentAdapter adapter;
     private List<String> urls;
 
     private DetailImageFragmentPresenter presenter;
+
+    private WorkOrderData data;
+    private EquipmentInfo info;
+    private WorkOrderData tour;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -69,10 +73,38 @@ public class DetailImageFragment extends Fragment implements OnItemClickListener
 
     private void initView() {
         presenter = new DetailImageFragmentPresenter(this);
-        data = getArguments().getParcelable("data");
+        data = getArguments().getParcelable("WorkOrderData");
+        info = getArguments().getParcelable("EquipmentInfo");
+        tour = getArguments().getParcelable("WorkOrderData");
         if (data != null) {
             urls = new ArrayList<String>();
             File f = new File(AppEnum.IMAGE, data.id);
+            if (f.exists()) {
+                File[] lis = f.listFiles();
+                for (int i = 0; i < lis.length; i++) {
+                    urls.add(lis[i].getAbsolutePath());
+                }
+            } else {
+                presenter.getData();
+            }
+            adapter = new DetailImageFragmentAdapter(urls, R.layout.item_fragment_detail_image, getActivity());
+            gridView.setAdapter(adapter);
+        } else if (info != null) {
+            urls = new ArrayList<String>();
+            File f = new File(AppEnum.IMAGE, info.id);
+            if (f.exists()) {
+                File[] lis = f.listFiles();
+                for (int i = 0; i < lis.length; i++) {
+                    urls.add(lis[i].getAbsolutePath());
+                }
+            } else {
+                presenter.getData();
+            }
+            adapter = new DetailImageFragmentAdapter(urls, R.layout.item_fragment_detail_image, getActivity());
+            gridView.setAdapter(adapter);
+        } else if (tour != null) {
+            urls = new ArrayList<String>();
+            File f = new File(AppEnum.IMAGE, tour.id);
             if (f.exists()) {
                 File[] lis = f.listFiles();
                 for (int i = 0; i < lis.length; i++) {
@@ -149,7 +181,15 @@ public class DetailImageFragment extends Fragment implements OnItemClickListener
 
     @Override
     public String getDataID() {
-        return data.id;
+        if (data != null) {
+            return data.id;
+        } else if (info != null) {
+            return info.id;
+        } else if (tour != null) {
+            return tour.id;
+        } else {
+            return "";
+        }
     }
 
     @Override

@@ -87,6 +87,12 @@ public interface HttpRetrofitInterface {
     Observable<JsonObject> upDataOrder(@Query("status") String status, @Query("id") String id, @Query("reason") String reason);
 
     /**
+     * @TODO:查找設備的接口
+     */
+    @GET("server/device/refer/searchDevice/")
+    Observable<JsonObject> searchDevice(@Query("type") String type, @Query("pageNo") int pageNo);
+
+    /**
      * @param version
      * @TODO:版本更新接口
      */

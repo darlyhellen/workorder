@@ -22,6 +22,7 @@ import com.hellen.baseframe.common.dlog.DLog;
 import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.AppEnum;
+import com.xiangxun.workorder.bean.EquipmentInfo;
 import com.xiangxun.workorder.bean.WorkOrderData;
 import com.xiangxun.workorder.common.WorkOrderUtils;
 import com.xiangxun.workorder.ui.adapter.DetailOrderImageAdapter;
@@ -45,8 +46,9 @@ import java.util.List;
 public class DetailOrderFragment extends Fragment implements OnClickListener, DetailOrderFragmentInterface, OnItemClickListener, OnDetailOrderConsListener {
     private View root;
 
-    private WorkOrderData data;
 
+    @ViewsBinder(R.id.id_detail_tv_title)
+    private TextView tv_title;//展示名称。
     @ViewsBinder(R.id.tv_content01)
     private TextView tvContent01;//工单编号
     @ViewsBinder(R.id.tv_content02)
@@ -112,6 +114,10 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
     public PhotoPop pop;
     private DetailOrderFragmentPresenter presenter;
 
+    private WorkOrderData data;
+    private EquipmentInfo info;
+    private WorkOrderData tour;
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_detail_order, null);
@@ -130,11 +136,21 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
 
 
     private void initView() {
-        data = getArguments().getParcelable("data");
-        if (data == null) {
-            ToastApp.showToast("页面数据错误");
-            return;
+        data = getArguments().getParcelable("WorkOrderData");
+        info = getArguments().getParcelable("EquipmentInfo");
+        tour = getArguments().getParcelable("WorkOrderData");
+        if (data != null) {
+            hasData();
+        } else if (info != null) {
+            hasInfo();
+        } else if (tour != null) {
+            hasTour();
         }
+
+    }
+
+    private void hasData() {
+        tv_title.setText(R.string.st_detail_detail);
         switch (data.status) {
             case 0:
                 //派工的状态(接收工单，退回工单)
@@ -185,10 +201,6 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
                 close.setVisibility(View.GONE);
                 break;
         }
-        initData();
-    }
-
-    private void initData() {
         tvContent01.setText(data.id);
         tvContent02.setText(data.devicename);
         tvContent03.setText(data.devicecode);
@@ -241,8 +253,121 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
         imageData.add("添加图片");
         adapter = new DetailOrderImageAdapter(imageData, R.layout.item_main_detail_image_adapter, getActivity(), this);
         images.setAdapter(adapter);
-
     }
+    //设备信息
+    private void hasInfo() {
+//        tv_title.setText(R.string.st_detail_equip);
+//        tvContent01.setText(info.id);
+//        tvContent02.setText(info.devicename);
+//        tvContent03.setText(info.devicecode);
+//        tvContent04.setText(info.deviceip);
+//        if ("device".equals(info.devicetype)) {
+//            tvContent05.setText("卡口");
+//        } else if ("ftp".equals(info.devicetype)) {
+//            tvContent05.setText("FTP");
+//        } else if ("project".equals(info.devicetype)) {
+//            tvContent05.setText("平台");
+//        } else if ("infobase".equals(info.devicetype)) {
+//            tvContent05.setText("数据库");
+//        } else {
+//            tvContent05.setText("机柜");
+//        }
+//        tvContent06.setText(info.position);
+//        tvContent07.setText(info.orgname);
+//        tvContent08.setText(info.contactname);
+//        tvContent09.setText(info.assigntime);
+//        WorkOrderUtils.findStatus(info.status, tvContent10);
+//        if (0 == info.isouter) {
+//            tvContent11.setText("否");
+//        } else {
+//            tvContent11.setText("是");
+//        }
+//        if ("0".equals(info.isreassign)) {
+//            tvContent12.setText("否");
+//        } else {
+//            tvContent12.setText("是");
+//        }
+//
+//        if ("0".equals(info.isleave)) {
+//            tvContent13.setText("否");
+//        } else {
+//            tvContent13.setText("是");
+//        }
+//        tvContent14.setText(info.messages);
+//
+//        //异常状态
+//        tvContent15.setText(info.exceptionid);
+//        tvContent16.setText("");
+//        tvContent17.setText("");
+//        // 关闭情况
+//        tvContent18.setText(info.offaccount);
+//        tvContent19.setText(info.offtime);
+//        tvContent20.setText("");
+//        tvContent21.setText("");
+//        //添加图片的功能模块
+//        imageData = new ArrayList<String>();
+//        imageData.add("添加图片");
+//        adapter = new DetailOrderImageAdapter(imageData, R.layout.item_main_detail_image_adapter, getActivity(), this);
+//        images.setAdapter(adapter);
+        
+    }
+
+    private void hasTour() {
+        tv_title.setText(R.string.st_detail_tour);
+        tvContent01.setText(tour.id);
+        tvContent02.setText(tour.devicename);
+        tvContent03.setText(tour.devicecode);
+        tvContent04.setText(tour.deviceip);
+        if ("device".equals(tour.devicetype)) {
+            tvContent05.setText("卡口");
+        } else if ("ftp".equals(tour.devicetype)) {
+            tvContent05.setText("FTP");
+        } else if ("project".equals(tour.devicetype)) {
+            tvContent05.setText("平台");
+        } else if ("database".equals(tour.devicetype)) {
+            tvContent05.setText("数据库");
+        } else {
+            tvContent05.setText("机柜");
+        }
+        tvContent06.setText(tour.position);
+        tvContent07.setText(tour.orgname);
+        tvContent08.setText(tour.contactname);
+        tvContent09.setText(tour.assigntime);
+        WorkOrderUtils.findStatus(tour.status, tvContent10);
+        if (0 == tour.isouter) {
+            tvContent11.setText("否");
+        } else {
+            tvContent11.setText("是");
+        }
+        if ("0".equals(tour.isreassign)) {
+            tvContent12.setText("否");
+        } else {
+            tvContent12.setText("是");
+        }
+
+        if ("0".equals(tour.isleave)) {
+            tvContent13.setText("否");
+        } else {
+            tvContent13.setText("是");
+        }
+        tvContent14.setText(tour.messages);
+
+        //异常状态
+        tvContent15.setText(tour.exceptionid);
+        tvContent16.setText("");
+        tvContent17.setText("");
+        // 关闭情况
+        tvContent18.setText(tour.offaccount);
+        tvContent19.setText(tour.offtime);
+        tvContent20.setText("");
+        tvContent21.setText("");
+        //添加图片的功能模块
+        imageData = new ArrayList<String>();
+        imageData.add("添加图片");
+        adapter = new DetailOrderImageAdapter(imageData, R.layout.item_main_detail_image_adapter, getActivity(), this);
+        images.setAdapter(adapter);
+    }
+
 
     private void initListener() {
         commit.setOnClickListener(this);

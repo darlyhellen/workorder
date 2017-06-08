@@ -96,7 +96,7 @@ public class LoginPresenter {
 
     public void login_post(Context context) {
         LogApp.i(TAG, "login");
-        userBiz.onStart(loading);
+        //userBiz.onStart(loading);
         main.setDisableClick();
         userBiz.login_in(context, main.getUserName(), main.getPassword(),
                 new FrameListener<LoginRoot>() {
@@ -106,7 +106,7 @@ public class LoginPresenter {
                         // TODO Auto-generated method stub
                         main.onLoginSuccess();
                         main.setEnableClick();
-                        userBiz.onStop(loading);
+                        //userBiz.onStop(loading);
                     }
 
                     @Override
@@ -114,7 +114,7 @@ public class LoginPresenter {
                         // TODO Auto-generated method stub
                         main.onLoginFailed();
                         main.setEnableClick();
-                        userBiz.onStop(loading);
+                        //userBiz.onStop(loading);
                         switch (code) {
                             case 0:
                                 ToastApp.showToast(info);

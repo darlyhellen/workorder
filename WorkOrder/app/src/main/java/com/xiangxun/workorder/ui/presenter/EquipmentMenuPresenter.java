@@ -153,7 +153,7 @@ public class EquipmentMenuPresenter {
         List<EquipmentRoot> ka = new ArrayList<>();
         for (int k = 0; k < 2 * j + 2; k++) {
             EquipmentRoot root = new EquipmentRoot();
-            root.setName(name + "编号:" + k);
+            root.setMessage(name + "编号:" + k);
             ka.add(root);
         }
         return ka;

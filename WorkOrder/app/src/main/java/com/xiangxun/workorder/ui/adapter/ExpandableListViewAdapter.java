@@ -129,7 +129,7 @@ public class ExpandableListViewAdapter extends BaseExpandableListAdapter {
             holder = (ChildViewHolder) convertView.getTag();
         }
         EquipmentRoot childData = groupData.get(groupPosition).getData().get(childPosition);
-        holder.tv_name.setText(childData.getName());
+        holder.tv_name.setText(childData.getMessage());
         return convertView;
     }
 

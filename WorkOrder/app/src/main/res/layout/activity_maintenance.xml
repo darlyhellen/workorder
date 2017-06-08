@@ -17,7 +17,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@mipmap/ic_maintenance_up" />
+        android:background="@mipmap/ic_maintenance_up"
+        android:visibility="gone"/>
 
     <ImageView
         android:id="@+id/id_maintenance_iv"
@@ -40,7 +41,7 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="2dp"
         android:layout_marginBottom="@dimen/margin_padding20"
         android:background="@mipmap/ic_maintenance_mid" />
 
@@ -108,7 +109,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_padding20"
-        android:background="@mipmap/ic_maintenance_down" />
+        android:background="@mipmap/ic_maintenance_down"
+        android:visibility="gone"/>
 
     <View
         android:layout_width="match_parent"
