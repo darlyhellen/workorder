@@ -20,6 +20,8 @@ import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.base.BaseActivity;
 import com.xiangxun.workorder.bean.BaseModel;
+import com.xiangxun.workorder.bean.EquipMenuChildData;
+import com.xiangxun.workorder.bean.EquipmentInfo;
 import com.xiangxun.workorder.bean.EquipmentRoot;
 import com.xiangxun.workorder.ui.adapter.TourImageAdapter;
 import com.xiangxun.workorder.ui.adapter.TourImageAdapter.OnTourConsListener;
@@ -47,10 +49,7 @@ public class TourActivity extends BaseActivity implements OnClickListener, TourI
 
     @ViewsBinder(R.id.id_tour_title)
     private HeaderView title;
-    @ViewsBinder(R.id.id_order_name_click)
-    private LinearLayout id_order_name_click;
-    @ViewsBinder(R.id.id_order_equip_code)
-    private TextView id_order_equip_code;//名称
+
     @ViewsBinder(R.id.id_order_equip_ip)
     private TextView id_order_equip_ip;
     @ViewsBinder(R.id.id_order_equip_type)
@@ -63,14 +62,35 @@ public class TourActivity extends BaseActivity implements OnClickListener, TourI
     private WholeGridView id_order_equip_image;
     @ViewsBinder(R.id.id_order_equip_declare)
     private EditText id_order_equip_declare;
-    @ViewsBinder(R.id.tv_order_name)
-    private EditText tv_order_name;//编码
+
+
+    @ViewsBinder(R.id.id_tour_code)
+    private LinearLayout id_tour_code;
+
+    @ViewsBinder(R.id.id_tour_code_code)
+    private TextView id_tour_code_code;
+    @ViewsBinder(R.id.id_tour_code_name)
+    private EditText id_tour_code_name;
+    @ViewsBinder(R.id.id_tour_code_name_click)
+    private TextView id_tour_code_name_click;//根据编码查询点击请求
+
+    @ViewsBinder(R.id.id_tour_name)
+    private LinearLayout id_tour_name;
+
+    @ViewsBinder(R.id.id_tour_name_code)
+    private TextView id_tour_name_code;//名称
+    @ViewsBinder(R.id.id_tour_name_name)
+    private EditText id_tour_name_name;//编码
+    @ViewsBinder(R.id.id_tour_name_name_click)
+    private TextView id_tour_name_name_click;//根据名称查询点击请求
 
     private List<String> imageData;
     private TourImageAdapter adapter;
     private PhotoPop pop;
 
     private TourPresenter presenter;
+
+    private boolean isCheck;
 
     @Override
     protected void initView(Bundle savedInstanceState) {
@@ -100,26 +120,70 @@ public class TourActivity extends BaseActivity implements OnClickListener, TourI
         title.setLeftBackOneListener(this);
         title.setRightImageTextFlipper(this);
         id_order_equip_image.setOnItemClickListener(this);
+        id_order_equip_type.setOnClickListener(this);
+
+        id_tour_code_name_click.setOnClickListener(this);
+        id_tour_name_name_click.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.id_order_equip_type:
+                new TourSelectDialog(this, presenter.getType(), id_order_equip_type, "请选择设备类型", this).show();
+                break;
             default:
-                presenter.onClickDown(this, v);
+                presenter.onClickDown(this, v, isCheck);
                 break;
         }
 
     }
 
     @Override
-    public TextView findName() {
-        return tv_order_name;
+    public void end() {
+        finish();
     }
 
     @Override
-    public void end() {
-        finish();
+    public String getCode() {
+        return id_tour_code_name.getText().toString().trim();
+    }
+
+    @Override
+    public void onCodeSuccess(EquipmentInfo info) {
+        //填充数据
+        isCheck = true;
+    }
+
+    @Override
+    public void onCodeFailed() {
+        isCheck = false;
+    }
+
+    @Override
+    public String getName() {
+        return id_tour_name_name.getText().toString().trim();
+    }
+
+    @Override
+    public void onNameSuccess(EquipmentInfo info) {
+        //填充数据
+        isCheck = true;
+    }
+
+    @Override
+    public void onNameFailed() {
+        isCheck = false;
+    }
+
+    @Override
+    public String getDeclare() {
+        return id_order_equip_declare.getText().toString().trim();
+    }
+
+    @Override
+    public List<String> getImageData() {
+        return imageData;
     }
 
     @Override
@@ -197,7 +261,17 @@ public class TourActivity extends BaseActivity implements OnClickListener, TourI
     }
 
     @Override
-    public void changeState(EquipmentRoot type) {
+    public void changeState(EquipMenuChildData type) {
         //点击选中的设备信息。
+        id_order_equip_type.setText(type.getName());
+        if ("icabinef".equals(type.getType()) || "device".equals(type.getType()) || "server".equals(type.getType())) {
+            //这些有设备编号。根据编号查询
+            id_tour_code.setVisibility(View.VISIBLE);
+            id_tour_name.setVisibility(View.GONE);
+        } else {
+            //剩余没有设备编号。更加名称查询
+            id_tour_code.setVisibility(View.GONE);
+            id_tour_name.setVisibility(View.VISIBLE);
+        }
     }
 }

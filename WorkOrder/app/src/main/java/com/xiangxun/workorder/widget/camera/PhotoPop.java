@@ -36,7 +36,7 @@ import java.io.InputStream;
 public class PhotoPop extends PopupWindow implements OnClickListener {
 
     private String rota = "ROTATE.png";
-    private int qualityCompress = AppEnum.WIDTH.getLen() * AppEnum.HEIGHT.getLen() /  10;//设备屏幕像素的1/10
+    private int qualityCompress = AppEnum.WIDTH.getLen() * AppEnum.HEIGHT.getLen() / 10;//设备屏幕像素的1/10
 
     public PhotoPop(Context context) {
         super();
@@ -193,10 +193,15 @@ public class PhotoPop extends PopupWindow implements OnClickListener {
         DLog.i("PopStringActivityResult");
         switch (tag) {
             case AppEnum.REQUESTCODE_CAP:
+                String ppp = getImagePathForCAP(capUri);
+                DLog.i(ppp);
+                if (ppp == null) {
+                    break;
+                }
                 // 照相机程序返回的
-                String url = copyFile(getImagePathForCAP(capUri), AppEnum.IMAGE + System.currentTimeMillis() + ".png");
+                String url = copyFile(ppp, AppEnum.IMAGE + System.currentTimeMillis() + ".png");
                 //需要删除以前文件。
-                File file = new File(getImagePathForCAP(capUri));
+                File file = new File(ppp);
                 if (file.exists()) {
                     file.delete();
                 }
@@ -206,6 +211,9 @@ public class PhotoPop extends PopupWindow implements OnClickListener {
                 // 照片的原始资源地址
                 photoUri = data.getData();
                 DLog.i(getImagePath(photoUri));
+                if (getImagePath(photoUri) == null) {
+                    break;
+                }
                 String cam = copyFile(getImagePathForCAP(getImagePath(photoUri)), AppEnum.IMAGE + System.currentTimeMillis() + ".png");
                 //需要删除以前文件。
                 File idk = new File(getImagePathForCAP(getImagePath(photoUri)));
@@ -281,7 +289,7 @@ public class PhotoPop extends PopupWindow implements OnClickListener {
             if (file_size > 320) {
                 bit = decodeSampledBitmapFromFile(capUri);
                 // 获取图片大小的比对关系。是100KB的多少。
-                int quality = qualityCompress/file_size * 10;
+                int quality = qualityCompress / file_size * 10;
                 DLog.i(getClass().getSimpleName(), quality + "----" + file_size);
                 return compressBitmap(bit, quality);
             } else {

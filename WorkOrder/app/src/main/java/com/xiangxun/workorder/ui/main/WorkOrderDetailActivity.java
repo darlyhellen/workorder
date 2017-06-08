@@ -132,7 +132,7 @@ public class WorkOrderDetailActivity extends BaseActivity implements OnClickList
         order = new DetailOrderFragment();
         order.setArguments(bundle);
         list.add(order);
-        if (!TextUtils.isEmpty(info.installplace) && !TextUtils.isEmpty(info.installplace)) {
+        if (!TextUtils.isEmpty(info.mapx) && !TextUtils.isEmpty(info.mapy)) {
             //有坐标
             for (int i = 0; i < titles.length; i++) {
                 //设置未选中和选中时字体的颜色

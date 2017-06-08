@@ -1,6 +1,8 @@
 package com.xiangxun.workorder.ui.biz;
 
 import android.app.Dialog;
+import android.graphics.BitmapFactory;
+import android.text.TextUtils;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -12,9 +14,18 @@ import com.hellen.baseframe.application.FrameView;
 import com.hellen.baseframe.common.dlog.DLog;
 import com.xiangxun.workorder.base.APP;
 import com.xiangxun.workorder.bean.DetailImageRoot;
+import com.xiangxun.workorder.bean.EquipmentInfo;
 import com.xiangxun.workorder.bean.ObjectData;
+import com.xiangxun.workorder.bean.WorkOrderData;
+import com.xiangxun.workorder.common.image.BitmapChangeUtil;
 import com.xiangxun.workorder.common.retrofit.RxjavaRetrofitRequestUtil;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.List;
+
+import okhttp3.RequestBody;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
@@ -29,11 +40,26 @@ import rx.schedulers.Schedulers;
  */
 public class TourListener implements FramePresenter {
 
+
     public interface TourInterface extends FrameView {
 
-        TextView findName();
-
         void end();
+
+        String getCode();
+
+        void onCodeSuccess(EquipmentInfo info);
+
+        void onCodeFailed();
+
+        String getName();
+
+        void onNameSuccess(EquipmentInfo info);
+
+        void onNameFailed();
+
+        String getDeclare();
+
+        List<String> getImageData();
     }
 
     @Override
@@ -46,11 +72,37 @@ public class TourListener implements FramePresenter {
     /**
      * 编辑完成后进行工单提交
      */
-    public void commitTour(final FrameListener<String> listener) {
+    public void commitTour(boolean isCheck, String declare, List<String> url, final FrameListener<String> listener) {
         if (!APP.isNetworkConnected(APP.getInstance())) {
             listener.onFaild(0, "网络异常,请检查网络");
             return;
         }
+        if (!isCheck) {
+            listener.onFaild(0, "设备信息为空");
+            return;
+        }
+        if (TextUtils.isEmpty(declare)) {
+            listener.onFaild(0, "说明信息不能为空");
+            return;
+        }
+
+        JSONObject ob = new JSONObject();
+        try {
+            ob.put("declare", declare);
+            if (url != null && url.size() >= 2) {
+                ob.put("picture1", BitmapChangeUtil.convertIconToString(BitmapFactory.decodeFile(url.get(0))));
+            }
+            if (url != null && url.size() >= 3) {
+                ob.put("picture2", BitmapChangeUtil.convertIconToString(BitmapFactory.decodeFile(url.get(1))));
+            }
+            if (url != null && url.size() >= 4) {
+                ob.put("picture3", BitmapChangeUtil.convertIconToString(BitmapFactory.decodeFile(url.get(2))));
+            }
+        } catch (JSONException e) {
+
+        }
+        DLog.i(getClass().getSimpleName(), ob);
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json;charset=UTF-8"), ob.toString());
         //在这里进行数据请求
         RxjavaRetrofitRequestUtil.getInstance().get().test().
                 subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io())

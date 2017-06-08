@@ -22,6 +22,7 @@ import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.bean.BaseModel.Type;
 import com.xiangxun.workorder.bean.ChildData;
+import com.xiangxun.workorder.bean.EquipMenuChildData;
 import com.xiangxun.workorder.bean.EquipmentRoot;
 import com.xiangxun.workorder.common.urlencode.Tools;
 import com.xiangxun.workorder.ui.adapter.RootExpandableListViewAdapter;
@@ -41,24 +42,25 @@ public class TourSelectDialog extends Dialog {
 
 
     public interface onSelectItemClick {
-        void changeState(EquipmentRoot type);
+        void changeState(EquipMenuChildData type);
     }
 
     private onSelectItemClick selectItemClick;
     private Context mContext = null;
+    private List<EquipMenuChildData> data = null;
     private View mCustomView = null;
     private TextView textView = null;
     private String mTitle = null;
     private TextView mTvCancle = null;
     private TextView mTvPublishSelectTitle = null;
-    private ExpandableListView mLvPublishTypes = null;
+    private ListView mLvPublishTypes = null;
     private StringBuffer mFinalStyle = new StringBuffer();
-    private RootExpandableListViewAdapter adapter;
     private int selectedItemPosition = 0;
 
-    public TourSelectDialog(Context context, TextView textView, String mTitle, onSelectItemClick selectItemClick) {
+    public TourSelectDialog(Context context, List<EquipMenuChildData> data, TextView textView, String mTitle, onSelectItemClick selectItemClick) {
         super(context, R.style.PublishDialog);
         this.mContext = context;
+        this.data = data;
         this.textView = textView;
         this.mTitle = mTitle;
         this.selectItemClick = selectItemClick;
@@ -87,33 +89,17 @@ public class TourSelectDialog extends Dialog {
         mTvCancle = (TextView) mCustomView.findViewById(R.id.tv_publish_select_dialog_cancle);
         mTvPublishSelectTitle = (TextView) mCustomView.findViewById(R.id.tv_publish_select_dialog_title);
         mTvPublishSelectTitle.setText(mTitle);
-        mLvPublishTypes = (ExpandableListView) mCustomView.findViewById(R.id.lv_publish_select_dialog);
-        adapter = new RootExpandableListViewAdapter(mContext, EquipmentMenuPresenter.testData().getData());
-        mLvPublishTypes.setAdapter(adapter);
-        //重写OnGroupClickListener，实现当展开时，ExpandableListView不自动滚动
-        mLvPublishTypes.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-            @Override
-            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                if (parent.isGroupExpanded(groupPosition)) {
-                    parent.collapseGroup(groupPosition);
-                } else {
-                    //第二个参数false表示展开时是否触发默认滚动动画
-                    parent.expandGroup(groupPosition, false);
-                }
-                //telling the listView we have handled the group click, and don't want the default actions.
-                return true;
-            }
-        });
+        mLvPublishTypes = (ListView) mCustomView.findViewById(R.id.lv_publish_select_dialog);
+        mLvPublishTypes.setAdapter(new TourSelectAdapter(data, R.layout.item_select_text, mContext));
 
-        mLvPublishTypes.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+        mLvPublishTypes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                EquipmentRoot data = (EquipmentRoot) adapter.getChild(groupPosition, childPosition);
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                EquipMenuChildData data = (EquipMenuChildData) parent.getItemAtPosition(position);
                 if (selectItemClick != null) {
                     selectItemClick.changeState(data);
                 }
                 dismiss();
-                return false;
             }
         });
         mTvCancle.setOnClickListener(new View.OnClickListener() {

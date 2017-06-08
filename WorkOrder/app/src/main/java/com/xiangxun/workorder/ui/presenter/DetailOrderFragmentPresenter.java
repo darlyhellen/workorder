@@ -1,11 +1,13 @@
 package com.xiangxun.workorder.ui.presenter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.hellen.baseframe.application.FrameListener;
 import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.R;
+import com.xiangxun.workorder.base.APP;
 import com.xiangxun.workorder.bean.DetailChangeRoot;
 import com.xiangxun.workorder.ui.biz.DetailOrderFragmentListener;
 import com.xiangxun.workorder.ui.biz.DetailOrderFragmentListener.DetailOrderFragmentInterface;
@@ -109,6 +111,14 @@ public class DetailOrderFragmentPresenter {
      * @TODO:正常上报和异常上报接口内容。
      */
     private void updataOrder(String status, String id, List<String> urls) {
+        if (!APP.isNetworkConnected(APP.getInstance())) {
+            ToastApp.showToast("网络异常,请检查网络");
+            return;
+        }
+        if (TextUtils.isEmpty(view.getReason())) {
+            ToastApp.showToast("上报工单说明不能为空");
+            return;
+        }
         if (urls != null && urls.size() > 1 && !isUpImage) {
             //有圖片但是沒有上傳的判斷。
             upLoadImage(urls);

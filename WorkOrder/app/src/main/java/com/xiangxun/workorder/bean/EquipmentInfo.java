@@ -25,7 +25,12 @@ public class EquipmentInfo implements Parcelable {
     public String netStatus;
     public String dataStatus;
     public String payoutstatus;
+    //经度
+    public String mapx;
+    //纬度
+    public String mapy;
     public int cabinetStatus;
+
 
 
     public EquipmentInfo() {
@@ -52,6 +57,8 @@ public class EquipmentInfo implements Parcelable {
         netStatus = in.readString();
         dataStatus = in.readString();
         payoutstatus = in.readString();
+        mapx = in.readString();
+        mapy = in.readString();
         cabinetStatus = in.readInt();
 
 
@@ -83,6 +90,8 @@ public class EquipmentInfo implements Parcelable {
         dest.writeString(netStatus);
         dest.writeString(dataStatus);
         dest.writeString(payoutstatus);
+        dest.writeString(mapx);
+        dest.writeString(mapy);
         dest.writeInt(cabinetStatus);
     }
 
