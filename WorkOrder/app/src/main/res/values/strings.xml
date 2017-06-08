@@ -115,6 +115,19 @@
     <string name="st_detail_order_content">是否转派:</string>
     <string name="st_detail_request">是否遗留:</string>
     <string name="st_detail_declare">短信内容</string>
+    <!--设备详情信息-->
+    <string name="st_equip_deviceid">设备ID：</string>
+    <string name="st_equip_assetname">资产名称：</string>
+    <string name="st_equip_assetcode">资产编号：</string>
+    <string name="st_equip_assetmodel">资产型号：</string>
+    <string name="st_equip_assettype">资产类别：</string>
+    <string name="st_equip_manufacturer">生产厂商：</string>
+    <string name="st_equip_factoryId">运维服务商：</string>
+    <string name="st_equip_purchasetime">采购时间：</string>
+    <string name="st_equip_engineering">工程商：</string>
+    <string name="st_equip_installtime">安装时间：</string>
+    <string name="st_equip_installplace">安装位置：</string>
+    <string name="st_equip_serviceid">服务厂商：</string>
     <!--工单异常信息-->
     <string name="st_detail_except">工单异常信息</string>
     <string name="st_detail_hardorder">上报人:</string>

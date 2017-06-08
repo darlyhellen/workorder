@@ -47,14 +47,14 @@ public class EquipmentListAdapter extends ParentAdapter<EquipmentInfo> {
             hocker = (ViewHocker) view.getTag();
         }
 
-        hocker.id_tv_supplier_title.setText("设备名称:" + Tools.isEmpty(info.getAssetname()));
-        hocker.id_tv_supplier_contact.setText("设备编号: " + Tools.isEmpty(info.getDeviceid()));
-        hocker.id_tv_supplier_product.setText("设备位置: " + Tools.isEmpty(info.getInstallplace()));
-        hocker.id_tv_appraise_man.setText("设备IP：" + Tools.isEmpty(info.getIp()));
+        hocker.id_tv_supplier_title.setText("设备名称:" + Tools.isEmpty(info.assetname));
+        hocker.id_tv_supplier_contact.setText("设备编号: " + Tools.isEmpty(info.deviceid));
+        hocker.id_tv_supplier_product.setText("设备位置: " + Tools.isEmpty(info.installplace));
+        hocker.id_tv_appraise_man.setText("设备IP：" + Tools.isEmpty(info.ip));
         hocker.id_tv_appraise_man.setTextColor(Color.BLACK);
         hocker.id_tv_background.setShowDisplay(false);
         hocker.id_tv_background.setBackgroundResource(R.drawable.app_login_shape);
-        hocker.id_tv_appraise_date.setText("安装时间: " + Tools.isEmpty(info.getInstalltime()));
+        hocker.id_tv_appraise_date.setText("安装时间: " + Tools.isEmpty(info.installtime));
 
         return view;
     }

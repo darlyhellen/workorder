@@ -8,9 +8,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_padding5"
         android:layout_marginLeft="@dimen/margin_padding5"
         android:layout_marginRight="@dimen/margin_padding5"
+        android:layout_marginTop="@dimen/margin_padding5"
         android:background="@drawable/business_detai_background"
         android:orientation="vertical"
         android:padding="@dimen/margin_padding5">
@@ -19,333 +19,18 @@
             android:id="@+id/id_detail_tv_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_padding10"
             android:gravity="center"
             android:text="@string/st_detail_detail"
             android:textColor="@color/text_color"
-            android:layout_margin="@dimen/margin_padding10"
             android:textSize="@dimen/textSize18" />
 
         <LinearLayout
-            android:layout_width="fill_parent"
+            android:id="@+id/id_detail_tv_linear"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_padding10"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:orientation="horizontal">
+            android:orientation="vertical" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/st_detail_orderid"
-                android:textColor="@color/text_color"
-                android:textSize="@dimen/textSize16" />
-
-            <TextView
-                android:id="@+id/tv_content01"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/margin_padding8"
-                android:text=""
-                android:textColor="@color/color333333"
-                android:textSize="@dimen/textSize16" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_padding10"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/st_detail_complainant"
-                android:textColor="@color/text_color"
-                android:textSize="@dimen/textSize16" />
-
-            <TextView
-                android:id="@+id/tv_content02"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/margin_padding8"
-                android:text=""
-                android:textColor="@color/color333333"
-                android:textSize="@dimen/textSize16" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_padding10"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/st_detail_complainant_time"
-                android:textColor="@color/text_color"
-                android:textSize="@dimen/textSize16" />
-
-            <TextView
-                android:id="@+id/tv_content03"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/margin_padding8"
-                android:text=""
-                android:textColor="@color/color333333"
-                android:textSize="@dimen/textSize16" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_padding10"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/st_detail_complainant_tel"
-                android:textColor="@color/text_color"
-                android:textSize="@dimen/textSize16" />
-
-            <TextView
-                android:id="@+id/tv_content04"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/margin_padding8"
-                android:text=""
-                android:textColor="@color/color333333"
-                android:textSize="@dimen/textSize16" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_padding10"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/st_detail_come"
-                android:textColor="@color/text_color"
-                android:textSize="@dimen/textSize16" />
-
-            <TextView
-                android:id="@+id/tv_content05"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/margin_padding8"
-                android:text=""
-                android:textColor="@color/color333333"
-                android:textSize="@dimen/textSize16" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_padding10"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/st_detail_type"
-                android:textColor="@color/text_color"
-                android:textSize="@dimen/textSize16" />
-
-            <TextView
-                android:id="@+id/tv_content06"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/margin_padding8"
-                android:text=""
-                android:textColor="@color/color333333"
-                android:textSize="@dimen/textSize16" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_padding10"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/st_detail_inout"
-                android:textColor="@color/text_color"
-                android:textSize="@dimen/textSize16" />
-
-            <TextView
-                android:id="@+id/tv_content07"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/margin_padding8"
-                android:text=""
-                android:textColor="@color/color333333"
-                android:textSize="@dimen/textSize16" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_padding10"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/st_detail_company"
-                android:textColor="@color/text_color"
-                android:textSize="@dimen/textSize16" />
-
-            <TextView
-                android:id="@+id/tv_content08"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/margin_padding8"
-                android:text=""
-                android:textColor="@color/color333333"
-                android:textSize="@dimen/textSize16" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_padding10"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/st_detail_worktime"
-                android:textColor="@color/text_color"
-                android:textSize="@dimen/textSize16" />
-
-            <TextView
-                android:id="@+id/tv_content09"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/margin_padding8"
-                android:text=""
-                android:textColor="@color/color333333"
-                android:textSize="@dimen/textSize16" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_padding10"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/st_detail_postion"
-                android:textColor="@color/text_color"
-                android:textSize="@dimen/textSize16" />
-
-            <TextView
-                android:id="@+id/tv_content10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/margin_padding5"
-                android:textColor="@color/white"
-                android:textSize="@dimen/textSize16" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_padding10"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/st_detail_ordertype"
-                android:textColor="@color/text_color"
-                android:textSize="@dimen/textSize16" />
-
-            <TextView
-                android:id="@+id/tv_content11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/margin_padding8"
-                android:text=""
-                android:textColor="@color/color333333"
-                android:textSize="@dimen/textSize16" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_padding10"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/st_detail_order_content"
-                android:textColor="@color/text_color"
-                android:textSize="@dimen/textSize16" />
-
-            <TextView
-                android:id="@+id/tv_content12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/margin_padding8"
-                android:text=""
-                android:textColor="@color/color333333"
-                android:textSize="@dimen/textSize16" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_padding5"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/st_detail_request"
-                android:textColor="@color/text_color"
-                android:textSize="@dimen/textSize16" />
-
-            <TextView
-                android:id="@+id/tv_content13"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/margin_padding8"
-                android:text=""
-                android:textColor="@color/color333333"
-                android:textSize="@dimen/textSize16" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/st_detail_declare"
-                android:textColor="@color/text_color"
-                android:textSize="@dimen/textSize16" />
-
-            <TextView
-                android:id="@+id/tv_content14"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/margin_padding8"
-                android:text=""
-                android:textColor="@color/color333333"
-                android:textSize="@dimen/textSize16" />
-        </LinearLayout>
     </LinearLayout>
     <!--上面是工单详情信息-->
     <!--工单异常信息-->
@@ -353,9 +38,9 @@
         android:id="@+id/id_detail_fragment_exception"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_padding5"
         android:layout_marginLeft="@dimen/margin_padding5"
         android:layout_marginRight="@dimen/margin_padding5"
+        android:layout_marginTop="@dimen/margin_padding5"
         android:background="@drawable/business_detai_background"
         android:orientation="vertical"
         android:padding="@dimen/margin_padding5">
@@ -363,10 +48,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_padding4"
             android:gravity="center"
             android:text="@string/st_detail_except"
             android:textColor="@color/text_color"
-            android:layout_margin="@dimen/margin_padding4"
             android:textSize="@dimen/textSize18" />
 
         <LinearLayout
@@ -444,9 +129,9 @@
         android:id="@+id/id_detail_fragment_close"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_padding5"
         android:layout_marginLeft="@dimen/margin_padding5"
         android:layout_marginRight="@dimen/margin_padding5"
+        android:layout_marginTop="@dimen/margin_padding5"
         android:background="@drawable/business_detai_background"
         android:orientation="vertical"
         android:padding="@dimen/margin_padding5">
@@ -454,10 +139,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_padding4"
             android:gravity="center"
             android:text="@string/st_detail_close"
             android:textColor="@color/text_color"
-            android:layout_margin="@dimen/margin_padding4"
             android:textSize="@dimen/textSize18" />
 
         <LinearLayout
@@ -529,36 +214,4 @@
         </LinearLayout>
     </LinearLayout>
     <!--工单关闭信息-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_padding5"
-        android:layout_marginLeft="@dimen/margin_padding5"
-        android:layout_marginRight="@dimen/margin_padding5"
-        android:background="@drawable/business_detai_background"
-        android:orientation="vertical"
-        android:padding="@dimen/margin_padding5">
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/project_remark"
-                android:textColor="@color/text_color"
-                android:textSize="@dimen/textSize16" />
-
-            <TextView
-                android:id="@+id/tv_content21"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/margin_padding8"
-                android:text=""
-                android:textColor="@color/color333333"
-                android:textSize="@dimen/textSize16" />
-        </LinearLayout>
-    </LinearLayout>
 </LinearLayout>
