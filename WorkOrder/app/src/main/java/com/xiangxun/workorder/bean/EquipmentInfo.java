@@ -30,6 +30,7 @@ public class EquipmentInfo implements Parcelable {
     //纬度
     public String mapy;
     public int cabinetStatus;
+    public String code;
 
 
 
@@ -60,7 +61,7 @@ public class EquipmentInfo implements Parcelable {
         mapx = in.readString();
         mapy = in.readString();
         cabinetStatus = in.readInt();
-
+        code = in.readString();
 
     }
 
@@ -93,6 +94,7 @@ public class EquipmentInfo implements Parcelable {
         dest.writeString(mapx);
         dest.writeString(mapy);
         dest.writeInt(cabinetStatus);
+        dest.writeString(code);
     }
 
     public static final Parcelable.Creator<EquipmentInfo> CREATOR = new Parcelable.Creator<EquipmentInfo>() {

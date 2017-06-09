@@ -48,7 +48,7 @@ public class EquipmentListAdapter extends ParentAdapter<EquipmentInfo> {
         }
 
         hocker.id_tv_supplier_title.setText("设备名称:" + Tools.isEmpty(info.assetname));
-        hocker.id_tv_supplier_contact.setText("设备编号: " + Tools.isEmpty(info.deviceid));
+        hocker.id_tv_supplier_contact.setText("设备编号: " + Tools.isEmpty(info.code));
         hocker.id_tv_supplier_product.setText("设备位置: " + Tools.isEmpty(info.installplace));
         hocker.id_tv_appraise_man.setText("设备IP：" + Tools.isEmpty(info.ip));
         hocker.id_tv_appraise_man.setTextColor(Color.BLACK);

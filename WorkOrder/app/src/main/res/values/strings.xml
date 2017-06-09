@@ -117,10 +117,10 @@
     <string name="st_detail_declare">短信内容</string>
     <!--设备详情信息-->
     <string name="st_equip_deviceid">设备ID：</string>
-    <string name="st_equip_assetname">资产名称：</string>
-    <string name="st_equip_assetcode">资产编号：</string>
-    <string name="st_equip_assetmodel">资产型号：</string>
-    <string name="st_equip_assettype">资产类别：</string>
+    <string name="st_equip_assetname">设备名称：</string>
+    <string name="st_equip_assetcode">设备编号：</string>
+    <string name="st_equip_assetmodel">设备型号：</string>
+    <string name="st_equip_assettype">设备类别：</string>
     <string name="st_equip_manufacturer">生产厂商：</string>
     <string name="st_equip_factoryId">运维服务商：</string>
     <string name="st_equip_purchasetime">采购时间：</string>

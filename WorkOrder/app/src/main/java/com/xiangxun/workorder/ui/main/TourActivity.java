@@ -167,31 +167,22 @@ public class TourActivity extends BaseActivity implements OnClickListener, TourI
     }
 
     @Override
-    public void onCodeSuccess(EquipmentInfo info) {
+    public void onNameCodeSuccess(List<EquipmentInfo> info) {
         //填充数据
         isCheck = true;
     }
 
     @Override
-    public void onCodeFailed() {
+    public void onNameCodeFailed() {
         isCheck = false;
     }
+
 
     @Override
     public String getName() {
         return id_tour_name_name.getText().toString().trim();
     }
 
-    @Override
-    public void onNameSuccess(EquipmentInfo info) {
-        //填充数据
-        isCheck = true;
-    }
-
-    @Override
-    public void onNameFailed() {
-        isCheck = false;
-    }
 
     @Override
     public String getDeclare() {
@@ -270,5 +261,6 @@ public class TourActivity extends BaseActivity implements OnClickListener, TourI
             id_tour_code.setVisibility(View.GONE);
             id_tour_name.setVisibility(View.VISIBLE);
         }
+        presenter.setType(type.getType());
     }
 }

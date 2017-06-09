@@ -6,9 +6,11 @@ import android.view.View;
 
 import com.hellen.baseframe.application.FrameListener;
 import com.hellen.baseframe.common.dlog.DLog;
+import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.bean.BaseModel;
 import com.xiangxun.workorder.bean.EquipMenuChildData;
+import com.xiangxun.workorder.bean.EquipmentRoot;
 import com.xiangxun.workorder.bean.ObjectData;
 import com.xiangxun.workorder.ui.biz.MainListener;
 import com.xiangxun.workorder.ui.biz.TourListener;
@@ -34,6 +36,8 @@ public class TourPresenter {
     private TourListener.TourInterface view;
 
     private ShowLoading loading;
+
+    private String type;
 
     public TourPresenter(TourListener.TourInterface view) {
         this.view = view;
@@ -78,10 +82,12 @@ public class TourPresenter {
             case R.id.id_tour_code_name_click:
                 //根据编码查询点击请求
                 DLog.i("根据编码查询点击请求" + view.getCode());
+                getEquipment(type, view.getCode(), null);
                 break;
             case R.id.id_tour_name_name_click:
                 //根据名称查询点击请求
                 DLog.i("根据名称查询点击请求" + view.getName());
+                getEquipment(type, null, view.getName());
 
                 break;
         }
@@ -89,34 +95,62 @@ public class TourPresenter {
 
     private void updateTour(boolean isCheck) {
         biz.onStart(loading);
-        biz.commitTour(isCheck, view.getDeclare(),view.getImageData(), new FrameListener<String>() {
+        biz.commitTour(isCheck, view.getDeclare(), view.getImageData(), new FrameListener<String>() {
             @Override
             public void onSucces(String s) {
-
+                biz.onStop(loading);
             }
 
             @Override
             public void onFaild(int i, String s) {
-
+                biz.onStop(loading);
+                switch (i) {
+                    case 0:
+                        ToastApp.showToast(s);
+                        break;
+                    case 1:
+                        ToastApp.showToast("网络请求异常");
+                        break;
+                    default:
+                        break;
+                }
             }
         });
     }
 
     /**
+     * @param type
+     * @param code
      * @TODO：获取设备信息列表。
      */
-    public void getEquipment() {
+    public void getEquipment(String type, String code, String name) {
         biz.onStart(loading);
-        biz.getEquipment(new FrameListener<ObjectData>() {
+        biz.getEquipment(type, code, name, new FrameListener<EquipmentRoot>() {
             @Override
-            public void onSucces(ObjectData o) {
-
+            public void onSucces(EquipmentRoot o) {
+                biz.onStop(loading);
+                view.onNameCodeSuccess(o.getData());
             }
 
             @Override
             public void onFaild(int i, String s) {
-
+                biz.onStop(loading);
+                view.onNameCodeFailed();
+                switch (i) {
+                    case 0:
+                        ToastApp.showToast(s);
+                        break;
+                    case 1:
+                        ToastApp.showToast("网络请求异常");
+                        break;
+                    default:
+                        break;
+                }
             }
         });
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

@@ -285,7 +285,7 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
         assetname.setNameValue(R.string.st_equip_assetname, info.assetname);
         tv_linear.addView(assetname);
         DetailView assetcode = new DetailView(getActivity());
-        assetcode.setNameValue(R.string.st_equip_assetcode, info.assetcode);
+        assetcode.setNameValue(R.string.st_equip_assetcode, info.code);
         tv_linear.addView(assetcode);
 
         DetailView assetmodel = new DetailView(getActivity());
@@ -293,7 +293,19 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
         tv_linear.addView(assetmodel);
 
         DetailView assettype = new DetailView(getActivity());
-        assettype.setNameValue(R.string.st_equip_assettype, info.assettype);
+        if ("device".equals(data.devicetype)) {
+            assettype.setNameValue(R.string.st_equip_assettype, "卡口");
+        } else if ("ftp".equals(data.devicetype)) {
+            assettype.setNameValue(R.string.st_equip_assettype, "FTP");
+        } else if ("project".equals(data.devicetype)) {
+            assettype.setNameValue(R.string.st_equip_assettype, "平台");
+        } else if ("database".equals(data.devicetype)) {
+            assettype.setNameValue(R.string.st_equip_assettype, "数据库");
+        } else if ("server".equals(data.devicetype)) {
+            assettype.setNameValue(R.string.st_equip_assettype, "服务器");
+        } else {
+            assettype.setNameValue(R.string.st_equip_assettype, "机柜");
+        }
         tv_linear.addView(assettype);
 
         DetailView manufacturer = new DetailView(getActivity());
@@ -331,21 +343,21 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
         id.setNameValue(R.string.st_tour_id, tour.id);
         tv_linear.addView(id);
 
-        DetailView devicename = new DetailView(getActivity());
-        devicename.setNameValue(R.string.st_tour_deviceid, tour.deviceid);
-        tv_linear.addView(devicename);
+        DetailView deviceid = new DetailView(getActivity());
+        deviceid.setNameValue(R.string.st_tour_deviceid, tour.deviceid);
+        tv_linear.addView(deviceid);
 
-        DetailView devicecode = new DetailView(getActivity());
-        devicecode.setNameValue(R.string.st_tour_time, tour.time);
-        tv_linear.addView(devicecode);
+        DetailView time = new DetailView(getActivity());
+        time.setNameValue(R.string.st_tour_time, tour.time);
+        tv_linear.addView(time);
 
-        DetailView deviceip = new DetailView(getActivity());
-        deviceip.setNameValue(R.string.st_tour_reason, tour.reason);
-        tv_linear.addView(deviceip);
+        DetailView reason = new DetailView(getActivity());
+        reason.setNameValue(R.string.st_tour_reason, tour.reason);
+        tv_linear.addView(reason);
 
-        DetailView position = new DetailView(getActivity());
-        position.setNameValue(R.string.st_tour_note, tour.note);
-        tv_linear.addView(position);
+        DetailView note = new DetailView(getActivity());
+        note.setNameValue(R.string.st_tour_note, tour.note);
+        tv_linear.addView(note);
 
         DetailView orgname = new DetailView(getActivity());
         orgname.setNameValue(R.string.st_tour_Checkingpeople, tour.Checkingpeople);

@@ -3,7 +3,6 @@ package com.xiangxun.workorder.ui.biz;
 import android.app.Dialog;
 import android.graphics.BitmapFactory;
 import android.text.TextUtils;
-import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -13,10 +12,8 @@ import com.hellen.baseframe.application.FramePresenter;
 import com.hellen.baseframe.application.FrameView;
 import com.hellen.baseframe.common.dlog.DLog;
 import com.xiangxun.workorder.base.APP;
-import com.xiangxun.workorder.bean.DetailImageRoot;
 import com.xiangxun.workorder.bean.EquipmentInfo;
-import com.xiangxun.workorder.bean.ObjectData;
-import com.xiangxun.workorder.bean.WorkOrderData;
+import com.xiangxun.workorder.bean.EquipmentRoot;
 import com.xiangxun.workorder.common.image.BitmapChangeUtil;
 import com.xiangxun.workorder.common.retrofit.RxjavaRetrofitRequestUtil;
 
@@ -47,15 +44,11 @@ public class TourListener implements FramePresenter {
 
         String getCode();
 
-        void onCodeSuccess(EquipmentInfo info);
+        void onNameCodeSuccess(List<EquipmentInfo> info);
 
-        void onCodeFailed();
+        void onNameCodeFailed();
 
         String getName();
-
-        void onNameSuccess(EquipmentInfo info);
-
-        void onNameFailed();
 
         String getDeclare();
 
@@ -78,7 +71,7 @@ public class TourListener implements FramePresenter {
             return;
         }
         if (!isCheck) {
-            listener.onFaild(0, "设备信息为空");
+            listener.onFaild(0, "请选择设备信息");
             return;
         }
         if (TextUtils.isEmpty(declare)) {
@@ -145,24 +138,24 @@ public class TourListener implements FramePresenter {
     /**
      * @TODO:获取设备信息接口。
      */
-    public void getEquipment(final FrameListener<ObjectData> listener) {
+    public void getEquipment(String type, String code, String name, final FrameListener<EquipmentRoot> listener) {
         if (!APP.isNetworkConnected(APP.getInstance())) {
             listener.onFaild(0, "网络异常,请检查网络");
             return;
         }
         //在这里进行数据请求
-        RxjavaRetrofitRequestUtil.getInstance().get().test().
+        RxjavaRetrofitRequestUtil.getInstance().get().searchOneDevice(type, code, name).
                 subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .map(new Func1<JsonObject, ObjectData>() {
+                .map(new Func1<JsonObject, EquipmentRoot>() {
                     @Override
-                    public ObjectData call(JsonObject jsonObject) {
+                    public EquipmentRoot call(JsonObject jsonObject) {
                         DLog.json("Func1", jsonObject.toString());
-                        return new Gson().fromJson(jsonObject.toString(), new TypeToken<ObjectData>() {
+                        return new Gson().fromJson(jsonObject, new TypeToken<EquipmentRoot>() {
                         }.getType());
                     }
                 })
-                .subscribe(new Observer<ObjectData>() {
+                .subscribe(new Observer<EquipmentRoot>() {
                     @Override
                     public void onCompleted() {
 
@@ -170,19 +163,18 @@ public class TourListener implements FramePresenter {
 
                     @Override
                     public void onError(Throwable e) {
+                        e.printStackTrace();
                         listener.onFaild(1, e.getMessage());
                     }
 
                     @Override
-                    public void onNext(ObjectData data) {
+                    public void onNext(EquipmentRoot data) {
                         if (data != null) {
-
-                            if (data.getStatus() == 1 && data.getData() != null) {
+                            if (data.getData() != null && data.getStatus() == 1) {
                                 listener.onSucces(data);
                             } else {
                                 listener.onFaild(0, data.getMessage());
                             }
-
                         } else {
                             listener.onFaild(0, "解析错误");
                         }
