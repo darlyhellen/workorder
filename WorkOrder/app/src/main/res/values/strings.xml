@@ -128,6 +128,14 @@
     <string name="st_equip_installtime">安装时间：</string>
     <string name="st_equip_installplace">安装位置：</string>
     <string name="st_equip_serviceid">服务厂商：</string>
+
+    <!--巡检详情信息-->
+    <string name="st_tour_id">工单编号：</string>
+    <string name="st_tour_deviceid">设备编号：</string>
+    <string name="st_tour_time">巡检时间：</string>
+    <string name="st_tour_reason">问题说明：</string>
+    <string name="st_tour_note">记录：</string>
+    <string name="st_tour_Checkingpeople">巡检人：</string>
     <!--工单异常信息-->
     <string name="st_detail_except">工单异常信息</string>
     <string name="st_detail_hardorder">上报人:</string>

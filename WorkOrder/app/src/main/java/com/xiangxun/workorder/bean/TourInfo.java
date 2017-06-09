@@ -14,6 +14,10 @@ public class TourInfo implements Parcelable {
     public String reason;
     public String note;
     public String Checkingpeople;
+    //经度
+    public String mapx;
+    //纬度
+    public String mapy;
 
 
     public TourInfo() {
@@ -29,6 +33,8 @@ public class TourInfo implements Parcelable {
         reason = in.readString();
         note = in.readString();
         Checkingpeople = in.readString();
+        mapx = in.readString();
+        mapy = in.readString();
 
     }
 
@@ -45,6 +51,8 @@ public class TourInfo implements Parcelable {
         dest.writeString(reason);
         dest.writeString(note);
         dest.writeString(Checkingpeople);
+        dest.writeString(mapx);
+        dest.writeString(mapy);
     }
 
     public static final Creator<TourInfo> CREATOR = new Creator<TourInfo>() {

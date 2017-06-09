@@ -23,6 +23,7 @@ import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.bean.EquipmentInfo;
+import com.xiangxun.workorder.bean.TourInfo;
 import com.xiangxun.workorder.bean.WorkOrderData;
 import com.xiangxun.workorder.common.WorkOrderUtils;
 import com.xiangxun.workorder.ui.adapter.DetailOrderImageAdapter;
@@ -90,7 +91,7 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
 
     private WorkOrderData data;
     private EquipmentInfo info;
-    private WorkOrderData tour;
+    private TourInfo tour;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -112,7 +113,7 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
     private void initView() {
         data = getArguments().getParcelable("WorkOrderData");
         info = getArguments().getParcelable("EquipmentInfo");
-        tour = getArguments().getParcelable("WorkOrderData");
+        tour = getArguments().getParcelable("TourInfo");
         if (data != null) {
             hasData();
         } else if (info != null) {
@@ -327,96 +328,29 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
         except.setVisibility(View.GONE);
         close.setVisibility(View.GONE);
         DetailView id = new DetailView(getActivity());
-        id.setNameValue(R.string.st_detail_orderid, data.id);
+        id.setNameValue(R.string.st_tour_id, tour.id);
         tv_linear.addView(id);
 
         DetailView devicename = new DetailView(getActivity());
-        devicename.setNameValue(R.string.st_detail_orderid, data.devicename);
+        devicename.setNameValue(R.string.st_tour_deviceid, tour.deviceid);
         tv_linear.addView(devicename);
 
         DetailView devicecode = new DetailView(getActivity());
-        devicecode.setNameValue(R.string.st_detail_orderid, data.devicecode);
+        devicecode.setNameValue(R.string.st_tour_time, tour.time);
         tv_linear.addView(devicecode);
 
         DetailView deviceip = new DetailView(getActivity());
-        deviceip.setNameValue(R.string.st_detail_orderid, data.deviceip);
+        deviceip.setNameValue(R.string.st_tour_reason, tour.reason);
         tv_linear.addView(deviceip);
 
-
-        DetailView devicetype = new DetailView(getActivity());
-        if ("device".equals(data.devicetype)) {
-            devicetype.setNameValue(R.string.st_detail_orderid, "卡口");
-        } else if ("ftp".equals(data.devicetype)) {
-            devicetype.setNameValue(R.string.st_detail_orderid, "FTP");
-        } else if ("project".equals(data.devicetype)) {
-            devicetype.setNameValue(R.string.st_detail_orderid, "平台");
-        } else if ("database".equals(data.devicetype)) {
-            devicetype.setNameValue(R.string.st_detail_orderid, "数据库");
-        } else {
-            devicetype.setNameValue(R.string.st_detail_orderid, "机柜");
-        }
-        tv_linear.addView(devicetype);
-
         DetailView position = new DetailView(getActivity());
-        position.setNameValue(R.string.st_detail_orderid, data.position);
+        position.setNameValue(R.string.st_tour_note, tour.note);
         tv_linear.addView(position);
 
         DetailView orgname = new DetailView(getActivity());
-        orgname.setNameValue(R.string.st_detail_orderid, data.orgname);
+        orgname.setNameValue(R.string.st_tour_Checkingpeople, tour.Checkingpeople);
         tv_linear.addView(orgname);
 
-        DetailView contactname = new DetailView(getActivity());
-        contactname.setNameValue(R.string.st_detail_orderid, data.contactname);
-        tv_linear.addView(contactname);
-
-        DetailView assigntime = new DetailView(getActivity());
-        assigntime.setNameValue(R.string.st_detail_orderid, data.assigntime);
-        tv_linear.addView(assigntime);
-
-
-        DetailView de = new DetailView(getActivity());
-        de.setName(R.string.st_detail_postion);
-        WorkOrderUtils.findStatus(data.status, de.getValue());
-        tv_linear.addView(de);
-
-        DetailView isouter = new DetailView(getActivity());
-        if (0 == data.isouter) {
-            isouter.setNameValue(R.string.st_detail_orderid, "否");
-        } else {
-            isouter.setNameValue(R.string.st_detail_orderid, "是");
-        }
-        tv_linear.addView(isouter);
-        DetailView isreassign = new DetailView(getActivity());
-        if ("0".equals(data.isreassign)) {
-            isreassign.setNameValue(R.string.st_detail_orderid, "否");
-        } else {
-            isreassign.setNameValue(R.string.st_detail_orderid, "是");
-        }
-        tv_linear.addView(isreassign);
-        DetailView isleave = new DetailView(getActivity());
-        if ("0".equals(data.isleave)) {
-            isleave.setNameValue(R.string.st_detail_orderid, "否");
-        } else {
-            isleave.setNameValue(R.string.st_detail_orderid, "是");
-        }
-        tv_linear.addView(isleave);
-        DetailView messages = new DetailView(getActivity());
-        messages.setNameValue(R.string.st_detail_orderid, data.messages);
-        tv_linear.addView(messages);
-
-        //异常状态
-        tvContent15.setText(tour.exceptionid);
-        tvContent16.setText("");
-        tvContent17.setText("");
-        // 关闭情况
-        tvContent18.setText(tour.offaccount);
-        tvContent19.setText(tour.offtime);
-        tvContent20.setText("");
-        //添加图片的功能模块
-        imageData = new ArrayList<String>();
-        imageData.add("添加图片");
-        adapter = new DetailOrderImageAdapter(imageData, R.layout.item_main_detail_image_adapter, getActivity(), this);
-        images.setAdapter(adapter);
     }
 
 

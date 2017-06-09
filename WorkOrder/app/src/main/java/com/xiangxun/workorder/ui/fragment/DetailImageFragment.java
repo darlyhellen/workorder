@@ -18,7 +18,9 @@ import com.hellen.baseframe.binder.ViewsBinder;
 import com.hellen.baseframe.common.dlog.DLog;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.AppEnum;
+import com.xiangxun.workorder.base.ItemClickListenter;
 import com.xiangxun.workorder.bean.EquipmentInfo;
+import com.xiangxun.workorder.bean.TourInfo;
 import com.xiangxun.workorder.bean.WorkOrderData;
 import com.xiangxun.workorder.common.image.BitmapChangeUtil;
 import com.xiangxun.workorder.ui.adapter.DetailImageFragmentAdapter;
@@ -41,7 +43,7 @@ import java.util.List;
  *
  * @TODO:展示服务端传递图片的位置
  */
-public class DetailImageFragment extends Fragment implements OnItemClickListener, DetailImageFragmentInterface {
+public class DetailImageFragment extends Fragment implements DetailImageFragmentInterface {
 
     private View root;
 
@@ -54,7 +56,7 @@ public class DetailImageFragment extends Fragment implements OnItemClickListener
 
     private WorkOrderData data;
     private EquipmentInfo info;
-    private WorkOrderData tour;
+    private TourInfo tour;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -75,7 +77,7 @@ public class DetailImageFragment extends Fragment implements OnItemClickListener
         presenter = new DetailImageFragmentPresenter(this);
         data = getArguments().getParcelable("WorkOrderData");
         info = getArguments().getParcelable("EquipmentInfo");
-        tour = getArguments().getParcelable("WorkOrderData");
+        tour = getArguments().getParcelable("TourInfo");
         if (data != null) {
             urls = new ArrayList<String>();
             File f = new File(AppEnum.IMAGE, data.id);
@@ -120,23 +122,22 @@ public class DetailImageFragment extends Fragment implements OnItemClickListener
     }
 
     private void initListener() {
-        gridView.setOnItemClickListener(this);
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-        Intent intent = new Intent(getActivity(), ShowImageViewActivity.class);
-        intent.putExtra("position", position);
-        int[] location = new int[2];
-        view.getLocationOnScreen(location);
-        intent.putExtra("locationX", location[0]);//必须
-        intent.putExtra("locationY", location[1]);//必须
-        intent.putExtra("url", (String) parent.getItemAtPosition(position));
-        intent.putExtra("width", view.getWidth());//必须
-        intent.putExtra("height", view.getHeight());//必须
-        startActivity(intent);
-        getActivity().overridePendingTransition(0, 0);
+        gridView.setOnItemClickListener(new ItemClickListenter() {
+            @Override
+            public void NoDoubleItemClickListener(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), ShowImageViewActivity.class);
+                intent.putExtra("position", position);
+                int[] location = new int[2];
+                view.getLocationOnScreen(location);
+                intent.putExtra("locationX", location[0]);//必须
+                intent.putExtra("locationY", location[1]);//必须
+                intent.putExtra("url", (String) parent.getItemAtPosition(position));
+                intent.putExtra("width", view.getWidth());//必须
+                intent.putExtra("height", view.getHeight());//必须
+                startActivity(intent);
+                getActivity().overridePendingTransition(0, 0);
+            }
+        });
     }
 
     @Override

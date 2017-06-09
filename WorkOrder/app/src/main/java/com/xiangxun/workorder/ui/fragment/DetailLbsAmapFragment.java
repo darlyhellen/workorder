@@ -23,6 +23,7 @@ import com.hellen.baseframe.common.dlog.DLog;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.bean.EquipmentInfo;
+import com.xiangxun.workorder.bean.TourInfo;
 import com.xiangxun.workorder.bean.WorkOrderData;
 import com.xiangxun.workorder.common.Aset;
 
@@ -43,7 +44,7 @@ public class DetailLbsAmapFragment extends Fragment {
 
     private WorkOrderData data;
     private EquipmentInfo info;
-    private WorkOrderData tour;
+    private TourInfo tour;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -79,7 +80,7 @@ public class DetailLbsAmapFragment extends Fragment {
         }
         data = getArguments().getParcelable("WorkOrderData");
         info = getArguments().getParcelable("EquipmentInfo");
-        tour = getArguments().getParcelable("WorkOrderData");
+        tour = getArguments().getParcelable("TourInfo");
         if (AppEnum.TEST) {
             //单独的测试数据,假数据.
             data = AppEnum.getData();
@@ -119,21 +120,21 @@ public class DetailLbsAmapFragment extends Fragment {
                     .position(latlng)
                     .draggable(true));
         } else if (info != null) {
-//            if (TextUtils.isEmpty(info.mapx) || TextUtils.isEmpty(info.mapy)) {
-//                //108.951279,34.164469
-//                info.mapx = "34.164469";
-//                info.mapy = "108.951279";
-//            }
-//            latlng = new LatLng(Double.parseDouble(info.mapx), Double.parseDouble(info.mapy));
-//            //这里进行视角，等参数调整。0度就是平面图
-//            changeCamera(
-//                    CameraUpdateFactory.newCameraPosition(new CameraPosition(
-//                            latlng, 14, 0, 0)));
-//            aMap.clear();
-//            aMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory
-//                    .defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
-//                    .position(latlng)
-//                    .draggable(true));
+            if (TextUtils.isEmpty(info.mapx) || TextUtils.isEmpty(info.mapy)) {
+                //108.951279,34.164469
+                info.mapx = "34.164469";
+                info.mapy = "108.951279";
+            }
+            latlng = new LatLng(Double.parseDouble(info.mapx), Double.parseDouble(info.mapy));
+            //这里进行视角，等参数调整。0度就是平面图
+            changeCamera(
+                    CameraUpdateFactory.newCameraPosition(new CameraPosition(
+                            latlng, 14, 0, 0)));
+            aMap.clear();
+            aMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory
+                    .defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+                    .position(latlng)
+                    .draggable(true));
         } else if (tour != null) {
             if (TextUtils.isEmpty(tour.mapx) || TextUtils.isEmpty(tour.mapy)) {
                 //108.951279,34.164469

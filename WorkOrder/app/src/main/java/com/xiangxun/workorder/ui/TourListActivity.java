@@ -13,17 +13,14 @@ import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.base.BaseActivity;
+import com.xiangxun.workorder.base.ItemClickListenter;
 import com.xiangxun.workorder.bean.Patrol;
 import com.xiangxun.workorder.bean.TourInfo;
-import com.xiangxun.workorder.bean.WorkOrderData;
 import com.xiangxun.workorder.ui.adapter.TourAdapter;
-import com.xiangxun.workorder.ui.biz.TourListListener;
 import com.xiangxun.workorder.ui.biz.TourListListener.TourListInterface;
-import com.xiangxun.workorder.ui.biz.WorkOrderListener;
 import com.xiangxun.workorder.ui.fragment.SearchWorkOrderDialogFragment;
 import com.xiangxun.workorder.ui.main.WorkOrderDetailActivity;
 import com.xiangxun.workorder.ui.presenter.TourListPresenter;
-import com.xiangxun.workorder.ui.presenter.WorkOrderPresenter;
 import com.xiangxun.workorder.widget.header.HeaderView;
 import com.xiangxun.workorder.widget.xlistView.XListView;
 
@@ -38,7 +35,7 @@ import java.util.List;
  * @TODO:巡检列表和其他列表不能共用。单独提取出来使用。
  */
 @ContentBinder(R.layout.activity_work_order)
-public class TourListActivity extends BaseActivity implements View.OnClickListener, XListView.IXListViewListener, AdapterView.OnItemClickListener, TourListInterface, SearchWorkOrderDialogFragment.SearchListener {
+public class TourListActivity extends BaseActivity implements View.OnClickListener, XListView.IXListViewListener, TourListInterface, SearchWorkOrderDialogFragment.SearchListener {
 
     @ViewsBinder(R.id.id_work_order_header)
     private HeaderView header;
@@ -97,7 +94,17 @@ public class TourListActivity extends BaseActivity implements View.OnClickListen
         header.setRightOnClickListener(this);
         xlist.setPullLoadEnable(true);
         xlist.setXListViewListener(this);
-        xlist.setOnItemClickListener(this);
+        xlist.setOnItemClickListener(new ItemClickListenter() {
+            @Override
+            public void NoDoubleItemClickListener(AdapterView<?> parent, View view, int position, long id) {
+                DLog.i("onItemClick--" + position);
+                TourInfo ds = (TourInfo) parent.getItemAtPosition(position);
+                Intent intent = new Intent(TourListActivity.this, WorkOrderDetailActivity.class);
+                //工单详细信息
+                intent.putExtra("TourInfo", ds);
+                startActivityForResult(intent, 700);
+            }
+        });
     }
 
     @Override
@@ -136,16 +143,6 @@ public class TourListActivity extends BaseActivity implements View.OnClickListen
     private void stopXListView() {
         xlist.stopRefresh();
         xlist.stopLoadMore();
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        DLog.i("onItemClick--" + position);
-        TourInfo ds = (TourInfo) parent.getItemAtPosition(position);
-        Intent intent = new Intent(this, WorkOrderDetailActivity.class);
-        //工单详细信息
-        intent.putExtra("TourInfo", ds);
-        startActivityForResult(intent, 700);
     }
 
 

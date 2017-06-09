@@ -16,6 +16,7 @@ import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.base.BaseActivity;
 import com.xiangxun.workorder.bean.EquipmentInfo;
+import com.xiangxun.workorder.bean.TourInfo;
 import com.xiangxun.workorder.bean.WorkOrderData;
 import com.xiangxun.workorder.ui.adapter.ViewPagerAdapter;
 import com.xiangxun.workorder.ui.biz.WorkOrderDetailListener.WorkOrderDetailInterface;
@@ -53,7 +54,7 @@ public class WorkOrderDetailActivity extends BaseActivity implements OnClickList
 
     private WorkOrderData data;
     private EquipmentInfo info;
-    private WorkOrderData tour;
+    private TourInfo tour;
     private DetailOrderFragment order;
 
     @Override
@@ -65,7 +66,7 @@ public class WorkOrderDetailActivity extends BaseActivity implements OnClickList
         //设备信息详情
         info = getIntent().getParcelableExtra("EquipmentInfo");
         //巡检工单详情
-        tour = getIntent().getParcelableExtra("WorkOrderData");
+        tour = getIntent().getParcelableExtra("TourInfo");
         if (AppEnum.TEST) {
             //单独的测试数据,假数据.
             data = AppEnum.getData();
@@ -165,7 +166,7 @@ public class WorkOrderDetailActivity extends BaseActivity implements OnClickList
     private void hasTour() {
 
         Bundle bundle = new Bundle();
-        bundle.putParcelable("WorkOrderData", tour);
+        bundle.putParcelable("TourInfo", tour);
         order = new DetailOrderFragment();
         order.setArguments(bundle);
         list.add(order);
