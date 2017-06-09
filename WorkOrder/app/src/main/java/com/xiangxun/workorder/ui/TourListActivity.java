@@ -16,11 +16,15 @@ import com.xiangxun.workorder.base.BaseActivity;
 import com.xiangxun.workorder.base.ItemClickListenter;
 import com.xiangxun.workorder.bean.Patrol;
 import com.xiangxun.workorder.bean.TourInfo;
+import com.xiangxun.workorder.bean.WorkOrderData;
 import com.xiangxun.workorder.ui.adapter.TourAdapter;
+import com.xiangxun.workorder.ui.biz.TourListListener;
 import com.xiangxun.workorder.ui.biz.TourListListener.TourListInterface;
+import com.xiangxun.workorder.ui.biz.WorkOrderListener;
 import com.xiangxun.workorder.ui.fragment.SearchWorkOrderDialogFragment;
 import com.xiangxun.workorder.ui.main.WorkOrderDetailActivity;
 import com.xiangxun.workorder.ui.presenter.TourListPresenter;
+import com.xiangxun.workorder.ui.presenter.WorkOrderPresenter;
 import com.xiangxun.workorder.widget.header.HeaderView;
 import com.xiangxun.workorder.widget.xlistView.XListView;
 

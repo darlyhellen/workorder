@@ -54,7 +54,6 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         String name = context.getResources().getString(title[position]);
-        DLog.i(getClass().getSimpleName(), name);
         return name;
     }
 

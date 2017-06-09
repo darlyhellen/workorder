@@ -24,6 +24,7 @@ public class HeaderView extends FrameLayout {
     private TextView mTVTitle;
     // 返回
     private LinearLayout mBtnBack;
+    private LinearLayout mRight;
     private ImageView mBtnShare;
     private ImageView back_img;
     private ViewFlipper title_view_right_Flipper01;
@@ -38,6 +39,7 @@ public class HeaderView extends FrameLayout {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.header_view, this, true);
         mBtnBack = (LinearLayout) findViewById(R.id.title_view_back_llayout);
+        mRight = (LinearLayout) findViewById(R.id.title_view_right_linear);
         mTVTitle = (TextView) findViewById(R.id.title_view_operation_text);
         mBtnShare = (ImageView) findViewById(R.id.xw_share);
         back_img = (ImageView) findViewById(R.id.title_view_back_img);
@@ -65,8 +67,7 @@ public class HeaderView extends FrameLayout {
     }
 
     public void setRightOnClickListener(OnClickListener listener) {
-        //title_view_right_Flipper01.setVisibility(View.VISIBLE);
-        mBtnShare.setOnClickListener(listener);
+        mRight.setOnClickListener(listener);
     }
 
     public void setRightBackgroundResource(int drawable) {

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import com.hellen.baseframe.binder.InitBinder;
 import com.hellen.baseframe.binder.ViewsBinder;
@@ -49,6 +50,8 @@ public class DetailImageFragment extends Fragment implements DetailImageFragment
 
     @ViewsBinder(R.id.id_detail_fragment_grid)
     private GridView gridView;
+    @ViewsBinder(R.id.id_detail_fragment_text)
+    private TextView text;
     private DetailImageFragmentAdapter adapter;
     private List<String> urls;
 
@@ -80,6 +83,9 @@ public class DetailImageFragment extends Fragment implements DetailImageFragment
         tour = getArguments().getParcelable("TourInfo");
         if (data != null) {
             urls = new ArrayList<String>();
+            if (TextUtils.isEmpty(data.id)) {
+                return;
+            }
             File f = new File(AppEnum.IMAGE, data.id);
             if (f.exists()) {
                 File[] lis = f.listFiles();
@@ -93,6 +99,9 @@ public class DetailImageFragment extends Fragment implements DetailImageFragment
             gridView.setAdapter(adapter);
         } else if (info != null) {
             urls = new ArrayList<String>();
+            if (TextUtils.isEmpty(info.id)) {
+                return;
+            }
             File f = new File(AppEnum.IMAGE, info.id);
             if (f.exists()) {
                 File[] lis = f.listFiles();
@@ -106,6 +115,9 @@ public class DetailImageFragment extends Fragment implements DetailImageFragment
             gridView.setAdapter(adapter);
         } else if (tour != null) {
             urls = new ArrayList<String>();
+            if (TextUtils.isEmpty(tour.id)) {
+                return;
+            }
             File f = new File(AppEnum.IMAGE, tour.id);
             if (f.exists()) {
                 File[] lis = f.listFiles();
@@ -172,12 +184,13 @@ public class DetailImageFragment extends Fragment implements DetailImageFragment
             }
         }
         DLog.i(getClass().getSimpleName(), urls);
+        text.setVisibility(View.GONE);
         adapter.setData(urls);
     }
 
     @Override
     public void onLoginFailed() {
-
+        text.setVisibility(View.VISIBLE);
     }
 
     @Override

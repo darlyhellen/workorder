@@ -51,7 +51,7 @@ public class WorkOrderPresenter {
             case R.id.title_view_back_llayout:
                 view.end();
                 break;
-            case R.id.xw_share:
+            case R.id.title_view_right_linear:
                 if (patrol == 20) {
                     DLog.i("新增按钮点击，跳转到新增巡检页面。在列表页面中显示巡检列表");
                     context.startActivity(new Intent(context, TourActivity.class));

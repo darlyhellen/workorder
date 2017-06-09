@@ -42,8 +42,8 @@ public class MainPresenter {
      */
     public void onClickDown(Context context, View v) {
         switch (v.getId()) {
-            case R.id.xw_share:
-                //進入設置頁面
+            case R.id.title_view_right_linear:
+                DLog.i(getClass().getSimpleName(), "title_view_right_linear");
                 context.startActivity(new Intent(context, EquipmentMenuAcitvity.class));
                 break;
         }

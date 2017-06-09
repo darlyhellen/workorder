@@ -6,7 +6,6 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableRow;
@@ -24,8 +23,6 @@ import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.base.BaseActivity;
 import com.xiangxun.workorder.bean.Patrol;
 import com.xiangxun.workorder.bean.WorkOrderData;
-import com.xiangxun.workorder.ui.adapter.PatrolHomeAdapter;
-import com.xiangxun.workorder.ui.adapter.PatrolMaintenanceAdapter;
 import com.xiangxun.workorder.ui.biz.MaintenanceListener.MaintenanceInterface;
 import com.xiangxun.workorder.ui.main.WorkOrderActivity;
 import com.xiangxun.workorder.ui.main.WorkOrderDetailActivity;
@@ -180,7 +177,7 @@ public class MaintenanceActivity extends BaseActivity implements AdapterView.OnI
                     //是否是巡检工单
                     intent.putExtra("isTour", false);
                     //工单详细信息
-                    intent.putExtra("data", da);
+                    intent.putExtra("WorkOrderData", da);
                     startActivityForResult(intent, 700);
                 }
             });

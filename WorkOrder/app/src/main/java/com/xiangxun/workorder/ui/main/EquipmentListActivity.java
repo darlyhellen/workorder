@@ -78,7 +78,6 @@ public class EquipmentListActivity extends BaseActivity implements View.OnClickL
     @Override
     protected void initListener() {
         header.setLeftBackOneListener(this);
-        header.setRightOnClickListener(this);
         xlist.setPullLoadEnable(true);
         xlist.setXListViewListener(this);
         xlist.setOnItemClickListener(new ItemClickListenter() {

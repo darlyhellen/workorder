@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 
 import com.hellen.baseframe.application.FrameListener;
+import com.hellen.baseframe.common.dlog.DLog;
 import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.bean.EquipmentRoot;
@@ -40,6 +41,9 @@ public class EquipmentListPresenter {
         switch (v.getId()) {
             case R.id.title_view_back_llayout:
                 view.end();
+                break;
+            case R.id.title_view_right_linear:
+                DLog.i(getClass().getSimpleName(), "title_view_right_linear");
                 break;
             default:
                 break;

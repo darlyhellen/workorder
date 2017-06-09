@@ -41,7 +41,7 @@ public class TourSelectAdapter extends ParentAdapter<TourSelectListener> {
             hocker.tv.setText(((EquipMenuChildData) s).getName());
         }
         if (s instanceof EquipmentInfo) {
-            hocker.tv.setText(((EquipmentInfo) s).assetname);
+            hocker.tv.setText(((EquipmentInfo) s).name);
         }
         return view;
     }

@@ -84,18 +84,21 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
             header.setTitle(R.string.main_work_order);
             presenter.getWorkOrderByPage(currentPage, workorder, devicename, devicenum, deviceip);
             header.setRightBackgroundResource(R.mipmap.ic_title_search);
+            header.setRightOnClickListener(this);
         } else {
             //根据传递过来的参数,进行页面分类整理.请求不同的接口,
             if (patrol.getListId() == 20) {
                 //巡检管理
                 isTour = true;
                 header.setRightBackgroundResource(R.mipmap.ic_title_add);
+                header.setRightOnClickListener(this);
             } else if (patrol.getListId() == 40) {
                 isTour = false;
                 header.setRightBackgroundResource(0);
             } else {
                 isTour = false;
                 header.setRightBackgroundResource(R.mipmap.ic_title_search);
+                header.setRightOnClickListener(this);
             }
             header.setTitle(patrol.getName());
             classifyRequest(patrol.getListId());
@@ -162,7 +165,6 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
     @Override
     protected void initListener() {
         header.setLeftBackOneListener(this);
-        header.setRightOnClickListener(this);
         xlist.setPullLoadEnable(true);
         xlist.setXListViewListener(this);
         xlist.setOnItemClickListener(new ItemClickListenter() {

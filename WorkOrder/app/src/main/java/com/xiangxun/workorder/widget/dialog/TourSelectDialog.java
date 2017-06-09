@@ -79,18 +79,17 @@ public class TourSelectDialog extends Dialog {
     }
 
     private void initView() {
-        TextView  mTvCancle = (TextView) mCustomView.findViewById(R.id.tv_publish_select_dialog_cancle);
-        TextView  mTvPublishSelectTitle = (TextView) mCustomView.findViewById(R.id.tv_publish_select_dialog_title);
+        TextView mTvCancle = (TextView) mCustomView.findViewById(R.id.tv_publish_select_dialog_cancle);
+        TextView mTvPublishSelectTitle = (TextView) mCustomView.findViewById(R.id.tv_publish_select_dialog_title);
         mTvPublishSelectTitle.setText(mTitle);
-        ListView  mLvPublishTypes = (ListView) mCustomView.findViewById(R.id.lv_publish_select_dialog);
+        ListView mLvPublishTypes = (ListView) mCustomView.findViewById(R.id.lv_publish_select_dialog);
         mLvPublishTypes.setAdapter(new TourSelectAdapter(data, R.layout.item_select_text, mContext));
 
         mLvPublishTypes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                EquipMenuChildData data = (EquipMenuChildData) parent.getItemAtPosition(position);
                 if (selectItemClick != null) {
-                    selectItemClick.changeState(data);
+                    selectItemClick.changeState((TourSelectListener) parent.getItemAtPosition(position));
                 }
                 dismiss();
             }

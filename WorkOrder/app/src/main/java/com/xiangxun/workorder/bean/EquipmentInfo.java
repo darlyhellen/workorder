@@ -33,6 +33,7 @@ public class EquipmentInfo implements Parcelable, TourSelectListener {
     public String mapy;
     public int cabinetStatus;
     public String code;
+    public String name;
 
 
     public EquipmentInfo() {
@@ -63,6 +64,7 @@ public class EquipmentInfo implements Parcelable, TourSelectListener {
         mapy = in.readString();
         cabinetStatus = in.readInt();
         code = in.readString();
+        name = in.readString();
 
     }
 
@@ -96,6 +98,7 @@ public class EquipmentInfo implements Parcelable, TourSelectListener {
         dest.writeString(mapy);
         dest.writeInt(cabinetStatus);
         dest.writeString(code);
+        dest.writeString(name);
     }
 
     public static final Parcelable.Creator<EquipmentInfo> CREATOR = new Parcelable.Creator<EquipmentInfo>() {

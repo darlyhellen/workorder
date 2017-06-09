@@ -57,9 +57,8 @@ public class MaintenancePresenter {
 
     public void onClickDown(Context context, View v) {
         switch (v.getId()) {
-            case R.id.xw_share:
-                //進入設置頁面
-                DLog.i("设置按钮点击");
+            case R.id.title_view_right_linear:
+                DLog.i(getClass().getSimpleName(), "title_view_right_linear");
                 context.startActivity(new Intent(context, SetActivity.class));
                 break;
             case R.id.id_maintenance_order:

@@ -9,6 +9,7 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hellen.baseframe.binder.ContentBinder;
@@ -24,6 +25,7 @@ import com.xiangxun.workorder.bean.EquipmentInfo;
 import com.xiangxun.workorder.ui.adapter.TourImageAdapter;
 import com.xiangxun.workorder.ui.adapter.TourImageAdapter.OnTourConsListener;
 import com.xiangxun.workorder.ui.biz.TourListener.TourInterface;
+import com.xiangxun.workorder.ui.login.edittext.ClearEditText;
 import com.xiangxun.workorder.ui.presenter.TourPresenter;
 import com.xiangxun.workorder.widget.camera.PhotoPop;
 import com.xiangxun.workorder.widget.dialog.TourSelectDialog;
@@ -53,6 +55,8 @@ public class TourActivity extends BaseActivity implements OnClickListener, TourI
     private TextView id_order_equip_ip;
     @ViewsBinder(R.id.id_order_equip_type)
     private TextView id_order_equip_type;
+    @ViewsBinder(R.id.id_order_equip_type_click)
+    private RelativeLayout id_order_equip_type_click;
     @ViewsBinder(R.id.id_order_equip_position)
     private TextView id_order_equip_position;
     @ViewsBinder(R.id.id_order_equip_deptment)
@@ -69,7 +73,7 @@ public class TourActivity extends BaseActivity implements OnClickListener, TourI
     @ViewsBinder(R.id.id_tour_code_code)
     private TextView id_tour_code_code;
     @ViewsBinder(R.id.id_tour_code_name)
-    private EditText id_tour_code_name;
+    private ClearEditText id_tour_code_name;
     @ViewsBinder(R.id.id_tour_code_name_click)
     private TextView id_tour_code_name_click;//根据编码查询点击请求
 
@@ -79,7 +83,7 @@ public class TourActivity extends BaseActivity implements OnClickListener, TourI
     @ViewsBinder(R.id.id_tour_name_code)
     private TextView id_tour_name_code;//名称
     @ViewsBinder(R.id.id_tour_name_name)
-    private EditText id_tour_name_name;//编码
+    private ClearEditText id_tour_name_name;//编码
     @ViewsBinder(R.id.id_tour_name_name_click)
     private TextView id_tour_name_name_click;//根据名称查询点击请求
 
@@ -138,7 +142,7 @@ public class TourActivity extends BaseActivity implements OnClickListener, TourI
                 }
             }
         });
-        id_order_equip_type.setOnClickListener(this);
+        id_order_equip_type_click.setOnClickListener(this);
 
         id_tour_code_name_click.setOnClickListener(this);
         id_tour_name_name_click.setOnClickListener(this);
@@ -147,7 +151,7 @@ public class TourActivity extends BaseActivity implements OnClickListener, TourI
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.id_order_equip_type:
+            case R.id.id_order_equip_type_click:
                 new TourSelectDialog(this, presenter.getType(), "请选择设备类型", this).show();
                 break;
             default:
@@ -275,9 +279,9 @@ public class TourActivity extends BaseActivity implements OnClickListener, TourI
             id_order_equip_position.setText(infoed.installplace);
             id_order_equip_deptment.setText(infoed.factoryId);
             id_tour_code_code.setText(infoed.code);
-            id_tour_code_name.setText(infoed.assetname);
+            id_tour_code_name.setText(infoed.name);
             id_tour_name_code.setText(infoed.code);
-            id_tour_name_name.setText(infoed.assetname);
+            id_tour_name_name.setText(infoed.name);
         }
     }
 }

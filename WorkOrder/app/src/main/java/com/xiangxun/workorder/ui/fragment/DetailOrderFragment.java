@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -19,9 +18,9 @@ import android.widget.TextView;
 import com.hellen.baseframe.binder.InitBinder;
 import com.hellen.baseframe.binder.ViewsBinder;
 import com.hellen.baseframe.common.dlog.DLog;
-import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.AppEnum;
+import com.xiangxun.workorder.base.ItemClickListenter;
 import com.xiangxun.workorder.bean.EquipmentInfo;
 import com.xiangxun.workorder.bean.TourInfo;
 import com.xiangxun.workorder.bean.WorkOrderData;
@@ -45,7 +44,7 @@ import java.util.List;
  *
  * @TODO: 固态详情展示页面。
  */
-public class DetailOrderFragment extends Fragment implements OnClickListener, DetailOrderFragmentInterface, OnItemClickListener, OnDetailOrderConsListener {
+public class DetailOrderFragment extends Fragment implements OnClickListener, DetailOrderFragmentInterface, OnDetailOrderConsListener {
     private View root;
 
 
@@ -293,15 +292,15 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
         tv_linear.addView(assetmodel);
 
         DetailView assettype = new DetailView(getActivity());
-        if ("device".equals(data.devicetype)) {
+        if ("device".equals(info.assettype)) {
             assettype.setNameValue(R.string.st_equip_assettype, "卡口");
-        } else if ("ftp".equals(data.devicetype)) {
+        } else if ("ftp".equals(info.assettype)) {
             assettype.setNameValue(R.string.st_equip_assettype, "FTP");
-        } else if ("project".equals(data.devicetype)) {
+        } else if ("project".equals(info.assettype)) {
             assettype.setNameValue(R.string.st_equip_assettype, "平台");
-        } else if ("database".equals(data.devicetype)) {
+        } else if ("database".equals(info.assettype)) {
             assettype.setNameValue(R.string.st_equip_assettype, "数据库");
-        } else if ("server".equals(data.devicetype)) {
+        } else if ("server".equals(info.assettype)) {
             assettype.setNameValue(R.string.st_equip_assettype, "服务器");
         } else {
             assettype.setNameValue(R.string.st_equip_assettype, "机柜");
@@ -369,7 +368,32 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
     private void initListener() {
         commit.setOnClickListener(this);
         consel.setOnClickListener(this);
-        images.setOnItemClickListener(this);
+        images.setOnItemClickListener(new ItemClickListenter() {
+            @Override
+            public void NoDoubleItemClickListener(AdapterView<?> parent, View view, int position, long id) {
+                String st = (String) parent.getItemAtPosition(position);
+                if (position == (imageData.size() - 1)) {
+                    if (position == 3) {
+                        //上传图片
+                        DLog.i(getClass().getSimpleName(), position + "上传图片");
+                        presenter.upLoadImage(imageData);
+                    } else {
+                        pop.show(view);
+                    }
+                } else {
+                    Intent intent = new Intent(getActivity(), ShowImageViewActivity.class);
+                    intent.putExtra("position", position);
+                    int[] location = new int[2];
+                    view.getLocationOnScreen(location);
+                    intent.putExtra("locationX", location[0]);//必须
+                    intent.putExtra("locationY", location[1]);//必须
+                    intent.putExtra("url", st);
+                    intent.putExtra("width", view.getWidth());//必须
+                    intent.putExtra("height", view.getHeight());//必须
+                    startActivity(intent);
+                }
+            }
+        });
     }
 
     @Override
@@ -420,32 +444,6 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
     public void setEnableClick() {
         commit.setClickable(true);
         consel.setClickable(true);
-    }
-
-    //图片加载类
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        String st = (String) parent.getItemAtPosition(position);
-        if (position == (imageData.size() - 1)) {
-            if (position == 3) {
-                //上传图片
-                DLog.i(getClass().getSimpleName(), position + "上传图片");
-                presenter.upLoadImage(imageData);
-            } else {
-                pop.show(view);
-            }
-        } else {
-            Intent intent = new Intent(getActivity(), ShowImageViewActivity.class);
-            intent.putExtra("position", position);
-            int[] location = new int[2];
-            view.getLocationOnScreen(location);
-            intent.putExtra("locationX", location[0]);//必须
-            intent.putExtra("locationY", location[1]);//必须
-            intent.putExtra("url", st);
-            intent.putExtra("width", view.getWidth());//必须
-            intent.putExtra("height", view.getHeight());//必须
-            startActivity(intent);
-        }
     }
 
 

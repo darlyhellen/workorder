@@ -78,6 +78,10 @@ public class TourListener implements FramePresenter {
             listener.onFaild(0, "说明信息不能为空");
             return;
         }
+        if (url.size() < 2) {
+            listener.onFaild(0, "请选择照片信息");
+            return;
+        }
 
         JSONObject ob = new JSONObject();
         try {
@@ -171,7 +175,11 @@ public class TourListener implements FramePresenter {
                     public void onNext(EquipmentRoot data) {
                         if (data != null) {
                             if (data.getData() != null && data.getStatus() == 1) {
-                                listener.onSucces(data);
+                                if (data.getData().size() == 0) {
+                                    listener.onFaild(0, "查无数据，请重新查询");
+                                } else {
+                                    listener.onSucces(data);
+                                }
                             } else {
                                 listener.onFaild(0, data.getMessage());
                             }
