@@ -7,7 +7,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,10 +18,9 @@ import com.hellen.baseframe.common.utiltools.SharePreferHelp;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.base.BaseActivity;
-import com.xiangxun.workorder.bean.BaseModel;
+import com.xiangxun.workorder.base.ItemClickListenter;
 import com.xiangxun.workorder.bean.EquipMenuChildData;
 import com.xiangxun.workorder.bean.EquipmentInfo;
-import com.xiangxun.workorder.bean.EquipmentRoot;
 import com.xiangxun.workorder.ui.adapter.TourImageAdapter;
 import com.xiangxun.workorder.ui.adapter.TourImageAdapter.OnTourConsListener;
 import com.xiangxun.workorder.ui.biz.TourListener.TourInterface;
@@ -44,7 +42,7 @@ import java.util.List;
  * @TODO:新增巡检工单
  */
 @ContentBinder(R.layout.activity_tour)
-public class TourActivity extends BaseActivity implements OnClickListener, TourInterface, OnTourConsListener, OnItemClickListener, onSelectItemClick {
+public class TourActivity extends BaseActivity implements OnClickListener, TourInterface, OnTourConsListener, onSelectItemClick {
 
 
     @ViewsBinder(R.id.id_tour_title)
@@ -119,7 +117,26 @@ public class TourActivity extends BaseActivity implements OnClickListener, TourI
     protected void initListener() {
         title.setLeftBackOneListener(this);
         title.setRightImageTextFlipper(this);
-        id_order_equip_image.setOnItemClickListener(this);
+        id_order_equip_image.setOnItemClickListener(new ItemClickListenter() {
+            @Override
+            public void NoDoubleItemClickListener(AdapterView<?> parent, View view, int position, long id) {
+                String st = (String) parent.getItemAtPosition(position);
+                if (position == (imageData.size() - 1)) {
+                    pop.show(view);
+                } else {
+                    Intent intent = new Intent(TourActivity.this, ShowImageViewActivity.class);
+                    intent.putExtra("position", position);
+                    int[] location = new int[2];
+                    view.getLocationOnScreen(location);
+                    intent.putExtra("locationX", location[0]);//必须
+                    intent.putExtra("locationY", location[1]);//必须
+                    intent.putExtra("url", st);
+                    intent.putExtra("width", view.getWidth());//必须
+                    intent.putExtra("height", view.getHeight());//必须
+                    startActivity(intent);
+                }
+            }
+        });
         id_order_equip_type.setOnClickListener(this);
 
         id_tour_code_name_click.setOnClickListener(this);
@@ -200,26 +217,6 @@ public class TourActivity extends BaseActivity implements OnClickListener, TourI
     public void onConsListener(View v, int position) {
         imageData.remove(position);
         adapter.setData(imageData);
-    }
-
-    //图片加载类
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        String st = (String) parent.getItemAtPosition(position);
-        if (position == (imageData.size() - 1)) {
-            pop.show(view);
-        } else {
-            Intent intent = new Intent(this, ShowImageViewActivity.class);
-            intent.putExtra("position", position);
-            int[] location = new int[2];
-            view.getLocationOnScreen(location);
-            intent.putExtra("locationX", location[0]);//必须
-            intent.putExtra("locationY", location[1]);//必须
-            intent.putExtra("url", st);
-            intent.putExtra("width", view.getWidth());//必须
-            intent.putExtra("height", view.getHeight());//必须
-            startActivity(intent);
-        }
     }
 
     @Override

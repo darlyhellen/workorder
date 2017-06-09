@@ -32,7 +32,7 @@ import java.util.List;
  * Copyright by [Zhangyuhui/Darly]
  * ©2017 XunXiang.Company. All rights reserved.
  *
- * @TODO: 首页静态页面, 暂时没有接口网络请求。
+ * @TODO: 首页测试页面。实际工作中并没有使用。
  */
 @ContentBinder(R.layout.activity_main)
 public class MainActivity extends BaseActivity implements View.OnClickListener, MainInterface, OnItemClickListener, Callback {

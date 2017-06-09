@@ -36,7 +36,7 @@ import java.util.List;
  * Copyright by [Zhangyuhui/Darly]
  * ©2017 XunXiang.Company. All rights reserved.
  *
- * @TODO:
+ * @TODO: 巡检页面弹出的选择对话框
  */
 public class TourSelectDialog extends Dialog {
 

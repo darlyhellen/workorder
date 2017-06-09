@@ -17,7 +17,7 @@ import com.xiangxun.workorder.widget.header.HeaderView;
  * Copyright by [Zhangyuhui/Darly]
  * ©2017 XunXiang.Company. All rights reserved.
  *
- * @TODO:
+ * @TODO:设置页面中的替换服务器地址和服务器端口的页面。
  */
 @ContentBinder(R.layout.activity_set_service)
 public class SetServiceAcitivity extends BaseActivity implements OnClickListener {

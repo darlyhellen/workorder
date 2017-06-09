@@ -11,6 +11,9 @@ import android.widget.TextView;
 import com.xiangxun.workorder.R;
 
 
+/**
+ * @TODO：图片和文字还有小角标的自定义组合控件。
+ */
 public class XwHomeModeButton extends RelativeLayout {
     private Context mContext;
     private TextView tv_mode_button, tv_hint;

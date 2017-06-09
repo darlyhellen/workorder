@@ -13,9 +13,9 @@ import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.base.BaseActivity;
+import com.xiangxun.workorder.base.ItemClickListenter;
 import com.xiangxun.workorder.bean.EquipMenuChildData;
 import com.xiangxun.workorder.bean.EquipmentInfo;
-import com.xiangxun.workorder.bean.WorkOrderData;
 import com.xiangxun.workorder.ui.adapter.EquipmentListAdapter;
 import com.xiangxun.workorder.ui.biz.EquipmentListListener.EquipmentListInterface;
 import com.xiangxun.workorder.ui.presenter.EquipmentListPresenter;
@@ -33,7 +33,7 @@ import java.util.List;
  * @TODO: 对应设备列表
  */
 @ContentBinder(R.layout.activity_work_order)
-public class EquipmentListActivity extends BaseActivity implements View.OnClickListener, XListView.IXListViewListener, AdapterView.OnItemClickListener, EquipmentListInterface {
+public class EquipmentListActivity extends BaseActivity implements View.OnClickListener, XListView.IXListViewListener, EquipmentListInterface {
     @ViewsBinder(R.id.id_work_order_header)
     private HeaderView header;
     @ViewsBinder(R.id.id_work_order_xlist)
@@ -81,7 +81,18 @@ public class EquipmentListActivity extends BaseActivity implements View.OnClickL
         header.setRightOnClickListener(this);
         xlist.setPullLoadEnable(true);
         xlist.setXListViewListener(this);
-        xlist.setOnItemClickListener(this);
+        xlist.setOnItemClickListener(new ItemClickListenter() {
+            @Override
+            public void NoDoubleItemClickListener(AdapterView<?> parent, View view, int position, long id) {
+                DLog.i(getClass().getSimpleName(), position);
+
+                DLog.i("onItemClick--" + position);
+                EquipmentInfo ds = (EquipmentInfo) parent.getItemAtPosition(position);
+                Intent intent = new Intent(EquipmentListActivity.this, WorkOrderDetailActivity.class);
+                intent.putExtra("EquipmentInfo", ds);
+                startActivityForResult(intent, 700);
+            }
+        });
     }
 
     @Override
@@ -171,18 +182,7 @@ public class EquipmentListActivity extends BaseActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        presenter.onClickDown(this,v);
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        DLog.i(getClass().getSimpleName(), position);
-
-        DLog.i("onItemClick--" + position);
-        EquipmentInfo ds = (EquipmentInfo) parent.getItemAtPosition(position);
-        Intent intent = new Intent(this, WorkOrderDetailActivity.class);
-        intent.putExtra("EquipmentInfo", ds);
-        startActivityForResult(intent, 700);
+        presenter.onClickDown(this, v);
     }
 
     @Override

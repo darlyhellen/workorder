@@ -17,7 +17,7 @@ import java.util.List;
  * Copyright by [Zhangyuhui/Darly]
  * ©2017 XunXiang.Company. All rights reserved.
  *
- * @TODO:
+ * @TODO：巡检页面弹窗的列表适配器。
  */
 public class TourSelectAdapter extends ParentAdapter<EquipMenuChildData> {
     public TourSelectAdapter(List<EquipMenuChildData> data, int resID, Context context) {

@@ -33,6 +33,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * @TODO：拍照，相册选择弹出框。
+ */
 public class PhotoPop extends PopupWindow implements OnClickListener {
 
     private String rota = "ROTATE.png";

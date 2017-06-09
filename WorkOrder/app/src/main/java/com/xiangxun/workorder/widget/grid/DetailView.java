@@ -11,6 +11,9 @@ import android.widget.TextView;
 import com.xiangxun.workorder.R;
 
 
+/**
+ * @TODO：自定义详情页面键值对组合控件
+ */
 public class DetailView extends LinearLayout {
     private Context mContext;
     private TextView name, value;

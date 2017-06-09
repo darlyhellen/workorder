@@ -10,11 +10,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-import com.amap.api.maps.model.LatLng;
 import com.hellen.baseframe.binder.ContentBinder;
 import com.hellen.baseframe.binder.ViewsBinder;
-import com.hellen.baseframe.common.dlog.DLog;
-import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.base.BaseActivity;
@@ -62,8 +59,12 @@ public class WorkOrderDetailActivity extends BaseActivity implements OnClickList
     @Override
     protected void initView(Bundle savedInstanceState) {
         presenter = new WorkOrderDetailPresenter(this);
+        //一下三个必须进来一个。否则就崩溃了。
+        //正常工单详情
         data = getIntent().getParcelableExtra("WorkOrderData");
+        //设备信息详情
         info = getIntent().getParcelableExtra("EquipmentInfo");
+        //巡检工单详情
         tour = getIntent().getParcelableExtra("WorkOrderData");
         if (AppEnum.TEST) {
             //单独的测试数据,假数据.

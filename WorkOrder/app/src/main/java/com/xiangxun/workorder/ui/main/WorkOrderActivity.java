@@ -13,6 +13,7 @@ import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.base.BaseActivity;
+import com.xiangxun.workorder.base.ItemClickListenter;
 import com.xiangxun.workorder.bean.Patrol;
 import com.xiangxun.workorder.bean.WorkOrderData;
 import com.xiangxun.workorder.ui.adapter.WorkOrderAdapter;
@@ -34,7 +35,7 @@ import java.util.List;
  * @TODO:修改V1(根据首页传递进来的参数来判断到底是什么列表,当然传递为空表示全部工单列表)
  */
 @ContentBinder(R.layout.activity_work_order)
-public class WorkOrderActivity extends BaseActivity implements View.OnClickListener, XListView.IXListViewListener, AdapterView.OnItemClickListener, WorkOrderListener.WorkOrderInterface, SearchWorkOrderDialogFragment.SearchListener {
+public class WorkOrderActivity extends BaseActivity implements View.OnClickListener, XListView.IXListViewListener, WorkOrderListener.WorkOrderInterface, SearchWorkOrderDialogFragment.SearchListener {
 
     @ViewsBinder(R.id.id_work_order_header)
     private HeaderView header;
@@ -164,7 +165,17 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
         header.setRightOnClickListener(this);
         xlist.setPullLoadEnable(true);
         xlist.setXListViewListener(this);
-        xlist.setOnItemClickListener(this);
+        xlist.setOnItemClickListener(new ItemClickListenter() {
+            @Override
+            public void NoDoubleItemClickListener(AdapterView<?> parent, View view, int position, long id) {
+                DLog.i("onItemClick--" + position);
+                WorkOrderData ds = (WorkOrderData) parent.getItemAtPosition(position);
+                Intent intent = new Intent(WorkOrderActivity.this, WorkOrderDetailActivity.class);
+                //工单详细信息
+                intent.putExtra("WorkOrderData", ds);
+                startActivityForResult(intent, 700);
+            }
+        });
     }
 
     @Override
@@ -211,20 +222,6 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
     private void stopXListView() {
         xlist.stopRefresh();
         xlist.stopLoadMore();
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        DLog.i("onItemClick--" + position);
-        WorkOrderData ds = (WorkOrderData) parent.getItemAtPosition(position);
-        Intent intent = new Intent(this, WorkOrderDetailActivity.class);
-        //是否是巡检工单
-        intent.putExtra("isTour", isTour);
-        //工单详细信息
-        intent.putExtra("WorkOrderData", ds);
-        //工单的id
-        intent.putExtra("des", patrol.getListId());
-        startActivityForResult(intent, 700);
     }
 
 

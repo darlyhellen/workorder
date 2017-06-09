@@ -7,7 +7,7 @@ import android.widget.GridView;
 /** @author zhangyh2
  * a
  * 上午11:07:02
- * TODO
+ * TODO 铺满布局的GridView控件
  */
 public class WholeGridView extends GridView {
 	  

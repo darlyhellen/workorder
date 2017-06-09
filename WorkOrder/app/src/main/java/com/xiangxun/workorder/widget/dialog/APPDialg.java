@@ -18,7 +18,7 @@ import com.xiangxun.workorder.R;
 
 
 /**
- * @author zhangyh2 LoginOutDialg 上午10:32:27 TODO
+ * @author zhangyh2 LoginOutDialg 上午10:32:27 TODO 项目总弹出选择框
  */
 public class APPDialg extends AlertDialog {
     private TextView title;
