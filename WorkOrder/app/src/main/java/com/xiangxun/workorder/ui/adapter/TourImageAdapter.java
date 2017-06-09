@@ -44,7 +44,6 @@ public class TourImageAdapter extends ParentAdapter<String> {
 
     @Override
     public View HockView(final int position, View view, ViewGroup viewGroup, int i1, Context context, String url) {
-
         ViewHocker viewHolder = null;
         if (view == null) {
             view = LayoutInflater.from(context).inflate(i1, null);

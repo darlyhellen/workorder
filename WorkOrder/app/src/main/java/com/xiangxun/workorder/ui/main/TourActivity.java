@@ -272,16 +272,24 @@ public class TourActivity extends BaseActivity implements OnClickListener, TourI
                 id_tour_name.setVisibility(View.VISIBLE);
             }
             presenter.setType(datat.getType());
+
+            id_order_equip_ip.setText("");
+            id_order_equip_position.setText("");
+            id_order_equip_deptment.setText("");
+            id_tour_code_code.setText("");
+            id_tour_code_name.setText("");
+            id_tour_name_code.setText("");
+            id_tour_name_name.setText("");
         }
         if (type instanceof EquipmentInfo) {
             EquipmentInfo infoed = (EquipmentInfo) type;
             id_order_equip_ip.setText(infoed.ip);
             id_order_equip_position.setText(infoed.installplace);
-            id_order_equip_deptment.setText(infoed.factoryId);
-            id_tour_code_code.setText(infoed.code);
-            id_tour_code_name.setText(infoed.name);
+            id_order_equip_deptment.setText(infoed.orgname);
+            id_tour_code_code.setText(infoed.assetname);
+            id_tour_code_name.setText(infoed.code);
             id_tour_name_code.setText(infoed.code);
-            id_tour_name_name.setText(infoed.name);
+            id_tour_name_name.setText(infoed.assetname);
         }
     }
 }

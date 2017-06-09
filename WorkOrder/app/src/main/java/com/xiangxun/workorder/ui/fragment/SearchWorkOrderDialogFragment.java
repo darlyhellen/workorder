@@ -15,11 +15,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TableRow;
+import android.widget.TextView;
 
 import com.hellen.baseframe.common.dlog.DLog;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.AppEnum;
+import com.xiangxun.workorder.bean.SearchStatusInfo;
+import com.xiangxun.workorder.widget.dialog.TourSelectDialog;
+import com.xiangxun.workorder.widget.dialog.TourSelectDialog.onSelectItemClick;
+import com.xiangxun.workorder.widget.dialog.TourSelectListener;
 import com.xiangxun.workorder.widget.header.HeaderView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Zhangyuhui/Darly on 2017/5/24.
@@ -28,7 +36,8 @@ import com.xiangxun.workorder.widget.header.HeaderView;
  *
  * @TODO:搜索条件列表窗口。
  */
-public class SearchWorkOrderDialogFragment extends DialogFragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class SearchWorkOrderDialogFragment extends DialogFragment implements View.OnClickListener, onSelectItemClick {
+
 
     public interface SearchListener {
         void findParamers(String statu, String name, String num, String ip);
@@ -40,12 +49,14 @@ public class SearchWorkOrderDialogFragment extends DialogFragment implements Vie
     private EditText num;
     private EditText ip;
 
-    private Spinner sp;
+    private TextView sp;
     private Button commit;
     private Button consel;
 
 
     private String status;
+
+    private List<TourSelectListener> data;
 
     //重写onCreateView方法
     @Override
@@ -75,7 +86,7 @@ public class SearchWorkOrderDialogFragment extends DialogFragment implements Vie
         name = (EditText) view.findViewById(R.id.id_search_name);
         num = (EditText) view.findViewById(R.id.id_search_num);
         ip = (EditText) view.findViewById(R.id.id_search_ip);
-        sp = (Spinner) view.findViewById(R.id.id_search_sp);
+        sp = (TextView) view.findViewById(R.id.id_search_sp);
 
         commit = (Button) view.findViewById(R.id.id_search_commit);
         consel = (Button) view.findViewById(R.id.id_search_consel);
@@ -93,17 +104,22 @@ public class SearchWorkOrderDialogFragment extends DialogFragment implements Vie
             //展示列表
             status = getArguments().getString("WORKORDER");
             row.setVisibility(View.VISIBLE);
-            // 建立数据源
+            data = new ArrayList<TourSelectListener>();
             String[] mItems = getResources().getStringArray(R.array.Status);
-            // 建立Adapter并且绑定数据源
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, mItems);
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            //绑定 Adapter到控件
-            sp.setAdapter(adapter);
             if (TextUtils.isEmpty(status)) {
-                sp.setSelection(0);
-            } else {
-                sp.setSelection(Integer.parseInt(status) + 1);
+                sp.setText(mItems[0]);
+            }
+            for (int i = 0; i < mItems.length; i++) {
+
+                if (status.equals(i - 1 + "")) {
+                    sp.setText(mItems[i]);
+                }
+                if (i == 0) {
+                    data.add(new SearchStatusInfo(mItems[i], ""));
+                } else {
+                    data.add(new SearchStatusInfo(mItems[i], i - 1 + ""));
+                }
+
             }
         } else {
             //不展示信息
@@ -117,8 +133,7 @@ public class SearchWorkOrderDialogFragment extends DialogFragment implements Vie
         header.setRightImageTextFlipper(this);
         commit.setOnClickListener(this);
         consel.setOnClickListener(this);
-        sp.setOnItemSelectedListener(this);
-
+        sp.setOnClickListener(this);
     }
 
     @Override
@@ -132,28 +147,28 @@ public class SearchWorkOrderDialogFragment extends DialogFragment implements Vie
                 String deviceip = ip.getText().toString().trim();
                 ((SearchListener) getActivity()).findParamers(status, devicename, devicenum, deviceip);
                 DLog.i("点击提交");
+                dismiss();
                 break;
             case R.id.title_view_back_llayout:
+                dismiss();
                 break;
             case R.id.id_search_consel:
+                dismiss();
+                break;
+            case R.id.id_search_sp:
+                // 建立数据源
+                new TourSelectDialog(getActivity(), data, "选择工单状态", this).show();
                 break;
             default:
                 break;
         }
-        dismiss();
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        if (position == 0) {
-            status = "";
-        } else {
-            status = position - 1 + "";
+    public void changeState(TourSelectListener type) {
+        if (type instanceof SearchStatusInfo) {
+            status = ((SearchStatusInfo) type).getStatus();
+            sp.setText(((SearchStatusInfo) type).getName());
         }
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
     }
 }

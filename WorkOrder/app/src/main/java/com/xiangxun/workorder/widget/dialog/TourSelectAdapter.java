@@ -10,6 +10,7 @@ import com.hellen.baseframe.baseadapter.ParentAdapter;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.bean.EquipMenuChildData;
 import com.xiangxun.workorder.bean.EquipmentInfo;
+import com.xiangxun.workorder.bean.SearchStatusInfo;
 
 import java.util.List;
 
@@ -41,7 +42,10 @@ public class TourSelectAdapter extends ParentAdapter<TourSelectListener> {
             hocker.tv.setText(((EquipMenuChildData) s).getName());
         }
         if (s instanceof EquipmentInfo) {
-            hocker.tv.setText(((EquipmentInfo) s).name);
+            hocker.tv.setText(((EquipmentInfo) s).assetname);
+        }
+        if (s instanceof SearchStatusInfo) {
+            hocker.tv.setText(((SearchStatusInfo) s).getName());
         }
         return view;
     }
