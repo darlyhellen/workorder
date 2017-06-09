@@ -28,6 +28,7 @@ import com.xiangxun.workorder.ui.presenter.TourPresenter;
 import com.xiangxun.workorder.widget.camera.PhotoPop;
 import com.xiangxun.workorder.widget.dialog.TourSelectDialog;
 import com.xiangxun.workorder.widget.dialog.TourSelectDialog.onSelectItemClick;
+import com.xiangxun.workorder.widget.dialog.TourSelectListener;
 import com.xiangxun.workorder.widget.grid.WholeGridView;
 import com.xiangxun.workorder.widget.header.HeaderView;
 
@@ -147,7 +148,7 @@ public class TourActivity extends BaseActivity implements OnClickListener, TourI
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.id_order_equip_type:
-                new TourSelectDialog(this, presenter.getType(), id_order_equip_type, "请选择设备类型", this).show();
+                new TourSelectDialog(this, presenter.getType(), "请选择设备类型", this).show();
                 break;
             default:
                 presenter.onClickDown(this, v, isCheck);
@@ -170,6 +171,9 @@ public class TourActivity extends BaseActivity implements OnClickListener, TourI
     public void onNameCodeSuccess(List<EquipmentInfo> info) {
         //填充数据
         isCheck = true;
+        List<TourSelectListener> datas = new ArrayList<TourSelectListener>();
+        datas.addAll(info);
+        new TourSelectDialog(this, datas, "请选择设备类型", this).show();
     }
 
     @Override
@@ -249,18 +253,31 @@ public class TourActivity extends BaseActivity implements OnClickListener, TourI
     }
 
     @Override
-    public void changeState(EquipMenuChildData type) {
-        //点击选中的设备信息。
-        id_order_equip_type.setText(type.getName());
-        if ("icabinef".equals(type.getType()) || "device".equals(type.getType()) || "server".equals(type.getType())) {
-            //这些有设备编号。根据编号查询
-            id_tour_code.setVisibility(View.VISIBLE);
-            id_tour_name.setVisibility(View.GONE);
-        } else {
-            //剩余没有设备编号。更加名称查询
-            id_tour_code.setVisibility(View.GONE);
-            id_tour_name.setVisibility(View.VISIBLE);
+    public void changeState(TourSelectListener type) {
+        if (type instanceof EquipMenuChildData) {
+            EquipMenuChildData datat = (EquipMenuChildData) type;
+            //点击选中的设备信息。
+            id_order_equip_type.setText(datat.getName());
+            if ("icabinef".equals(datat.getType()) || "device".equals(datat.getType()) || "server".equals(datat.getType())) {
+                //这些有设备编号。根据编号查询
+                id_tour_code.setVisibility(View.VISIBLE);
+                id_tour_name.setVisibility(View.GONE);
+            } else {
+                //剩余没有设备编号。更加名称查询
+                id_tour_code.setVisibility(View.GONE);
+                id_tour_name.setVisibility(View.VISIBLE);
+            }
+            presenter.setType(datat.getType());
         }
-        presenter.setType(type.getType());
+        if (type instanceof EquipmentInfo) {
+            EquipmentInfo infoed = (EquipmentInfo) type;
+            id_order_equip_ip.setText(infoed.ip);
+            id_order_equip_position.setText(infoed.installplace);
+            id_order_equip_deptment.setText(infoed.factoryId);
+            id_tour_code_code.setText(infoed.code);
+            id_tour_code_name.setText(infoed.assetname);
+            id_tour_name_code.setText(infoed.code);
+            id_tour_name_name.setText(infoed.assetname);
+        }
     }
 }

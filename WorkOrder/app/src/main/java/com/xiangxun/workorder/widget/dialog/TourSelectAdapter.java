@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.hellen.baseframe.baseadapter.ParentAdapter;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.bean.EquipMenuChildData;
+import com.xiangxun.workorder.bean.EquipmentInfo;
 
 import java.util.List;
 
@@ -19,13 +20,13 @@ import java.util.List;
  *
  * @TODO：巡检页面弹窗的列表适配器。
  */
-public class TourSelectAdapter extends ParentAdapter<EquipMenuChildData> {
-    public TourSelectAdapter(List<EquipMenuChildData> data, int resID, Context context) {
+public class TourSelectAdapter extends ParentAdapter<TourSelectListener> {
+    public TourSelectAdapter(List<TourSelectListener> data, int resID, Context context) {
         super(data, resID, context);
     }
 
     @Override
-    public View HockView(int i, View view, ViewGroup viewGroup, int i1, Context context, EquipMenuChildData s) {
+    public View HockView(int i, View view, ViewGroup viewGroup, int i1, Context context, TourSelectListener s) {
         ViewHocker hocker = null;
         if (view == null) {
             view = LayoutInflater.from(context).inflate(i1, null);
@@ -36,7 +37,12 @@ public class TourSelectAdapter extends ParentAdapter<EquipMenuChildData> {
             hocker = (ViewHocker) view.getTag();
         }
 
-        hocker.tv.setText(s.getName());
+        if (s instanceof EquipMenuChildData) {
+            hocker.tv.setText(((EquipMenuChildData) s).getName());
+        }
+        if (s instanceof EquipmentInfo) {
+            hocker.tv.setText(((EquipmentInfo) s).assetname);
+        }
         return view;
     }
 

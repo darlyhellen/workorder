@@ -17,6 +17,7 @@ import com.xiangxun.workorder.ui.biz.TourListener;
 import com.xiangxun.workorder.ui.main.SetActivity;
 import com.xiangxun.workorder.ui.main.TourActivity;
 import com.xiangxun.workorder.widget.dialog.TourSelectDialog;
+import com.xiangxun.workorder.widget.dialog.TourSelectListener;
 import com.xiangxun.workorder.widget.loading.ShowLoading;
 
 import java.util.ArrayList;
@@ -46,9 +47,9 @@ public class TourPresenter {
     }
 
 
-    public List<EquipMenuChildData> getType() {
+    public List<TourSelectListener> getType() {
         EquipMenuChildData cd = null;
-        List<EquipMenuChildData> date = new ArrayList<EquipMenuChildData>();
+        List<TourSelectListener> date = new ArrayList<TourSelectListener>();
         cd = new EquipMenuChildData("卡口设备", "device", 0);
         date.add(cd);
         cd = new EquipMenuChildData("智能机柜", "icabinef", 0);

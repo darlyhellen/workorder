@@ -3,9 +3,11 @@ package com.xiangxun.workorder.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.xiangxun.workorder.widget.dialog.TourSelectListener;
+
 
 //@Document(collection="PROPERTY_ASSET_INFO")
-public class EquipmentInfo implements Parcelable {
+public class EquipmentInfo implements Parcelable, TourSelectListener {
     public String id;
     public String deviceid;
     public String assetcode;
@@ -31,7 +33,6 @@ public class EquipmentInfo implements Parcelable {
     public String mapy;
     public int cabinetStatus;
     public String code;
-
 
 
     public EquipmentInfo() {

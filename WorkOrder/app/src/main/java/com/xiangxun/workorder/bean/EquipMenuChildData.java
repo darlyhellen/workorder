@@ -1,14 +1,15 @@
 package com.xiangxun.workorder.bean;
 
+import com.xiangxun.workorder.widget.dialog.TourSelectListener;
+
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * Created by Administrator on 2017/6/5.
  * 顶部标签集合
  */
 
-public class EquipMenuChildData implements Serializable {
+public class EquipMenuChildData implements Serializable, TourSelectListener {
     private String name;
     private String type;
     private int res;
