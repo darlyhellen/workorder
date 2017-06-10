@@ -97,7 +97,7 @@ public class ShowLoading extends Dialog {
         setContentView(R.layout.progress_custom);
         // 按返回键是否取消
         setCanceledOnTouchOutside(false);
-        // setCancelable(false);
+        setCancelable(false);
         // 监听返回键处理
         // setOnCancelListener(cancelListener);
         // 设置居中

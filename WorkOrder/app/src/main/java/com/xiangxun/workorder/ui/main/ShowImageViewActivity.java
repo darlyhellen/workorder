@@ -16,7 +16,7 @@ import com.xiangxun.workorder.widget.image.SmoothImageView;
  * Copyright by [Zhangyuhui/Darly]
  * ©2017 XunXiang.Company. All rights reserved.
  *
- * @TODO:
+ * @TODO:GridView图片点击放大的展示效果。
  */
 public class ShowImageViewActivity extends BaseActivity implements OnClickListener {
 
@@ -38,7 +38,7 @@ public class ShowImageViewActivity extends BaseActivity implements OnClickListen
         setContentView(imageView);
         if (url.startsWith("http")) {
             ImageLoaderUtil.getInstance().loadImageNor(url, imageView);
-        }else {
+        } else {
             ImageLoader.getInstance().displayImage("file://" + url, imageView);
         }
     }

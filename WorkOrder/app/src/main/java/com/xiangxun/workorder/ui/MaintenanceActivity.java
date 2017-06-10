@@ -6,9 +6,9 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
@@ -23,7 +23,6 @@ import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.base.BaseActivity;
 import com.xiangxun.workorder.bean.Patrol;
 import com.xiangxun.workorder.bean.WorkOrderData;
-import com.xiangxun.workorder.ui.adapter.PatrolHomeAdapter;
 import com.xiangxun.workorder.ui.biz.MaintenanceListener.MaintenanceInterface;
 import com.xiangxun.workorder.ui.main.WorkOrderActivity;
 import com.xiangxun.workorder.ui.main.WorkOrderDetailActivity;
@@ -53,13 +52,16 @@ public class MaintenanceActivity extends BaseActivity implements AdapterView.OnI
     @ViewsBinder(R.id.id_maintenance_flipper)
     private ViewFlipper flipper;
 
+    @ViewsBinder(R.id.id_maintenance_order)
+    private ImageView order;
+    @ViewsBinder(R.id.id_maintenance_tour)
+    private ImageView tour;
+    @ViewsBinder(R.id.id_maintenance_equip)
+    private ImageView equip;
+    @ViewsBinder(R.id.id_maintenance_notifi)
+    private ImageView notifi;
 
-    @ViewsBinder(R.id.id_maintenance_gv)
-    private GridView gridView;
 
-    private PatrolHomeAdapter adapter;
-
-    private List<Patrol> data;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -72,16 +74,25 @@ public class MaintenanceActivity extends BaseActivity implements AdapterView.OnI
         presenter.getWorkOrderByPage();
         title.setTitle(R.string.maintenance_title);
         title.setRightBackgroundResource(R.mipmap.set);
-        iv.setLayoutParams(new LinearLayout.LayoutParams(AppEnum.WIDTH.getLen() / 5, AppEnum.WIDTH.getLen() / 5));
+        iv.setLayoutParams(new LinearLayout.LayoutParams(AppEnum.WIDTH.getLen() / 4, AppEnum.WIDTH.getLen() / 4));
         name.setText(SharePreferHelp.getValue(AppEnum.USERREALNAME.getDec(), null));
-        adapter = new PatrolHomeAdapter(presenter.findMaintenance(), R.layout.home_grideview_layout, this);
-        gridView.setAdapter(adapter);
+        order.setImageResource(R.mipmap.ic_maintenance_order);
+        order.setLayoutParams(new TableRow.LayoutParams(AppEnum.WIDTH.getLen() / 3, AppEnum.WIDTH.getLen() / 3));
+        tour.setImageResource(R.mipmap.ic_maintenance_tour);
+        tour.setLayoutParams(new TableRow.LayoutParams(AppEnum.WIDTH.getLen() / 3, AppEnum.WIDTH.getLen() / 3));
+        equip.setImageResource(R.mipmap.ic_maintenance_equip);
+        equip.setLayoutParams(new TableRow.LayoutParams(AppEnum.WIDTH.getLen() / 3, AppEnum.WIDTH.getLen() / 3));
+        notifi.setImageResource(R.mipmap.ic_maintenance_notif);
+        notifi.setLayoutParams(new TableRow.LayoutParams(AppEnum.WIDTH.getLen() / 3, AppEnum.WIDTH.getLen() / 3));
     }
 
     @Override
     protected void initListener() {
         title.setRightOnClickListener(this);
-        gridView.setOnItemClickListener(this);
+        order.setOnClickListener(this);
+        tour.setOnClickListener(this);
+        equip.setOnClickListener(this);
+        notifi.setOnClickListener(this);
     }
 
 
@@ -122,6 +133,7 @@ public class MaintenanceActivity extends BaseActivity implements AdapterView.OnI
                 startActivity(intent);
                 break;
             case 30:
+                startActivity(new Intent(this, EquipmentMenuAcitvity.class));
                 break;
             case 40:
                 Intent ask = new Intent(this, WorkOrderActivity.class);
@@ -165,7 +177,7 @@ public class MaintenanceActivity extends BaseActivity implements AdapterView.OnI
                     //是否是巡检工单
                     intent.putExtra("isTour", false);
                     //工单详细信息
-                    intent.putExtra("data", da);
+                    intent.putExtra("WorkOrderData", da);
                     startActivityForResult(intent, 700);
                 }
             });

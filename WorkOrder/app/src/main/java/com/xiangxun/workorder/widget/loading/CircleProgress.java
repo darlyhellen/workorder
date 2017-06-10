@@ -16,6 +16,9 @@ import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.ui.login.edittext.EaseInOutCubicInterpolator;
 
 
+/**
+ * @TODO：加载中的自定义圆圈展示控件
+ */
 public class CircleProgress extends View {
     private static final int COLOR_NUM = 3;
     private int[] COLORS;

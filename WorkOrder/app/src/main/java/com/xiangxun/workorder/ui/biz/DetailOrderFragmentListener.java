@@ -1,6 +1,7 @@
 package com.xiangxun.workorder.ui.biz;
 
 import android.app.Dialog;
+import android.graphics.BitmapFactory;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
@@ -10,9 +11,14 @@ import com.hellen.baseframe.application.FrameListener;
 import com.hellen.baseframe.application.FramePresenter;
 import com.hellen.baseframe.application.FrameView;
 import com.hellen.baseframe.common.dlog.DLog;
+import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.base.APP;
 import com.xiangxun.workorder.bean.DetailChangeRoot;
+import com.xiangxun.workorder.bean.WorkOrderData;
+import com.xiangxun.workorder.bean.WorkOrderRoot;
+import com.xiangxun.workorder.common.image.BitmapChangeUtil;
 import com.xiangxun.workorder.common.retrofit.RxjavaRetrofitRequestUtil;
+import com.xiangxun.workorder.common.urlencode.Tools;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,7 +32,6 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
-
 /**
  * Created by Zhangyuhui/Darly on 2017/5/31.
  * Copyright by [Zhangyuhui/Darly]
@@ -36,7 +41,9 @@ import rx.schedulers.Schedulers;
  */
 public class DetailOrderFragmentListener implements FramePresenter {
 
+
     public interface DetailOrderFragmentInterface extends FrameView {
+
         void onLoginSuccess();
 
         void onLoginFailed();
@@ -107,7 +114,7 @@ public class DetailOrderFragmentListener implements FramePresenter {
     }
 
 
-    public void upDataOrder(String status, String id, String reason, List<String> urls, final FrameListener<DetailChangeRoot> listener) {
+    public void upDataOrder(String status, String id, String reason, final FrameListener<DetailChangeRoot> listener) {
 
         if (!APP.isNetworkConnected(APP.getInstance())) {
             listener.onFaild(0, "网络异常,请检查网络");
@@ -117,25 +124,9 @@ public class DetailOrderFragmentListener implements FramePresenter {
             listener.onFaild(0, "上报工单说明不能为空");
             return;
         }
-        JSONObject ob = new JSONObject();
-        try {
-            ob.put("status", status);
-            ob.put("id", id);
-            if (urls != null) {
-                JSONArray array = new JSONArray();
-                for (String st : urls) {
-                    array.put(st);
-                }
-                ob.put("urls", array);
-            }
-        } catch (JSONException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json;charset=UTF-8"), ob.toString());
 
         //在这里进行数据请求
-        RxjavaRetrofitRequestUtil.getInstance().post().upDataOrder(body).
+        RxjavaRetrofitRequestUtil.getInstance().get().upDataOrder(status, id, reason).
                 subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(new Func1<JsonObject, DetailChangeRoot>() {
@@ -171,6 +162,73 @@ public class DetailOrderFragmentListener implements FramePresenter {
                     }
                 });
     }
+
+    public void upLoadImage(String id, List<String> url, final FrameListener<DetailChangeRoot> listener) {
+
+        if (!APP.isNetworkConnected(APP.getInstance())) {
+            listener.onFaild(0, "网络异常,请检查网络");
+            return;
+        }
+        JSONObject ob = new JSONObject();
+        try {
+            ob.put("id", id);
+            if (url != null && url.size() >= 2) {
+                ob.put("picture1", BitmapChangeUtil.convertIconToString(BitmapFactory.decodeFile(url.get(0))));
+            }
+            if (url != null && url.size() >= 3) {
+                ob.put("picture2", BitmapChangeUtil.convertIconToString(BitmapFactory.decodeFile(url.get(1))));
+            }
+            if (url != null && url.size() >= 4) {
+                ob.put("picture3", BitmapChangeUtil.convertIconToString(BitmapFactory.decodeFile(url.get(2))));
+            }
+        } catch (JSONException e) {
+
+        }
+        DLog.i(getClass().getSimpleName(), ob);
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json;charset=UTF-8"), ob.toString());
+
+        //在这里进行数据请求
+        RxjavaRetrofitRequestUtil.getInstance().post()
+                .upLoadImage(body).subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map(new Func1<JsonObject, DetailChangeRoot>() {
+                         @Override
+                         public DetailChangeRoot call(JsonObject jsonObject) {
+                             DLog.json("Func1", jsonObject.toString());
+                             return new Gson().fromJson(jsonObject.toString(), new TypeToken<DetailChangeRoot>() {
+                             }.getType());
+                         }
+                     }
+
+                )
+                .subscribe(new Observer<DetailChangeRoot>() {
+                               @Override
+                               public void onCompleted() {
+
+                               }
+
+                               @Override
+                               public void onError(Throwable e) {
+                                   listener.onFaild(1, e.getMessage());
+                               }
+
+                               @Override
+                               public void onNext(DetailChangeRoot data) {
+                                   if (data != null) {
+                                       if (data.getStatus() == 1) {
+                                           listener.onSucces(data);
+                                       } else {
+                                           listener.onFaild(0, data.getMessage());
+                                       }
+                                   } else {
+                                       listener.onFaild(0, "解析错误");
+                                   }
+                               }
+                           }
+
+                );
+    }
+
 
     @Override
     public void onStop(Dialog dialog) {

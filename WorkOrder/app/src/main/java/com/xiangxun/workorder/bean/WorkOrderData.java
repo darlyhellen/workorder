@@ -34,8 +34,6 @@ public class WorkOrderData implements Parcelable {
     public String telephone;
     public String assetid;
     public String isreassign;
-    public double latitude;
-    public double longitude;
     public String exceptionid;
     public String orgid;
     public String reason;
@@ -82,8 +80,6 @@ public class WorkOrderData implements Parcelable {
         telephone = in.readString();
         assetid = in.readString();
         isreassign = in.readString();
-        latitude = in.readDouble();
-        longitude = in.readDouble();
         exceptionid = in.readString();
         orgid = in.readString();
         reason = in.readString();
@@ -124,8 +120,6 @@ public class WorkOrderData implements Parcelable {
         dest.writeString(telephone);
         dest.writeString(assetid);
         dest.writeString(isreassign);
-        dest.writeDouble(latitude);
-        dest.writeDouble(longitude);
         dest.writeString(exceptionid);
         dest.writeString(orgid);
         dest.writeString(reason);

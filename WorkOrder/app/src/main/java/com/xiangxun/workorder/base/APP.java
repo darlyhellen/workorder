@@ -10,6 +10,7 @@ import com.hellen.baseframe.common.db.DBControler;
 import com.hellen.baseframe.common.dlog.DLog;
 import com.hellen.baseframe.common.obsinfo.ConApp;
 import com.xiangxun.workorder.BuildConfig;
+import com.xiangxun.workorder.common.Aset;
 import com.xiangxun.workorder.common.image.ImageLoaderUtil;
 
 import java.io.File;

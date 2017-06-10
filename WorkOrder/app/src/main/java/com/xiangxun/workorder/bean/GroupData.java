@@ -1,22 +1,20 @@
 package com.xiangxun.workorder.bean;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/6/5.
+ * 顶部标签集合
  */
 
 public class GroupData implements Serializable {
     private String name;
     private String num;
 
-    public GroupData(String name) {
-        this.name = name;
-    }
+    private List<ChildData> data;
 
-    public GroupData(String name, String num) {
-        this.name = name;
-        this.num = num;
+    public GroupData() {
     }
 
     public String getName() {
@@ -33,5 +31,13 @@ public class GroupData implements Serializable {
 
     public void setNum(String num) {
         this.num = num;
+    }
+
+    public List<ChildData> getData() {
+        return data;
+    }
+
+    public void setData(List<ChildData> data) {
+        this.data = data;
     }
 }

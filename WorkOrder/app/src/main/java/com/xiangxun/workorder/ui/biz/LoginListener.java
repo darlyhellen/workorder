@@ -92,7 +92,7 @@ public class LoginListener implements FramePresenter {
         try {
             ob.put("loginName", username);
             ob.put("password", password);
-            ob.put("keyValue", Tools.makeValidate(username, password));
+            //ob.put("keyValue", Tools.makeValidate(username, password));
         } catch (JSONException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

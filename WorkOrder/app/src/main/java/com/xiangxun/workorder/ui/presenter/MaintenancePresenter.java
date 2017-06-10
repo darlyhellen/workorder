@@ -11,10 +11,14 @@ import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.StaticListener;
 import com.xiangxun.workorder.bean.Patrol;
 import com.xiangxun.workorder.bean.WorkOrderRoot;
+import com.xiangxun.workorder.ui.EquipmentMenuAcitvity;
 import com.xiangxun.workorder.ui.MaintenanceActivity;
+import com.xiangxun.workorder.ui.TourListActivity;
+import com.xiangxun.workorder.ui.WorkOrderMenuActivity;
 import com.xiangxun.workorder.ui.biz.MaintenanceListener;
 import com.xiangxun.workorder.ui.biz.MaintenanceListener.MaintenanceInterface;
 import com.xiangxun.workorder.ui.main.SetActivity;
+import com.xiangxun.workorder.ui.main.WorkOrderActivity;
 import com.xiangxun.workorder.widget.loading.ShowLoading;
 
 import java.util.ArrayList;
@@ -44,19 +48,34 @@ public class MaintenancePresenter {
 
     public List<Patrol> findMaintenance() {
         List<Patrol> data = new ArrayList<>();
-        data.add(new Patrol(10, R.string.maintenance_order, R.mipmap.work_order_search, 0));
-        data.add(new Patrol(20, R.string.maintenance_tour, R.mipmap.patrol_normal, 0));
-        data.add(new Patrol(30, R.string.maintenance_equipment, R.mipmap.work_order_search, 0));
-        data.add(new Patrol(40, R.string.maintenance_notification, R.mipmap.patrol_normal, 0));
+        data.add(new Patrol(10, R.string.maintenance_order, R.mipmap.work_order_search, R.mipmap.ic_maintenance_order));
+        data.add(new Patrol(20, R.string.maintenance_tour, R.mipmap.patrol_normal, R.mipmap.ic_maintenance_tour));
+        data.add(new Patrol(30, R.string.maintenance_equipment, R.mipmap.work_order_search, R.mipmap.ic_maintenance_equip));
+        data.add(new Patrol(40, R.string.maintenance_notification, R.mipmap.patrol_normal, R.mipmap.ic_maintenance_notif));
         return data;
     }
 
     public void onClickDown(Context context, View v) {
         switch (v.getId()) {
-            case R.id.xw_share:
-                //進入設置頁面
-                DLog.i("设置按钮点击");
+            case R.id.title_view_right_linear:
+                DLog.i(getClass().getSimpleName(), "title_view_right_linear");
                 context.startActivity(new Intent(context, SetActivity.class));
+                break;
+            case R.id.id_maintenance_order:
+                context.startActivity(new Intent(context, WorkOrderMenuActivity.class));
+                break;
+            case R.id.id_maintenance_tour:
+                Intent intent = new Intent(context, TourListActivity.class);
+                intent.putExtra("PATROL", (new Patrol(20, R.string.maintenance_tour, R.mipmap.patrol_normal, R.mipmap.ic_maintenance_tour)));
+                context.startActivity(intent);
+                break;
+            case R.id.id_maintenance_equip:
+                context.startActivity(new Intent(context, EquipmentMenuAcitvity.class));
+                break;
+            case R.id.id_maintenance_notifi:
+                Intent ask = new Intent(context, WorkOrderActivity.class);
+                ask.putExtra("PATROL", new Patrol(40, R.string.maintenance_notification, R.mipmap.patrol_normal, R.mipmap.ic_maintenance_notif));
+                context.startActivity(ask);
                 break;
             default:
                 break;

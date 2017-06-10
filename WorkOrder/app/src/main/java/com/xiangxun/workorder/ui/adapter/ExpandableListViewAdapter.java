@@ -5,12 +5,13 @@ import android.database.DataSetObserver;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ExpandableListAdapter;
+import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.bean.ChildData;
+import com.xiangxun.workorder.bean.EquipmentRoot;
 import com.xiangxun.workorder.bean.GroupData;
 import com.xiangxun.workorder.common.image.ImageLoaderUtil;
 
@@ -18,17 +19,24 @@ import java.util.List;
 
 /**
  * Created by Administrator on 2017/6/5.
+ * 子列表
  */
 
-public class ExpandableListViewAdapter implements ExpandableListAdapter {
+public class ExpandableListViewAdapter extends BaseExpandableListAdapter {
     private Context context;
-    private List<GroupData> groupData;
-    private List<List<ChildData>> childData;
-    public ExpandableListViewAdapter(Context context, List<GroupData> groupData, List<List<ChildData>> childData) {
+    private List<ChildData> groupData;
+
+    public ExpandableListViewAdapter(List<ChildData> groupData, Context context) {
         this.context = context;
         this.groupData = groupData;
-        this.childData = childData;
     }
+
+
+    public void setData(List<ChildData> groupData) {
+        this.groupData = groupData;
+        this.notifyDataSetChanged();
+    }
+
     @Override
     public void registerDataSetObserver(DataSetObserver observer) {
 
@@ -51,8 +59,8 @@ public class ExpandableListViewAdapter implements ExpandableListAdapter {
     @Override
     public int getChildrenCount(int groupPosition) {
         int ret = 0;
-        if (childData != null) {
-            ret = childData.get(groupPosition).size();
+        if (groupData != null && groupData.get(groupPosition).getData() != null) {
+            ret = groupData.get(groupPosition).getData().size();
         }
         return ret;
     }
@@ -64,7 +72,7 @@ public class ExpandableListViewAdapter implements ExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return childData.get(groupPosition).get(childPosition);
+        return groupData.get(groupPosition).getData().get(childPosition);
     }
 
     @Override
@@ -95,7 +103,7 @@ public class ExpandableListViewAdapter implements ExpandableListAdapter {
         } else {
             holder = (GroupViewHolder) convertView.getTag();
         }
-        GroupData groupData = this.groupData.get(groupPosition);
+        ChildData groupData = this.groupData.get(groupPosition);
         //是否展开
 //        if (isExpanded) {
 //            holder.img.setImageResource(R.drawable.img_bottom);
@@ -103,7 +111,7 @@ public class ExpandableListViewAdapter implements ExpandableListAdapter {
 //            holder.img.setImageResource(R.drawable.img_right);
 //        }
         holder.tv_name.setText(groupData.getName());
-        holder.tv_num.setText(groupData.getNum());
+        holder.tv_num.setText(groupData.getUrl());
         return convertView;
     }
 
@@ -120,10 +128,8 @@ public class ExpandableListViewAdapter implements ExpandableListAdapter {
         } else {
             holder = (ChildViewHolder) convertView.getTag();
         }
-        ChildData childData = this.childData.get(groupPosition).get(childPosition);
-        ImageLoaderUtil.getInstance().loadImageNor(childData.getUrl(),holder.img);
-        holder.tv_name.setText(childData.getName());
-        holder.tv_content.setText(childData.getContent());
+        EquipmentRoot childData = groupData.get(groupPosition).getData().get(childPosition);
+        holder.tv_name.setText(childData.getMessage());
         return convertView;
     }
 
@@ -161,6 +167,7 @@ public class ExpandableListViewAdapter implements ExpandableListAdapter {
     public long getCombinedGroupId(long groupId) {
         return 0;
     }
+
     class GroupViewHolder {
         ImageView img;
         TextView tv_name, tv_num;

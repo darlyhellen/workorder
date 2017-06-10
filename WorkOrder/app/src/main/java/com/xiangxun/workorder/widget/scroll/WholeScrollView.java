@@ -10,7 +10,7 @@ import android.widget.ScrollView;
  * Copyright by [Zhangyuhui/Darly]
  * ©2017 XunXiang.Company. All rights reserved.
  *
- * @TODO:
+ * @TODO: ScrollView滑动重写
  */
 public class WholeScrollView extends ScrollView {
     // 滑动距离及坐标

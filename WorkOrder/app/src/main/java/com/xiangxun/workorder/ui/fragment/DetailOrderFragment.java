@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -19,16 +18,20 @@ import android.widget.TextView;
 import com.hellen.baseframe.binder.InitBinder;
 import com.hellen.baseframe.binder.ViewsBinder;
 import com.hellen.baseframe.common.dlog.DLog;
-import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.AppEnum;
+import com.xiangxun.workorder.base.ItemClickListenter;
+import com.xiangxun.workorder.bean.EquipmentInfo;
+import com.xiangxun.workorder.bean.TourInfo;
 import com.xiangxun.workorder.bean.WorkOrderData;
 import com.xiangxun.workorder.common.WorkOrderUtils;
 import com.xiangxun.workorder.ui.adapter.DetailOrderImageAdapter;
+import com.xiangxun.workorder.ui.adapter.DetailOrderImageAdapter.OnDetailOrderConsListener;
 import com.xiangxun.workorder.ui.biz.DetailOrderFragmentListener.DetailOrderFragmentInterface;
 import com.xiangxun.workorder.ui.main.ShowImageViewActivity;
 import com.xiangxun.workorder.ui.presenter.DetailOrderFragmentPresenter;
 import com.xiangxun.workorder.widget.camera.PhotoPop;
+import com.xiangxun.workorder.widget.grid.DetailView;
 import com.xiangxun.workorder.widget.grid.WholeGridView;
 
 import java.util.ArrayList;
@@ -41,39 +44,15 @@ import java.util.List;
  *
  * @TODO: 固态详情展示页面。
  */
-public class DetailOrderFragment extends Fragment implements OnClickListener, DetailOrderFragmentInterface, OnItemClickListener {
+public class DetailOrderFragment extends Fragment implements OnClickListener, DetailOrderFragmentInterface, OnDetailOrderConsListener {
     private View root;
 
-    private WorkOrderData data;
 
-    @ViewsBinder(R.id.tv_content01)
-    private TextView tvContent01;//工单编号
-    @ViewsBinder(R.id.tv_content02)
-    private TextView tvContent02;//设备名称
-    @ViewsBinder(R.id.tv_content03)
-    private TextView tvContent03;//设备编号
-    @ViewsBinder(R.id.tv_content04)
-    private TextView tvContent04;//设备IP
-    @ViewsBinder(R.id.tv_content05)
-    private TextView tvContent05;//设备类型
-    @ViewsBinder(R.id.tv_content06)
-    private TextView tvContent06;//位置信息
-    @ViewsBinder(R.id.tv_content07)
-    private TextView tvContent07;//所属部门
-    @ViewsBinder(R.id.tv_content08)
-    private TextView tvContent08;//派发人
-    @ViewsBinder(R.id.tv_content09)
-    private TextView tvContent09;//派发时间
-    @ViewsBinder(R.id.tv_content10)
-    private TextView tvContent10;//工单状态
-    @ViewsBinder(R.id.tv_content11)
-    private TextView tvContent11;//是否场内
-    @ViewsBinder(R.id.tv_content12)
-    private TextView tvContent12;//是否转派
-    @ViewsBinder(R.id.tv_content13)
-    private TextView tvContent13;//是否遗留
-    @ViewsBinder(R.id.tv_content14)
-    private TextView tvContent14;//短信内容
+    @ViewsBinder(R.id.id_detail_tv_title)
+    private TextView tv_title;//展示名称。
+    @ViewsBinder(R.id.id_detail_tv_linear)
+    private LinearLayout tv_linear;//展示名称。
+
     @ViewsBinder(R.id.id_detail_fragment_exception)
     private LinearLayout except;
     @ViewsBinder(R.id.tv_content15)
@@ -90,8 +69,6 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
     private TextView tvContent19;//关闭时间
     @ViewsBinder(R.id.tv_content20)
     private TextView tvContent20;   //
-    @ViewsBinder(R.id.tv_content21)
-    private TextView tvContent21;   //
     @ViewsBinder(R.id.tv_declare)
     private EditText reason;   //
     @ViewsBinder(R.id.id_detail_fragment_button)
@@ -105,12 +82,15 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
     private List<String> imageData;
     private DetailOrderImageAdapter adapter;
 
-
     /**
      * 上午9:29:04 TODO 调出选项的POP窗口，主要为相机，相册，取消
      */
     public PhotoPop pop;
     private DetailOrderFragmentPresenter presenter;
+
+    private WorkOrderData data;
+    private EquipmentInfo info;
+    private TourInfo tour;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -130,17 +110,21 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
 
 
     private void initView() {
-        data = getArguments().getParcelable("data");
-        if (data == null) {
-            ToastApp.showToast("页面数据错误");
-            return;
+        data = getArguments().getParcelable("WorkOrderData");
+        info = getArguments().getParcelable("EquipmentInfo");
+        tour = getArguments().getParcelable("TourInfo");
+        if (data != null) {
+            hasData();
+        } else if (info != null) {
+            hasInfo();
+        } else if (tour != null) {
+            hasTour();
         }
-        if ("0".equals(data.status)) {
-            button.setVisibility(View.VISIBLE);
-            commit.setOnClickListener(this);
-            consel.setOnClickListener(this);
-        } else {
-            button.setVisibility(View.GONE);
+
+    }
+
+    private void hasData() {
+        tv_title.setText(R.string.st_detail_detail);
         switch (data.status) {
             case 0:
                 //派工的状态(接收工单，退回工单)
@@ -190,49 +174,84 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
                 except.setVisibility(View.GONE);
                 close.setVisibility(View.GONE);
                 break;
-             }
         }
-        initData();
-    }
+        DetailView id = new DetailView(getActivity());
+        id.setNameValue(R.string.st_detail_orderid, data.id);
+        tv_linear.addView(id);
 
-    private void initData() {
-        tvContent01.setText(data.id);
-        tvContent02.setText(data.devicename);
-        tvContent03.setText(data.devicecode);
-        tvContent04.setText(data.deviceip);
+        DetailView devicename = new DetailView(getActivity());
+        devicename.setNameValue(R.string.st_detail_complainant, data.devicename);
+        tv_linear.addView(devicename);
+
+        DetailView devicecode = new DetailView(getActivity());
+        devicecode.setNameValue(R.string.st_detail_complainant_time, data.devicecode);
+        tv_linear.addView(devicecode);
+
+        DetailView deviceip = new DetailView(getActivity());
+        deviceip.setNameValue(R.string.st_detail_complainant_tel, data.deviceip);
+        tv_linear.addView(deviceip);
+
+
+        DetailView devicetype = new DetailView(getActivity());
         if ("device".equals(data.devicetype)) {
-            tvContent05.setText("卡口");
+            devicetype.setNameValue(R.string.st_detail_come, "卡口");
         } else if ("ftp".equals(data.devicetype)) {
-            tvContent05.setText("FTP");
+            devicetype.setNameValue(R.string.st_detail_come, "FTP");
         } else if ("project".equals(data.devicetype)) {
-            tvContent05.setText("平台");
+            devicetype.setNameValue(R.string.st_detail_come, "平台");
         } else if ("database".equals(data.devicetype)) {
-            tvContent05.setText("数据库");
+            devicetype.setNameValue(R.string.st_detail_come, "数据库");
         } else {
-            tvContent05.setText("机柜");
+            devicetype.setNameValue(R.string.st_detail_come, "机柜");
         }
-        tvContent06.setText(data.position);
-        tvContent07.setText(data.orgname);
-        tvContent08.setText(data.contactname);
-        tvContent09.setText(data.assigntime);
-        WorkOrderUtils.findStatus(data.status, tvContent10);
-        if (0 == data.isouter) {
-            tvContent11.setText("否");
-        } else {
-            tvContent11.setText("是");
-        }
-        if ("0".equals(data.isreassign)) {
-            tvContent12.setText("否");
-        } else {
-            tvContent12.setText("是");
-        }
+        tv_linear.addView(devicetype);
 
-        if ("0".equals(data.isleave)) {
-            tvContent13.setText("否");
+        DetailView position = new DetailView(getActivity());
+        position.setNameValue(R.string.st_detail_type, data.position);
+        tv_linear.addView(position);
+
+        DetailView orgname = new DetailView(getActivity());
+        orgname.setNameValue(R.string.st_detail_inout, data.orgname);
+        tv_linear.addView(orgname);
+
+        DetailView contactname = new DetailView(getActivity());
+        contactname.setNameValue(R.string.st_detail_company, data.contactname);
+        tv_linear.addView(contactname);
+
+        DetailView assigntime = new DetailView(getActivity());
+        assigntime.setNameValue(R.string.st_detail_worktime, data.assigntime);
+        tv_linear.addView(assigntime);
+
+
+        DetailView de = new DetailView(getActivity());
+        de.setName(R.string.st_detail_postion);
+        WorkOrderUtils.findStatus(data.status, de.getValue());
+        tv_linear.addView(de);
+
+        DetailView isouter = new DetailView(getActivity());
+        if (0 == data.isouter) {
+            isouter.setNameValue(R.string.st_detail_ordertype, "否");
         } else {
-            tvContent13.setText("是");
+            isouter.setNameValue(R.string.st_detail_ordertype, "是");
         }
-        tvContent14.setText(data.messages);
+        tv_linear.addView(isouter);
+        DetailView isreassign = new DetailView(getActivity());
+        if ("0".equals(data.isreassign)) {
+            isreassign.setNameValue(R.string.st_detail_order_content, "否");
+        } else {
+            isreassign.setNameValue(R.string.st_detail_order_content, "是");
+        }
+        tv_linear.addView(isreassign);
+        DetailView isleave = new DetailView(getActivity());
+        if ("0".equals(data.isleave)) {
+            isleave.setNameValue(R.string.st_detail_request, "否");
+        } else {
+            isleave.setNameValue(R.string.st_detail_request, "是");
+        }
+        tv_linear.addView(isleave);
+        DetailView messages = new DetailView(getActivity());
+        messages.setNameValue(R.string.st_detail_declare, data.messages);
+        tv_linear.addView(messages);
 
         //异常状态
         tvContent15.setText(data.exceptionid);
@@ -242,29 +261,144 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
         tvContent18.setText(data.offaccount);
         tvContent19.setText(data.offtime);
         tvContent20.setText("");
-        tvContent21.setText("");
         //添加图片的功能模块
         imageData = new ArrayList<String>();
         imageData.add("添加图片");
-        adapter = new DetailOrderImageAdapter(imageData, R.layout.item_fragment_detail_image, getActivity());
+        adapter = new DetailOrderImageAdapter(imageData, R.layout.item_main_detail_image_adapter, getActivity(), this);
         images.setAdapter(adapter);
+    }
+
+    //设备信息
+    private void hasInfo() {
+        tv_title.setText(R.string.st_detail_equip);
+        images.setVisibility(View.GONE);
+        button.setVisibility(View.GONE);
+        except.setVisibility(View.GONE);
+        close.setVisibility(View.GONE);
+
+
+        DetailView deviceid = new DetailView(getActivity());
+        deviceid.setNameValue(R.string.st_equip_deviceid, info.deviceid);
+        tv_linear.addView(deviceid);
+        DetailView assetname = new DetailView(getActivity());
+        assetname.setNameValue(R.string.st_equip_assetname, info.assetname);
+        tv_linear.addView(assetname);
+        DetailView assetcode = new DetailView(getActivity());
+        assetcode.setNameValue(R.string.st_equip_assetcode, info.code);
+        tv_linear.addView(assetcode);
+
+        DetailView assetmodel = new DetailView(getActivity());
+        assetmodel.setNameValue(R.string.st_equip_assetmodel, info.assetmodel);
+        tv_linear.addView(assetmodel);
+
+        DetailView assettype = new DetailView(getActivity());
+        if ("device".equals(info.assettype)) {
+            assettype.setNameValue(R.string.st_equip_assettype, "卡口");
+        } else if ("ftp".equals(info.assettype)) {
+            assettype.setNameValue(R.string.st_equip_assettype, "FTP");
+        } else if ("project".equals(info.assettype)) {
+            assettype.setNameValue(R.string.st_equip_assettype, "平台");
+        } else if ("database".equals(info.assettype)) {
+            assettype.setNameValue(R.string.st_equip_assettype, "数据库");
+        } else if ("server".equals(info.assettype)) {
+            assettype.setNameValue(R.string.st_equip_assettype, "服务器");
+        } else {
+            assettype.setNameValue(R.string.st_equip_assettype, "机柜");
+        }
+        tv_linear.addView(assettype);
+
+        DetailView manufacturer = new DetailView(getActivity());
+        manufacturer.setNameValue(R.string.st_equip_manufacturer, info.manufacturer);
+        tv_linear.addView(manufacturer);
+
+        DetailView factoryId = new DetailView(getActivity());
+        factoryId.setNameValue(R.string.st_equip_factoryId, info.factoryId);
+        tv_linear.addView(factoryId);
+        DetailView purchasetime = new DetailView(getActivity());
+        purchasetime.setNameValue(R.string.st_equip_purchasetime, info.purchasetime);
+        tv_linear.addView(purchasetime);
+        DetailView engineering = new DetailView(getActivity());
+        engineering.setNameValue(R.string.st_equip_engineering, info.engineering);
+        tv_linear.addView(engineering);
+        DetailView installtime = new DetailView(getActivity());
+        installtime.setNameValue(R.string.st_equip_installtime, info.installtime);
+        tv_linear.addView(installtime);
+        DetailView installplace = new DetailView(getActivity());
+        installplace.setNameValue(R.string.st_equip_installplace, info.installplace);
+        tv_linear.addView(installplace);
+        DetailView serviceid = new DetailView(getActivity());
+        serviceid.setNameValue(R.string.st_equip_serviceid, info.serviceid);
+        tv_linear.addView(serviceid);
 
     }
+
+    private void hasTour() {
+        tv_title.setText(R.string.st_detail_tour);
+        images.setVisibility(View.GONE);
+        button.setVisibility(View.GONE);
+        except.setVisibility(View.GONE);
+        close.setVisibility(View.GONE);
+        DetailView id = new DetailView(getActivity());
+        id.setNameValue(R.string.st_tour_id, tour.id);
+        tv_linear.addView(id);
+
+        DetailView deviceid = new DetailView(getActivity());
+        deviceid.setNameValue(R.string.st_tour_deviceid, tour.deviceid);
+        tv_linear.addView(deviceid);
+
+        DetailView time = new DetailView(getActivity());
+        time.setNameValue(R.string.st_tour_time, tour.time);
+        tv_linear.addView(time);
+
+        DetailView reason = new DetailView(getActivity());
+        reason.setNameValue(R.string.st_tour_reason, tour.reason);
+        tv_linear.addView(reason);
+
+        DetailView note = new DetailView(getActivity());
+        note.setNameValue(R.string.st_tour_note, tour.note);
+        tv_linear.addView(note);
+
+        DetailView orgname = new DetailView(getActivity());
+        orgname.setNameValue(R.string.st_tour_Checkingpeople, tour.Checkingpeople);
+        tv_linear.addView(orgname);
+
+    }
+
 
     private void initListener() {
         commit.setOnClickListener(this);
         consel.setOnClickListener(this);
-        images.setOnItemClickListener(this);
+        images.setOnItemClickListener(new ItemClickListenter() {
+            @Override
+            public void NoDoubleItemClickListener(AdapterView<?> parent, View view, int position, long id) {
+                String st = (String) parent.getItemAtPosition(position);
+                if (position == (imageData.size() - 1)) {
+                    if (position == 3) {
+                        //上传图片
+                        DLog.i(getClass().getSimpleName(), position + "上传图片");
+                        presenter.upLoadImage(imageData);
+                    } else {
+                        pop.show(view);
+                    }
+                } else {
+                    Intent intent = new Intent(getActivity(), ShowImageViewActivity.class);
+                    intent.putExtra("position", position);
+                    int[] location = new int[2];
+                    view.getLocationOnScreen(location);
+                    intent.putExtra("locationX", location[0]);//必须
+                    intent.putExtra("locationY", location[1]);//必须
+                    intent.putExtra("url", st);
+                    intent.putExtra("width", view.getWidth());//必须
+                    intent.putExtra("height", view.getHeight());//必须
+                    startActivity(intent);
+                }
+            }
+        });
     }
 
     @Override
     public void onClick(View v) {
         presenter.onClickDown(getActivity(), v);
-    }
-
-    @Override
-    public String getDataID() {
-        return data.id;
     }
 
     @Override
@@ -280,6 +414,11 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
     }
 
     @Override
+    public String getDataID() {
+        return data.id;
+    }
+
+    @Override
     public String getReason() {
         return reason.getText().toString().trim();
     }
@@ -292,7 +431,7 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
 
     @Override
     public List<String> getUrls() {
-        return null;
+        return imageData;
     }
 
     @Override
@@ -305,26 +444,6 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
     public void setEnableClick() {
         commit.setClickable(true);
         consel.setClickable(true);
-    }
-
-    //图片加载类
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        String st = (String) parent.getItemAtPosition(position);
-        if (position == (imageData.size() - 1)) {
-            pop.show(view);
-        } else {
-            Intent intent = new Intent(getActivity(), ShowImageViewActivity.class);
-            intent.putExtra("position", position);
-            int[] location = new int[2];
-            view.getLocationOnScreen(location);
-            intent.putExtra("locationX", location[0]);//必须
-            intent.putExtra("locationY", location[1]);//必须
-            intent.putExtra("url", (String) parent.getItemAtPosition(position));
-            intent.putExtra("width", view.getWidth());//必须
-            intent.putExtra("height", view.getHeight());//必须
-            startActivity(intent);
-        }
     }
 
 
@@ -359,9 +478,17 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
             }
 
             imageData.add(imageData.size() - 1, head_path);
-            adapter.notifyDataSetChanged();
+            adapter.setData(imageData);
             //pop.cropPhoto(Uri.fromFile(temp));// 裁剪图片
             //这里不需要裁剪图片。
+
         }
+    }
+
+    //点击删除图片按钮，进行图片删除操作。
+    @Override
+    public void onConsListener(View v, int position) {
+        imageData.remove(position);
+        adapter.setData(imageData);
     }
 }

@@ -47,7 +47,7 @@ public class WorkOrderFragmentPresenter {
             case R.id.title_view_back_llayout:
                 view.end();
                 break;
-            case R.id.xw_share:
+            case R.id.title_view_right_linear:
                 DLog.i("搜索按钮点击，跳转到搜索页面。在搜索页面中显示搜索结果");
                 SearchWorkOrderDialogFragment dialog = new SearchWorkOrderDialogFragment();
                 Bundle bundle = new Bundle();

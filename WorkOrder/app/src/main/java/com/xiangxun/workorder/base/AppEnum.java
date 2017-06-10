@@ -24,6 +24,10 @@ public enum AppEnum {
     PASSWORD("password", 0),
 
     USERID("userid", 0),
+    //巡检使用的所有设备信息
+    EQUIPMENTMATION("equipmentinfomaition", 0),
+    //设备管理页面的首个列表
+    EQUIPMENTLIST("equipmentlist", 0),
 
     COOKIE("cookie", 0);
 
@@ -46,8 +50,6 @@ public enum AppEnum {
         data.messages = "西安翔迅科技有限责任公司的李斯，你好：位于[G70 K1741 900]上的设备编号为[610000000007031075]的设备[G70 K1741 900]发生故障，请及时维修。";
         data.assignaccount = "00";
         data.assigntime = "2017-05-11 20:16:15";
-        data.isreassign = "0";
-        //data.orgid = "170405094524399e776b";
         data.status = 0;
         data.isreassign = "0";
         data.orgid = "170405094524399e776b";
@@ -64,7 +66,7 @@ public enum AppEnum {
     public static final String DOWNS = ROOT + "local/";
 
     public static final String DATA = DOWNS + "data/";
-    
+
     public static final String MAP = DATA + "map/";
 
     public static final String MAINRADIO = CACTH + "mainimage/";
@@ -121,6 +123,5 @@ public enum AppEnum {
     public void setDec(String dec) {
         this.dec = dec;
     }
-
 
 }

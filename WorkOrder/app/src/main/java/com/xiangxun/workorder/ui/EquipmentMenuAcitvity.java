@@ -1,18 +1,33 @@
 package com.xiangxun.workorder.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ExpandableListView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.hellen.baseframe.binder.ContentBinder;
 import com.hellen.baseframe.binder.ViewsBinder;
 import com.hellen.baseframe.common.dlog.DLog;
+import com.hellen.baseframe.common.utiltools.SharePreferHelp;
 import com.xiangxun.workorder.R;
+import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.base.BaseActivity;
 import com.xiangxun.workorder.bean.ChildData;
+import com.xiangxun.workorder.bean.EquipMenuChildData;
+import com.xiangxun.workorder.bean.EquipmentRoot;
 import com.xiangxun.workorder.bean.GroupData;
+import com.xiangxun.workorder.bean.ObjectData;
+import com.xiangxun.workorder.ui.adapter.EquipmentMenuAdapter;
 import com.xiangxun.workorder.ui.adapter.ExpandableListViewAdapter;
+import com.xiangxun.workorder.ui.adapter.RootExpandableListViewAdapter;
+import com.xiangxun.workorder.ui.biz.EquipmentMenuListener;
+import com.xiangxun.workorder.ui.biz.EquipmentMenuListener.EquipmentMenuInterface;
+import com.xiangxun.workorder.ui.main.EquipmentListActivity;
+import com.xiangxun.workorder.ui.presenter.EquipmentMenuPresenter;
 import com.xiangxun.workorder.widget.header.HeaderView;
 
 import java.util.ArrayList;
@@ -20,32 +35,25 @@ import java.util.List;
 
 /**
  * Created by Administrator on 2017/6/5.
+ *
  * @TODO: 設備管理功能頁面，包括幾大點。下拉列表。點擊進設備列表。然後點擊進詳情。
  */
 @ContentBinder(R.layout.activity_equipment)
-public class EquipmentMenuAcitvity extends BaseActivity implements OnClickListener {
+public class EquipmentMenuAcitvity extends BaseActivity implements OnClickListener, EquipmentMenuInterface {
     @ViewsBinder(R.id.id_equipment_header)
     private HeaderView header;
     @ViewsBinder(R.id.id_equipment_listview)
     private ExpandableListView listView;
-    private ExpandableListViewAdapter adapter;
+    private EquipmentMenuAdapter adapter;
 
+    private EquipmentMenuPresenter presenter;
 
+    private ObjectData data;
 
-    private List<GroupData> groupList;
-    private List<List<ChildData>> childList;
-
-    private String[] url;
     @Override
     protected void initView(Bundle savedInstanceState) {
-
-        header.setTitle("測試用戶列表");
-        header.setLeftBackgroundResource(R.mipmap.ic_title_back);
-        header.setRightBackgroundResource(0);
-        groupList = new ArrayList<>();
-        childList = new ArrayList<>();
-        loadsData();
-        adapter = new ExpandableListViewAdapter(this, groupList, childList);
+        presenter = new EquipmentMenuPresenter(this);
+        adapter = new EquipmentMenuAdapter(this, presenter.findData());
         listView.setAdapter(adapter);
 
         //重写OnGroupClickListener，实现当展开时，ExpandableListView不自动滚动
@@ -58,10 +66,12 @@ public class EquipmentMenuAcitvity extends BaseActivity implements OnClickListen
                     //第二个参数false表示展开时是否触发默认滚动动画
                     parent.expandGroup(groupPosition, false);
                 }
-                //telling the listView we have handled the group click, and don't want the default actions.
                 return true;
             }
         });
+        header.setTitle("设备列表");
+        header.setLeftBackgroundResource(R.mipmap.ic_title_back);
+        header.setRightBackgroundResource(0);
     }
 
     @Override
@@ -70,56 +80,35 @@ public class EquipmentMenuAcitvity extends BaseActivity implements OnClickListen
         listView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-               ChildData data = (ChildData) adapter.getChild(groupPosition,childPosition);
-                DLog.i(getClass().getSimpleName(),groupPosition+"---"+childPosition+"---"+data.getName());
+                EquipMenuChildData data = (EquipMenuChildData) adapter.getChild(groupPosition, childPosition);
+                DLog.i(getClass().getSimpleName(), groupPosition + "---" + childPosition + "---" + data.getName());
+                Intent intent = new Intent(EquipmentMenuAcitvity.this, EquipmentListActivity.class);
+                intent.putExtra("EquipMenuChildData", data);
+                startActivity(intent);
                 return false;
             }
         });
+
     }
 
-    private void loadsData() {
-        url = new String[]{
-                "http://cdn.duitang.com/uploads/item/201506/07/20150607125903_vFWC5.png",
-                "http://upload.qqbody.com/ns/20160915/202359954jalrg3mqoei.jpg",
-                "http://tupian.qqjay.com/tou3/2016/0726/8529f425cf23fd5afaa376c166b58e29.jpg",
-                "http://cdn.duitang.com/uploads/item/201607/13/20160713094718_Xe3Tc.png",
-                "http://img3.imgtn.bdimg.com/it/u=1808104956,526590423&fm=11&gp=0.jpg",
-                "http://tupian.qqjay.com/tou3/2016/0725/5d6272a4acd7e21b2391aff92f765018.jpg"
-        };
-
-        List<String> group = new ArrayList<>();
-        group.add("我的设备");
-        group.add("我的好友");
-        group.add("初中同学");
-        group.add("高中同学");
-        group.add("大学同学");
-
-        for (int i = 0; i < group.size(); i++) {
-            GroupData gd = new GroupData(group.get(i), (i + 2) + "/" + (2 * i + 2));
-            groupList.add(gd);
-        }
-
-        for (int i = 0; i < group.size(); i++) {
-            List<ChildData> list = new ArrayList<>();
-            for (int j = 0; j < 2 * i + 2; j++) {
-                ChildData cd = null;
-                if (i == 0) {
-                    cd = new ChildData("null", "我的手机", "上次登录");
-                    list.add(cd);
-                    cd = new ChildData("null", "发现新设备", "玩转只能信设备，发现新生活");
-                    list.add(cd);
-                    break;
-                } else {
-                    cd = new ChildData(url[j % url.length], "张三" + j, "你好！！！");
-                    list.add(cd);
-                }
-            }
-            childList.add(list);
-        }
-    }
 
     @Override
     public void onClick(View v) {
         finish();
+    }
+
+    @Override
+    public void end() {
+
+    }
+
+    @Override
+    public void setDisableClick() {
+
+    }
+
+    @Override
+    public void setEnableClick() {
+
     }
 }

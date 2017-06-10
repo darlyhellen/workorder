@@ -8,9 +8,11 @@ import com.hellen.baseframe.common.db.ThreadInfo;
 import com.hellen.baseframe.common.dlog.DLog;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.bean.Patrol;
+import com.xiangxun.workorder.ui.EquipmentMenuAcitvity;
 import com.xiangxun.workorder.ui.biz.MainListener;
 import com.xiangxun.workorder.ui.main.DownLoadActivity;
 import com.xiangxun.workorder.ui.main.SetActivity;
+import com.xiangxun.workorder.ui.main.TourActivity;
 import com.xiangxun.workorder.ui.video.VideoRecordActivity;
 
 import java.util.ArrayList;
@@ -40,8 +42,9 @@ public class MainPresenter {
      */
     public void onClickDown(Context context, View v) {
         switch (v.getId()) {
-            case R.id.xw_share:
-                //進入設置頁面
+            case R.id.title_view_right_linear:
+                DLog.i(getClass().getSimpleName(), "title_view_right_linear");
+                context.startActivity(new Intent(context, EquipmentMenuAcitvity.class));
                 break;
         }
     }

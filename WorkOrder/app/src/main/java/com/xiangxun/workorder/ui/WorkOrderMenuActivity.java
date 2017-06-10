@@ -37,7 +37,7 @@ import java.util.Random;
  * Copyright by [Zhangyuhui/Darly]
  * ©2017 XunXiang.Company. All rights reserved.
  *
- * @TODO: 首页静态页面, 暂时没有接口网络请求。
+ * @TODO: 工单菜单页面。包括四个子宫能列表。
  */
 @ContentBinder(R.layout.activity_main_v0)
 public class WorkOrderMenuActivity extends BaseActivity implements View.OnClickListener, MainV0Listener.MainV0Interface, AdapterView.OnItemClickListener, StaticListener.RefreshMainUIListener {

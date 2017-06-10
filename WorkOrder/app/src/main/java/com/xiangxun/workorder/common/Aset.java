@@ -17,11 +17,7 @@ import java.io.OutputStream;
  * Copyright by [Zhangyuhui/Darly]
  * ©2017 XunXiang.Company. All rights reserved.
  *
-<<<<<<< HEAD
- * @TODO:
-=======
  * @TODO: 将Assets中的文件复制到文件夹中。
->>>>>>> f9757719696d8632a6d88228ebda0cd326936f4d
  */
 public class Aset {
     private static String filename = "xian.dat";

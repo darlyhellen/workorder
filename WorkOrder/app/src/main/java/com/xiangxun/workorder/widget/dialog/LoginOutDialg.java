@@ -16,7 +16,7 @@ import com.xiangxun.workorder.R;
 
 
 /**
- * @author zhangyh2 LoginOutDialg 上午10:32:27 TODO
+ * @author zhangyh2 LoginOutDialg 上午10:32:27 TODO 退出登录选择框
  */
 public class LoginOutDialg extends AlertDialog {
 

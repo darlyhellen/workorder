@@ -1,5 +1,6 @@
 package com.xiangxun.workorder.common;
 
+import android.graphics.Color;
 import android.widget.TextView;
 
 import com.xiangxun.workorder.R;
@@ -49,11 +50,12 @@ public class WorkOrderUtils {
                 tv.setBackgroundResource(R.drawable.status_bg_7);
                 break;
             default:
-                result = "";
+                result = "已完成";
                 tv.setBackgroundResource(R.drawable.status_bg_8);
                 break;
         }
-
+        tv.setPadding(10, 10, 10, 10);
+        tv.setTextColor(Color.WHITE);
         tv.setText(result);
     }
 }

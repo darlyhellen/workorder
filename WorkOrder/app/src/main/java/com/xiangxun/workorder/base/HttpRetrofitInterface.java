@@ -52,6 +52,7 @@ public interface HttpRetrofitInterface {
      */
     @GET("server/workorder/refer/totalCount")
     Observable<JsonObject> totalCount();
+
     /**
      * @TODO:http://localhost:8090/server/workorder/refer/totalWorkOrder/ 首頁滚动的接口
      */
@@ -67,10 +68,34 @@ public interface HttpRetrofitInterface {
 
     /**
      * @param args
-     * @TODO:上報工單接口
+     * @TODO:上图片接口
      */
-    @POST("server/workorder/")
-    Observable<JsonObject> upDataOrder(@Body RequestBody args);
+    @POST("server/workorder/change/upLoadPicture/")
+    Observable<JsonObject> upLoadImage(@Body RequestBody args);
+
+    /**
+     * @TODO:图片下载接口。
+     */
+    @GET("server/workorder/refer/watchPicture/")
+    Observable<JsonObject> downImage(@Query("id") String id);
+
+
+    /**
+     * @TODO:正常上报和异常上报接口
+     */
+    @GET("server/workorder/change/workorderUp/")
+    Observable<JsonObject> upDataOrder(@Query("status") String status, @Query("id") String id, @Query("reason") String reason);
+
+    /**
+     * @TODO:查找設備的接口
+     */
+    @GET("server/device/refer/searchDevice/")
+    Observable<JsonObject> searchDevice(@Query("type") String type, @Query("pageNo") int pageNo);
+    /**
+     * @TODO:巡检页面根据条件查询设备信息。
+     */
+    @GET("server/device/refer/searchOneDevice/")
+    Observable<JsonObject> searchOneDevice(@Query("type") String type, @Query("code") String code, @Query("name") String name);
 
     /**
      * @param version
@@ -78,4 +103,10 @@ public interface HttpRetrofitInterface {
      */
     @GET("server/version/")
     Observable<JsonObject> getVersion(@Query("version") int version);
+
+    /**
+     * @TODO:测试接口，替换接口。
+     */
+    @GET("server")
+    Observable<JsonObject> test();
 }

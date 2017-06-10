@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@mipmap/ic_maintenance_background"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
@@ -13,12 +13,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/ic_maintenance_up"
+        android:visibility="gone"/>
+
     <ImageView
         android:id="@+id/id_maintenance_iv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/margin_padding10"
-        android:src="@mipmap/ic_maintenance_background"
+        android:src="@mipmap/ic_maintenance_background_1"
         android:visibility="visible" />
 
 
@@ -28,37 +35,102 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="@dimen/margin_padding10"
-        android:textColor="@color/text_color"
-        android:textSize="@dimen/textSize16" />
+        android:textColor="@color/white"
+        android:textSize="@dimen/textSize20" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginBottom="@dimen/margin_padding20"
+        android:background="@mipmap/ic_maintenance_mid" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <TableRow
+            android:id="@+id/id_maintenance_table"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/id_maintenance_order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_maintenance_order" />
+
+            <View
+                android:layout_width="20dp"
+                android:layout_height="1dp" />
+
+            <ImageView
+                android:id="@+id/id_maintenance_tour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_maintenance_order" />
+
+        </TableRow>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="20dp" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/id_maintenance_equip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_maintenance_order" />
+
+            <View
+                android:layout_width="20dp"
+                android:layout_height="1dp" />
+
+            <ImageView
+                android:id="@+id/id_maintenance_notifi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_maintenance_order" />
+
+        </TableRow>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_padding20"
+        android:background="@mipmap/ic_maintenance_down"
+        android:visibility="gone"/>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/margin_padding5"
-        android:background="@color/divider" />
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
     <ViewFlipper
         android:id="@+id/id_maintenance_flipper"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="44dp"
+        android:layout_marginLeft="@dimen/margin_padding10"
+        android:layout_marginRight="@dimen/margin_padding10"
         android:autoStart="true"
+        android:background="@mipmap/ic_maintenance_warning"
         android:flipInterval="5000"
         android:inAnimation="@anim/anim_in"
         android:outAnimation="@anim/anim_out" />
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/margin_padding5"
-        android:background="@color/divider" />
-
-    <GridView
-        android:id="@+id/id_maintenance_gv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:divider="@null"
-        android:horizontalSpacing="@dimen/margin_padding2"
-        android:listSelector="@color/transparent_white"
-        android:numColumns="2"
-        android:scrollbars="none"
-        android:verticalSpacing="@dimen/margin_padding2" />
-
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 </LinearLayout>

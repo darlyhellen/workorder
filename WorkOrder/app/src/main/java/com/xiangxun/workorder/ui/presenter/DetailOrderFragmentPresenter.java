@@ -1,11 +1,13 @@
 package com.xiangxun.workorder.ui.presenter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.hellen.baseframe.application.FrameListener;
 import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.R;
+import com.xiangxun.workorder.base.APP;
 import com.xiangxun.workorder.bean.DetailChangeRoot;
 import com.xiangxun.workorder.ui.biz.DetailOrderFragmentListener;
 import com.xiangxun.workorder.ui.biz.DetailOrderFragmentListener.DetailOrderFragmentInterface;
@@ -27,6 +29,8 @@ public class DetailOrderFragmentPresenter {
     private DetailOrderFragmentListener biz;
 
     private ShowLoading loading;
+
+    private boolean isUpImage = false;//图片是否已经上传.
 
     public DetailOrderFragmentPresenter(DetailOrderFragmentInterface view) {
         this.view = view;
@@ -57,13 +61,18 @@ public class DetailOrderFragmentPresenter {
                         getData("2", view.getDataID());
                         break;
                     case 1:
-                        updataOrder("4", view.getDataID(),  view.getUrls());
+                        updataOrder("4", view.getDataID(), view.getUrls());
                         break;
                 }
                 break;
         }
     }
 
+    /**
+     * @param status
+     * @param id
+     * @TODO：接收工单和拒绝工单接口。
+     */
     private void getData(String status, String id) {
         biz.onStart(loading);
         view.setDisableClick();
@@ -95,10 +104,28 @@ public class DetailOrderFragmentPresenter {
         });
     }
 
+    /**
+     * @param status
+     * @param id
+     * @param urls
+     * @TODO:正常上报和异常上报接口内容。
+     */
     private void updataOrder(String status, String id, List<String> urls) {
+        if (!APP.isNetworkConnected(APP.getInstance())) {
+            ToastApp.showToast("网络异常,请检查网络");
+            return;
+        }
+        if (TextUtils.isEmpty(view.getReason())) {
+            ToastApp.showToast("上报工单说明不能为空");
+            return;
+        }
+        if (urls != null && urls.size() > 1 && !isUpImage) {
+            //有圖片但是沒有上傳的判斷。
+            upLoadImage(urls);
+        }
         biz.onStart(loading);
         view.setDisableClick();
-        biz.upDataOrder(status, id, view.getReason(), urls, new FrameListener<DetailChangeRoot>() {
+        biz.upDataOrder(status, id, view.getReason(), new FrameListener<DetailChangeRoot>() {
             @Override
             public void onSucces(DetailChangeRoot s) {
                 biz.onStop(loading);
@@ -112,6 +139,40 @@ public class DetailOrderFragmentPresenter {
                 biz.onStop(loading);
                 view.setEnableClick();
                 view.onLoginFailed();
+                switch (i) {
+                    case 0:
+                        ToastApp.showToast(s);
+                        break;
+                    case 1:
+                        ToastApp.showToast("网络请求异常");
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+    }
+
+    /**
+     * @param url
+     * @TODO:图片上传测试。
+     */
+    public void upLoadImage(List<String> url) {
+        biz.onStart(loading);
+        biz.upLoadImage(view.getDataID(), url, new FrameListener<DetailChangeRoot>() {
+            @Override
+            public void onSucces(DetailChangeRoot s) {
+                biz.onStop(loading);
+                view.setEnableClick();
+                isUpImage = true;
+                ToastApp.showToast(s.getMessage());
+            }
+
+            @Override
+            public void onFaild(int i, String s) {
+                biz.onStop(loading);
+                view.setEnableClick();
+                isUpImage = false;
                 switch (i) {
                     case 0:
                         ToastApp.showToast(s);

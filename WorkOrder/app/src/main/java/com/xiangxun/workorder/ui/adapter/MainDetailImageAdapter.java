@@ -4,12 +4,15 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hellen.baseframe.baseadapter.ParentAdapter;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.xiangxun.workorder.R;
+import com.xiangxun.workorder.base.AppEnum;
 
 import java.util.List;
 
@@ -43,7 +46,7 @@ public class MainDetailImageAdapter extends ParentAdapter<String> {
 
 
     @Override
-    public View HockView(int position, View view, ViewGroup viewGroup, int resId, Context context, String url) {
+    public View HockView(final int position, View view, ViewGroup viewGroup, int resId, Context context, String url) {
         final int po = position;
 
         ViewHolder viewHolder = null;
@@ -51,6 +54,8 @@ public class MainDetailImageAdapter extends ParentAdapter<String> {
             view = LayoutInflater.from(context).inflate(
                     R.layout.item_main_detail_image_adapter, null);
             viewHolder = new ViewHolder();
+            viewHolder.relative = (RelativeLayout) view.findViewById(R.id.id_iv_relative);
+            viewHolder.relative.setLayoutParams(new AbsListView.LayoutParams(AppEnum.WIDTH.getLen() / 5, AppEnum.WIDTH.getLen() / 5));
             viewHolder.photo = (ImageView) view
                     .findViewById(R.id.id_iv_photo);
             viewHolder.close = (ImageView) view
@@ -61,10 +66,16 @@ public class MainDetailImageAdapter extends ParentAdapter<String> {
         } else {
             viewHolder = (ViewHolder) view.getTag();
         }
-        if (viewGroup.getChildCount() == position) { // 里面就是正常的position
 
+        if (viewGroup.getChildCount() == position) { // 里面就是正常的position
             if (position == (data.size() - 1)) {
-                viewHolder.photo.setImageResource(R.drawable.add_publish_image);
+                if (position == 3) {
+                    viewHolder.photo.setVisibility(View.INVISIBLE);
+                    viewHolder.desc.setText("上传图片");
+                } else {
+                    viewHolder.photo.setVisibility(View.VISIBLE);
+                    viewHolder.photo.setImageResource(R.drawable.add_publish_image);
+                }
                 viewHolder.photo.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 viewHolder.close.setVisibility(View.GONE);
             } else {
@@ -72,23 +83,20 @@ public class MainDetailImageAdapter extends ParentAdapter<String> {
                 viewHolder.desc.setText("");
                 ImageLoader.getInstance().displayImage(
                         "file://" + data.get(position), viewHolder.photo);
+                viewHolder.close.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mCallback.click(v, position);
+                    }
+                });
 
             }
         }
-        // 给删除绑定点击监听器，点击触发OnClickListener的onClick()方法
-        // 响应按钮点击事件,调用子定义接口，并传入View
-        viewHolder.close.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                mCallback.click(v, po);
-            }
-        });
-
         return view;
     }
 
     class ViewHolder {
+        RelativeLayout relative;
         ImageView photo;
         ImageView close;
         TextView desc;

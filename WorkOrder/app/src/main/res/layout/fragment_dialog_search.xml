@@ -141,7 +141,7 @@
                 android:layout_margin="2dp"
                 android:background="@color/wel_back_color" />
 
-            <Spinner
+            <TextView
                 android:id="@+id/id_search_sp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

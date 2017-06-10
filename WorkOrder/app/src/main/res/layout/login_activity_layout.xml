@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -10,9 +10,11 @@
         android:id="@+id/edt_login_bg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@mipmap/patrol_manage" />
+        android:background="@mipmap/ic_login" />
 
     <LinearLayout
+        android:id="@+id/ll_login_bg"
+        android:layout_below="@id/edt_login_bg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -85,7 +87,7 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/margin_padding10">
+            android:padding="@dimen/margin_padding2">
 
             <View
                 android:layout_width="0dp"
@@ -104,26 +106,26 @@
             android:id="@+id/btn_login"
             android:layout_width="fill_parent"
             android:layout_height="@dimen/view_height40"
-            android:layout_marginTop="@dimen/margin_padding40"
+            android:layout_marginTop="@dimen/margin_padding10"
             android:visibility="gone" />
 
         <com.xiangxun.workorder.ui.login.edittext.XSubButton
             android:id="@+id/btn_login_post"
             android:layout_width="fill_parent"
             android:layout_height="@dimen/view_height40"
-            android:layout_marginTop="@dimen/margin_padding40" />
+            android:layout_marginTop="@dimen/margin_padding10" />
     </LinearLayout>
 
 
     <TextView
         style="@style/more_about_text"
-        android:layout_gravity="center_horizontal|bottom"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/margin_padding10"
         android:layout_marginTop="@dimen/margin_padding20"
-        android:gravity="center_horizontal|bottom"
         android:lineSpacingExtra="5dp"
         android:text="@string/splash_adv_logo"
         android:textColor="@color/black"
         android:textSize="@dimen/textSize14" />
 
-</LinearLayout>
+</RelativeLayout>

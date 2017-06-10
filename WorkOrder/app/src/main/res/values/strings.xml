@@ -15,7 +15,7 @@
     <string name="mine_login_login">登&#160;&#160;&#160;&#160;录</string>
     <string name="login">登录</string>
     <string name="mine_login_loginning">登录中</string>
-    <string name="splash_adv_logo">Copyright © 1993&#8211;2017\n西安翔迅科技有限责任公司版权所有</string>
+    <string name="splash_adv_logo">西安翔迅科技有限责任公司版权所有 Copyright © 2017</string>
     <string name="loginout">退出登录</string>
     <string name="regest">注册账号</string>
     <string name="find_pass">忘记密码</string>
@@ -93,11 +93,14 @@
 
     <!--WorkOrderDetailActivity-->
     <string name="st_detail_title">工单详情</string>
+    <string name="st_equip_title_order">设备详情</string>
     <string name="st_detail_detal">详情</string>
     <string name="st_detail_image">图片</string>
     <string name="st_detail_position">位置</string>
     <!--工单详情信息-->
     <string name="st_detail_detail">工单详情信息</string>
+    <string name="st_detail_equip">设备详情信息</string>
+    <string name="st_detail_tour">巡检详情信息</string>
     <string name="st_detail_orderid">工单编号:</string>
     <string name="st_detail_complainant">设备名称:</string>
     <string name="st_detail_complainant_time">设备编码:</string>
@@ -112,6 +115,27 @@
     <string name="st_detail_order_content">是否转派:</string>
     <string name="st_detail_request">是否遗留:</string>
     <string name="st_detail_declare">短信内容</string>
+    <!--设备详情信息-->
+    <string name="st_equip_deviceid">设备ID：</string>
+    <string name="st_equip_assetname">设备名称：</string>
+    <string name="st_equip_assetcode">设备编号：</string>
+    <string name="st_equip_assetmodel">设备型号：</string>
+    <string name="st_equip_assettype">设备类别：</string>
+    <string name="st_equip_manufacturer">生产厂商：</string>
+    <string name="st_equip_factoryId">运维服务商：</string>
+    <string name="st_equip_purchasetime">采购时间：</string>
+    <string name="st_equip_engineering">工程商：</string>
+    <string name="st_equip_installtime">安装时间：</string>
+    <string name="st_equip_installplace">安装位置：</string>
+    <string name="st_equip_serviceid">服务厂商：</string>
+
+    <!--巡检详情信息-->
+    <string name="st_tour_id">工单编号：</string>
+    <string name="st_tour_deviceid">设备编号：</string>
+    <string name="st_tour_time">巡检时间：</string>
+    <string name="st_tour_reason">问题说明：</string>
+    <string name="st_tour_note">记录：</string>
+    <string name="st_tour_Checkingpeople">巡检人：</string>
     <!--工单异常信息-->
     <string name="st_detail_except">工单异常信息</string>
     <string name="st_detail_hardorder">上报人:</string>
@@ -132,7 +156,7 @@
 
 
     <array name="Status">
-        <item>"全  部"</item>
+        <item>"全 部"</item>
         <item>"已派发"</item>
         <item>"已接收"</item>
         <item>"已退回"</item>
@@ -141,5 +165,6 @@
         <item>"遗留中"</item>
         <item>"已关闭"</item>
         <item>"已评估"</item>
+        <item>"已完成"</item>
     </array>
 </resources>
