@@ -10,7 +10,7 @@ import android.os.Parcelable;
 public class TourInfo implements Parcelable {
     public String id;
     public String deviceid;
-    public String time;
+    public String inserttime;
     public String reason;
     public String note;
     public String Checkingpeople;
@@ -18,6 +18,10 @@ public class TourInfo implements Parcelable {
     public String mapx;
     //纬度
     public String mapy;
+
+    public String userid;
+    public String mobile;
+    public String name;
 
 
     public TourInfo() {
@@ -29,12 +33,15 @@ public class TourInfo implements Parcelable {
         deviceid = in.readString();
         id = in.readString();
         deviceid = in.readString();
-        time = in.readString();
+        inserttime = in.readString();
         reason = in.readString();
         note = in.readString();
         Checkingpeople = in.readString();
         mapx = in.readString();
         mapy = in.readString();
+        userid = in.readString();
+        mobile = in.readString();
+        name = in.readString();
 
     }
 
@@ -47,12 +54,15 @@ public class TourInfo implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(id);
         dest.writeString(deviceid);
-        dest.writeString(time);
+        dest.writeString(inserttime);
         dest.writeString(reason);
         dest.writeString(note);
         dest.writeString(Checkingpeople);
         dest.writeString(mapx);
         dest.writeString(mapy);
+        dest.writeString(userid);
+        dest.writeString(mobile);
+        dest.writeString(name);
     }
 
     public static final Creator<TourInfo> CREATOR = new Creator<TourInfo>() {

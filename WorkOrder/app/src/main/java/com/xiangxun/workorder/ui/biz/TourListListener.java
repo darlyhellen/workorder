@@ -60,7 +60,7 @@ public class TourListListener implements FramePresenter {
             return;
         }
         //在这里进行数据请求
-        RxjavaRetrofitRequestUtil.getInstance().get().getWorkOrder(page, status, devicename, devicecode, deviceip).
+        RxjavaRetrofitRequestUtil.getInstance().get().details(page).
                 subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(new Func1<JsonObject, TourRoot>() {

@@ -78,9 +78,7 @@ public class TourListPresenter {
     }
 
     public void getWorkOrderByPage(int page, final String status, String devicename, String devicecode, String deviceip) {
-
         biz.onStart(loading);
-
         biz.getWorkOrder(page, status, devicename, devicecode, deviceip, new FrameListener<TourRoot>() {
             @Override
             public void onSucces(TourRoot data) {

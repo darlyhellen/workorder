@@ -105,6 +105,12 @@ public interface HttpRetrofitInterface {
     Observable<JsonObject> perambulateUp(@Body RequestBody args);
 
     /**
+     * @TODO:巡检列表页面
+     */
+    @GET("server/perambulate/refer/details/")
+    Observable<JsonObject> details(@Query("pageNo") int pageNo);
+
+    /**
      * @param version
      * @TODO:版本更新接口
      */
