@@ -91,11 +91,24 @@ public interface HttpRetrofitInterface {
      */
     @GET("server/device/refer/searchDevice/")
     Observable<JsonObject> searchDevice(@Query("type") String type, @Query("pageNo") int pageNo);
+
     /**
      * @TODO:巡检页面根据条件查询设备信息。
      */
     @GET("server/device/refer/searchOneDevice/")
     Observable<JsonObject> searchOneDevice(@Query("type") String type, @Query("code") String code, @Query("name") String name);
+
+    /**
+     * @TODO:巡检页面参数完整,提交工单接口.
+     */
+    @POST("server/perambulate/change/perambulateUp/")
+    Observable<JsonObject> perambulateUp(@Body RequestBody args);
+
+    /**
+     * @TODO:巡检列表页面
+     */
+    @GET("server/perambulate/refer/details/")
+    Observable<JsonObject> details(@Query("pageNo") int pageNo);
 
     /**
      * @param version

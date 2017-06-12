@@ -12,28 +12,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <ImageView
-        android:id="@+id/comment_iv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@mipmap/patrol_manage"
-        android:visibility="visible" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/margin_padding5"
-        android:background="@color/divider" />
-
     <GridView
         android:id="@+id/gv_home"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:divider="@null"
-        android:horizontalSpacing="@dimen/margin_padding2"
         android:listSelector="@color/transparent_white"
         android:numColumns="2"
-        android:scrollbars="none"
-        android:verticalSpacing="@dimen/margin_padding2" />
+        android:scrollbars="none" />
 
     <!--首页内容结束-->
     <LinearLayout

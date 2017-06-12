@@ -68,8 +68,6 @@ public class WorkOrderMenuActivity extends BaseActivity implements View.OnClickL
     //首页参数集合
     @ViewsBinder(R.id.comment_title)
     private HeaderView title;
-    @ViewsBinder(R.id.comment_iv)
-    private ImageView iv;
     @ViewsBinder(R.id.gv_home)
     private GridView gridView;
     private PatrolHomeAdapter adapter;
@@ -82,11 +80,9 @@ public class WorkOrderMenuActivity extends BaseActivity implements View.OnClickL
         Intent intent = new Intent(this, WorkOrderNewService.class);
         startService(intent);
         presenter = new MainV0Presenter(this);
-        title.setTitle(R.string.main_titile);
+        title.setTitle(R.string.maintenance_order);
         title.setLeftBackgroundResource(R.mipmap.ic_title_back);
         title.setRightBackgroundResource(0);
-        iv.setLayoutParams(new LinearLayout.LayoutParams(AppEnum.WIDTH.getLen(), (int) (AppEnum.WIDTH.getLen() * 0.61)));
-
         adapter = new PatrolHomeAdapter(presenter.findMainV0(0), R.layout.home_grideview_layout, this);
         gridView.setAdapter(adapter);
 

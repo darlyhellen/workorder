@@ -27,6 +27,7 @@ import com.xiangxun.workorder.ui.biz.MaintenanceListener.MaintenanceInterface;
 import com.xiangxun.workorder.ui.main.WorkOrderActivity;
 import com.xiangxun.workorder.ui.main.WorkOrderDetailActivity;
 import com.xiangxun.workorder.ui.presenter.MaintenancePresenter;
+import com.xiangxun.workorder.widget.grid.XwHomeModeButton;
 import com.xiangxun.workorder.widget.header.HeaderView;
 
 import java.util.List;
@@ -53,13 +54,13 @@ public class MaintenanceActivity extends BaseActivity implements AdapterView.OnI
     private ViewFlipper flipper;
 
     @ViewsBinder(R.id.id_maintenance_order)
-    private ImageView order;
+    private XwHomeModeButton order;
     @ViewsBinder(R.id.id_maintenance_tour)
-    private ImageView tour;
+    private XwHomeModeButton tour;
     @ViewsBinder(R.id.id_maintenance_equip)
-    private ImageView equip;
+    private XwHomeModeButton equip;
     @ViewsBinder(R.id.id_maintenance_notifi)
-    private ImageView notifi;
+    private XwHomeModeButton notifi;
 
 
     /**
@@ -76,13 +77,13 @@ public class MaintenanceActivity extends BaseActivity implements AdapterView.OnI
         title.setRightBackgroundResource(R.mipmap.set);
         iv.setLayoutParams(new LinearLayout.LayoutParams(AppEnum.WIDTH.getLen() / 4, AppEnum.WIDTH.getLen() / 4));
         name.setText(SharePreferHelp.getValue(AppEnum.USERREALNAME.getDec(), null));
-        order.setImageResource(R.mipmap.ic_maintenance_order);
+        order.setIV(R.mipmap.ic_maintenance_order_iv,"工单管理");
         order.setLayoutParams(new TableRow.LayoutParams(AppEnum.WIDTH.getLen() / 3, AppEnum.WIDTH.getLen() / 3));
-        tour.setImageResource(R.mipmap.ic_maintenance_tour);
+        tour.setIV(R.mipmap.ic_maintenance_tour_iv,"巡检管理");
         tour.setLayoutParams(new TableRow.LayoutParams(AppEnum.WIDTH.getLen() / 3, AppEnum.WIDTH.getLen() / 3));
-        equip.setImageResource(R.mipmap.ic_maintenance_equip);
+        equip.setIV(R.mipmap.ic_maintenance_equip_iv,"设备管理");
         equip.setLayoutParams(new TableRow.LayoutParams(AppEnum.WIDTH.getLen() / 3, AppEnum.WIDTH.getLen() / 3));
-        notifi.setImageResource(R.mipmap.ic_maintenance_notif);
+        notifi.setIV(R.mipmap.ic_maintenance_notif_iv,"通知公告");
         notifi.setLayoutParams(new TableRow.LayoutParams(AppEnum.WIDTH.getLen() / 3, AppEnum.WIDTH.getLen() / 3));
     }
 

@@ -14,6 +14,7 @@ import com.hellen.baseframe.common.dlog.DLog;
 import com.xiangxun.workorder.base.APP;
 import com.xiangxun.workorder.bean.EquipmentInfo;
 import com.xiangxun.workorder.bean.EquipmentRoot;
+import com.xiangxun.workorder.bean.TourRoot;
 import com.xiangxun.workorder.common.image.BitmapChangeUtil;
 import com.xiangxun.workorder.common.retrofit.RxjavaRetrofitRequestUtil;
 
@@ -65,7 +66,7 @@ public class TourListener implements FramePresenter {
     /**
      * 编辑完成后进行工单提交
      */
-    public void commitTour(boolean isCheck, String declare, List<String> url, final FrameListener<String> listener) {
+    public void commitTour(boolean isCheck, String id, String declare, List<String> url, final FrameListener<TourRoot> listener) {
         if (!APP.isNetworkConnected(APP.getInstance())) {
             listener.onFaild(0, "网络异常,请检查网络");
             return;
@@ -85,14 +86,16 @@ public class TourListener implements FramePresenter {
 
         JSONObject ob = new JSONObject();
         try {
-            ob.put("declare", declare);
-            if (url != null && url.size() >= 2) {
+            ob.put("reason", declare);
+            ob.put("note", null);
+            ob.put("deviceid", id);
+            if (url.size() >= 2) {
                 ob.put("picture1", BitmapChangeUtil.convertIconToString(BitmapFactory.decodeFile(url.get(0))));
             }
-            if (url != null && url.size() >= 3) {
+            if (url.size() >= 3) {
                 ob.put("picture2", BitmapChangeUtil.convertIconToString(BitmapFactory.decodeFile(url.get(1))));
             }
-            if (url != null && url.size() >= 4) {
+            if (url.size() >= 4) {
                 ob.put("picture3", BitmapChangeUtil.convertIconToString(BitmapFactory.decodeFile(url.get(2))));
             }
         } catch (JSONException e) {
@@ -101,17 +104,19 @@ public class TourListener implements FramePresenter {
         DLog.i(getClass().getSimpleName(), ob);
         RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json;charset=UTF-8"), ob.toString());
         //在这里进行数据请求
-        RxjavaRetrofitRequestUtil.getInstance().get().test().
+        RxjavaRetrofitRequestUtil.getInstance().post().perambulateUp(body).
                 subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .map(new Func1<JsonObject, String>() {
+                .map(new Func1<JsonObject, TourRoot>() {
                     @Override
-                    public String call(JsonObject jsonObject) {
+                    public TourRoot call(JsonObject jsonObject) {
                         DLog.json("Func1", jsonObject.toString());
-                        return jsonObject.toString();
+
+                        return new Gson().fromJson(jsonObject.toString(), new TypeToken<TourRoot>() {
+                        }.getType());
                     }
                 })
-                .subscribe(new Observer<String>() {
+                .subscribe(new Observer<TourRoot>() {
                     @Override
                     public void onCompleted() {
 
@@ -123,14 +128,14 @@ public class TourListener implements FramePresenter {
                     }
 
                     @Override
-                    public void onNext(String data) {
+                    public void onNext(TourRoot data) {
                         if (data != null) {
 
-//                            if (data.getStatus() == 1 && data.getData() != null) {
-//                                listener.onSucces(data);
-//                            } else {
-//                                listener.onFaild(0, data.getMessage());
-//                            }
+                            if (data.getStatus() == 1 && data.getData() != null) {
+                                listener.onSucces(data);
+                            } else {
+                                listener.onFaild(0, data.getMessage());
+                            }
 
                         } else {
                             listener.onFaild(0, "解析错误");

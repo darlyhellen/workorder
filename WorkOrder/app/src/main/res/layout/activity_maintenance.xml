@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/ic_maintenance_background"
+    android:background="@color/white"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
@@ -13,19 +13,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@mipmap/ic_maintenance_up"
-        android:visibility="gone"/>
-
     <ImageView
         android:id="@+id/id_maintenance_iv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/margin_padding10"
-        android:src="@mipmap/ic_maintenance_background_1"
+        android:src="@mipmap/ic_launcher"
         android:visibility="visible" />
 
 
@@ -34,16 +27,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:padding="@dimen/margin_padding10"
-        android:textColor="@color/white"
+        android:textColor="@color/text_color"
+        android:layout_marginBottom="@dimen/margin_padding10"
         android:textSize="@dimen/textSize20" />
 
-
-    <TextView
+    <ViewFlipper
+        android:id="@+id/id_maintenance_flipper"
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="44dp"
         android:layout_marginBottom="@dimen/margin_padding20"
-        android:background="@mipmap/ic_maintenance_mid" />
+        android:layout_marginLeft="@dimen/margin_padding10"
+        android:layout_marginRight="@dimen/margin_padding10"
+        android:autoStart="true"
+        android:background="@drawable/app_login_flipper_shape"
+        android:flipInterval="3000"
+        android:inAnimation="@anim/anim_in"
+        android:outAnimation="@anim/anim_out" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -57,7 +56,7 @@
             android:layout_height="wrap_content"
             android:gravity="center">
 
-            <ImageView
+            <com.xiangxun.workorder.widget.grid.XwHomeModeButton
                 android:id="@+id/id_maintenance_order"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -67,7 +66,7 @@
                 android:layout_width="20dp"
                 android:layout_height="1dp" />
 
-            <ImageView
+            <com.xiangxun.workorder.widget.grid.XwHomeModeButton
                 android:id="@+id/id_maintenance_tour"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -84,7 +83,7 @@
             android:layout_height="wrap_content"
             android:gravity="center">
 
-            <ImageView
+            <com.xiangxun.workorder.widget.grid.XwHomeModeButton
                 android:id="@+id/id_maintenance_equip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -94,7 +93,7 @@
                 android:layout_width="20dp"
                 android:layout_height="1dp" />
 
-            <ImageView
+            <com.xiangxun.workorder.widget.grid.XwHomeModeButton
                 android:id="@+id/id_maintenance_notifi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -105,32 +104,4 @@
 
     </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_padding20"
-        android:background="@mipmap/ic_maintenance_down"
-        android:visibility="gone"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
-    <ViewFlipper
-        android:id="@+id/id_maintenance_flipper"
-        android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:layout_marginLeft="@dimen/margin_padding10"
-        android:layout_marginRight="@dimen/margin_padding10"
-        android:autoStart="true"
-        android:background="@mipmap/ic_maintenance_warning"
-        android:flipInterval="5000"
-        android:inAnimation="@anim/anim_in"
-        android:outAnimation="@anim/anim_out" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
 </LinearLayout>

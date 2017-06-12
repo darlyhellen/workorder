@@ -46,14 +46,14 @@ public class WorkOrderAdapter extends ParentAdapter<WorkOrderData> {
         }
 
         hocker.id_tv_supplier_title.setText("工单编号:" + Tools.isEmpty(workOrderData.id));
-        hocker.id_tv_supplier_contact.setText("责任单位: " + Tools.isEmpty(workOrderData.companyid));
+        hocker.id_tv_supplier_contact.setText("责任单位: " + Tools.isEmpty(workOrderData.companyname));
         hocker.id_tv_supplier_product.setText("工单内容: " + Tools.isEmpty(workOrderData.messages));
         if (workOrderData.status != 0) {
             hocker.id_tv_background.setShowDisplay(false);
             hocker.id_tv_background.setBackgroundResource(R.drawable.app_login_shape);
         } else {
             hocker.id_tv_background.setShowDisplay(true);
-            hocker.id_tv_background.setBackgroundResource(R.color.color_d1d1d1);
+            hocker.id_tv_background.setBackgroundResource(R.color.transparent);
         }
         WorkOrderUtils.findStatus(workOrderData.status, hocker.id_tv_appraise_man);
         hocker.id_tv_appraise_date.setText("发布时间: " + Tools.isEmpty(workOrderData.assigntime));

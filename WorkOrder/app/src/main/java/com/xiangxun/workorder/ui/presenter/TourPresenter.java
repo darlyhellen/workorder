@@ -12,6 +12,7 @@ import com.xiangxun.workorder.bean.BaseModel;
 import com.xiangxun.workorder.bean.EquipMenuChildData;
 import com.xiangxun.workorder.bean.EquipmentRoot;
 import com.xiangxun.workorder.bean.ObjectData;
+import com.xiangxun.workorder.bean.TourRoot;
 import com.xiangxun.workorder.ui.biz.MainListener;
 import com.xiangxun.workorder.ui.biz.TourListener;
 import com.xiangxun.workorder.ui.main.SetActivity;
@@ -40,6 +41,8 @@ public class TourPresenter {
 
     private String type;
 
+    private String id;
+
     public TourPresenter(TourListener.TourInterface view) {
         this.view = view;
         this.biz = new TourListener();
@@ -54,13 +57,7 @@ public class TourPresenter {
         date.add(cd);
         cd = new EquipMenuChildData("智能机柜", "icabinef", 0);
         date.add(cd);
-        cd = new EquipMenuChildData("服务器", "server", 0);
-        date.add(cd);
-        cd = new EquipMenuChildData("数据库", "database", 0);
-        date.add(cd);
-        cd = new EquipMenuChildData("平台信息", "project", 0);
-        date.add(cd);
-        cd = new EquipMenuChildData("FTP信息", "ftp", 0);
+        cd = new EquipMenuChildData("监控设备", "jiankong", 0);
         date.add(cd);
         return date;
     }
@@ -96,9 +93,9 @@ public class TourPresenter {
 
     private void updateTour(boolean isCheck) {
         biz.onStart(loading);
-        biz.commitTour(isCheck, view.getDeclare(), view.getImageData(), new FrameListener<String>() {
+        biz.commitTour(isCheck, id, view.getDeclare(), view.getImageData(), new FrameListener<TourRoot>() {
             @Override
-            public void onSucces(String s) {
+            public void onSucces(TourRoot s) {
                 biz.onStop(loading);
             }
 
@@ -153,5 +150,9 @@ public class TourPresenter {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public void setDeviceID(String id) {
+        this.id = id;
     }
 }

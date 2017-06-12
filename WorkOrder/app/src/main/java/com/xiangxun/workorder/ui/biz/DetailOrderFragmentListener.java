@@ -71,8 +71,8 @@ public class DetailOrderFragmentListener implements FramePresenter {
             listener.onFaild(0, "网络异常,请检查网络");
             return;
         }
-        if (TextUtils.isEmpty(reason)) {
-            listener.onFaild(0, "接收/退工说明不能为空");
+        if (TextUtils.isEmpty(reason) && "2".equals(status)) {
+            listener.onFaild(0, "退工说明不能为空");
             return;
         }
         //在这里进行数据请求
