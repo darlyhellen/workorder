@@ -57,13 +57,7 @@ public class TourPresenter {
         date.add(cd);
         cd = new EquipMenuChildData("智能机柜", "icabinef", 0);
         date.add(cd);
-        cd = new EquipMenuChildData("服务器", "server", 0);
-        date.add(cd);
-        cd = new EquipMenuChildData("数据库", "database", 0);
-        date.add(cd);
-        cd = new EquipMenuChildData("平台信息", "project", 0);
-        date.add(cd);
-        cd = new EquipMenuChildData("FTP信息", "ftp", 0);
+        cd = new EquipMenuChildData("监控设备", "jiankong", 0);
         date.add(cd);
         return date;
     }

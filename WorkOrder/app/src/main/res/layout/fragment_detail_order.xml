@@ -29,7 +29,37 @@
                 android:layout_margin="@dimen/margin_padding4"
                 android:numColumns="4" />
 
+            <!--添加一个用户选项《已处理》《未处理》，在工单详情中关联展示按钮-->
+            <RadioGroup
+                android:id="@+id/id_detail_radio_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/app_login_shape"
+                android:orientation="vertical"
+                android:padding="@dimen/margin_padding10">
+
+                <RadioButton
+                    android:id="@+id/id_detail_radio_down"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:button="@drawable/detail_order_radio_select"
+                    android:gravity="center"
+                    android:padding="@dimen/margin_padding10"
+                    android:text="已处理" />
+
+
+                <RadioButton
+                    android:id="@+id/id_detail_radio_undown"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:button="@drawable/detail_order_radio_select"
+                    android:gravity="center"
+                    android:padding="@dimen/margin_padding10"
+                    android:text="未处理" />
+            </RadioGroup>
+
             <TextView
+                android:id="@+id/tv_declare_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/st_detail_update_time"

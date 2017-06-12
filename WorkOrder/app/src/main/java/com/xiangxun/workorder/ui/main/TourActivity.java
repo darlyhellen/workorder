@@ -262,15 +262,15 @@ public class TourActivity extends BaseActivity implements OnClickListener, TourI
             EquipMenuChildData datat = (EquipMenuChildData) type;
             //点击选中的设备信息。
             id_order_equip_type.setText(datat.getName());
-            if ("icabinef".equals(datat.getType()) || "device".equals(datat.getType()) || "server".equals(datat.getType())) {
-                //这些有设备编号。根据编号查询
-                id_tour_code.setVisibility(View.VISIBLE);
-                id_tour_name.setVisibility(View.GONE);
-            } else {
-                //剩余没有设备编号。更加名称查询
-                id_tour_code.setVisibility(View.GONE);
-                id_tour_name.setVisibility(View.VISIBLE);
-            }
+//            if ("icabinef".equals(datat.getType()) || "device".equals(datat.getType()) || "server".equals(datat.getType())) {
+//                //这些有设备编号。根据编号查询
+//                id_tour_code.setVisibility(View.VISIBLE);
+//                id_tour_name.setVisibility(View.GONE);
+//            } else {
+            //剩余没有设备编号。更加名称查询
+            id_tour_code.setVisibility(View.GONE);
+            id_tour_name.setVisibility(View.VISIBLE);
+//            }
             presenter.setType(datat.getType());
 
             id_order_equip_ip.setText("");

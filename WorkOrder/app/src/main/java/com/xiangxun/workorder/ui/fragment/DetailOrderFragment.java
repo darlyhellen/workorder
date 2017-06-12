@@ -13,6 +13,8 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.hellen.baseframe.binder.InitBinder;
@@ -71,6 +73,8 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
     private TextView tvContent20;   //
     @ViewsBinder(R.id.tv_declare)
     private EditText reason;   //
+    @ViewsBinder(R.id.tv_declare_title)
+    private TextView reason_title;   //
     @ViewsBinder(R.id.id_detail_fragment_button)
     private LinearLayout button;   //
     @ViewsBinder(R.id.id_detail_fragment_config)
@@ -79,6 +83,14 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
     private Button consel;   //
     @ViewsBinder(R.id.id_detail_fragment_inimage)
     private WholeGridView images;
+    @ViewsBinder(R.id.id_detail_radio_group)
+    private RadioGroup group;//二选一列表
+    @ViewsBinder(R.id.id_detail_radio_down)
+    private RadioButton down;//用户处理完成选择
+    @ViewsBinder(R.id.id_detail_radio_undown)
+    private RadioButton undown;//用户未处理完成选择
+
+
     private List<String> imageData;
     private DetailOrderImageAdapter adapter;
 
@@ -132,6 +144,8 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
                 close.setVisibility(View.GONE);
                 except.setVisibility(View.GONE);
                 images.setVisibility(View.GONE);
+                reason_title.setText(R.string.st_detail_declare_t1);
+                group.setVisibility(View.GONE);
                 commit.setText("接收工单");
                 consel.setText("退回工单");
                 break;
@@ -141,8 +155,27 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
                 except.setVisibility(View.GONE);
                 close.setVisibility(View.GONE);
                 images.setVisibility(View.VISIBLE);
-                commit.setText("正常上报");
-                consel.setText("异常上报");
+                group.setVisibility(View.VISIBLE);
+                group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(RadioGroup group, int checkedId) {
+                        switch (checkedId) {
+                            case R.id.id_detail_radio_down:
+                                reason_title.setText(R.string.st_detail_declare_t2);
+                                commit.setText("正常上报");
+                                commit.setVisibility(View.VISIBLE);
+                                consel.setVisibility(View.GONE);
+                                break;
+                            case R.id.id_detail_radio_undown:
+                                reason_title.setText(R.string.st_detail_declare_t3);
+                                consel.setText("异常上报");
+                                commit.setVisibility(View.GONE);
+                                consel.setVisibility(View.VISIBLE);
+                                break;
+                        }
+                    }
+                });
+                down.setChecked(true);
                 break;
             case 5:
                 //遗留的状态
