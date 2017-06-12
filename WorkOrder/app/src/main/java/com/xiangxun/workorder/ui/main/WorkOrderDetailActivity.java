@@ -77,7 +77,7 @@ public class WorkOrderDetailActivity extends BaseActivity implements OnClickList
         }
         tab.setTabMode(TabLayout.MODE_FIXED);
         tab.setTabGravity(TabLayout.GRAVITY_FILL);
-        tab.setTabTextColors(R.color.text_color, R.color.blue_btn_bg_color);
+        tab.setTabTextColors(R.color.edit_save_btn_color_disable, R.color.text_color);
 
         if (data != null) {
             hasData();

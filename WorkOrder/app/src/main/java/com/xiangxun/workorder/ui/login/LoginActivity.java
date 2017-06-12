@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hellen.baseframe.binder.ContentBinder;
@@ -55,7 +55,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Logi
         presenter = new LoginPresenter(this);
         mBtnLogin.setViewInit(R.string.mine_login_login, R.string.mine_login_loginning, mEdtAcount, mEdtPassWord);
         mBtnLogin_post.setViewInit(R.string.mine_login_login, R.string.mine_login_loginning, mEdtAcount, mEdtPassWord);
-        iv.setLayoutParams(new RelativeLayout.LayoutParams(AppEnum.WIDTH.getLen(), (int) (AppEnum.WIDTH.getLen() * 0.64)));
+        iv.setLayoutParams(new LinearLayout.LayoutParams(AppEnum.WIDTH.getLen()/5, AppEnum.WIDTH.getLen() /5));
         String account = SharePreferHelp.getValue(AppEnum.USERNAME.getDec(), null);
         String password = SharePreferHelp.getValue(AppEnum.PASSWORD.getDec(), null);
         mEdtAcount.setText(account);

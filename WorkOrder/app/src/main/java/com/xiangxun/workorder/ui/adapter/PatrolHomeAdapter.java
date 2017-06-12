@@ -4,9 +4,12 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.LinearLayout;
 
 import com.hellen.baseframe.baseadapter.ParentAdapter;
 import com.xiangxun.workorder.R;
+import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.bean.Patrol;
 import com.xiangxun.workorder.widget.grid.XwHomeModeButton;
 
@@ -32,6 +35,8 @@ public class PatrolHomeAdapter extends ParentAdapter<Patrol> {
         if (view == null) {
             holder = new ViewHolder();
             view = LayoutInflater.from(context).inflate(resID, null);
+            holder.ll = (LinearLayout) view.findViewById(R.id.ll_background);
+            holder.ll.setLayoutParams(new AbsListView.LayoutParams(AppEnum.WIDTH.getLen() / 2, AppEnum.WIDTH.getLen() / 3));
             holder.modeButton = (XwHomeModeButton) view.findViewById(R.id.mode_button);
             view.setTag(holder);
         } else {
@@ -50,6 +55,7 @@ public class PatrolHomeAdapter extends ParentAdapter<Patrol> {
 
     class ViewHolder {
         XwHomeModeButton modeButton;
+        LinearLayout ll;
     }
 
 }

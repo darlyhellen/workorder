@@ -53,7 +53,7 @@ public class WorkOrderAdapter extends ParentAdapter<WorkOrderData> {
             hocker.id_tv_background.setBackgroundResource(R.drawable.app_login_shape);
         } else {
             hocker.id_tv_background.setShowDisplay(true);
-            hocker.id_tv_background.setBackgroundResource(R.color.color_d1d1d1);
+            hocker.id_tv_background.setBackgroundResource(R.color.transparent);
         }
         WorkOrderUtils.findStatus(workOrderData.status, hocker.id_tv_appraise_man);
         hocker.id_tv_appraise_date.setText("发布时间: " + Tools.isEmpty(workOrderData.assigntime));

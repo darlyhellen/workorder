@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
@@ -10,19 +10,24 @@
         android:id="@+id/id_item_equip_iv"
         android:layout_width="20dp"
         android:layout_height="20dp"
+        android:layout_alignParentLeft="true"
         android:scaleType="fitXY" />
 
     <TextView
         android:id="@+id/id_item_equip_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:layout_marginLeft="10dp"
-        android:textSize="16sp" />
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/textSize20" />
 
     <TextView
         android:id="@+id/id_item_equip_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
         android:layout_marginLeft="10dp"
-        android:textSize="16sp" />
-</LinearLayout>
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/textSize20" />
+</RelativeLayout>

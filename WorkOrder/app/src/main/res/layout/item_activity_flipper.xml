@@ -4,19 +4,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
+    android:gravity="center_vertical"
     android:padding="4dp">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/margin_padding10"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
         android:src="@mipmap/ic_maintenance_flipper" />
 
     <TextView
         android:id="@+id/id_maintenance_flp_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/margin_padding10" />
+        android:textColor="@color/text_color"
+        android:padding="@dimen/margin_padding4" />
 
 
 </com.xiangxun.workorder.widget.coupon.CouponDisplayView>

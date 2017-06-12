@@ -5,127 +5,146 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-
-    <ImageView
-        android:id="@+id/edt_login_bg"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@mipmap/ic_login" />
-
     <LinearLayout
-        android:id="@+id/ll_login_bg"
-        android:layout_below="@id/edt_login_bg"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/margin_padding15">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_padding10"
-            android:gravity="center_vertical"
-            android:padding="@dimen/margin_padding10">
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/btn_selecter_user"
-                android:visibility="gone" />
-
-            <com.xiangxun.workorder.ui.login.edittext.ClearEditText
-                android:id="@+id/edt_user_acount"
+            <ImageView
+                android:id="@+id/edt_login_bg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/xw_edit_normal"
-                android:drawableLeft="@drawable/btn_selecter_user"
-                android:drawablePadding="@dimen/margin_padding15"
-                android:ems="10"
-                android:hint="@string/mine_login_hine1"
-                android:inputType="text"
-                android:text="chaotu"
-                android:textColor="@color/black"
-                android:textColorHint="@color/color_cecece"
-                android:textSize="@dimen/textSize17">
-
-                <requestFocus />
-            </com.xiangxun.workorder.ui.login.edittext.ClearEditText>
+                android:src="@mipmap/ic_launcher" />
         </LinearLayout>
-
 
         <LinearLayout
+            android:id="@+id/ll_login_bg"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_padding10"
-            android:layout_marginTop="@dimen/margin_padding15"
-            android:gravity="center_vertical"
-            android:padding="@dimen/margin_padding10">
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/margin_padding15"
+            android:paddingRight="@dimen/margin_padding15">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/btn_selecter_pwd"
-                android:visibility="gone" />
-
-            <com.xiangxun.workorder.ui.login.edittext.ClearEditText
-                android:id="@+id/edt_login_password"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/xw_edit_normal"
-                android:drawableLeft="@drawable/btn_selecter_pwd"
-                android:drawablePadding="@dimen/margin_padding15"
-                android:ems="10"
-                android:hint="@string/mine_login_hine2"
-                android:inputType="textPassword"
-                android:maxLength="11"
-                android:text="123456"
-                android:textColor="@color/black"
-                android:textColorHint="@color/color_cecece"
-                android:textSize="@dimen/textSize17" />
-        </LinearLayout>
+                android:layout_marginTop="@dimen/margin_padding10"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/margin_padding10"
+                android:paddingRight="@dimen/margin_padding10">
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/margin_padding2">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_selecter_user"
+                    android:visibility="gone" />
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1" />
+                <com.xiangxun.workorder.ui.login.edittext.ClearEditText
+                    android:id="@+id/edt_user_acount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/app_login_flipper_shape"
+                    android:drawableLeft="@drawable/btn_selecter_user"
+                    android:drawablePadding="@dimen/margin_padding15"
+                    android:ems="10"
+                    android:hint="@string/mine_login_hine1"
+                    android:inputType="text"
+                    android:padding="@dimen/margin_padding10"
+                    android:text="chaotu"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/color_cecece"
+                    android:textSize="@dimen/textSize17">
 
-            <TextView
-                android:id="@+id/id_login_set"
-                android:layout_width="wrap_content"
+                    <requestFocus />
+                </com.xiangxun.workorder.ui.login.edittext.ClearEditText>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="系统设置"
-                android:textColor="@color/link_color" />
-        </TableRow>
+                android:layout_marginBottom="@dimen/margin_padding5"
+                android:layout_marginTop="@dimen/margin_padding15"
+                android:gravity="center_vertical"
+                android:padding="@dimen/margin_padding10">
 
-        <com.xiangxun.workorder.ui.login.edittext.XSubButton
-            android:id="@+id/btn_login"
-            android:layout_width="fill_parent"
-            android:layout_height="@dimen/view_height40"
-            android:layout_marginTop="@dimen/margin_padding10"
-            android:visibility="gone" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_selecter_pwd"
+                    android:visibility="gone" />
 
-        <com.xiangxun.workorder.ui.login.edittext.XSubButton
-            android:id="@+id/btn_login_post"
-            android:layout_width="fill_parent"
-            android:layout_height="@dimen/view_height40"
-            android:layout_marginTop="@dimen/margin_padding10" />
+                <com.xiangxun.workorder.ui.login.edittext.ClearEditText
+                    android:id="@+id/edt_login_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/app_login_flipper_shape"
+                    android:drawableLeft="@drawable/btn_selecter_pwd"
+                    android:drawablePadding="@dimen/margin_padding15"
+                    android:ems="10"
+                    android:hint="@string/mine_login_hine2"
+                    android:inputType="textPassword"
+                    android:maxLength="11"
+                    android:padding="@dimen/margin_padding10"
+                    android:text="123456"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/color_cecece"
+                    android:textSize="@dimen/textSize17" />
+            </LinearLayout>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingRight="@dimen/margin_padding10"
+                android:paddingLeft="@dimen/margin_padding10">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/id_login_set"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="系统设置"
+                    android:textColor="@color/color_1f8ce1" />
+            </TableRow>
+
+            <com.xiangxun.workorder.ui.login.edittext.XSubButton
+                android:id="@+id/btn_login"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/view_height40"
+                android:layout_marginTop="@dimen/margin_padding10"
+                android:visibility="gone" />
+
+            <com.xiangxun.workorder.ui.login.edittext.XSubButton
+                android:id="@+id/btn_login_post"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/view_height40"
+                android:paddingRight="@dimen/margin_padding10"
+                android:paddingLeft="@dimen/margin_padding10"
+                android:layout_marginTop="@dimen/margin_padding10" />
+        </LinearLayout>
     </LinearLayout>
-
 
     <TextView
         style="@style/more_about_text"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/margin_padding10"
         android:layout_marginTop="@dimen/margin_padding20"
         android:lineSpacingExtra="5dp"
         android:text="@string/splash_adv_logo"
-        android:textColor="@color/black"
+        android:textColor="@color/color_1f8ce1"
         android:textSize="@dimen/textSize14" />
 
 </RelativeLayout>

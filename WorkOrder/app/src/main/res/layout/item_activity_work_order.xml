@@ -20,7 +20,7 @@
     <View
         android:layout_width="fill_parent"
         android:layout_height="1.0px"
-        android:background="@color/chart_value_3" />
+        android:background="@color/edit_save_btn_color_disable" />
 
     <TextView
         android:id="@+id/id_tv_supplier_contact"
