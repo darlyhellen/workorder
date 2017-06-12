@@ -40,7 +40,7 @@
         android:layout_marginRight="@dimen/margin_padding10"
         android:autoStart="true"
         android:background="@drawable/app_login_flipper_shape"
-        android:flipInterval="5000"
+        android:flipInterval="3000"
         android:inAnimation="@anim/anim_in"
         android:outAnimation="@anim/anim_out" />
 

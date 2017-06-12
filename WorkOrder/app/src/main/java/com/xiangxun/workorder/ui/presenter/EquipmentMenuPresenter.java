@@ -58,20 +58,20 @@ public class EquipmentMenuPresenter {
             List<EquipMenuChildData> list = new ArrayList<EquipMenuChildData>();
             if (i % 2 == 0) {
                 EquipMenuChildData cd = null;
-                cd = new EquipMenuChildData("卡口设备", "device", 0);
+                cd = new EquipMenuChildData("卡口设备", "device", R.mipmap.ic_equip_img_kakou);
                 list.add(cd);
-                cd = new EquipMenuChildData("智能机柜", "icabinef", 0);
+                cd = new EquipMenuChildData("智能机柜", "icabinef", R.mipmap.ic_equip_img_jigui);
                 list.add(cd);
             } else {
                 EquipMenuChildData cd = null;
                 if (i == 1) {
-                    cd = new EquipMenuChildData("服务器", "server", 0);
+                    cd = new EquipMenuChildData("服务器", "server", R.mipmap.ic_equip_img_fuwuqi);
                     list.add(cd);
-                    cd = new EquipMenuChildData("数据库", "database", 0);
+                    cd = new EquipMenuChildData("数据库", "database", R.mipmap.ic_equip_img_shujk);
                     list.add(cd);
-                    cd = new EquipMenuChildData("平台信息", "project", 0);
+                    cd = new EquipMenuChildData("平台信息", "project", R.mipmap.ic_equip_img_pingtai);
                     list.add(cd);
-                    cd = new EquipMenuChildData("FTP信息", "ftp", 0);
+                    cd = new EquipMenuChildData("FTP信息", "ftp", R.mipmap.ic_equip_img_ftp);
                     list.add(cd);
                 }
             }

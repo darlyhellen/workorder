@@ -290,6 +290,7 @@ public class TourActivity extends BaseActivity implements OnClickListener, TourI
             id_tour_code_name.setText(infoed.code);
             id_tour_name_code.setText(infoed.code);
             id_tour_name_name.setText(infoed.assetname);
+            presenter.setDeviceID(infoed.id);
         }
     }
 }
