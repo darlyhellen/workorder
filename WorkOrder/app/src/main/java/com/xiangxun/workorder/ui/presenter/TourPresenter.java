@@ -47,6 +47,7 @@ public class TourPresenter {
         this.view = view;
         this.biz = new TourListener();
         loading = new ShowLoading((TourActivity) view);
+        loading.setMessage(R.string.loading);
     }
 
 
