@@ -60,4 +60,34 @@ public class Aset {
         }
     }
 
+
+    public static void copyAssetsGif(Context context) {
+
+        AssetManager assetManager = context.getAssets();
+        InputStream in = null;
+        OutputStream out = null;
+        try {
+            in = assetManager.open("loading.gif");
+            File outFile = new File(AppEnum.ROOT, "loading.gif");
+            if (!outFile.exists()) {
+                out = new FileOutputStream(outFile);
+                copyFile(in, out);
+            }
+        } catch (IOException e) {
+            //初始化失败
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                }
+            }
+            if (out != null) {
+                try {
+                    out.close();
+                } catch (IOException e) {
+                }
+            }
+        }
+    }
 }

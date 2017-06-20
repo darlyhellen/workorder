@@ -56,6 +56,7 @@ public class APP extends FrameAPP {
         DBControler.getInstance(this).init();
         //初始化图片工具类
         ImageLoaderUtil.init(this);
+        Aset.copyAssetsGif(this);
     }
 
     /**

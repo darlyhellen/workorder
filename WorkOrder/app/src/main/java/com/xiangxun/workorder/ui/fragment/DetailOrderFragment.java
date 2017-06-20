@@ -380,7 +380,7 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
         tv_linear.addView(deviceid);
 
         DetailView time = new DetailView(getActivity());
-        time.setNameValue(R.string.st_tour_time, tour.time);
+        time.setNameValue(R.string.st_tour_time, tour.inserttime);
         tv_linear.addView(time);
 
         DetailView reason = new DetailView(getActivity());

@@ -4,8 +4,6 @@ import android.app.Dialog;
 
 import com.hellen.baseframe.application.FramePresenter;
 import com.hellen.baseframe.application.FrameView;
-import com.hellen.baseframe.common.db.ThreadInfo;
-import com.xiangxun.workorder.widget.camera.PhotoPop;
 
 /**
  * Created by Zhangyuhui/Darly on 2017/5/17.
