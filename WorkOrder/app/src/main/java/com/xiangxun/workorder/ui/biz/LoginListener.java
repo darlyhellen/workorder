@@ -231,6 +231,44 @@ public class LoginListener implements FramePresenter {
 
     }
 
+    public void login_github(
+            final FrameListener<String> listener) {
+        // TODO Auto-generated method stub
+        if (!APP.isNetworkConnected(APP.getInstance())) {
+            listener.onFaild(0, "网络异常,请检查网络");
+            return;
+        }
+        RxjavaRetrofitRequestUtil.getInstance().getgithub()
+                .github()
+                .subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map(new Func1<JsonObject, String>() {
+                    @Override
+                    public String call(JsonObject s) {
+                        DLog.json("Func1", s.toString());
+                        return s.toString();
+                    }
+                })
+                .subscribe(new Observer<String>() {
+                               @Override
+                               public void onCompleted() {
+
+                               }
+
+                               @Override
+                               public void onError(Throwable e) {
+                                   listener.onFaild(1, e.getMessage());
+                               }
+
+                               @Override
+                               public void onNext(String data) {
+                               }
+                           }
+
+                );
+
+    }
+
     private String getTelNum(Context context) {
         TelephonyManager tm = (TelephonyManager) context
                 .getSystemService(Context.TELEPHONY_SERVICE);// 取得相关系统服务

@@ -84,6 +84,23 @@ public class RxjavaRetrofitRequestUtil {
         return retrofit.create(HttpRetrofitInterface.class);
     }
 
+    public HttpRetrofitInterface getgithub() {
+        //清理多余的头文件。
+        while (builder.interceptors().size() > 0 && builder.interceptors().size() != interSize) {
+            builder.interceptors().remove(builder.interceptors().size() - 1);
+        }
+        //清理多余的头文件。
+        builder.addInterceptor(RxInterceptor.getInstance());
+        DLog.i(builder.interceptors().size());
+        Retrofit retrofit = new Retrofit.Builder()
+                .client(builder.build())
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .baseUrl("https://darlyhellen.github.io/")
+                .build();
+        return retrofit.create(HttpRetrofitInterface.class);
+    }
+
     public HttpRetrofitInterface post() {
         //清理多余的头文件。
         while (builder.interceptors().size() > 0 && builder.interceptors().size() != interSize) {

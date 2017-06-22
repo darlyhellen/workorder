@@ -38,8 +38,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Logi
     private ClearEditText mEdtAcount;
     @ViewsBinder(R.id.edt_login_password)
     private ClearEditText mEdtPassWord;
-    @ViewsBinder(R.id.btn_login)
-    private XSubButton mBtnLogin;
+    @ViewsBinder(R.id.btn_login_github)
+    private XSubButton btn_login_github;
     @ViewsBinder(R.id.btn_login_post)
     private XSubButton mBtnLogin_post;
     private String password;
@@ -53,9 +53,9 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Logi
     @Override
     protected void initView(Bundle savedInstanceState) {
         presenter = new LoginPresenter(this);
-        mBtnLogin.setViewInit(R.string.mine_login_login, R.string.mine_login_loginning, mEdtAcount, mEdtPassWord);
+        btn_login_github.setViewInit(R.string.mine_login_login, R.string.mine_login_loginning, mEdtAcount, mEdtPassWord);
         mBtnLogin_post.setViewInit(R.string.mine_login_login, R.string.mine_login_loginning, mEdtAcount, mEdtPassWord);
-        iv.setLayoutParams(new LinearLayout.LayoutParams(AppEnum.WIDTH.getLen()/5, AppEnum.WIDTH.getLen() /5));
+        iv.setLayoutParams(new LinearLayout.LayoutParams(AppEnum.WIDTH.getLen() / 5, AppEnum.WIDTH.getLen() / 5));
         String account = SharePreferHelp.getValue(AppEnum.USERNAME.getDec(), null);
         String password = SharePreferHelp.getValue(AppEnum.PASSWORD.getDec(), null);
         mEdtAcount.setText(account);
@@ -65,7 +65,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Logi
 
     @Override
     public void initListener() {
-        mBtnLogin.setOnClickListener(this);
+        btn_login_github.setOnClickListener(this);
         mBtnLogin_post.setOnClickListener(this);
         setiv.setOnClickListener(this);
     }
@@ -114,14 +114,14 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Logi
 
     @Override
     public void setDisableClick() {
-        mBtnLogin.setEnabled(false);
+        btn_login_github.setEnabled(false);
         mBtnLogin_post.setEnabled(false);
     }
 
     @Override
     public void setEnableClick() {
-        mBtnLogin.setEnabled(true);
-        mBtnLogin.setNormal();
+        btn_login_github.setEnabled(true);
+        btn_login_github.setNormal();
         mBtnLogin_post.setEnabled(true);
         mBtnLogin_post.setNormal();
     }

@@ -42,8 +42,9 @@ public class LoginPresenter {
      */
     public void onClickDown(Context context, View v) {
         switch (v.getId()) {
-            case R.id.btn_login:
-                login(context);
+            case R.id.btn_login_github:
+                logingithub();
+//                login(context);
                 break;
             case R.id.btn_login_post:
                 login_post(context);
@@ -56,6 +57,40 @@ public class LoginPresenter {
             default:
                 break;
         }
+    }
+
+
+    public void logingithub() {
+        LogApp.i(TAG, "login");
+        userBiz.onStart(loading);
+        main.setDisableClick();
+        userBiz.login_github(new FrameListener<String>() {
+
+            @Override
+            public void onSucces(final String result) {
+                // TODO Auto-generated method stub
+                main.setEnableClick();
+                userBiz.onStop(loading);
+            }
+
+            @Override
+            public void onFaild(int code, String info) {
+                // TODO Auto-generated method stub
+                main.setEnableClick();
+                userBiz.onStop(loading);
+                switch (code) {
+                    case 1:
+                        ToastApp.showToast(info);
+                        break;
+                    case 0:
+                        ToastApp.showToast("网络请求异常");
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+
     }
 
     public void login(Context context) {

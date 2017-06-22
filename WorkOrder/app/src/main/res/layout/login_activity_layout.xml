@@ -103,8 +103,8 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingRight="@dimen/margin_padding10"
-                android:paddingLeft="@dimen/margin_padding10">
+                android:paddingLeft="@dimen/margin_padding10"
+                android:paddingRight="@dimen/margin_padding10">
 
                 <View
                     android:layout_width="0dp"
@@ -120,7 +120,7 @@
             </TableRow>
 
             <com.xiangxun.workorder.ui.login.edittext.XSubButton
-                android:id="@+id/btn_login"
+                android:id="@+id/btn_login_github"
                 android:layout_width="fill_parent"
                 android:layout_height="@dimen/view_height40"
                 android:layout_marginTop="@dimen/margin_padding10"
@@ -130,9 +130,9 @@
                 android:id="@+id/btn_login_post"
                 android:layout_width="fill_parent"
                 android:layout_height="@dimen/view_height40"
-                android:paddingRight="@dimen/margin_padding10"
+                android:layout_marginTop="@dimen/margin_padding10"
                 android:paddingLeft="@dimen/margin_padding10"
-                android:layout_marginTop="@dimen/margin_padding10" />
+                android:paddingRight="@dimen/margin_padding10" />
         </LinearLayout>
     </LinearLayout>
 
