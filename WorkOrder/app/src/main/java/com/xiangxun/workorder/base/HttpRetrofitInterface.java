@@ -123,6 +123,7 @@ public interface HttpRetrofitInterface {
     @GET("server")
     Observable<JsonObject> test();
 
+
     /**
      * @TODO:测试接口，替换接口。
      */

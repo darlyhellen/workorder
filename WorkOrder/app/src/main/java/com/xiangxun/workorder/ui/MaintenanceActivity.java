@@ -77,13 +77,13 @@ public class MaintenanceActivity extends BaseActivity implements AdapterView.OnI
         title.setRightBackgroundResource(R.mipmap.set);
         iv.setLayoutParams(new LinearLayout.LayoutParams(AppEnum.WIDTH.getLen() / 4, AppEnum.WIDTH.getLen() / 4));
         name.setText(SharePreferHelp.getValue(AppEnum.USERREALNAME.getDec(), null));
-        order.setIV(R.mipmap.ic_maintenance_order_iv,"工单管理");
+        order.setIV(R.mipmap.ic_maintenance_order_iv, "工单管理");
         order.setLayoutParams(new TableRow.LayoutParams(AppEnum.WIDTH.getLen() / 3, AppEnum.WIDTH.getLen() / 3));
-        tour.setIV(R.mipmap.ic_maintenance_tour_iv,"巡检管理");
+        tour.setIV(R.mipmap.ic_maintenance_tour_iv, "巡检管理");
         tour.setLayoutParams(new TableRow.LayoutParams(AppEnum.WIDTH.getLen() / 3, AppEnum.WIDTH.getLen() / 3));
-        equip.setIV(R.mipmap.ic_maintenance_equip_iv,"设备管理");
+        equip.setIV(R.mipmap.ic_maintenance_equip_iv, "设备管理");
         equip.setLayoutParams(new TableRow.LayoutParams(AppEnum.WIDTH.getLen() / 3, AppEnum.WIDTH.getLen() / 3));
-        notifi.setIV(R.mipmap.ic_maintenance_notif_iv,"通知公告");
+        notifi.setIV(R.mipmap.ic_maintenance_notif_iv, "通知公告");
         notifi.setLayoutParams(new TableRow.LayoutParams(AppEnum.WIDTH.getLen() / 3, AppEnum.WIDTH.getLen() / 3));
     }
 
@@ -126,7 +126,9 @@ public class MaintenanceActivity extends BaseActivity implements AdapterView.OnI
         }
         switch (patrol.getListId()) {
             case 10:
-                startActivity(new Intent(this, WorkOrderMenuActivity.class));
+                Intent menu = new Intent(this, WorkOrderMenuActivity.class);
+                menu.putExtra("Num", flipper.getChildCount());
+                startActivity(menu);
                 break;
             case 20:
                 Intent intent = new Intent(this, WorkOrderActivity.class);

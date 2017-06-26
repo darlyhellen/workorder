@@ -106,6 +106,12 @@
                 android:paddingLeft="@dimen/margin_padding10"
                 android:paddingRight="@dimen/margin_padding10">
 
+                <CheckBox
+                    android:id="@+id/id_login_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="记住密码" />
+
                 <View
                     android:layout_width="0dp"
                     android:layout_height="1dp"

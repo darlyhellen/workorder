@@ -13,6 +13,8 @@ import com.xiangxun.workorder.bean.WorkOrderData;
  */
 public enum AppEnum {
 
+    ISLOGINPASS("isloginpass", 0),
+
     WIDTH("screen width", 0),
 
     HEIGHT("screen height", 0),

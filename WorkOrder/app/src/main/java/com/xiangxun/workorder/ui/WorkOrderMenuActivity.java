@@ -83,7 +83,8 @@ public class WorkOrderMenuActivity extends BaseActivity implements View.OnClickL
         title.setTitle(R.string.maintenance_order);
         title.setLeftBackgroundResource(R.mipmap.ic_title_back);
         title.setRightBackgroundResource(0);
-        adapter = new PatrolHomeAdapter(presenter.findMainV0(0), R.layout.home_grideview_layout, this);
+
+        adapter = new PatrolHomeAdapter(presenter.findMainV0(getIntent().getIntExtra("Num",0)), R.layout.home_grideview_layout, this);
         gridView.setAdapter(adapter);
 
     }

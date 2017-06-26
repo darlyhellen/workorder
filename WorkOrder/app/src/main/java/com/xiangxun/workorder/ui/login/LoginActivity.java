@@ -5,6 +5,9 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -29,7 +32,7 @@ import com.xiangxun.workorder.ui.presenter.LoginPresenter;
  * @TODO: 登陆页面
  */
 @ContentBinder(R.layout.login_activity_layout)
-public class LoginActivity extends BaseActivity implements OnClickListener, LoginInterface {
+public class LoginActivity extends BaseActivity implements OnClickListener, LoginInterface, OnCheckedChangeListener {
 
 
     @ViewsBinder(R.id.edt_login_bg)
@@ -46,6 +49,8 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Logi
     private String acount;
     @ViewsBinder(R.id.id_login_set)
     private TextView setiv;
+    @ViewsBinder(R.id.id_login_check)
+    private CheckBox id_login_check;
 
 
     private LoginPresenter presenter;
@@ -59,7 +64,13 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Logi
         String account = SharePreferHelp.getValue(AppEnum.USERNAME.getDec(), null);
         String password = SharePreferHelp.getValue(AppEnum.PASSWORD.getDec(), null);
         mEdtAcount.setText(account);
-        mEdtPassWord.setText(password);
+        if (SharePreferHelp.getValue(AppEnum.ISLOGINPASS.getDec(), false)) {
+            mEdtPassWord.setText(password);
+            id_login_check.setChecked(true);
+        } else {
+            mEdtPassWord.setText(null);
+            id_login_check.setChecked(false);
+        }
         setiv.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
     }
 
@@ -68,6 +79,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Logi
         btn_login_github.setOnClickListener(this);
         mBtnLogin_post.setOnClickListener(this);
         setiv.setOnClickListener(this);
+        id_login_check.setOnCheckedChangeListener(this);
     }
 
     @Override
@@ -124,5 +136,10 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Logi
         btn_login_github.setNormal();
         mBtnLogin_post.setEnabled(true);
         mBtnLogin_post.setNormal();
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        SharePreferHelp.putValue(AppEnum.ISLOGINPASS.getDec(), isChecked);
     }
 }
