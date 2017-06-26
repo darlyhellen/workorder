@@ -5,15 +5,22 @@ import android.content.Intent;
 import android.view.View;
 
 import com.hellen.baseframe.application.FrameListener;
+import com.hellen.baseframe.common.dlog.DLog;
 import com.hellen.baseframe.common.obsinfo.LogApp;
 import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.hellen.baseframe.common.utiltools.SharePreferHelp;
 import com.xiangxun.workorder.R;
+import com.xiangxun.workorder.base.APP;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.bean.LoginRoot;
+import com.xiangxun.workorder.bean.VersionRoot;
+import com.xiangxun.workorder.service.VersionUpdateService;
 import com.xiangxun.workorder.ui.biz.LoginListener;
+import com.xiangxun.workorder.ui.biz.SetListener;
 import com.xiangxun.workorder.ui.login.LoginActivity;
 import com.xiangxun.workorder.ui.main.SetActivity;
+import com.xiangxun.workorder.widget.dialog.APPDialg;
+import com.xiangxun.workorder.widget.dialog.OndialogListener;
 import com.xiangxun.workorder.widget.loading.ShowLoading;
 
 

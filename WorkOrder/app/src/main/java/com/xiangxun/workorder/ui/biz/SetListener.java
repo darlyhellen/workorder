@@ -37,6 +37,8 @@ public class SetListener implements FramePresenter {
 
     public interface SetInterface extends FrameView {
 
+        void onStartDownVersion(VersionRoot root);
+
         void getUserDate(List<SetModel> data);
 
         void end();
@@ -61,7 +63,7 @@ public class SetListener implements FramePresenter {
             return;
         }
         //在这里进行数据请求
-        RxjavaRetrofitRequestUtil.getInstance().get().getVersion(version).
+        RxjavaRetrofitRequestUtil.getInstance().getgithub().github().
                 subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(new Func1<JsonObject, VersionRoot>() {

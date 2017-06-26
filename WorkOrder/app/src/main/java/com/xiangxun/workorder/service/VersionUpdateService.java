@@ -16,14 +16,19 @@ import com.hellen.baseframe.common.multithread.MultithreadDownLoadCommon;
 import com.hellen.baseframe.common.multithread.MultithreadDownLoadManager;
 import com.hellen.baseframe.common.multithread.MultithreadDownLoadManager.OnMultithreadUIListener;
 import com.hellen.baseframe.common.obsinfo.ToastApp;
+import com.hellen.baseframe.common.utiltools.SharePreferHelp;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.APP;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.bean.VersionData;
 import com.xiangxun.workorder.ui.MaintenanceActivity;
 import com.xiangxun.workorder.ui.presenter.WorkOrderNewPresenter;
+import com.xiangxun.workorder.widget.dialog.APPDialg;
+import com.xiangxun.workorder.widget.dialog.OndialogListener;
+import com.xiangxun.workorder.widget.dialog.VersionUpDateDialog;
 
 import java.io.File;
+import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -35,19 +40,32 @@ import java.util.TimerTask;
  * @TODO: 打开APP启动的服务，每隔60s请求一次服务端，获取最新工单，修改首页UI界面。不会修改工单列表。
  */
 public class VersionUpdateService extends Service implements OnMultithreadUIListener {
-    private VersionData data;
 
+    public interface OnServerListener {
+        void onStartPrepare();
+
+        void onLoading(float progress);
+
+        void onSuccess();
+    }
+
+    private VersionData data;
     private NotificationManager nm;
     private Notification notification;
     private RemoteViews views;
     private int notificationId = 43;
     private NotificationCompat.Builder builder;
+    private static OnServerListener listener;
+
+    public static void setListener(OnServerListener onServerListener) {
+        listener = onServerListener;
+    }
 
     /*
-     * (non-Javadoc)
-     *
-     * @see android.app.Service#onBind(android.content.Intent)
-     */
+         * (non-Javadoc)
+         *
+         * @see android.app.Service#onBind(android.content.Intent)
+         */
     @Override
     public IBinder onBind(Intent intent) {
         // TODO Auto-generated method stub
@@ -83,21 +101,22 @@ public class VersionUpdateService extends Service implements OnMultithreadUIList
      * 初始化服务，启动Timer，进行请求。
      */
     private void initService() {
-        nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        // 设置任务栏中下载进程显示的views
-        views = new RemoteViews(getPackageName(), R.layout.update_service);
-        views.setTextViewText(R.id.tvProcess, "已下载" + 0 + "%");
-        views.setProgressBar(R.id.pbDownload, 100, 0, false);
-        //实例化NotificationCompat.Builde并设置相关属性
-        builder = new NotificationCompat.Builder(this)
-                //设置小图标
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setCustomContentView(views);
-        //设置通知时间，默认为系统发出通知的时间，通常不用设置
-        //.setWhen(System.currentTimeMillis());
-        //通过builder.build()方法生成Notification对象,并发送通知,id=1
-        nm.notify(notificationId, builder.build());
+//        nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+//        // 设置任务栏中下载进程显示的views
+//        views = new RemoteViews(getPackageName(), R.layout.update_service);
+//        views.setTextViewText(R.id.tvProcess, "已下载" + 0 + "%");
+//        views.setProgressBar(R.id.pbDownload, 100, 0, false);
+//        //实例化NotificationCompat.Builde并设置相关属性
+//        builder = new NotificationCompat.Builder(this)
+//                //设置小图标
+//                .setSmallIcon(R.mipmap.ic_launcher)
+//                .setCustomContentView(views);
+//        //设置通知时间，默认为系统发出通知的时间，通常不用设置
+//        //.setWhen(System.currentTimeMillis());
+//        //通过builder.build()方法生成Notification对象,并发送通知,id=1
+//        nm.notify(notificationId, builder.build());
         // 更新状态栏上的下载进度信息
+
         MultithreadDownLoadManager.init(this, MultithreadDownLoadCommon.TYPE_FIFO, 4);
         MultithreadDownLoadManager.getInstance().getFileInfo(data.getUrl(), AppEnum.DOWN);
         MultithreadDownLoadManager.getInstance().setOnMultithreadUIListener(this);
@@ -105,20 +124,24 @@ public class VersionUpdateService extends Service implements OnMultithreadUIList
 
     @Override
     public void onStartDown() {
+        listener.onStartPrepare();
     }
 
     @Override
     public void onLoading(float progress) {
+        listener.onLoading(progress);
         // 更新状态栏上的下载进度信息
-        views.setTextViewText(R.id.tvProcess, "已下载" + (int) progress + "%");
-        views.setProgressBar(R.id.pbDownload, 100, (int) progress, false);
-        builder.setSmallIcon(R.mipmap.ic_launcher).setCustomContentView(views);
-        nm.notify(notificationId, builder.build());
+//        views.setTextViewText(R.id.tvProcess, "已下载" + (int) progress + "%");
+//        views.setProgressBar(R.id.pbDownload, 100, (int) progress, false);
+//        builder.setSmallIcon(R.mipmap.ic_launcher).setCustomContentView(views);
+//        nm.notify(notificationId, builder.build());
     }
 
     @Override
     public void onSuccess(File file) {
-        nm.cancel(notificationId);
+        listener.onSuccess();
+        DLog.d(getClass().getSimpleName(), "下载完成" + file.getAbsoluteFile());
+        //nm.cancel(notificationId);
         Instanll(file, this);
         // 停止掉当前的服务
         stopSelf();

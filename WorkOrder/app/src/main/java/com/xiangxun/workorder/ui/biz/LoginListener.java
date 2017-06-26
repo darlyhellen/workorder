@@ -15,6 +15,7 @@ import com.hellen.baseframe.common.utiltools.SharePreferHelp;
 import com.xiangxun.workorder.base.APP;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.bean.LoginRoot;
+import com.xiangxun.workorder.bean.VersionRoot;
 import com.xiangxun.workorder.common.retrofit.RxjavaRetrofitRequestUtil;
 import com.xiangxun.workorder.common.urlencode.Tools;
 
@@ -294,4 +295,53 @@ public class LoginListener implements FramePresenter {
     public void onStop(Dialog loading) {
         loading.dismiss();
     }
+
+
+    /**
+     * 获取版本更新接口数据
+     */
+    public void findNewVersion(int version, final FrameListener<VersionRoot> listener) {
+        if (!APP.isNetworkConnected(APP.getInstance())) {
+            listener.onFaild(0, "网络异常,请检查网络");
+            return;
+        }
+        //在这里进行数据请求
+        RxjavaRetrofitRequestUtil.getInstance().get().getVersion(version).
+                subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map(new Func1<JsonObject, VersionRoot>() {
+                    @Override
+                    public VersionRoot call(JsonObject jsonObject) {
+                        DLog.json("Func1", jsonObject.toString());
+                        VersionRoot root = new Gson().fromJson(jsonObject, new TypeToken<VersionRoot>() {
+                        }.getType());
+                        return root;
+                    }
+                })
+                .subscribe(new Observer<VersionRoot>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        listener.onFaild(1, e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(VersionRoot data) {
+                        if (data != null) {
+                            if (data.getData() != null && data.getStatus() == 1) {
+                                listener.onSucces(data);
+                            } else {
+                                listener.onFaild(0, data.getMessage());
+                            }
+                        } else {
+                            listener.onFaild(0, "解析错误");
+                        }
+                    }
+                });
+    }
+
 }

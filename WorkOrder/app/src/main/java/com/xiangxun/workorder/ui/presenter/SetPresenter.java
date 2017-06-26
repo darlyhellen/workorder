@@ -5,25 +5,23 @@ import android.content.Intent;
 import android.view.View;
 
 import com.hellen.baseframe.application.FrameListener;
-import com.hellen.baseframe.common.dlog.DLog;
 import com.hellen.baseframe.common.utiltools.SharePreferHelp;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.APP;
 import com.xiangxun.workorder.base.Api;
 import com.xiangxun.workorder.base.AppEnum;
+import com.xiangxun.workorder.base.BaseActivity;
 import com.xiangxun.workorder.bean.SetModel;
 import com.xiangxun.workorder.bean.VersionRoot;
-import com.xiangxun.workorder.service.VersionUpdateService;
 import com.xiangxun.workorder.ui.biz.SetListener;
 import com.xiangxun.workorder.ui.login.LoginActivity;
-import com.xiangxun.workorder.ui.main.SetActivity;
-import com.xiangxun.workorder.ui.main.SetServiceAcitivity;
 import com.xiangxun.workorder.widget.dialog.APPDialg;
 import com.xiangxun.workorder.widget.dialog.OndialogListener;
 import com.xiangxun.workorder.widget.loading.ShowLoading;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -45,7 +43,7 @@ public class SetPresenter {
     public SetPresenter(SetListener.SetInterface view) {
         this.view = view;
         this.biz = new SetListener();
-        this.loading = new ShowLoading((SetActivity) view);
+        this.loading = new ShowLoading((BaseActivity) view);
         this.loading.setMessage(R.string.loading);
     }
 
@@ -111,72 +109,63 @@ public class SetPresenter {
         });
     }
 
-    public void clickUpdate(final Context context) {
+    public void clickUpdate(final Context context, final boolean isLogin) {
         //先请求版本更新接口,获取版本更新内容,判断是否是最新版本,不是最新版本,提示更新.
-        biz.onStart(loading);
+        if (!isLogin) {
+            biz.onStart(loading);
+        }
         biz.findNewVersion(APP.getInstance().getVersionCode(), new FrameListener<VersionRoot>() {
             @Override
             public void onSucces(final VersionRoot versionRoot) {
-                biz.onStop(loading);
-                if (versionRoot.getData().getVersion() > APP.getInstance().getVersionCode()) {
-                    APPDialg dialg = new APPDialg(context);
-                    dialg.setViewVisible();
-                    dialg.setTitle(R.string.set_decl);
-                    dialg.setContent(R.string.set_update_des);
-                    dialg.setSure(R.string.set_sure);
-                    dialg.setConsel(R.string.consel);
-                    dialg.setOndialogListener(new OndialogListener() {
-                        @Override
-                        public void onSureClick() {
-                            DLog.i("启动服务进行下载");
-                            Intent intent = new Intent(context, VersionUpdateService.class);
-                            intent.putExtra("Root", versionRoot.getData());
-                            context.startService(intent);
+                if (!isLogin) {
+                    biz.onStop(loading);
+                }
+                if (versionRoot != null && versionRoot.getData() != null) {
+                    if (versionRoot.getData().getVersion() > APP.getInstance().getVersionCode()) {
+                        APPDialg dialg = new APPDialg(context);
+                        dialg.setViewVisible();
+                        dialg.setTitle(R.string.set_decl);
+                        dialg.setContent(R.string.set_update_des);
+                        dialg.setSure(R.string.set_sure);
+                        dialg.setConsel(R.string.consel);
+                        dialg.setOndialogListener(new OndialogListener() {
+                            @Override
+                            public void onSureClick() {
+                                view.onStartDownVersion(versionRoot);
+                            }
+
+                            @Override
+                            public void onConselClick() {
+                                if (isLogin) {
+                                    Calendar calendar = Calendar.getInstance();
+                                    calendar.set(Calendar.DAY_OF_YEAR,
+                                            calendar.get(Calendar.DAY_OF_YEAR) + 7);
+                                    SharePreferHelp.putValue(AppEnum.NOTUPDATE.getDec(),
+                                            calendar.get(Calendar.DAY_OF_YEAR));
+                                }
+                            }
+                        });
+                    } else {
+                        if (!isLogin) {
+                            APPDialg dialg = new APPDialg(context);
+                            dialg.setViewInvisible();
+                            dialg.setContent("已经是最新版本");
+                            dialg.setSure(R.string.set_sure);
                         }
 
-                        @Override
-                        public void onConselClick() {
-
-                        }
-                    });
-                } else {
-                    APPDialg dialg = new APPDialg(context);
-                    dialg.setViewInvisible();
-                    dialg.setContent("已经是最新版本");
-                    dialg.setSure(R.string.set_sure);
+                    }
                 }
             }
 
             @Override
             public void onFaild(int i, String s) {
-                biz.onStop(loading);
-                //测试正常。
-//                dialg.setViewVisible();
-//                dialg.setTitle(R.string.set_decl);
-//                dialg.setContent(R.string.set_update_des);
-//                dialg.setSure(R.string.set_sure);
-//                dialg.setConsel(R.string.consel);
-//                dialg.setOndialogListener(new OndialogListener() {
-//                    @Override
-//                    public void onSureClick() {
-//                        DLog.i("启动服务进行下载");
-//                        Intent intent = new Intent(context, VersionUpdateService.class);
-//                        VersionData data = new VersionData();
-//                        data.setUrl("http://gdown.baidu.com/data/wisegame/02ba8a69a5a792b1/QQ_500.apk");
-//                        intent.putExtra("Root", data);
-//                        context.startService(intent);
-//                    }
-//
-//                    @Override
-//                    public void onConselClick() {
-//
-//                    }
-//                });
-
-                APPDialg dialg = new APPDialg(context);
-                dialg.setViewInvisible();
-                dialg.setContent("已经是最新版本");
-                dialg.setSure(R.string.set_sure);
+                if (!isLogin) {
+                    biz.onStop(loading);
+                    APPDialg dialg = new APPDialg(context);
+                    dialg.setViewInvisible();
+                    dialg.setContent("已经是最新版本");
+                    dialg.setSure(R.string.set_sure);
+                }
             }
         });
     }
