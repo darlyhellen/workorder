@@ -16,15 +16,11 @@ import com.xiangxun.workorder.base.BaseActivity;
 import com.xiangxun.workorder.base.ItemClickListenter;
 import com.xiangxun.workorder.bean.Patrol;
 import com.xiangxun.workorder.bean.TourInfo;
-import com.xiangxun.workorder.bean.WorkOrderData;
 import com.xiangxun.workorder.ui.adapter.TourAdapter;
-import com.xiangxun.workorder.ui.biz.TourListListener;
 import com.xiangxun.workorder.ui.biz.TourListListener.TourListInterface;
-import com.xiangxun.workorder.ui.biz.WorkOrderListener;
 import com.xiangxun.workorder.ui.fragment.SearchWorkOrderDialogFragment;
 import com.xiangxun.workorder.ui.main.WorkOrderDetailActivity;
 import com.xiangxun.workorder.ui.presenter.TourListPresenter;
-import com.xiangxun.workorder.ui.presenter.WorkOrderPresenter;
 import com.xiangxun.workorder.widget.header.HeaderView;
 import com.xiangxun.workorder.widget.xlistView.XListView;
 
@@ -106,7 +102,7 @@ public class TourListActivity extends BaseActivity implements View.OnClickListen
                 Intent intent = new Intent(TourListActivity.this, WorkOrderDetailActivity.class);
                 //工单详细信息
                 intent.putExtra("TourInfo", ds);
-                startActivityForResult(intent, 700);
+                startActivity(intent);
             }
         });
     }
@@ -160,6 +156,7 @@ public class TourListActivity extends BaseActivity implements View.OnClickListen
                 data.clear();
                 data.addAll(orderBeans);
                 adapter.setData(data);
+                xlist.smoothScrollToPosition(1);
                 break;
             case AppEnum.LISTSTATEREFRESH:
                 data.clear();
@@ -246,6 +243,7 @@ public class TourListActivity extends BaseActivity implements View.OnClickListen
 
         if (resultCode == 701) {
             currentPage = 1;
+            listState = AppEnum.LISTSTATEFIRST;
             presenter.getWorkOrderByPage(currentPage, workorder, devicename, devicenum, deviceip);
         }
     }

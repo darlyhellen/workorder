@@ -13,6 +13,7 @@ import com.xiangxun.workorder.bean.EquipMenuChildData;
 import com.xiangxun.workorder.bean.EquipmentRoot;
 import com.xiangxun.workorder.bean.ObjectData;
 import com.xiangxun.workorder.bean.TourRoot;
+import com.xiangxun.workorder.bean.UpTourRoot;
 import com.xiangxun.workorder.ui.biz.MainListener;
 import com.xiangxun.workorder.ui.biz.TourListener;
 import com.xiangxun.workorder.ui.main.SetActivity;
@@ -94,10 +95,11 @@ public class TourPresenter {
 
     private void updateTour(boolean isCheck) {
         biz.onStart(loading);
-        biz.commitTour(isCheck, id, view.getDeclare(), view.getImageData(), new FrameListener<TourRoot>() {
+        biz.commitTour(isCheck, id, view.getDeclare(), view.getImageData(), new FrameListener<UpTourRoot>() {
             @Override
-            public void onSucces(TourRoot s) {
+            public void onSucces(UpTourRoot s) {
                 biz.onStop(loading);
+                view.onTourSuccess(s.getMessage());
             }
 
             @Override

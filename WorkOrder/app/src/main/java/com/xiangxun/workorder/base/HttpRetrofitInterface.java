@@ -101,7 +101,7 @@ public interface HttpRetrofitInterface {
     /**
      * @TODO:巡检页面参数完整,提交工单接口.
      */
-    @POST("server/perambulate/change/perambulateUp/")
+    @POST("server/perambulate/refer/perambulateUp/")
     Observable<JsonObject> perambulateUp(@Body RequestBody args);
 
     /**

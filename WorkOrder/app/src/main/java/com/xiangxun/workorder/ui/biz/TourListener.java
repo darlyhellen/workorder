@@ -15,6 +15,7 @@ import com.xiangxun.workorder.base.APP;
 import com.xiangxun.workorder.bean.EquipmentInfo;
 import com.xiangxun.workorder.bean.EquipmentRoot;
 import com.xiangxun.workorder.bean.TourRoot;
+import com.xiangxun.workorder.bean.UpTourRoot;
 import com.xiangxun.workorder.common.image.BitmapChangeUtil;
 import com.xiangxun.workorder.common.retrofit.RxjavaRetrofitRequestUtil;
 
@@ -54,6 +55,10 @@ public class TourListener implements FramePresenter {
         String getDeclare();
 
         List<String> getImageData();
+
+        void onTourSuccess(String s);
+
+        void onTourFailed();
     }
 
     @Override
@@ -66,7 +71,7 @@ public class TourListener implements FramePresenter {
     /**
      * 编辑完成后进行工单提交
      */
-    public void commitTour(boolean isCheck, String id, String declare, List<String> url, final FrameListener<TourRoot> listener) {
+    public void commitTour(boolean isCheck, String id, String declare, List<String> url, final FrameListener<UpTourRoot> listener) {
         if (!APP.isNetworkConnected(APP.getInstance())) {
             listener.onFaild(0, "网络异常,请检查网络");
             return;
@@ -107,16 +112,15 @@ public class TourListener implements FramePresenter {
         RxjavaRetrofitRequestUtil.getInstance().post().perambulateUp(body).
                 subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .map(new Func1<JsonObject, TourRoot>() {
+                .map(new Func1<JsonObject, UpTourRoot>() {
                     @Override
-                    public TourRoot call(JsonObject jsonObject) {
+                    public UpTourRoot call(JsonObject jsonObject) {
                         DLog.json("Func1", jsonObject.toString());
-
-                        return new Gson().fromJson(jsonObject.toString(), new TypeToken<TourRoot>() {
+                        return new Gson().fromJson(jsonObject.toString(), new TypeToken<UpTourRoot>() {
                         }.getType());
                     }
                 })
-                .subscribe(new Observer<TourRoot>() {
+                .subscribe(new Observer<UpTourRoot>() {
                     @Override
                     public void onCompleted() {
 
@@ -128,17 +132,15 @@ public class TourListener implements FramePresenter {
                     }
 
                     @Override
-                    public void onNext(TourRoot data) {
+                    public void onNext(UpTourRoot data) {
                         if (data != null) {
-
-                            if (data.getStatus() == 1 && data.getData() != null) {
+                            if (data.getStatus() == 1) {
                                 listener.onSucces(data);
                             } else {
-                                listener.onFaild(0, data.getMessage());
+                                listener.onFaild(1, data.getMessage());
                             }
-
                         } else {
-                            listener.onFaild(0, "解析错误");
+                            listener.onFaild(0, "解析异常");
                         }
                     }
                 });

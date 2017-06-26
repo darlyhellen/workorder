@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.hellen.baseframe.binder.ContentBinder;
 import com.hellen.baseframe.binder.ViewsBinder;
 import com.hellen.baseframe.common.dlog.DLog;
+import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.hellen.baseframe.common.utiltools.SharePreferHelp;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.AppEnum;
@@ -200,6 +201,18 @@ public class TourActivity extends BaseActivity implements OnClickListener, TourI
     @Override
     public List<String> getImageData() {
         return imageData;
+    }
+
+    @Override
+    public void onTourSuccess(String s) {
+        ToastApp.showToast(s);
+        setResult(701);
+        finish();
+    }
+
+    @Override
+    public void onTourFailed() {
+
     }
 
     @Override

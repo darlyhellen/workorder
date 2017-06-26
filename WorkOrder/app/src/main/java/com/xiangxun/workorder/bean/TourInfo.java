@@ -31,8 +31,6 @@ public class TourInfo implements Parcelable {
         //顺序要和writeToParcel写的顺序一样
         id = in.readString();
         deviceid = in.readString();
-        id = in.readString();
-        deviceid = in.readString();
         inserttime = in.readString();
         reason = in.readString();
         note = in.readString();

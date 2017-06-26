@@ -237,6 +237,7 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
                 data.clear();
                 data.addAll(orderBeans);
                 adapter.setData(data);
+                xlist.smoothScrollToPosition(1);
                 break;
             case AppEnum.LISTSTATEREFRESH:
                 data.clear();
@@ -328,6 +329,7 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
 
         if (resultCode == 701) {
             currentPage = 1;
+            listState = AppEnum.LISTSTATEFIRST;
             presenter.getWorkOrderByPage(currentPage, workorder, devicename, devicenum, deviceip);
         }
     }

@@ -23,8 +23,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RxjavaRetrofitRequestUtil {
     private volatile static RxjavaRetrofitRequestUtil instance;
 
-    private static int VersionCode = APP.getInstance().getVersionCode();
-    private static final String APPSYS_STRING = "Android_";
     private static final int REQUEST_TIME = 30;
     private int interSize = 0;
 
@@ -43,7 +41,7 @@ public class RxjavaRetrofitRequestUtil {
         //设置请求日志
         if (BuildConfig.DEBUG) {
             HttpLoggingInterceptor log = new HttpLoggingInterceptor();
-            log.setLevel(HttpLoggingInterceptor.Level.BODY);
+            log.setLevel(HttpLoggingInterceptor.Level.BASIC);
             builder.addInterceptor(log);
         }
         interSize = builder.interceptors().size();
