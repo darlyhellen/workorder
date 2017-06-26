@@ -62,7 +62,9 @@ public class MaintenancePresenter {
                 context.startActivity(new Intent(context, SetActivity.class));
                 break;
             case R.id.id_maintenance_order:
-                context.startActivity(new Intent(context, WorkOrderMenuActivity.class));
+                Intent menu = new Intent(context, WorkOrderMenuActivity.class);
+                menu.putExtra("Num", view.findFilipperCount());
+                context.startActivity(menu);
                 break;
             case R.id.id_maintenance_tour:
                 Intent intent = new Intent(context, TourListActivity.class);

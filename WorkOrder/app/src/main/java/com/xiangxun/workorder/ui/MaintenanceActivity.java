@@ -193,6 +193,11 @@ public class MaintenanceActivity extends BaseActivity implements AdapterView.OnI
 
     }
 
+    @Override
+    public int findFilipperCount() {
+        return flipper.getChildCount();
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

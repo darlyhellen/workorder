@@ -1,7 +1,10 @@
 package com.xiangxun.workorder.service;
 
 import android.app.Service;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.IBinder;
 
 import com.hellen.baseframe.common.dlog.DLog;
@@ -23,6 +26,8 @@ public class WorkOrderNewService extends Service {
     private WorkOrderNewPresenter presenter;
 
     private int delay = 60 * 1000;
+
+    private CommandReceiver receiver;
 
     /*
      * (non-Javadoc)
@@ -51,6 +56,10 @@ public class WorkOrderNewService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         // TODO Auto-generated method stub
         initService();
+        receiver = new CommandReceiver();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("com.xiangxun.workorder.ui.WorkOrderMenuActivity");
+        registerReceiver(receiver, intentFilter);
         return START_STICKY;
     }
 
@@ -74,4 +83,20 @@ public class WorkOrderNewService extends Service {
 
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(receiver);
+    }
+
+    //接受广播
+    private class CommandReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            DLog.i(getClass().getSimpleName(), "CommandReceiver  onReceive ");
+            timer.cancel();
+            stopSelf();//停止服务
+        }
+    }
 }

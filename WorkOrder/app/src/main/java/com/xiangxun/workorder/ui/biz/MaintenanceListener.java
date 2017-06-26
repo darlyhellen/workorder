@@ -1,6 +1,7 @@
 package com.xiangxun.workorder.ui.biz;
 
 import android.app.Dialog;
+import android.widget.ViewFlipper;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -94,6 +95,8 @@ public class MaintenanceListener implements FramePresenter {
         void onWorkOrderSuccess(List<WorkOrderData> datas);
 
         void onWorkOrderFailed();
+
+        int findFilipperCount();
 
         void goBack();
     }
