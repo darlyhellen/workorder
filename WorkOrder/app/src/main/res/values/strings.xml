@@ -156,6 +156,7 @@
     <string name="st_set_serv_set">设置</string>
     <string name="st_set_serv_ip">IP地址:</string>
     <string name="st_set_serv_port">端口:</string>
+    <string name="st_tour_code">设备编码:</string>
 
 
     <array name="Status">

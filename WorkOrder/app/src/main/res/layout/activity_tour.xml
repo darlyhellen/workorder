@@ -84,7 +84,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/margin_padding10"
-                        android:text="设备编码:"
+                        android:text="@string/st_tour_code"
                         android:textColor="@color/text_color"
                         android:textSize="@dimen/textSize16" />
 

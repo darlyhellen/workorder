@@ -47,8 +47,9 @@ public class TourAdapter extends ParentAdapter<TourInfo> {
         }
 
         hocker.id_tv_supplier_title.setText("工单编号:" + Tools.isEmpty(workOrderData.id));
-        hocker.id_tv_supplier_contact.setText("设备信息: " + Tools.isEmpty(workOrderData.deviceid));
+        hocker.id_tv_supplier_contact.setText("设备信息: " + Tools.isEmpty(workOrderData.assetname));
         hocker.id_tv_supplier_product.setText("工单内容: " + Tools.isEmpty(workOrderData.reason));
+        hocker.id_tv_appraise_man.setText("维护人："+Tools.isEmpty(workOrderData.Checkingpeople));
             hocker.id_tv_background.setBackgroundResource(R.drawable.app_login_shape);
         hocker.id_tv_appraise_date.setText("发布时间: " + Tools.isEmpty(workOrderData.inserttime));
 

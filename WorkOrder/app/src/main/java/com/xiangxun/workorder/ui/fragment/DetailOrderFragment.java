@@ -375,9 +375,26 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
         id.setNameValue(R.string.st_tour_id, tour.id);
         tv_linear.addView(id);
 
-        DetailView deviceid = new DetailView(getActivity());
-        deviceid.setNameValue(R.string.st_tour_deviceid, tour.deviceid);
-        tv_linear.addView(deviceid);
+        DetailView ip = new DetailView(getActivity());
+        ip.setNameValue(R.string.st_detail_complainant_tel, tour.ip);
+        tv_linear.addView(ip);
+        DetailView installplace = new DetailView(getActivity());
+        installplace.setNameValue(R.string.st_detail_type, tour.installplace);
+        tv_linear.addView(installplace);
+        DetailView orgnames = new DetailView(getActivity());
+        orgnames.setNameValue(R.string.st_detail_inout, tour.orgname);
+        tv_linear.addView(orgnames);
+        DetailView assetname = new DetailView(getActivity());
+        assetname.setNameValue(R.string.st_detail_complainant, tour.assetname);
+        tv_linear.addView(assetname);
+        DetailView code = new DetailView(getActivity());
+        code.setNameValue(R.string.st_tour_code, tour.code);
+        tv_linear.addView(code);
+
+        DetailView Checkingpeople = new DetailView(getActivity());
+        Checkingpeople.setNameValue(R.string.st_tour_Checkingpeople, tour.Checkingpeople);
+        tv_linear.addView(Checkingpeople);
+
 
         DetailView time = new DetailView(getActivity());
         time.setNameValue(R.string.st_tour_time, tour.inserttime);
@@ -394,6 +411,9 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
         DetailView orgname = new DetailView(getActivity());
         orgname.setNameValue(R.string.st_tour_Checkingpeople, tour.Checkingpeople);
         tv_linear.addView(orgname);
+
+
+
 
     }
 

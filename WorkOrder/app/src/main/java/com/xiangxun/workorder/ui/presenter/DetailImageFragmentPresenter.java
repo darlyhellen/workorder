@@ -60,10 +60,10 @@ public class DetailImageFragmentPresenter {
                 view.onLoginFailed();
                 switch (i) {
                     case 0:
-                        ToastApp.showToast(s);
+                        //ToastApp.showToast(s);
                         break;
                     case 1:
-                        ToastApp.showToast("网络请求异常");
+                       // ToastApp.showToast("网络请求异常");
                         break;
                     default:
                         break;

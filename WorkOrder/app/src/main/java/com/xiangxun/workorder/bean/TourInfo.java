@@ -22,6 +22,11 @@ public class TourInfo implements Parcelable {
     public String userid;
     public String mobile;
     public String name;
+    public String ip;
+    public String installplace;
+    public String orgname;
+    public String assetname;
+    public String code;
 
 
     public TourInfo() {
@@ -40,6 +45,12 @@ public class TourInfo implements Parcelable {
         userid = in.readString();
         mobile = in.readString();
         name = in.readString();
+
+        ip = in.readString();
+        installplace = in.readString();
+        orgname = in.readString();
+        assetname = in.readString();
+        code = in.readString();
 
     }
 
@@ -61,6 +72,13 @@ public class TourInfo implements Parcelable {
         dest.writeString(userid);
         dest.writeString(mobile);
         dest.writeString(name);
+
+        dest.writeString(ip);
+        dest.writeString(installplace);
+        dest.writeString(orgname);
+        dest.writeString(assetname);
+        dest.writeString(code);
+
     }
 
     public static final Creator<TourInfo> CREATOR = new Creator<TourInfo>() {
