@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.view.View;
 
 import com.hellen.baseframe.application.FrameListener;
+import com.hellen.baseframe.common.multithread.MultithreadDownLoadCommon;
+import com.hellen.baseframe.common.multithread.MultithreadDownLoadManager;
 import com.hellen.baseframe.common.utiltools.SharePreferHelp;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.APP;
@@ -125,12 +127,13 @@ public class SetPresenter {
                         APPDialg dialg = new APPDialg(context);
                         dialg.setViewVisible();
                         dialg.setTitle(R.string.set_decl);
-                        dialg.setContent(versionRoot.getData().getDescription());
+                        dialg.setContent(versionRoot.getData().getRemark());
                         dialg.setSure("更新");
                         dialg.setConsel("暂不更新");
                         dialg.setOndialogListener(new OndialogListener() {
                             @Override
                             public void onSureClick() {
+                                MultithreadDownLoadCommon.ISPUASE = false;
                                 view.onStartDownVersion(versionRoot);
                             }
 

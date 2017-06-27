@@ -10,6 +10,7 @@ import com.hellen.baseframe.application.FrameListener;
 import com.hellen.baseframe.application.FramePresenter;
 import com.hellen.baseframe.application.FrameView;
 import com.hellen.baseframe.common.dlog.DLog;
+import com.hellen.baseframe.common.utiltools.SharePreferHelp;
 import com.xiangxun.workorder.base.APP;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.bean.SetModel;
@@ -63,7 +64,7 @@ public class SetListener implements FramePresenter {
             return;
         }
         //在这里进行数据请求
-        RxjavaRetrofitRequestUtil.getInstance().getgithub().github().
+        RxjavaRetrofitRequestUtil.getInstance().get().getVersion(version).
                 subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(new Func1<JsonObject, VersionRoot>() {
@@ -72,6 +73,9 @@ public class SetListener implements FramePresenter {
                         DLog.json("Func1", jsonObject.toString());
                         VersionRoot root = new Gson().fromJson(jsonObject, new TypeToken<VersionRoot>() {
                         }.getType());
+                        if (root != null && root.getData() != null) {
+                            SharePreferHelp.putValue(AppEnum.VERSION.getDec(), root.getData().getVersion());
+                        }
                         return root;
                     }
                 })

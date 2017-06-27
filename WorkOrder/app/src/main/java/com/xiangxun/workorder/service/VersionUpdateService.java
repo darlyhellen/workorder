@@ -108,7 +108,7 @@ public class VersionUpdateService extends Service implements OnMultithreadUIList
         // 更新状态栏上的下载进度信息
 
         MultithreadDownLoadManager.init(this, MultithreadDownLoadCommon.TYPE_FIFO, 4);
-        MultithreadDownLoadManager.getInstance().getFileInfo(data.getUrl(), AppEnum.DOWN);
+        MultithreadDownLoadManager.getInstance().getFileInfo(data.getSaveUrl(), AppEnum.DOWN);
         MultithreadDownLoadManager.getInstance().setOnMultithreadUIListener(this);
     }
 

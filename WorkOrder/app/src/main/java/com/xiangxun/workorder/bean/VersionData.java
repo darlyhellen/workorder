@@ -11,27 +11,28 @@ import java.io.Serializable;
  */
 public class VersionData implements Serializable {
 
-    private String url;
+    private String saveUrl;
 
-    private String description;
+    private String remark;
 
     private int version;
 
+    private String name;
 
-    public String getUrl() {
-        return url;
+    public String getSaveUrl() {
+        return saveUrl;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setSaveUrl(String saveUrl) {
+        this.saveUrl = saveUrl;
     }
 
-    public String getDescription() {
-        return description;
+    public String getRemark() {
+        return remark;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
     public int getVersion() {
@@ -40,5 +41,13 @@ public class VersionData implements Serializable {
 
     public void setVersion(int version) {
         this.version = version;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

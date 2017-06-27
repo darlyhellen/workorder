@@ -36,7 +36,8 @@
         android:background="@drawable/app_login_text_shape"
         android:paddingBottom="@dimen/margin_padding10"
         android:paddingTop="@dimen/margin_padding10"
-        zyh:progress_text_color="@color/edit_save_btn_color_disable"
+        zyh:progress_text_color="@color/text_color"
+        zyh:progress_reached_color="@color/edit_save_btn_color_disable"
         zyh:progress_unreached_color="@color/wel_back_color" />
 
     <TableRow

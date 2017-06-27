@@ -9,7 +9,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hellen.baseframe.baseadapter.ParentAdapter;
+import com.hellen.baseframe.common.utiltools.SharePreferHelp;
 import com.xiangxun.workorder.R;
+import com.xiangxun.workorder.base.APP;
+import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.bean.SetModel;
 
 import java.util.List;
@@ -35,6 +38,7 @@ public class SetAdapter extends ParentAdapter<SetModel> {
             hocker = new ViewHocker();
             hocker.title = (TextView) view.findViewById(R.id.id_set_item_title);
             hocker.decls = (TextView) view.findViewById(R.id.id_set_item_decls);
+            hocker.newversion = (TextView) view.findViewById(R.id.id_set_item_new);
             hocker.decl = (TextView) view.findViewById(R.id.id_set_item_decl);
             hocker.image = (ImageView) view.findViewById(R.id.id_set_item_arrow);
             view.setTag(hocker);
@@ -46,6 +50,13 @@ public class SetAdapter extends ParentAdapter<SetModel> {
             hocker.decls.setText(setModel.getDecls());
             hocker.decl.setText(setModel.getDecl());
             hocker.image.setImageResource(setModel.getRes());
+            int version = SharePreferHelp.getValue(AppEnum.VERSION.getDec(), 0);
+            if (R.string.set_update == setModel.getTitle() && version > APP.getInstance().getVersionCode()) {
+                hocker.newversion.setVisibility(View.VISIBLE);
+                hocker.newversion.setText("新版本V" + version);
+            } else {
+                hocker.newversion.setVisibility(View.GONE);
+            }
         }
         return view;
     }
@@ -53,6 +64,7 @@ public class SetAdapter extends ParentAdapter<SetModel> {
     class ViewHocker {
         TextView title;
         TextView decls;
+        TextView newversion;
         TextView decl;
         ImageView image;
     }

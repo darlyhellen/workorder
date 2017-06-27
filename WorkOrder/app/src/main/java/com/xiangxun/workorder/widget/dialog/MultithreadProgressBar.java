@@ -22,7 +22,7 @@ import com.xiangxun.workorder.R;
 public class MultithreadProgressBar extends ProgressBar {
 
     private static final int DEFAULT_TEXT_SIZE = 10;
-    private static final int DEFAULT_TEXT_COLOR = 0x575757;
+    private static final int DEFAULT_TEXT_COLOR = 0x57575757;
     private static final int DEFAULT_COLOR_UNREACHED_COLOR = 0xFFd3d6da;
     private static final int DEFAULT_HEIGHT_REACHED_PROGRESS_BAR = 10;
     private static final int DEFAULT_HEIGHT_UNREACHED_PROGRESS_BAR = 10;

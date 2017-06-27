@@ -12,9 +12,10 @@ import com.xiangxun.workorder.bean.WorkOrderData;
  * @TODO:整个APP使用的枚举类别
  */
 public enum AppEnum {
+    VERSION("version", 0),
 
     ISLOGINPASS("isloginpass", 0),
-    
+
     NOTUPDATE("notupdate", 0),
 
     WIDTH("screen width", 0),

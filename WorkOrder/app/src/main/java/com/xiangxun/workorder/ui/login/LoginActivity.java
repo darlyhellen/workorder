@@ -160,12 +160,16 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Logi
         if (dialog == null) {
             dialog = new VersionUpDateDialog(this, root);
             dialog.show();
+        } else {
+            if (!dialog.isShowing()) {
+                dialog.show();
+            }
         }
     }
 
     public void initService(VersionData root) {
         MultithreadDownLoadManager.init(this, MultithreadDownLoadCommon.TYPE_FIFO, 4);
-        MultithreadDownLoadManager.getInstance().getFileInfo(root.getUrl(), AppEnum.DOWN);
+        MultithreadDownLoadManager.getInstance().getFileInfo(root.getSaveUrl(), AppEnum.DOWN);
         MultithreadDownLoadManager.getInstance().setOnMultithreadUIListener(this);
 
     }
