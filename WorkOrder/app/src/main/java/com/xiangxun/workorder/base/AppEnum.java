@@ -34,7 +34,7 @@ public enum AppEnum {
     //设备管理页面的首个列表
     EQUIPMENTLIST("equipmentlist", 0),
 
-    COOKIE("cookie", 0);
+    COOKIE("cookie", 0), PORT("port", 0), IP("ip", 0);
 
     //单页调试的假数据
     public static final boolean TEST = false;

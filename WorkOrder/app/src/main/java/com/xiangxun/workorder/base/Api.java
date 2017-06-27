@@ -3,6 +3,7 @@ package com.xiangxun.workorder.base;
 import android.text.TextUtils;
 
 import com.hellen.baseframe.common.dlog.DLog;
+import com.hellen.baseframe.common.utiltools.SharePreferHelp;
 import com.xiangxun.workorder.BuildConfig;
 import com.xiangxun.workorder.common.urlencode.EncodeTools;
 import com.xiangxun.workorder.common.urlencode.Tools;
@@ -32,9 +33,11 @@ public class Api {
 
     public static void setRoot(String ip, String port) {
         if (!TextUtils.isEmpty(ip)) {
+            SharePreferHelp.putValue(AppEnum.IP.getDec(), ip);
             Api.ip = ip;
         }
         if (!TextUtils.isEmpty(port)) {
+            SharePreferHelp.putValue(AppEnum.PORT.getDec(), port);
             Api.port = port;
         }
     }
@@ -44,7 +47,11 @@ public class Api {
             if (BuildConfig.DEBUG) {
                 ip = "193.169.100.153";
             } else {
-                ip = "10.10.15.111";
+                if (TextUtils.isEmpty(SharePreferHelp.getValue(AppEnum.IP.getDec(), null))) {
+                    ip = "10.10.15.111";
+                } else {
+                    ip = SharePreferHelp.getValue(AppEnum.IP.getDec(), null);
+                }
             }
         }
         return ip;
@@ -56,7 +63,11 @@ public class Api {
             if (BuildConfig.DEBUG) {
                 port = "8090";
             } else {
-                port = "8090";
+                if (TextUtils.isEmpty(SharePreferHelp.getValue(AppEnum.PORT.getDec(), null))) {
+                    port = "8090";
+                } else {
+                    port = SharePreferHelp.getValue(AppEnum.PORT.getDec(), null);
+                }
             }
         }
         return port;

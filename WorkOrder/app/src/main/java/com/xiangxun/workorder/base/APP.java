@@ -49,7 +49,7 @@ public class APP extends FrameAPP {
         AppEnum.WIDTH.setLen(ConApp.getInstance().getWidth());
         AppEnum.HEIGHT.setLen(ConApp.getInstance().getHeight());
         creatFile();
-        if (!BuildConfig.DEBUG) {
+        if (BuildConfig.DEBUG) {
             // 是否为开发测试环境。正式环境下无需打开调试。
             initStrictMode();
         }
