@@ -29,8 +29,6 @@ import com.xiangxun.workorder.base.BaseActivity;
 import com.xiangxun.workorder.bean.SetModel;
 import com.xiangxun.workorder.bean.VersionData;
 import com.xiangxun.workorder.bean.VersionRoot;
-import com.xiangxun.workorder.service.VersionUpdateService;
-import com.xiangxun.workorder.service.VersionUpdateService.OnServerListener;
 import com.xiangxun.workorder.ui.MaintenanceActivity;
 import com.xiangxun.workorder.ui.biz.LoginListener.LoginInterface;
 import com.xiangxun.workorder.ui.biz.SetListener.SetInterface;

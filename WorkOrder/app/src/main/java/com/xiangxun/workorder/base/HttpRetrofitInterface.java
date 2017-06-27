@@ -2,9 +2,6 @@ package com.xiangxun.workorder.base;
 
 import com.google.gson.JsonObject;
 
-import java.util.List;
-import java.util.Map;
-
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
 import retrofit2.http.GET;

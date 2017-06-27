@@ -12,8 +12,6 @@ import android.widget.TextView;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.bean.ChildData;
 import com.xiangxun.workorder.bean.EquipmentRoot;
-import com.xiangxun.workorder.bean.GroupData;
-import com.xiangxun.workorder.common.image.ImageLoaderUtil;
 
 import java.util.List;
 

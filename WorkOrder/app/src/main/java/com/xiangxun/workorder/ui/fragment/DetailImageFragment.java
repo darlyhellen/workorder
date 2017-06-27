@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.TextView;
 
@@ -25,7 +24,6 @@ import com.xiangxun.workorder.bean.TourInfo;
 import com.xiangxun.workorder.bean.WorkOrderData;
 import com.xiangxun.workorder.common.image.BitmapChangeUtil;
 import com.xiangxun.workorder.ui.adapter.DetailImageFragmentAdapter;
-import com.xiangxun.workorder.ui.biz.DetailImageFragmentListener;
 import com.xiangxun.workorder.ui.biz.DetailImageFragmentListener.DetailImageFragmentInterface;
 import com.xiangxun.workorder.ui.main.ShowImageViewActivity;
 import com.xiangxun.workorder.ui.presenter.DetailImageFragmentPresenter;

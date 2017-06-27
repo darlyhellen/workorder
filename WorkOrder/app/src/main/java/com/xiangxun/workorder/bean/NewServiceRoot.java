@@ -1,7 +1,5 @@
 package com.xiangxun.workorder.bean;
 
-import java.util.List;
-
 /**
  * Created by Zhangyuhui/Darly on 2017/5/31.
  * Copyright by [Zhangyuhui/Darly]

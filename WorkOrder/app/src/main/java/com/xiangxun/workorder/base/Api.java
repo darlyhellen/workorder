@@ -2,7 +2,6 @@ package com.xiangxun.workorder.base;
 
 import android.text.TextUtils;
 
-import com.hellen.baseframe.common.dlog.DLog;
 import com.hellen.baseframe.common.utiltools.SharePreferHelp;
 import com.xiangxun.workorder.BuildConfig;
 import com.xiangxun.workorder.common.urlencode.EncodeTools;

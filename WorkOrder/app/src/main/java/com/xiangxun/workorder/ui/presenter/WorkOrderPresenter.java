@@ -12,7 +12,6 @@ import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.StaticListener;
 import com.xiangxun.workorder.bean.WorkOrderRoot;
 import com.xiangxun.workorder.ui.biz.WorkOrderListener;
-import com.xiangxun.workorder.ui.fragment.DetailOrderFragment;
 import com.xiangxun.workorder.ui.fragment.SearchWorkOrderDialogFragment;
 import com.xiangxun.workorder.ui.main.TourActivity;
 import com.xiangxun.workorder.ui.main.WorkOrderActivity;

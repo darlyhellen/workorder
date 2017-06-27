@@ -1,28 +1,20 @@
 package com.xiangxun.workorder.ui.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.AbsoluteLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hellen.baseframe.baseadapter.ParentAdapter;
-import com.hellen.baseframe.common.dlog.DLog;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.AppEnum;
-import com.xiangxun.workorder.common.image.ImageLoaderUtil;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.net.URI;
 import java.util.List;
 
 /**

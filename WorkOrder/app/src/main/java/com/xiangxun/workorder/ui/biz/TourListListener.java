@@ -12,8 +12,6 @@ import com.hellen.baseframe.common.dlog.DLog;
 import com.xiangxun.workorder.base.APP;
 import com.xiangxun.workorder.bean.TourInfo;
 import com.xiangxun.workorder.bean.TourRoot;
-import com.xiangxun.workorder.bean.WorkOrderData;
-import com.xiangxun.workorder.bean.WorkOrderRoot;
 import com.xiangxun.workorder.common.retrofit.RxjavaRetrofitRequestUtil;
 
 import java.util.List;

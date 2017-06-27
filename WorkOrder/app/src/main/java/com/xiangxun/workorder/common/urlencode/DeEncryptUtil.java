@@ -1,7 +1,5 @@
 package com.xiangxun.workorder.common.urlencode;
 
-import com.hellen.baseframe.common.dlog.DLog;
-
 import java.security.Key;
 import java.security.Security;
 

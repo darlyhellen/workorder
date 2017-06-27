@@ -1,7 +1,6 @@
 package com.xiangxun.workorder.ui.biz;
 
 import android.app.Dialog;
-import android.content.Context;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -11,13 +10,11 @@ import com.hellen.baseframe.application.FramePresenter;
 import com.hellen.baseframe.application.FrameView;
 import com.hellen.baseframe.common.dlog.DLog;
 import com.xiangxun.workorder.base.APP;
-import com.xiangxun.workorder.bean.LoginRoot;
 import com.xiangxun.workorder.bean.WorkOrderData;
 import com.xiangxun.workorder.bean.WorkOrderRoot;
 import com.xiangxun.workorder.common.retrofit.RxjavaRetrofitRequestUtil;
 
 import java.util.List;
-import java.util.Map;
 
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;

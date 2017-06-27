@@ -8,7 +8,6 @@ import com.hellen.baseframe.common.dlog.DLog;
 import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.bean.EquipmentRoot;
-import com.xiangxun.workorder.bean.WorkOrderRoot;
 import com.xiangxun.workorder.ui.biz.EquipmentListListener;
 import com.xiangxun.workorder.ui.main.EquipmentListActivity;
 import com.xiangxun.workorder.widget.loading.ShowLoading;

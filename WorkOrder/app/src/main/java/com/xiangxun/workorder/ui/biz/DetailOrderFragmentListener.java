@@ -11,16 +11,11 @@ import com.hellen.baseframe.application.FrameListener;
 import com.hellen.baseframe.application.FramePresenter;
 import com.hellen.baseframe.application.FrameView;
 import com.hellen.baseframe.common.dlog.DLog;
-import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.base.APP;
 import com.xiangxun.workorder.bean.DetailChangeRoot;
-import com.xiangxun.workorder.bean.WorkOrderData;
-import com.xiangxun.workorder.bean.WorkOrderRoot;
 import com.xiangxun.workorder.common.image.BitmapChangeUtil;
 import com.xiangxun.workorder.common.retrofit.RxjavaRetrofitRequestUtil;
-import com.xiangxun.workorder.common.urlencode.Tools;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 

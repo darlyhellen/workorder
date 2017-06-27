@@ -5,19 +5,13 @@ import android.database.DataSetObserver;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.xiangxun.workorder.R;
-import com.xiangxun.workorder.bean.ChildData;
 import com.xiangxun.workorder.bean.EquipMenuChildData;
 import com.xiangxun.workorder.bean.EquipMenuGroupData;
-import com.xiangxun.workorder.bean.EquipmentRoot;
-import com.xiangxun.workorder.bean.GroupData;
-import com.xiangxun.workorder.widget.scroll.CustomExpandableListView;
 
 import java.util.List;
 

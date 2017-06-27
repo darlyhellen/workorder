@@ -2,7 +2,6 @@ package com.xiangxun.workorder.common;
 
 import android.content.Context;
 import android.content.res.AssetManager;
-import android.util.Log;
 
 import com.xiangxun.workorder.base.AppEnum;
 

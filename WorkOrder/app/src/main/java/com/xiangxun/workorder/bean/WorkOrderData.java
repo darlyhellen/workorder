@@ -3,9 +3,6 @@ package com.xiangxun.workorder.bean;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.io.Serializable;
-import java.util.Date;
-
 /**
  * Created by Zhangyuhui/Darly on 2017/5/19.
  * Copyright by [Zhangyuhui/Darly]

@@ -2,36 +2,22 @@ package com.xiangxun.workorder.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ExpandableListView;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.hellen.baseframe.binder.ContentBinder;
 import com.hellen.baseframe.binder.ViewsBinder;
 import com.hellen.baseframe.common.dlog.DLog;
-import com.hellen.baseframe.common.utiltools.SharePreferHelp;
 import com.xiangxun.workorder.R;
-import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.base.BaseActivity;
-import com.xiangxun.workorder.bean.ChildData;
 import com.xiangxun.workorder.bean.EquipMenuChildData;
-import com.xiangxun.workorder.bean.EquipmentRoot;
-import com.xiangxun.workorder.bean.GroupData;
 import com.xiangxun.workorder.bean.ObjectData;
 import com.xiangxun.workorder.ui.adapter.EquipmentMenuAdapter;
-import com.xiangxun.workorder.ui.adapter.ExpandableListViewAdapter;
-import com.xiangxun.workorder.ui.adapter.RootExpandableListViewAdapter;
-import com.xiangxun.workorder.ui.biz.EquipmentMenuListener;
 import com.xiangxun.workorder.ui.biz.EquipmentMenuListener.EquipmentMenuInterface;
 import com.xiangxun.workorder.ui.main.EquipmentListActivity;
 import com.xiangxun.workorder.ui.presenter.EquipmentMenuPresenter;
 import com.xiangxun.workorder.widget.header.HeaderView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Administrator on 2017/6/5.

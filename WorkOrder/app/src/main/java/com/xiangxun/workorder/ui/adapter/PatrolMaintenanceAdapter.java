@@ -9,9 +9,7 @@ import android.widget.LinearLayout;
 
 import com.hellen.baseframe.baseadapter.ParentAdapter;
 import com.xiangxun.workorder.R;
-import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.bean.Patrol;
-import com.xiangxun.workorder.widget.grid.XwHomeModeButton;
 
 import java.util.List;
 

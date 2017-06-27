@@ -14,7 +14,6 @@ import com.hellen.baseframe.common.dlog.DLog;
 import com.xiangxun.workorder.base.APP;
 import com.xiangxun.workorder.bean.EquipmentInfo;
 import com.xiangxun.workorder.bean.EquipmentRoot;
-import com.xiangxun.workorder.bean.TourRoot;
 import com.xiangxun.workorder.bean.UpTourRoot;
 import com.xiangxun.workorder.common.image.BitmapChangeUtil;
 import com.xiangxun.workorder.common.retrofit.RxjavaRetrofitRequestUtil;

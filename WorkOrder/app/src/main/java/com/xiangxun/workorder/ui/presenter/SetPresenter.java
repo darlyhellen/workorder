@@ -6,7 +6,6 @@ import android.view.View;
 
 import com.hellen.baseframe.application.FrameListener;
 import com.hellen.baseframe.common.multithread.MultithreadDownLoadCommon;
-import com.hellen.baseframe.common.multithread.MultithreadDownLoadManager;
 import com.hellen.baseframe.common.utiltools.SharePreferHelp;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.APP;

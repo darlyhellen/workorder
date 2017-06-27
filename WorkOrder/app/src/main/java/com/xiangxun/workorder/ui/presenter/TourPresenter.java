@@ -1,24 +1,17 @@
 package com.xiangxun.workorder.ui.presenter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.View;
 
 import com.hellen.baseframe.application.FrameListener;
 import com.hellen.baseframe.common.dlog.DLog;
 import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.R;
-import com.xiangxun.workorder.bean.BaseModel;
 import com.xiangxun.workorder.bean.EquipMenuChildData;
 import com.xiangxun.workorder.bean.EquipmentRoot;
-import com.xiangxun.workorder.bean.ObjectData;
-import com.xiangxun.workorder.bean.TourRoot;
 import com.xiangxun.workorder.bean.UpTourRoot;
-import com.xiangxun.workorder.ui.biz.MainListener;
 import com.xiangxun.workorder.ui.biz.TourListener;
-import com.xiangxun.workorder.ui.main.SetActivity;
 import com.xiangxun.workorder.ui.main.TourActivity;
-import com.xiangxun.workorder.widget.dialog.TourSelectDialog;
 import com.xiangxun.workorder.widget.dialog.TourSelectListener;
 import com.xiangxun.workorder.widget.loading.ShowLoading;
 

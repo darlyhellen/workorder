@@ -11,7 +11,6 @@ import android.widget.ListView;
 
 import com.hellen.baseframe.binder.ContentBinder;
 import com.hellen.baseframe.binder.ViewsBinder;
-import com.hellen.baseframe.common.dlog.DLog;
 import com.hellen.baseframe.common.multithread.MultithreadDownLoadCommon;
 import com.hellen.baseframe.common.multithread.MultithreadDownLoadManager;
 import com.hellen.baseframe.common.multithread.MultithreadDownLoadManager.OnMultithreadUIListener;
@@ -23,8 +22,6 @@ import com.xiangxun.workorder.base.BaseActivity;
 import com.xiangxun.workorder.bean.SetModel;
 import com.xiangxun.workorder.bean.VersionData;
 import com.xiangxun.workorder.bean.VersionRoot;
-import com.xiangxun.workorder.service.VersionUpdateService;
-import com.xiangxun.workorder.service.VersionUpdateService.OnServerListener;
 import com.xiangxun.workorder.ui.adapter.SetAdapter;
 import com.xiangxun.workorder.ui.biz.SetListener;
 import com.xiangxun.workorder.ui.presenter.SetPresenter;

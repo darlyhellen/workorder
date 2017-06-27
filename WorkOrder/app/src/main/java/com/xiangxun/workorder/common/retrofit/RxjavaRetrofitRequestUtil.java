@@ -2,7 +2,6 @@ package com.xiangxun.workorder.common.retrofit;
 
 import com.hellen.baseframe.common.dlog.DLog;
 import com.xiangxun.workorder.BuildConfig;
-import com.xiangxun.workorder.base.APP;
 import com.xiangxun.workorder.base.Api;
 import com.xiangxun.workorder.base.HttpRetrofitInterface;
 

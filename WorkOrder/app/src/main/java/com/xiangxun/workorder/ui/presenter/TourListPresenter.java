@@ -11,7 +11,6 @@ import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.StaticListener;
 import com.xiangxun.workorder.bean.TourRoot;
-import com.xiangxun.workorder.bean.WorkOrderRoot;
 import com.xiangxun.workorder.ui.TourListActivity;
 import com.xiangxun.workorder.ui.biz.TourListListener;
 import com.xiangxun.workorder.ui.fragment.SearchWorkOrderDialogFragment;

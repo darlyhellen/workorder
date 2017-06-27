@@ -29,7 +29,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.xiangxun.workorder.ui.fragment.SearchWorkOrderDialogFragment.*;
+import static com.xiangxun.workorder.ui.fragment.SearchWorkOrderDialogFragment.SearchListener;
 
 /**
  * Created by Zhangyuhui/Darly on 2017/5/25.

@@ -8,8 +8,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.hellen.baseframe.common.dlog.DLog;
-
 import java.util.List;
 
 /**

@@ -1,7 +1,6 @@
 package com.xiangxun.workorder.ui.biz;
 
 import android.app.Dialog;
-import android.widget.ViewFlipper;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -9,13 +8,11 @@ import com.google.gson.reflect.TypeToken;
 import com.hellen.baseframe.application.FrameListener;
 import com.hellen.baseframe.application.FramePresenter;
 import com.hellen.baseframe.application.FrameView;
-import com.hellen.baseframe.common.db.ThreadInfo;
 import com.hellen.baseframe.common.dlog.DLog;
 import com.xiangxun.workorder.base.APP;
 import com.xiangxun.workorder.bean.WorkOrderData;
 import com.xiangxun.workorder.bean.WorkOrderRoot;
 import com.xiangxun.workorder.common.retrofit.RxjavaRetrofitRequestUtil;
-import com.xiangxun.workorder.widget.camera.PhotoPop;
 
 import java.util.List;
 

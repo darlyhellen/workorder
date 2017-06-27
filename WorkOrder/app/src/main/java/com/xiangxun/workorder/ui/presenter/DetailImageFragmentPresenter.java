@@ -1,21 +1,11 @@
 package com.xiangxun.workorder.ui.presenter;
 
-import android.content.Context;
-import android.view.View;
-
 import com.hellen.baseframe.application.FrameListener;
-import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.R;
-import com.xiangxun.workorder.bean.DetailChangeRoot;
 import com.xiangxun.workorder.bean.DetailImageRoot;
 import com.xiangxun.workorder.ui.biz.DetailImageFragmentListener;
-import com.xiangxun.workorder.ui.biz.DetailOrderFragmentListener;
-import com.xiangxun.workorder.ui.biz.DetailOrderFragmentListener.DetailOrderFragmentInterface;
 import com.xiangxun.workorder.ui.fragment.DetailImageFragment;
-import com.xiangxun.workorder.ui.fragment.DetailOrderFragment;
 import com.xiangxun.workorder.widget.loading.ShowLoading;
-
-import java.util.List;
 
 /**
  * Created by Zhangyuhui/Darly on 2017/5/31.

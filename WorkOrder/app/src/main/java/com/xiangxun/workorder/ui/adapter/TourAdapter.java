@@ -9,8 +9,6 @@ import android.widget.TextView;
 import com.hellen.baseframe.baseadapter.ParentAdapter;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.bean.TourInfo;
-import com.xiangxun.workorder.bean.WorkOrderData;
-import com.xiangxun.workorder.common.WorkOrderUtils;
 import com.xiangxun.workorder.common.urlencode.Tools;
 import com.xiangxun.workorder.widget.coupon.CouponDisplayView;
 

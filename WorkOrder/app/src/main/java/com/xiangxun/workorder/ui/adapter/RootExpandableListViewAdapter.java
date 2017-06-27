@@ -11,12 +11,8 @@ import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.hellen.baseframe.common.dlog.DLog;
 import com.xiangxun.workorder.R;
-import com.xiangxun.workorder.bean.ChildData;
-import com.xiangxun.workorder.bean.EquipmentRoot;
 import com.xiangxun.workorder.bean.GroupData;
-import com.xiangxun.workorder.common.image.ImageLoaderUtil;
 import com.xiangxun.workorder.widget.scroll.CustomExpandableListView;
 
 import java.util.List;

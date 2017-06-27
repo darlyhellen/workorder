@@ -1,7 +1,5 @@
 package com.xiangxun.workorder.bean;
 
-import junit.runner.Version;
-
 /**
  * Created by Zhangyuhui/Darly on 2017/5/18.
  * Copyright by [Zhangyuhui/Darly]

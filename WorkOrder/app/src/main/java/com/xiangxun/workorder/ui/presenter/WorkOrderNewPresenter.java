@@ -3,7 +3,6 @@ package com.xiangxun.workorder.ui.presenter;
 import com.hellen.baseframe.application.FrameListener;
 import com.xiangxun.workorder.base.StaticListener;
 import com.xiangxun.workorder.bean.NewServiceRoot;
-import com.xiangxun.workorder.bean.WorkOrderRoot;
 import com.xiangxun.workorder.ui.biz.WorkOrderNewListener;
 
 /**

@@ -1,8 +1,6 @@
 package com.xiangxun.workorder.ui.biz;
 
 import android.app.Dialog;
-import android.graphics.BitmapFactory;
-import android.text.TextUtils;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -12,17 +10,11 @@ import com.hellen.baseframe.application.FramePresenter;
 import com.hellen.baseframe.application.FrameView;
 import com.hellen.baseframe.common.dlog.DLog;
 import com.xiangxun.workorder.base.APP;
-import com.xiangxun.workorder.bean.DetailChangeRoot;
 import com.xiangxun.workorder.bean.DetailImageRoot;
-import com.xiangxun.workorder.common.image.BitmapChangeUtil;
 import com.xiangxun.workorder.common.retrofit.RxjavaRetrofitRequestUtil;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.List;
 
-import okhttp3.RequestBody;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;

@@ -4,19 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 
-import com.hellen.baseframe.common.db.ThreadInfo;
 import com.hellen.baseframe.common.dlog.DLog;
 import com.xiangxun.workorder.R;
-import com.xiangxun.workorder.bean.Patrol;
 import com.xiangxun.workorder.ui.EquipmentMenuAcitvity;
 import com.xiangxun.workorder.ui.biz.MainListener;
-import com.xiangxun.workorder.ui.main.DownLoadActivity;
-import com.xiangxun.workorder.ui.main.SetActivity;
-import com.xiangxun.workorder.ui.main.TourActivity;
-import com.xiangxun.workorder.ui.video.VideoRecordActivity;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Zhangyuhui/Darly on 2017/5/17.
