@@ -56,6 +56,9 @@ public class VersionUpDateDialog extends Dialog {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         mCustomView = inflater.inflate(R.layout.version_update_dialog, null);
         setContentView(mCustomView);
+        // 按返回键是否取消
+        setCanceledOnTouchOutside(false);
+        setCancelable(false);
         Window window = this.getWindow();
         WindowManager.LayoutParams lp = window.getAttributes();
         DisplayMetrics dm = new DisplayMetrics();

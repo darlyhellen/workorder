@@ -125,9 +125,9 @@ public class SetPresenter {
                         APPDialg dialg = new APPDialg(context);
                         dialg.setViewVisible();
                         dialg.setTitle(R.string.set_decl);
-                        dialg.setContent(R.string.set_update_des);
-                        dialg.setSure(R.string.set_sure);
-                        dialg.setConsel(R.string.consel);
+                        dialg.setContent(versionRoot.getData().getDescription());
+                        dialg.setSure("更新");
+                        dialg.setConsel("暂不更新");
                         dialg.setOndialogListener(new OndialogListener() {
                             @Override
                             public void onSureClick() {

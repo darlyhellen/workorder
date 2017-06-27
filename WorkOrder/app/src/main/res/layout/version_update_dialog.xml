@@ -33,11 +33,11 @@
         android:id="@+id/id_version_update_multithread_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dip"
-        android:padding="5dp"
-        android:progress="10"
-        zyh:progress_text_color="#ff2903FC"
-        zyh:progress_unreached_color="#ffBCB4E8" />
+        android:background="@drawable/app_login_text_shape"
+        android:paddingBottom="@dimen/margin_padding10"
+        android:paddingTop="@dimen/margin_padding10"
+        zyh:progress_text_color="@color/edit_save_btn_color_disable"
+        zyh:progress_unreached_color="@color/wel_back_color" />
 
     <TableRow
         android:layout_width="match_parent"

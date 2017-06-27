@@ -107,7 +107,13 @@ public class APPDialg extends AlertDialog {
 
 
     public void setContent(String content) {
-        this.content.setText(content);
+        StringBuilder builder = new StringBuilder();
+        String args[] = content.split("#");
+        for (int i = 0; i < args.length; i++) {
+            builder.append(args[i]);
+            builder.append("\r\n");
+        }
+        this.content.setText(builder.toString());
     }
 
 

@@ -2,7 +2,6 @@ package com.xiangxun.workorder.service;
 
 import android.app.Notification;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -16,21 +15,12 @@ import com.hellen.baseframe.common.multithread.MultithreadDownLoadCommon;
 import com.hellen.baseframe.common.multithread.MultithreadDownLoadManager;
 import com.hellen.baseframe.common.multithread.MultithreadDownLoadManager.OnMultithreadUIListener;
 import com.hellen.baseframe.common.obsinfo.ToastApp;
-import com.hellen.baseframe.common.utiltools.SharePreferHelp;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.APP;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.bean.VersionData;
-import com.xiangxun.workorder.ui.MaintenanceActivity;
-import com.xiangxun.workorder.ui.presenter.WorkOrderNewPresenter;
-import com.xiangxun.workorder.widget.dialog.APPDialg;
-import com.xiangxun.workorder.widget.dialog.OndialogListener;
-import com.xiangxun.workorder.widget.dialog.VersionUpDateDialog;
 
 import java.io.File;
-import java.util.Calendar;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Created by Zhangyuhui/Darly on 2017/5/25.
