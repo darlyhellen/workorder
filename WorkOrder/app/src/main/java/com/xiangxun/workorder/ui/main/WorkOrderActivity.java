@@ -152,7 +152,7 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
             case 40:
                 //通知公告页面列表
                 isTour = false;
-                workorder = "";
+                workorder = "10000";
                 textDes = "没有通知公告！";
                 textView.setVisibility(View.VISIBLE);
                 textView.setText(textDes);
