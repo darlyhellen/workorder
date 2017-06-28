@@ -76,9 +76,9 @@ public class DetailImageFragment extends Fragment implements DetailImageFragment
 
     private void initView() {
         presenter = new DetailImageFragmentPresenter(this);
-        data = getArguments().getParcelable("WorkOrderData");
-        info = getArguments().getParcelable("EquipmentInfo");
-        tour = getArguments().getParcelable("TourInfo");
+        data = (WorkOrderData) getArguments().getSerializable("WorkOrderData");
+        info = (EquipmentInfo) getArguments().getSerializable("EquipmentInfo");
+        tour = (TourInfo) getArguments().getSerializable("TourInfo");
         if (data != null) {
             urls = new ArrayList<String>();
             if (TextUtils.isEmpty(data.id)) {

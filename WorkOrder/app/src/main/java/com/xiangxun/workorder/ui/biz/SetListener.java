@@ -64,7 +64,7 @@ public class SetListener implements FramePresenter {
             return;
         }
         //在这里进行数据请求
-        RxjavaRetrofitRequestUtil.getInstance().getgithub().github().
+        RxjavaRetrofitRequestUtil.getInstance().get().getVersion(version).
                 subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(new Func1<JsonObject, VersionRoot>() {

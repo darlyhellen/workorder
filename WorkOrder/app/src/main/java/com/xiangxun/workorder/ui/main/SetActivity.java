@@ -85,9 +85,11 @@ public class SetActivity extends BaseActivity implements SetListener.SetInterfac
         if (dialog == null) {
             dialog = new VersionUpDateDialog(this, root);
             dialog.show();
+            dialog.initClick();
         } else {
             if (!dialog.isShowing()) {
                 dialog.show();
+                dialog.initClick();
             }
         }
     }

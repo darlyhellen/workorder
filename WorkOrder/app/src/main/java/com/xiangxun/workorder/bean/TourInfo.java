@@ -9,6 +9,7 @@ import java.io.Serializable;
 public class TourInfo implements Serializable {
     public String id;
     public String deviceid;
+    public String devicename;
     public String inserttime;
     public String reason;
     public String note;
@@ -26,11 +27,6 @@ public class TourInfo implements Serializable {
     public String orgname;
     public String assetname;
     public String code;
-
-
-    public TourInfo() {
-    }
-
 
 
 }

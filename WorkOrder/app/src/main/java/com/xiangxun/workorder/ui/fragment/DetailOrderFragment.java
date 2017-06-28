@@ -385,14 +385,14 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
         orgnames.setNameValue(R.string.st_detail_inout, tour.orgname);
         tv_linear.addView(orgnames);
         DetailView assetname = new DetailView(getActivity());
-        assetname.setNameValue(R.string.st_detail_complainant, tour.assetname);
+        assetname.setNameValue(R.string.st_detail_complainant, tour.devicename);
         tv_linear.addView(assetname);
         DetailView code = new DetailView(getActivity());
         code.setNameValue(R.string.st_tour_code, tour.code);
         tv_linear.addView(code);
 
         DetailView Checkingpeople = new DetailView(getActivity());
-        Checkingpeople.setNameValue(R.string.st_tour_Checkingpeople, tour.Checkingpeople);
+        Checkingpeople.setNameValue(R.string.st_tour_Checkingpeople, tour.name);
         tv_linear.addView(Checkingpeople);
 
 

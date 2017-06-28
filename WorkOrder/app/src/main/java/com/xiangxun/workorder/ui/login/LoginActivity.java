@@ -158,9 +158,11 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Logi
         if (dialog == null) {
             dialog = new VersionUpDateDialog(this, root);
             dialog.show();
+            dialog.initClick();
         } else {
             if (!dialog.isShowing()) {
                 dialog.show();
+                dialog.initClick();
             }
         }
     }

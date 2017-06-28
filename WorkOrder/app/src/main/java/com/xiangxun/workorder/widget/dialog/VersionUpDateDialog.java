@@ -32,6 +32,9 @@ public class VersionUpDateDialog extends Dialog {
     private View mCustomView = null;
     private VersionRoot root;
 
+    private Button stop;
+    private Button cont;
+
     private MultithreadProgressBar bar;
 
     public VersionUpDateDialog(Context context, VersionRoot root) {
@@ -66,13 +69,15 @@ public class VersionUpDateDialog extends Dialog {
         TextView mTvPublishSelectTitle = (TextView) mCustomView.findViewById(R.id.id_version_update_title);
         bar = (MultithreadProgressBar) mCustomView.findViewById(R.id.id_version_update_multithread_bar);
         mTvPublishSelectTitle.setText("运维通版本更新");
-        Button stop = (Button) mCustomView.findViewById(R.id.id_version_update_stop);
-        Button cont = (Button) mCustomView.findViewById(R.id.id_version_update_continue);
+        stop = (Button) mCustomView.findViewById(R.id.id_version_update_stop);
+        cont = (Button) mCustomView.findViewById(R.id.id_version_update_continue);
         Button close = (Button) mCustomView.findViewById(R.id.id_version_update_close);
         stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MultithreadDownLoadCommon.ISPUASE = true;
+                cont.setClickable(true);
+                stop.setClickable(false);
             }
         });
         cont.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +85,8 @@ public class VersionUpDateDialog extends Dialog {
             public void onClick(View v) {
                 MultithreadDownLoadCommon.ISPUASE = false;
                 ((SetListener.SetInterface) mContext).onStartDownVersion(root);
+                cont.setClickable(false);
+                stop.setClickable(true);
             }
         });
         close.setOnClickListener(new View.OnClickListener() {
@@ -90,6 +97,11 @@ public class VersionUpDateDialog extends Dialog {
             }
         });
 
+    }
+
+    public void initClick() {
+        cont.setClickable(false);
+        stop.setClickable(true);
     }
 
     public MultithreadProgressBar getBar() {
