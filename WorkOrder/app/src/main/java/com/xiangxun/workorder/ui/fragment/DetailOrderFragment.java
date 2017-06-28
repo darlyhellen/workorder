@@ -286,6 +286,10 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
         messages.setNameValue(R.string.st_detail_declare, data.messages);
         tv_linear.addView(messages);
 
+        DetailView backreas = new DetailView(getActivity());
+        backreas.setNameValue(R.string.st_detail_backreas, data.reason);
+        tv_linear.addView(backreas);
+
         //异常状态
         tvContent15.setText(data.exceptionid);
         tvContent16.setText("");
@@ -411,8 +415,6 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
         DetailView orgname = new DetailView(getActivity());
         orgname.setNameValue(R.string.st_tour_Checkingpeople, tour.Checkingpeople);
         tv_linear.addView(orgname);
-
-
 
 
     }

@@ -111,6 +111,7 @@
     <string name="st_detail_company">派发人:</string>
     <string name="st_detail_worktime">派发时间:</string>
     <string name="st_detail_postion">工单状态:</string>
+    <string name="st_detail_backreas">备注记录:</string>
     <string name="st_detail_ordertype">是否场内:</string>
     <string name="st_detail_order_content">是否转派:</string>
     <string name="st_detail_request">是否遗留:</string>
