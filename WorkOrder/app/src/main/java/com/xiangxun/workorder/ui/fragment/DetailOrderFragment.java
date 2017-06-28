@@ -180,7 +180,7 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
             case 5:
                 //遗留的状态
                 button.setVisibility(View.GONE);
-                except.setVisibility(View.VISIBLE);
+                except.setVisibility(View.GONE);
                 close.setVisibility(View.GONE);
                 images.setVisibility(View.GONE);
                 break;
@@ -189,7 +189,7 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
                 images.setVisibility(View.GONE);
                 button.setVisibility(View.GONE);
                 except.setVisibility(View.GONE);
-                close.setVisibility(View.VISIBLE);
+                close.setVisibility(View.GONE);
                 break;
             case 2:
             case 3:
