@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.View;
 
 import com.hellen.baseframe.application.FrameListener;
+import com.hellen.baseframe.common.dlog.DLog;
 import com.hellen.baseframe.common.multithread.MultithreadDownLoadCommon;
 import com.hellen.baseframe.common.utiltools.SharePreferHelp;
 import com.xiangxun.workorder.R;
@@ -21,8 +22,11 @@ import com.xiangxun.workorder.widget.dialog.OndialogListener;
 import com.xiangxun.workorder.widget.loading.ShowLoading;
 
 import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -121,12 +125,24 @@ public class SetPresenter {
                 if (!isLogin) {
                     biz.onStop(loading);
                 }
+
                 if (versionRoot != null && versionRoot.getData() != null) {
-                    if (versionRoot.getData().getVersion() > APP.getInstance().getVersionCode()) {
+                    String vers = "0";
+                    try {
+                        String name = versionRoot.getData().getSaveUrl();
+                        String[] arg = name.split("-");
+                        String date = arg[arg.length - 1];
+                        vers = date.substring(0, date.lastIndexOf("."));
+                    } catch (Exception e) {
+
+                    }
+                    SharePreferHelp.putValue(AppEnum.VERSION.getDec(), vers);
+                    DLog.i("请求版本" + vers);
+                    if (Float.parseFloat(vers) > APP.getInstance().getVersionCode()) {
                         APPDialg dialg = new APPDialg(context);
                         dialg.setViewVisible();
                         dialg.setTitle(R.string.set_decl);
-                        dialg.setContent(versionRoot.getData().getRemark());
+                        dialg.setContent(R.string.set_update_des);
                         dialg.setSure("更新");
                         dialg.setConsel("暂不更新");
                         dialg.setOndialogListener(new OndialogListener() {

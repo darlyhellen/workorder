@@ -64,7 +64,7 @@ public class SetListener implements FramePresenter {
             return;
         }
         //在这里进行数据请求
-        RxjavaRetrofitRequestUtil.getInstance().get().getVersion(version).
+        RxjavaRetrofitRequestUtil.getInstance().getgithub().github().
                 subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(new Func1<JsonObject, VersionRoot>() {
@@ -73,9 +73,6 @@ public class SetListener implements FramePresenter {
                         DLog.json("Func1", jsonObject.toString());
                         VersionRoot root = new Gson().fromJson(jsonObject, new TypeToken<VersionRoot>() {
                         }.getType());
-                        if (root != null && root.getData() != null) {
-                            SharePreferHelp.putValue(AppEnum.VERSION.getDec(), root.getData().getVersion());
-                        }
                         return root;
                     }
                 })

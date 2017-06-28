@@ -56,7 +56,7 @@
     <string name="set_clean_cache_des">是否确认清理缓存？</string>
     <string name="set_update">版本更新</string>
     <string name="set_service">配置服务</string>
-    <string name="set_update_des">是否确认新版本升级？</string>
+    <string name="set_update_des">有新版本，是否确认新版本升级？</string>
     <string name="set_loginout">退出登录</string>
     <string name="set_loginout_des">是否确认退出登录？</string>
     <string name="set_sure">确认</string>

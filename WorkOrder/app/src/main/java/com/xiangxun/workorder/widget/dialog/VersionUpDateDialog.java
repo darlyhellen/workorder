@@ -9,25 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.hellen.baseframe.common.dlog.DLog;
 import com.hellen.baseframe.common.multithread.MultithreadDownLoadCommon;
-import com.hellen.baseframe.common.multithread.MultithreadDownLoadManager;
-import com.hellen.baseframe.common.multithread.MultithreadDownLoadManager.OnMultithreadUIListener;
-import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.R;
-import com.xiangxun.workorder.base.AppEnum;
-import com.xiangxun.workorder.bean.VersionData;
 import com.xiangxun.workorder.bean.VersionRoot;
 import com.xiangxun.workorder.common.urlencode.Tools;
 import com.xiangxun.workorder.ui.biz.SetListener;
-
-import java.io.File;
-import java.util.List;
 
 
 /**

@@ -78,9 +78,9 @@ public class DetailLbsAmapFragment extends Fragment {
             aMap = mapView.getMap();
             aMap.setMapType(AMap.MAP_TYPE_NORMAL);
         }
-        data = getArguments().getParcelable("WorkOrderData");
-        info = getArguments().getParcelable("EquipmentInfo");
-        tour = getArguments().getParcelable("TourInfo");
+        data = (WorkOrderData) getArguments().getSerializable("WorkOrderData");
+        info = (EquipmentInfo) getArguments().getSerializable("EquipmentInfo");
+        tour = (TourInfo) getArguments().getSerializable("TourInfo");
         if (AppEnum.TEST) {
             //单独的测试数据,假数据.
             data = AppEnum.getData();

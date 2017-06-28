@@ -49,8 +49,8 @@ public class SetAdapter extends ParentAdapter<SetModel> {
             hocker.decls.setText(setModel.getDecls());
             hocker.decl.setText(setModel.getDecl());
             hocker.image.setImageResource(setModel.getRes());
-            int version = SharePreferHelp.getValue(AppEnum.VERSION.getDec(), 0);
-            if (R.string.set_update == setModel.getTitle() && version > APP.getInstance().getVersionCode()) {
+            String version = SharePreferHelp.getValue(AppEnum.VERSION.getDec(), "0");
+            if (R.string.set_update == setModel.getTitle() && Float.parseFloat(version) > APP.getInstance().getVersionCode()) {
                 hocker.newversion.setVisibility(View.VISIBLE);
                 hocker.newversion.setText("新版本V" + version);
             } else {

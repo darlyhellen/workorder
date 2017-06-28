@@ -36,8 +36,8 @@
         android:background="@drawable/app_login_text_shape"
         android:paddingBottom="@dimen/margin_padding10"
         android:paddingTop="@dimen/margin_padding10"
-        zyh:progress_text_color="@color/text_color"
         zyh:progress_reached_color="@color/edit_save_btn_color_disable"
+        zyh:progress_text_color="@color/text_color"
         zyh:progress_unreached_color="@color/wel_back_color" />
 
     <TableRow
@@ -49,7 +49,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@null"
+            android:background="@drawable/button_app_selecter"
             android:text="暂停" />
 
         <Button
@@ -57,7 +57,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@null"
+            android:background="@drawable/button_app_selecter"
             android:text="继续" />
 
         <Button
@@ -65,7 +65,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@null"
+            android:background="@drawable/button_app_selecter"
             android:text="暂不更新" />
 
     </TableRow>
