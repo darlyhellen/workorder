@@ -9,24 +9,25 @@ import java.io.Serializable;
 public class TourInfo implements Serializable {
     public String id;
     public String deviceid;
-    public String devicename;
+
     public String inserttime;
+    public String userid;
+    public String name;
+    public String mobile;
+    public String devicename;
+    public String ip;
+    public String assettype;
+    public String deviceplace;
+    public String installtime;
+
+    public String code;
+
     public String reason;
     public String note;
-    public String Checkingpeople;
     //经度
     public String mapx;
     //纬度
     public String mapy;
-
-    public String userid;
-    public String mobile;
-    public String name;
-    public String ip;
-    public String installplace;
-    public String orgname;
-    public String assetname;
-    public String code;
 
 
 }

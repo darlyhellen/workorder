@@ -379,30 +379,35 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
         id.setNameValue(R.string.st_tour_id, tour.id);
         tv_linear.addView(id);
 
-        DetailView ip = new DetailView(getActivity());
-        ip.setNameValue(R.string.st_detail_complainant_tel, tour.ip);
-        tv_linear.addView(ip);
-        DetailView installplace = new DetailView(getActivity());
-        installplace.setNameValue(R.string.st_detail_type, tour.installplace);
-        tv_linear.addView(installplace);
-        DetailView orgnames = new DetailView(getActivity());
-        orgnames.setNameValue(R.string.st_detail_inout, tour.orgname);
-        tv_linear.addView(orgnames);
         DetailView assetname = new DetailView(getActivity());
         assetname.setNameValue(R.string.st_detail_complainant, tour.devicename);
         tv_linear.addView(assetname);
-        DetailView code = new DetailView(getActivity());
-        code.setNameValue(R.string.st_tour_code, tour.code);
-        tv_linear.addView(code);
-
-        DetailView Checkingpeople = new DetailView(getActivity());
-        Checkingpeople.setNameValue(R.string.st_tour_Checkingpeople, tour.name);
-        tv_linear.addView(Checkingpeople);
 
 
-        DetailView time = new DetailView(getActivity());
-        time.setNameValue(R.string.st_tour_time, tour.inserttime);
-        tv_linear.addView(time);
+        DetailView installplace = new DetailView(getActivity());
+        installplace.setNameValue(R.string.st_detail_type, tour.deviceplace);
+        tv_linear.addView(installplace);
+
+        DetailView ip = new DetailView(getActivity());
+        ip.setNameValue(R.string.st_detail_complainant_tel, tour.ip);
+        tv_linear.addView(ip);
+
+        DetailView assettype = new DetailView(getActivity());
+        if ("device".equals(tour.assettype)) {
+            assettype.setNameValue(R.string.st_equip_assettype, "卡口");
+        } else if ("ftp".equals(tour.assettype)) {
+            assettype.setNameValue(R.string.st_equip_assettype, "FTP");
+        } else if ("project".equals(tour.assettype)) {
+            assettype.setNameValue(R.string.st_equip_assettype, "平台");
+        } else if ("database".equals(tour.assettype)) {
+            assettype.setNameValue(R.string.st_equip_assettype, "数据库");
+        } else if ("server".equals(tour.assettype)) {
+            assettype.setNameValue(R.string.st_equip_assettype, "服务器");
+        } else {
+            assettype.setNameValue(R.string.st_equip_assettype, "机柜");
+        }
+        tv_linear.addView(assettype);
+
 
         DetailView reason = new DetailView(getActivity());
         reason.setNameValue(R.string.st_tour_reason, tour.reason);
@@ -412,10 +417,12 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
         note.setNameValue(R.string.st_tour_note, tour.note);
         tv_linear.addView(note);
 
-        DetailView orgname = new DetailView(getActivity());
-        orgname.setNameValue(R.string.st_tour_Checkingpeople, tour.Checkingpeople);
-        tv_linear.addView(orgname);
-
+        DetailView Checkingpeople = new DetailView(getActivity());
+        Checkingpeople.setNameValue(R.string.st_tour_Checkingpeople, tour.name);
+        tv_linear.addView(Checkingpeople);
+        DetailView time = new DetailView(getActivity());
+        time.setNameValue(R.string.st_tour_time, tour.inserttime);
+        tv_linear.addView(time);
 
     }
 
