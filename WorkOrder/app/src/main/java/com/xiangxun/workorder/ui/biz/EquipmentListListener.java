@@ -9,7 +9,10 @@ import com.hellen.baseframe.application.FrameListener;
 import com.hellen.baseframe.application.FramePresenter;
 import com.hellen.baseframe.application.FrameView;
 import com.hellen.baseframe.common.dlog.DLog;
+import com.hellen.baseframe.common.obsinfo.ToastApp;
+import com.hellen.baseframe.common.utiltools.SharePreferHelp;
 import com.xiangxun.workorder.base.APP;
+import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.bean.EquipmentInfo;
 import com.xiangxun.workorder.bean.EquipmentRoot;
 import com.xiangxun.workorder.common.retrofit.RxjavaRetrofitRequestUtil;
@@ -51,7 +54,7 @@ public class EquipmentListListener implements FramePresenter {
             dialog.show();
     }
 
-    public void getEquipment(int page, String status, String devicename, String devicecode, String deviceip, final FrameListener<EquipmentRoot> listener) {
+    public void getEquipment(final int page, String status, String devicename, String devicecode, String deviceip, final FrameListener<EquipmentRoot> listener) {
 
         if (!APP.isNetworkConnected(APP.getInstance())) {
             listener.onFaild(0, "网络异常,请检查网络");
@@ -67,6 +70,9 @@ public class EquipmentListListener implements FramePresenter {
                         DLog.json("Func1", jsonObject.toString());
                         EquipmentRoot root = new Gson().fromJson(jsonObject, new TypeToken<EquipmentRoot>() {
                         }.getType());
+                        if (root != null && root.getStatus() == 1 && root.getData() != null) {
+                            SharePreferHelp.putValue(AppEnum.EquipmentRoot.getDec() + page, root);
+                        }
                         return root;
                     }
                 })
@@ -78,8 +84,13 @@ public class EquipmentListListener implements FramePresenter {
 
                     @Override
                     public void onError(Throwable e) {
-                        e.printStackTrace();
-                        listener.onFaild(1, e.getMessage());
+                        EquipmentRoot root = (EquipmentRoot) SharePreferHelp.getValue(AppEnum.EquipmentRoot.getDec() + page);
+                        if (root != null) {
+                            ToastApp.showToast(e.getMessage());
+                            listener.onSucces(root);
+                        } else {
+                            listener.onFaild(1, e.getMessage());
+                        }
                     }
 
                     @Override

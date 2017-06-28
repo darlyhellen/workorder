@@ -62,11 +62,11 @@ public class WorkOrderDetailActivity extends BaseActivity implements OnClickList
         presenter = new WorkOrderDetailPresenter(this);
         //一下三个必须进来一个。否则就崩溃了。
         //正常工单详情
-        data = getIntent().getParcelableExtra("WorkOrderData");
+        data = (WorkOrderData) getIntent().getSerializableExtra("WorkOrderData");
         //设备信息详情
-        info = getIntent().getParcelableExtra("EquipmentInfo");
+        info = (EquipmentInfo) getIntent().getSerializableExtra("EquipmentInfo");
         //巡检工单详情
-        tour = getIntent().getParcelableExtra("TourInfo");
+        tour = (TourInfo) getIntent().getSerializableExtra("TourInfo");
         if (AppEnum.TEST) {
             //单独的测试数据,假数据.
             data = AppEnum.getData();
@@ -94,7 +94,7 @@ public class WorkOrderDetailActivity extends BaseActivity implements OnClickList
     private void hasData() {
 
         Bundle bundle = new Bundle();
-        bundle.putParcelable("WorkOrderData", data);
+        bundle.putSerializable("WorkOrderData", data);
         order = new DetailOrderFragment();
         order.setArguments(bundle);
         list.add(order);
@@ -130,7 +130,7 @@ public class WorkOrderDetailActivity extends BaseActivity implements OnClickList
     private void hasInfo() {
 
         Bundle bundle = new Bundle();
-        bundle.putParcelable("EquipmentInfo", info);
+        bundle.putSerializable("EquipmentInfo", info);
         order = new DetailOrderFragment();
         order.setArguments(bundle);
         list.add(order);
@@ -166,7 +166,7 @@ public class WorkOrderDetailActivity extends BaseActivity implements OnClickList
     private void hasTour() {
 
         Bundle bundle = new Bundle();
-        bundle.putParcelable("TourInfo", tour);
+        bundle.putSerializable("TourInfo", tour);
         order = new DetailOrderFragment();
         order.setArguments(bundle);
         list.add(order);

@@ -9,7 +9,11 @@ import com.hellen.baseframe.application.FrameListener;
 import com.hellen.baseframe.application.FramePresenter;
 import com.hellen.baseframe.application.FrameView;
 import com.hellen.baseframe.common.dlog.DLog;
+import com.hellen.baseframe.common.obsinfo.ToastApp;
+import com.hellen.baseframe.common.utiltools.SharePreferHelp;
 import com.xiangxun.workorder.base.APP;
+import com.xiangxun.workorder.base.AppEnum;
+import com.xiangxun.workorder.bean.TourRoot;
 import com.xiangxun.workorder.bean.WorkOrderData;
 import com.xiangxun.workorder.bean.WorkOrderRoot;
 import com.xiangxun.workorder.common.retrofit.RxjavaRetrofitRequestUtil;
@@ -51,7 +55,7 @@ public class WorkOrderListener implements FramePresenter {
             dialog.show();
     }
 
-    public void getWorkOrder(int page, String status, String devicename, String devicecode, String deviceip, final FrameListener<WorkOrderRoot> listener) {
+    public void getWorkOrder(final int page, final String status, String devicename, String devicecode, String deviceip, final FrameListener<WorkOrderRoot> listener) {
 
         if (!APP.isNetworkConnected(APP.getInstance())) {
             listener.onFaild(0, "网络异常,请检查网络");
@@ -67,6 +71,9 @@ public class WorkOrderListener implements FramePresenter {
                         DLog.json("Func1", jsonObject.toString());
                         WorkOrderRoot root = new Gson().fromJson(jsonObject, new TypeToken<WorkOrderRoot>() {
                         }.getType());
+                        if (root != null && root.getStatus() == 1 && root.getData() != null) {
+                            SharePreferHelp.putValue(AppEnum.WorkOrderRoot.getDec() + page + status, root);
+                        }
                         return root;
                     }
                 })
@@ -78,7 +85,13 @@ public class WorkOrderListener implements FramePresenter {
 
                     @Override
                     public void onError(Throwable e) {
-                        listener.onFaild(1, e.getMessage());
+                        WorkOrderRoot root = (WorkOrderRoot) SharePreferHelp.getValue(AppEnum.WorkOrderRoot.getDec() + page + status);
+                        if (root != null) {
+                            ToastApp.showToast(e.getMessage());
+                            listener.onSucces(root);
+                        } else {
+                            listener.onFaild(1, e.getMessage());
+                        }
                     }
 
                     @Override

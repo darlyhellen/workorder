@@ -122,9 +122,9 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
 
 
     private void initView() {
-        data = getArguments().getParcelable("WorkOrderData");
-        info = getArguments().getParcelable("EquipmentInfo");
-        tour = getArguments().getParcelable("TourInfo");
+        data = (WorkOrderData) getArguments().getSerializable("WorkOrderData");
+        info = (EquipmentInfo) getArguments().getSerializable("EquipmentInfo");
+        tour = (TourInfo) getArguments().getSerializable("TourInfo");
         if (data != null) {
             hasData();
         } else if (info != null) {

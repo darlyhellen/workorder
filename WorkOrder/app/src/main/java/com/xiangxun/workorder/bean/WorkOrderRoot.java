@@ -1,5 +1,6 @@
 package com.xiangxun.workorder.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
  *
  * @TODO:
  */
-public class WorkOrderRoot {
+public class WorkOrderRoot implements Serializable {
 
     private int pageSize;
     private String message;
@@ -74,4 +75,5 @@ public class WorkOrderRoot {
     public void setData(List<WorkOrderData> data) {
         this.data = data;
     }
+
 }

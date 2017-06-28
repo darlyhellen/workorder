@@ -1,5 +1,6 @@
 package com.xiangxun.workorder.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
  *
  * @TODO: 设备信息表
  */
-public class EquipmentRoot {
+public class EquipmentRoot implements Serializable {
     private String message;
 
     private int status;

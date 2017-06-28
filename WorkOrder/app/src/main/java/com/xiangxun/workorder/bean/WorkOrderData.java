@@ -1,7 +1,6 @@
 package com.xiangxun.workorder.bean;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import java.io.Serializable;
 
 /**
  * Created by Zhangyuhui/Darly on 2017/5/19.
@@ -10,7 +9,7 @@ import android.os.Parcelable;
  *
  * @TODO:
  */
-public class WorkOrderData implements Parcelable {
+public class WorkOrderData implements Serializable {
 
     public String position;
     public String isleave;
@@ -55,90 +54,5 @@ public class WorkOrderData implements Parcelable {
 
     public WorkOrderData() {
     }
-
-    public WorkOrderData(Parcel in) {
-        //顺序要和writeToParcel写的顺序一样
-        position = in.readString();
-        isleave = in.readString();
-        offtime = in.readString();
-        deviceip = in.readString();
-        status = in.readInt();
-        isouter = in.readInt();
-        contact = in.readString();
-        messages = in.readString();
-        id = in.readString();
-        companyid = in.readString();
-        assigntime = in.readString();
-        devicecode = in.readString();
-        assignaccount = in.readString();
-        devicename = in.readString();
-        devicetype = in.readString();
-        offaccount = in.readString();
-        telephone = in.readString();
-        assetid = in.readString();
-        isreassign = in.readString();
-        exceptionid = in.readString();
-        orgid = in.readString();
-        reason = in.readString();
-        note = in.readString();
-        contactname = in.readString();
-        orgname = in.readString();
-        companyname = in.readString();
-        mapx = in.readString();
-        mapy = in.readString();
-        photo1 = in.readString();
-        photo2 = in.readString();
-        photo3 = in.readString();
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(position);
-        dest.writeString(isleave);
-        dest.writeString(offtime);
-        dest.writeString(deviceip);
-        dest.writeInt(status);
-        dest.writeInt(isouter);
-        dest.writeString(contact);
-        dest.writeString(messages);
-        dest.writeString(id);
-        dest.writeString(companyid);
-        dest.writeString(assigntime);
-        dest.writeString(devicecode);
-        dest.writeString(assignaccount);
-        dest.writeString(devicename);
-        dest.writeString(devicetype);
-        dest.writeString(offaccount);
-        dest.writeString(telephone);
-        dest.writeString(assetid);
-        dest.writeString(isreassign);
-        dest.writeString(exceptionid);
-        dest.writeString(orgid);
-        dest.writeString(reason);
-        dest.writeString(note);
-        dest.writeString(contactname);
-        dest.writeString(orgname);
-        dest.writeString(companyname);
-        dest.writeString(mapx);
-        dest.writeString(mapy);
-        dest.writeString(photo1);
-        dest.writeString(photo2);
-        dest.writeString(photo3);
-    }
-
-    public static final Parcelable.Creator<WorkOrderData> CREATOR = new Parcelable.Creator<WorkOrderData>() {
-        public WorkOrderData createFromParcel(Parcel in) {
-            return new WorkOrderData(in);
-        }
-
-        public WorkOrderData[] newArray(int size) {
-            return new WorkOrderData[size];
-        }
-    };
 
 }

@@ -9,9 +9,13 @@ import com.hellen.baseframe.application.FrameListener;
 import com.hellen.baseframe.application.FramePresenter;
 import com.hellen.baseframe.application.FrameView;
 import com.hellen.baseframe.common.dlog.DLog;
+import com.hellen.baseframe.common.obsinfo.ToastApp;
+import com.hellen.baseframe.common.utiltools.SharePreferHelp;
 import com.xiangxun.workorder.base.APP;
+import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.bean.TourInfo;
 import com.xiangxun.workorder.bean.TourRoot;
+import com.xiangxun.workorder.bean.WorkOrderRoot;
 import com.xiangxun.workorder.common.retrofit.RxjavaRetrofitRequestUtil;
 
 import java.util.List;
@@ -51,7 +55,7 @@ public class TourListListener implements FramePresenter {
             dialog.show();
     }
 
-    public void getWorkOrder(int page, String status, String devicename, String devicecode, String deviceip, final FrameListener<TourRoot> listener) {
+    public void getWorkOrder(final int page, String status, String devicename, String devicecode, String deviceip, final FrameListener<TourRoot> listener) {
 
         if (!APP.isNetworkConnected(APP.getInstance())) {
             listener.onFaild(0, "网络异常,请检查网络");
@@ -67,6 +71,9 @@ public class TourListListener implements FramePresenter {
                         DLog.json("Func1", jsonObject.toString());
                         TourRoot root = new Gson().fromJson(jsonObject, new TypeToken<TourRoot>() {
                         }.getType());
+                        if (root != null && root.getStatus() == 1 && root.getData() != null) {
+                            SharePreferHelp.putValue(AppEnum.TourRoot.getDec() + page, root);
+                        }
                         return root;
                     }
                 })
@@ -78,7 +85,13 @@ public class TourListListener implements FramePresenter {
 
                     @Override
                     public void onError(Throwable e) {
-                        listener.onFaild(1, e.getMessage());
+                        TourRoot root = (TourRoot) SharePreferHelp.getValue(AppEnum.TourRoot.getDec() + page);
+                        if (root != null) {
+                            ToastApp.showToast(e.getMessage());
+                            listener.onSucces(root);
+                        } else {
+                            listener.onFaild(1, e.getMessage());
+                        }
                     }
 
                     @Override

@@ -43,7 +43,7 @@ public class APP extends FrameAPP {
         //初始化过程中，选择是否打印日志
         showinfo.notifyInfo(BuildConfig.DEBUG);
         //设置缓存文件名
-        showinfo.notifyPrefer("WorkOrder");
+        showinfo.notifyPrefer("WorkOrder", "WorkOrderOBJ");
         //设置固定参数
         showinfo.notifyCal(true);
         AppEnum.WIDTH.setLen(ConApp.getInstance().getWidth());
@@ -51,7 +51,7 @@ public class APP extends FrameAPP {
         creatFile();
         if (BuildConfig.DEBUG) {
             // 是否为开发测试环境。正式环境下无需打开调试。
-            initStrictMode();
+            //initStrictMode();
         }
         DBControler.getInstance(this).init();
         //初始化图片工具类

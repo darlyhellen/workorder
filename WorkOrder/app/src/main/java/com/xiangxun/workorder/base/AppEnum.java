@@ -14,6 +14,14 @@ import com.xiangxun.workorder.bean.WorkOrderData;
 public enum AppEnum {
     VERSION("version", 0),
 
+    LoginRoot("LoginRoot", 0),
+
+    WorkOrderRoot("WorkOrderRoot", 0),
+
+    TourRoot("TourRoot", 0),
+
+    EquipmentRoot("EquipmentRoot", 0),
+
     ISLOGINPASS("isloginpass", 0),
 
     NOTUPDATE("notupdate", 0),

@@ -1,5 +1,7 @@
 package com.xiangxun.workorder.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by Zhangyuhui/Darly on 2017/5/18.
  * Copyright by [Zhangyuhui/Darly]
@@ -7,7 +9,7 @@ package com.xiangxun.workorder.bean;
  *
  * @TODO:
  */
-public class LoginRoot {
+public class LoginRoot implements Serializable {
     private int status;
 
     private String message;

@@ -1,5 +1,6 @@
 package com.xiangxun.workorder.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
  *
  * @TODO: 巡检JSon表
  */
-public class TourRoot {
+public class TourRoot implements Serializable {
     private String message;
 
     private int status;

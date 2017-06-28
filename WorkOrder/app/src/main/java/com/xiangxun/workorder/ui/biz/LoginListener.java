@@ -11,9 +11,11 @@ import com.hellen.baseframe.application.FrameListener;
 import com.hellen.baseframe.application.FramePresenter;
 import com.hellen.baseframe.application.FrameView;
 import com.hellen.baseframe.common.dlog.DLog;
+import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.hellen.baseframe.common.utiltools.SharePreferHelp;
 import com.xiangxun.workorder.base.APP;
 import com.xiangxun.workorder.base.AppEnum;
+import com.xiangxun.workorder.bean.EquipmentRoot;
 import com.xiangxun.workorder.bean.LoginRoot;
 import com.xiangxun.workorder.bean.VersionRoot;
 import com.xiangxun.workorder.common.retrofit.RxjavaRetrofitRequestUtil;
@@ -111,6 +113,7 @@ public class LoginListener implements FramePresenter {
                         }.getType());
 
                         if (root != null && root.getStatus() == 1 && root.getData() != null) {
+                            SharePreferHelp.putValue(AppEnum.LoginRoot.getDec(), root);
                             // 对其进行解析。当登录成功时
                             SharePreferHelp.putValue(AppEnum.USERNAME.getDec(), username);
                             SharePreferHelp.putValue(AppEnum.USERREALNAME.getDec(), root.getData().getName());
@@ -128,7 +131,13 @@ public class LoginListener implements FramePresenter {
 
                                @Override
                                public void onError(Throwable e) {
-                                   listener.onFaild(1, e.getMessage());
+                                   LoginRoot root = (LoginRoot) SharePreferHelp.getValue(AppEnum.LoginRoot.getDec());
+                                   if (root != null) {
+                                       ToastApp.showToast(e.getMessage());
+                                       listener.onSucces(root);
+                                   } else {
+                                       listener.onFaild(1, e.getMessage());
+                                   }
                                }
 
                                @Override
