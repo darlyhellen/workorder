@@ -66,7 +66,7 @@ public class EquipmentListActivity extends BaseActivity implements View.OnClickL
         presenter = new EquipmentListPresenter(this);
         textDes = "没有设备信息！";
         data = new ArrayList<EquipmentInfo>();
-        adapter = new EquipmentListAdapter(data, R.layout.item_activity_work_order, this);
+        adapter = new EquipmentListAdapter(data, R.layout.item_activity_equipment, this);
         xlist.setAdapter(adapter);
         patrol = (EquipMenuChildData) getIntent().getSerializableExtra("EquipMenuChildData");
         if (patrol != null) {

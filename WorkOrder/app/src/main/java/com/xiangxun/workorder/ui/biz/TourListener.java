@@ -70,7 +70,7 @@ public class TourListener implements FramePresenter {
     /**
      * 编辑完成后进行工单提交
      */
-    public void commitTour(boolean isCheck, String id, String declare, List<String> url, final FrameListener<UpTourRoot> listener) {
+    public void commitTour(boolean isCheck, EquipmentInfo info, String declare, List<String> url, String type, final FrameListener<UpTourRoot> listener) {
         if (!APP.isNetworkConnected(APP.getInstance())) {
             listener.onFaild(0, "网络异常,请检查网络");
             return;
@@ -88,11 +88,22 @@ public class TourListener implements FramePresenter {
             return;
         }
 
+        if (info == null) {
+            listener.onFaild(0, "请选择设备信息");
+            return;
+        }
+
         JSONObject ob = new JSONObject();
         try {
             ob.put("reason", declare);
             ob.put("note", null);
-            ob.put("deviceid", id);
+            ob.put("deviceid", info.deviceid);
+            ob.put("code", info.code);
+            ob.put("assetname", info.assetname);
+            ob.put("orgname", info.orgname);
+            ob.put("installplace", info.installplace);
+            ob.put("ip", info.ip);
+            ob.put("type", type);
             if (url.size() >= 2) {
                 ob.put("picture1", BitmapChangeUtil.convertIconToString(BitmapFactory.decodeFile(url.get(0))));
             }

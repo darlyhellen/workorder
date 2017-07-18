@@ -15,7 +15,6 @@ import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.hellen.baseframe.common.utiltools.SharePreferHelp;
 import com.xiangxun.workorder.base.APP;
 import com.xiangxun.workorder.base.AppEnum;
-import com.xiangxun.workorder.bean.EquipmentRoot;
 import com.xiangxun.workorder.bean.LoginRoot;
 import com.xiangxun.workorder.bean.VersionRoot;
 import com.xiangxun.workorder.common.retrofit.RxjavaRetrofitRequestUtil;

@@ -15,6 +15,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.hellen.baseframe.common.dlog.DLog;
+import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.bean.SearchStatusInfo;
@@ -142,6 +143,12 @@ public class SearchWorkOrderDialogFragment extends DialogFragment implements Vie
                 String devicename = name.getText().toString().trim();
                 String devicenum = num.getText().toString().trim();
                 String deviceip = ip.getText().toString().trim();
+                if (status == null){
+                    if (TextUtils.isEmpty(devicename)&&TextUtils.isEmpty(devicenum)&&TextUtils.isEmpty(deviceip)){
+                        ToastApp.showToast("请填写查询条件！");
+                        return;
+                    }
+                }
                 ((SearchListener) getActivity()).findParamers(status, devicename, devicenum, deviceip);
                 DLog.i("点击提交");
                 dismiss();

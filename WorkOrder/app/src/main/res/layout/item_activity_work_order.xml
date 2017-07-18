@@ -15,12 +15,14 @@
         android:singleLine="true"
         android:text=""
         android:textColor="@color/black"
-        android:textSize="@dimen/textSize16" />
+        android:textSize="@dimen/textSize16"
+        android:visibility="gone" />
 
     <View
         android:layout_width="fill_parent"
         android:layout_height="1.0px"
-        android:background="@color/edit_save_btn_color_disable" />
+        android:background="@color/edit_save_btn_color_disable"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/id_tv_supplier_contact"
@@ -29,7 +31,8 @@
         android:layout_marginTop="@dimen/margin_padding5"
         android:text=""
         android:textColor="@color/black"
-        android:textSize="@dimen/textSize14" />
+        android:textSize="@dimen/textSize14"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/id_tv_supplier_product"

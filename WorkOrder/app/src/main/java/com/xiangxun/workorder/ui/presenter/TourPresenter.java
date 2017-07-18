@@ -8,6 +8,7 @@ import com.hellen.baseframe.common.dlog.DLog;
 import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.bean.EquipMenuChildData;
+import com.xiangxun.workorder.bean.EquipmentInfo;
 import com.xiangxun.workorder.bean.EquipmentRoot;
 import com.xiangxun.workorder.bean.UpTourRoot;
 import com.xiangxun.workorder.ui.biz.TourListener;
@@ -35,7 +36,7 @@ public class TourPresenter {
 
     private String type;
 
-    private String id;
+    private EquipmentInfo infoed;
 
     public TourPresenter(TourListener.TourInterface view) {
         this.view = view;
@@ -88,7 +89,7 @@ public class TourPresenter {
 
     private void updateTour(boolean isCheck) {
         biz.onStart(loading);
-        biz.commitTour(isCheck, id, view.getDeclare(), view.getImageData(), new FrameListener<UpTourRoot>() {
+        biz.commitTour(isCheck, infoed, view.getDeclare(), view.getImageData(),type, new FrameListener<UpTourRoot>() {
             @Override
             public void onSucces(UpTourRoot s) {
                 biz.onStop(loading);
@@ -148,7 +149,7 @@ public class TourPresenter {
         this.type = type;
     }
 
-    public void setDeviceID(String id) {
-        this.id = id;
+    public void setDevice(EquipmentInfo infoed) {
+        this.infoed = infoed;
     }
 }

@@ -92,7 +92,7 @@
                     android:ems="10"
                     android:hint="@string/mine_login_hine2"
                     android:inputType="textPassword"
-                    android:maxLength="11"
+                    android:maxLength="16"
                     android:padding="@dimen/margin_padding10"
                     android:text="123456"
                     android:textColor="@color/black"
