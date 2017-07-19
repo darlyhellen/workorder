@@ -48,8 +48,6 @@ public class MaintenanceActivity extends BaseActivity implements AdapterView.OnI
     private HeaderView title;
     @ViewsBinder(R.id.id_maintenance_iv)
     private ImageView iv;
-    @ViewsBinder(R.id.id_maintenance_username)
-    private TextView name;
     @ViewsBinder(R.id.id_maintenance_flipper)
     private ViewFlipper flipper;
 
@@ -75,16 +73,16 @@ public class MaintenanceActivity extends BaseActivity implements AdapterView.OnI
         presenter.getWorkOrderByPage();
         title.setTitle(R.string.maintenance_title);
         title.setRightBackgroundResource(R.mipmap.set);
-        iv.setLayoutParams(new LinearLayout.LayoutParams(AppEnum.WIDTH.getLen() / 4, AppEnum.WIDTH.getLen() / 4));
-        name.setText(SharePreferHelp.getValue(AppEnum.USERREALNAME.getDec(), null));
-        order.setIV(R.mipmap.ic_maintenance_order_iv, "工单管理");
-        order.setLayoutParams(new TableRow.LayoutParams(AppEnum.WIDTH.getLen() / 3, AppEnum.WIDTH.getLen() / 3));
-        tour.setIV(R.mipmap.ic_maintenance_tour_iv, "巡检管理");
-        tour.setLayoutParams(new TableRow.LayoutParams(AppEnum.WIDTH.getLen() / 3, AppEnum.WIDTH.getLen() / 3));
-        equip.setIV(R.mipmap.ic_maintenance_equip_iv, "设备管理");
-        equip.setLayoutParams(new TableRow.LayoutParams(AppEnum.WIDTH.getLen() / 3, AppEnum.WIDTH.getLen() / 3));
-        notifi.setIV(R.mipmap.ic_maintenance_notif_iv, "通知公告");
-        notifi.setLayoutParams(new TableRow.LayoutParams(AppEnum.WIDTH.getLen() / 3, AppEnum.WIDTH.getLen() / 3));
+        iv.setBackgroundResource(R.mipmap.ic_login);
+        iv.setLayoutParams(new LinearLayout.LayoutParams(AppEnum.WIDTH.getLen(), (int) (AppEnum.WIDTH.getLen() / 2.6)));
+        order.setIV(R.mipmap.ic_sampling_normal, "工单管理");
+        order.setLayoutParams(new TableRow.LayoutParams((int) (AppEnum.WIDTH.getLen() / 2.5), (int) (AppEnum.WIDTH.getLen() / 2.5)));
+        tour.setIV(R.mipmap.ic_sampling_scene_normal, "巡检管理");
+        tour.setLayoutParams(new TableRow.LayoutParams((int) (AppEnum.WIDTH.getLen() / 2.5), (int) (AppEnum.WIDTH.getLen() / 2.5)));
+        equip.setIV(R.mipmap.ic_sampling_target_normal, "设备管理");
+        equip.setLayoutParams(new TableRow.LayoutParams((int) (AppEnum.WIDTH.getLen() / 2.5), (int) (AppEnum.WIDTH.getLen() / 2.5)));
+        notifi.setIV(R.mipmap.ic_sampling_his_normal, "通知公告");
+        notifi.setLayoutParams(new TableRow.LayoutParams((int) (AppEnum.WIDTH.getLen() / 2.5), (int) (AppEnum.WIDTH.getLen() / 2.5)));
     }
 
     @Override

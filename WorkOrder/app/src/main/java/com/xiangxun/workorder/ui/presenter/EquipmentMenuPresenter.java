@@ -55,7 +55,7 @@ public class EquipmentMenuPresenter {
                 EquipMenuChildData cd = null;
                 cd = new EquipMenuChildData("卡口设备", "device", R.mipmap.ic_equip_img_kakou);
                 list.add(cd);
-                cd = new EquipMenuChildData("智能机柜", "icabinef", R.mipmap.ic_equip_img_jigui);
+                cd = new EquipMenuChildData("智能机柜", "cabinet", R.mipmap.ic_equip_img_jigui);
                 list.add(cd);
             } else {
                 EquipMenuChildData cd = null;

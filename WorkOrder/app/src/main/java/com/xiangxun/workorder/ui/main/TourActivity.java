@@ -3,6 +3,7 @@ package com.xiangxun.workorder.ui.main;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,6 +24,8 @@ import com.xiangxun.workorder.base.BaseActivity;
 import com.xiangxun.workorder.base.ItemClickListenter;
 import com.xiangxun.workorder.bean.EquipMenuChildData;
 import com.xiangxun.workorder.bean.EquipmentInfo;
+import com.xiangxun.workorder.ui.MaxLengthWatcher;
+import com.xiangxun.workorder.ui.MaxLengthWatcher.MaxLengthUiListener;
 import com.xiangxun.workorder.ui.adapter.TourImageAdapter;
 import com.xiangxun.workorder.ui.adapter.TourImageAdapter.OnTourConsListener;
 import com.xiangxun.workorder.ui.biz.TourListener.TourInterface;
@@ -46,7 +49,7 @@ import java.util.List;
  * @TODO:新增巡检工单
  */
 @ContentBinder(R.layout.activity_tour)
-public class TourActivity extends BaseActivity implements OnClickListener, TourInterface, OnTourConsListener, onSelectItemClick {
+public class TourActivity extends BaseActivity implements OnClickListener, TourInterface, OnTourConsListener, onSelectItemClick, MaxLengthUiListener {
 
 
     @ViewsBinder(R.id.id_tour_title)
@@ -66,6 +69,8 @@ public class TourActivity extends BaseActivity implements OnClickListener, TourI
     private WholeGridView id_order_equip_image;
     @ViewsBinder(R.id.id_order_equip_declare)
     private EditText id_order_equip_declare;
+    @ViewsBinder(R.id.id_order_equip_declare_num)
+    private TextView id_order_equip_declare_num;
 
 
     @ViewsBinder(R.id.id_tour_code)
@@ -121,6 +126,10 @@ public class TourActivity extends BaseActivity implements OnClickListener, TourI
 
     @Override
     protected void initListener() {
+
+        InputFilter[] filters = {new MaxLengthWatcher(100, this)};
+        id_order_equip_declare.setFilters(filters);
+        id_order_equip_declare_num.setText("0/100");
         title.setLeftBackOneListener(this);
         title.setRightImageTextFlipper(this);
         id_order_equip_image.setOnItemClickListener(new ItemClickListenter() {
@@ -305,5 +314,10 @@ public class TourActivity extends BaseActivity implements OnClickListener, TourI
             id_tour_name_name.setText(infoed.assetname);
             presenter.setDevice(infoed);
         }
+    }
+
+    @Override
+    public void onUiChanged(int num) {
+        id_order_equip_declare_num.setText(num + "/100");
     }
 }

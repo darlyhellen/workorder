@@ -13,14 +13,14 @@
         android:drawablePadding="@dimen/margin_padding8"
         android:gravity="center"
         android:textColor="@color/black"
-        android:textSize="@dimen/textSize20" />
+        android:textSize="@dimen/textSize16" />
 
     <TextView
         android:id="@+id/tv_hint"
         android:layout_width="13.0dp"
         android:layout_height="13.0dp"
         android:layout_alignBottom="@id/tv_mode_button"
-        android:layout_marginBottom="15.0dp"
+        android:layout_marginBottom="5.0dp"
         android:layout_toRightOf="@id/tv_mode_button"
         android:background="@mipmap/home_mode_button_hint"
         android:gravity="center"

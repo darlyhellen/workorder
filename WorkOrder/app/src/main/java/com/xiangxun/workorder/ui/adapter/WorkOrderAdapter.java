@@ -46,7 +46,18 @@ public class WorkOrderAdapter extends ParentAdapter<WorkOrderData> {
         }
 
         hocker.id_tv_supplier_title.setText("工单编号:" + Tools.isEmpty(workOrderData.id));
-        hocker.id_tv_supplier_contact.setText("责任单位: " + Tools.isEmpty(workOrderData.companyname));
+
+        if ("device".equals(workOrderData.devicetype)) {
+            hocker.id_tv_supplier_contact.setText("设备类型: " + "卡口");
+        } else if ("ftp".equals(workOrderData.devicetype)) {
+            hocker.id_tv_supplier_contact.setText("设备类型: " + "FTP");
+        } else if ("project".equals(workOrderData.devicetype)) {
+            hocker.id_tv_supplier_contact.setText("设备类型: " + "平台");
+        } else if ("database".equals(workOrderData.devicetype)) {
+            hocker.id_tv_supplier_contact.setText("设备类型: " + "数据库");
+        } else {
+            hocker.id_tv_supplier_contact.setText("设备类型: " + "机柜");
+        }
         hocker.id_tv_supplier_product.setText("工单内容: " + Tools.isEmpty(workOrderData.messages));
         if (workOrderData.status != 0) {
             hocker.id_tv_background.setShowDisplay(false);

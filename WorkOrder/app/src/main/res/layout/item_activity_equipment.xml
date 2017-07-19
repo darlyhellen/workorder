@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="4dp">
+    android:padding="10dp">
 
     <TextView
         android:id="@+id/id_tv_supplier_title"
@@ -13,7 +13,6 @@
         android:layout_marginBottom="@dimen/margin_padding5"
         android:ellipsize="end"
         android:singleLine="true"
-        android:text="3333333333333333333333333"
         android:textColor="@color/black"
         android:textSize="@dimen/textSize16" />
 
@@ -27,16 +26,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_padding5"
-        android:text="3333333333333333333333"
         android:textColor="@color/black"
-        android:textSize="@dimen/textSize14" />
+        android:textSize="@dimen/textSize14"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/id_tv_supplier_product"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_padding5"
-        android:text="33333333333333333333333333333"
         android:textColor="@color/black"
         android:textSize="@dimen/textSize14" />
 
@@ -45,10 +43,8 @@
         android:id="@+id/id_tv_appraise_man"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="@dimen/margin_padding5"
         android:singleLine="true"
-        android:text="333333333333333333333333333333"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="@dimen/textSize14" />
 
     <TextView
@@ -58,7 +54,6 @@
         android:layout_alignParentRight="true"
         android:layout_centerInParent="true"
         android:gravity="center"
-        android:text="3333333333333333333333333333333"
         android:textColor="@color/black"
         android:textSize="@dimen/textSize14" />
 

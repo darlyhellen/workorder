@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.InputFilter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,6 +28,8 @@ import com.xiangxun.workorder.bean.EquipmentInfo;
 import com.xiangxun.workorder.bean.TourInfo;
 import com.xiangxun.workorder.bean.WorkOrderData;
 import com.xiangxun.workorder.common.WorkOrderUtils;
+import com.xiangxun.workorder.ui.MaxLengthWatcher;
+import com.xiangxun.workorder.ui.MaxLengthWatcher.MaxLengthUiListener;
 import com.xiangxun.workorder.ui.adapter.DetailOrderImageAdapter;
 import com.xiangxun.workorder.ui.adapter.DetailOrderImageAdapter.OnDetailOrderConsListener;
 import com.xiangxun.workorder.ui.biz.DetailOrderFragmentListener.DetailOrderFragmentInterface;
@@ -46,7 +49,7 @@ import java.util.List;
  *
  * @TODO: 固态详情展示页面。
  */
-public class DetailOrderFragment extends Fragment implements OnClickListener, DetailOrderFragmentInterface, OnDetailOrderConsListener {
+public class DetailOrderFragment extends Fragment implements OnClickListener, DetailOrderFragmentInterface, OnDetailOrderConsListener, MaxLengthUiListener {
     private View root;
 
 
@@ -73,6 +76,8 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
     private TextView tvContent20;   //
     @ViewsBinder(R.id.tv_declare)
     private EditText reason;   //
+    @ViewsBinder(R.id.tv_declare_num)
+    private TextView tv_declare_num;   //
     @ViewsBinder(R.id.tv_declare_title)
     private TextView reason_title;   //
     @ViewsBinder(R.id.id_detail_fragment_button)
@@ -428,6 +433,9 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
 
 
     private void initListener() {
+        InputFilter[] filters = {new MaxLengthWatcher(100, this)};
+        reason.setFilters(filters);
+        tv_declare_num.setText("0/100");
         commit.setOnClickListener(this);
         consel.setOnClickListener(this);
         images.setOnItemClickListener(new ItemClickListenter() {
@@ -456,6 +464,12 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
                 }
             }
         });
+    }
+
+    //文字长度修改后 UI界面进行替换修改
+    @Override
+    public void onUiChanged(int num) {
+        tv_declare_num.setText(num + "/100");
     }
 
     @Override
@@ -553,4 +567,5 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
         imageData.remove(position);
         adapter.setData(imageData);
     }
+
 }
