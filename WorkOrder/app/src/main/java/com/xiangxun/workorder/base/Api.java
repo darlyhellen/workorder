@@ -71,7 +71,6 @@ public class Api {
         }
         return port;
     }
-
     public static String findMoe() {
         return "http://" + getIp() + ":" + getPort() + "/";
     }
