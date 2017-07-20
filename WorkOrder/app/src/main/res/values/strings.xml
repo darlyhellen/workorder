@@ -75,7 +75,7 @@
     <string name="cache_realy_cleat">缓存已经清除</string>
 
     <!-- TourActivity-->
-    <string name="st_tour_title">新增巡检工单</string>
+    <string name="st_tour_title">新建巡检工单</string>
     <string name="st_tour_title_order">巡检工单详情</string>
     <string name="st_tour_commit">提交</string>
     <string name="description_hint">5~400字</string>

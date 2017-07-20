@@ -72,9 +72,9 @@ public class MaintenanceActivity extends BaseActivity implements AdapterView.OnI
         presenter = new MaintenancePresenter(this);
         presenter.getWorkOrderByPage();
         title.setTitle(R.string.maintenance_title);
-        title.setRightBackgroundResource(R.mipmap.set);
+        title.setRightBackgroundResource(R.drawable.btn_selecter_mune);
         iv.setBackgroundResource(R.mipmap.ic_login);
-        iv.setLayoutParams(new LinearLayout.LayoutParams(AppEnum.WIDTH.getLen(), (int) (AppEnum.WIDTH.getLen() / 2.6)));
+        iv.setLayoutParams(new LinearLayout.LayoutParams(AppEnum.WIDTH.getLen(), (int) (AppEnum.WIDTH.getLen() / 2.2)));
         order.setIV(R.mipmap.ic_sampling_normal, "工单管理");
         order.setLayoutParams(new TableRow.LayoutParams((int) (AppEnum.WIDTH.getLen() / 2.5), (int) (AppEnum.WIDTH.getLen() / 2.5)));
         tour.setIV(R.mipmap.ic_sampling_scene_normal, "巡检管理");

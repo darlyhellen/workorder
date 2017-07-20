@@ -80,7 +80,9 @@ public class TourListActivity extends BaseActivity implements View.OnClickListen
             header.setRightBackgroundResource(R.mipmap.ic_title_search);
         } else {
             //巡检管理
-            header.setRightBackgroundResource(R.mipmap.ic_title_add);
+            header.getTitleViewOperationText().setText("新建");
+            header.setRightImageTextFlipper(this);
+            //header.setRightBackgroundResource(R.mipmap.ic_title_add);
             header.setTitle(patrol.getName());
             textDes = "没有巡检工单！";
             presenter.getWorkOrderByPage(currentPage, workorder, devicename, devicenum, deviceip);
