@@ -433,8 +433,7 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
 
 
     private void initListener() {
-        InputFilter[] filters = {new MaxLengthWatcher(100, this)};
-        reason.setFilters(filters);
+        reason.addTextChangedListener(new MaxLengthWatcher(100, reason, this));
         tv_declare_num.setText("0/100");
         commit.setOnClickListener(this);
         consel.setOnClickListener(this);

@@ -1,12 +1,11 @@
 package com.xiangxun.workorder.ui;
 
-import android.text.InputFilter;
-import android.text.Spanned;
+import android.text.Editable;
+import android.text.Selection;
+import android.text.TextWatcher;
+import android.widget.EditText;
 
 import com.hellen.baseframe.common.obsinfo.ToastApp;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Created by Zhangyuhui/Darly on 2017/7/19.
@@ -15,7 +14,7 @@ import java.util.regex.Pattern;
  *
  * @TODO:
  */
-public class MaxLengthWatcher implements InputFilter {
+public class MaxLengthWatcher implements TextWatcher {
 
     public interface MaxLengthUiListener {
 
@@ -27,27 +26,48 @@ public class MaxLengthWatcher implements InputFilter {
 
     private MaxLengthUiListener lengthUiListener;
 
-    public MaxLengthWatcher(int mAX_EN, MaxLengthUiListener lengthUiListener) {
+
+    private EditText editText = null;
+
+    public MaxLengthWatcher(int mAX_EN, EditText editText, MaxLengthUiListener lengthUiListener) {
         super();
         MAX_EN = mAX_EN;
+        this.editText = editText;
         this.lengthUiListener = lengthUiListener;
     }
 
-    @Override
-    public CharSequence filter(CharSequence source, int start, int end,
-                               Spanned dest, int dstart, int dend) {
-        int destCount = dest.toString().length();
-//                + getChineseCount(dest.toString());
-        int sourceCount = source.toString().length();
-//                + getChineseCount(source.toString());
-        if (destCount + sourceCount > MAX_EN) {
+
+    private CharSequence temp;
+    private boolean isEdit = true;
+    private int selectionStart;
+    private int selectionEnd;
+
+    public void afterTextChanged(Editable s) {
+        // TODO Auto-generated method stub
+
+        selectionStart = editText.getSelectionStart();
+        selectionEnd = editText.getSelectionEnd();
+        if (temp.length() > MAX_EN) {
             ToastApp.showToast("输入文字长度不能大于" + MAX_EN);
+            s.delete(selectionStart - 1, selectionEnd);
+            int tempSelection = selectionStart;
+            editText.setText(s);
+            editText.setSelection(tempSelection);
             lengthUiListener.onUiChanged(MAX_EN);
-            return "";
         } else {
-            lengthUiListener.onUiChanged(destCount + sourceCount);
-            return source;
+            lengthUiListener.onUiChanged(temp.length());
         }
+    }
+
+    public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+                                  int arg3) {
+        // TODO Auto-generated method stub
+        temp = arg0;
+    }
+
+    public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+        // TODO Auto-generated method stub
+
     }
 
     private int getChineseCount(String str) {

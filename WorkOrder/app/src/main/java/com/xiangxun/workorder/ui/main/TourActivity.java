@@ -126,9 +126,7 @@ public class TourActivity extends BaseActivity implements OnClickListener, TourI
 
     @Override
     protected void initListener() {
-
-        InputFilter[] filters = {new MaxLengthWatcher(100, this)};
-        id_order_equip_declare.setFilters(filters);
+        id_order_equip_declare.addTextChangedListener(new MaxLengthWatcher(100, id_order_equip_declare, this));
         id_order_equip_declare_num.setText("0/100");
         title.setLeftBackOneListener(this);
         title.setRightImageTextFlipper(this);
