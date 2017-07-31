@@ -25,6 +25,8 @@ import java.io.File;
 public class APP extends FrameAPP {
     protected static APP instance;
 
+    public static boolean DEBUG = true;
+
     public static APP getInstance() {
         if (instance == null) {
             Log.i("", "系统初始化错误...");
@@ -39,9 +41,9 @@ public class APP extends FrameAPP {
         instance = this;
         //初始化新增的日志管理系统,可以进行双向使用，既可以使用Dlog直接进行展示，
         // 也可以使用APPlog进行侧面展示。
-        DLog.init(BuildConfig.DEBUG, "WorkOrder");
+        DLog.init(DEBUG, "WorkOrder");
         //初始化过程中，选择是否打印日志
-        showinfo.notifyInfo(BuildConfig.DEBUG);
+        showinfo.notifyInfo(DEBUG);
         //设置缓存文件名
         showinfo.notifyPrefer("WorkOrder", "WorkOrderOBJ");
         //设置固定参数
@@ -49,7 +51,7 @@ public class APP extends FrameAPP {
         AppEnum.WIDTH.setLen(ConApp.getInstance().getWidth());
         AppEnum.HEIGHT.setLen(ConApp.getInstance().getHeight());
         creatFile();
-        if (BuildConfig.DEBUG) {
+        if (DEBUG) {
             // 是否为开发测试环境。正式环境下无需打开调试。
             //initStrictMode();
         }

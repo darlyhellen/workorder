@@ -75,13 +75,13 @@ public class MaintenanceActivity extends BaseActivity implements AdapterView.OnI
         title.setRightBackgroundResource(R.drawable.btn_selecter_mune);
         iv.setBackgroundResource(R.mipmap.ic_login);
         iv.setLayoutParams(new LinearLayout.LayoutParams(AppEnum.WIDTH.getLen(), (int) (AppEnum.WIDTH.getLen() / 2.2)));
-        order.setIV(R.mipmap.ic_sampling_normal, "工单管理");
+        order.setIV(R.drawable.intenance_selecter_order, "工单管理");
         order.setLayoutParams(new TableRow.LayoutParams((int) (AppEnum.WIDTH.getLen() / 2.5), (int) (AppEnum.WIDTH.getLen() / 2.5)));
-        tour.setIV(R.mipmap.ic_sampling_scene_normal, "巡检管理");
+        tour.setIV(R.drawable.intenance_selecter_tour, "巡检管理");
         tour.setLayoutParams(new TableRow.LayoutParams((int) (AppEnum.WIDTH.getLen() / 2.5), (int) (AppEnum.WIDTH.getLen() / 2.5)));
-        equip.setIV(R.mipmap.ic_sampling_target_normal, "设备管理");
+        equip.setIV(R.drawable.intenance_selecter_equipment, "设备管理");
         equip.setLayoutParams(new TableRow.LayoutParams((int) (AppEnum.WIDTH.getLen() / 2.5), (int) (AppEnum.WIDTH.getLen() / 2.5)));
-        notifi.setIV(R.mipmap.ic_sampling_his_normal, "通知公告");
+        notifi.setIV(R.drawable.intenance_selecter_notify, "通知公告");
         notifi.setLayoutParams(new TableRow.LayoutParams((int) (AppEnum.WIDTH.getLen() / 2.5), (int) (AppEnum.WIDTH.getLen() / 2.5)));
     }
 

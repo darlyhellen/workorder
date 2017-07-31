@@ -3,7 +3,6 @@ package com.xiangxun.workorder.base;
 import android.text.TextUtils;
 
 import com.hellen.baseframe.common.utiltools.SharePreferHelp;
-import com.xiangxun.workorder.BuildConfig;
 import com.xiangxun.workorder.common.urlencode.EncodeTools;
 import com.xiangxun.workorder.common.urlencode.Tools;
 
@@ -43,7 +42,7 @@ public class Api {
 
     public static String getIp() {
         if (ip == null) {
-            if (BuildConfig.DEBUG) {
+            if (APP.DEBUG) {
                 ip = "193.169.100.153";
             } else {
                 if (TextUtils.isEmpty(SharePreferHelp.getValue(AppEnum.IP.getDec(), null))) {
@@ -59,7 +58,7 @@ public class Api {
 
     public static String getPort() {
         if (port == null) {
-            if (BuildConfig.DEBUG) {
+            if (APP.DEBUG) {
                 port = "8090";
             } else {
                 if (TextUtils.isEmpty(SharePreferHelp.getValue(AppEnum.PORT.getDec(), null))) {
@@ -71,6 +70,7 @@ public class Api {
         }
         return port;
     }
+
     public static String findMoe() {
         return "http://" + getIp() + ":" + getPort() + "/";
     }

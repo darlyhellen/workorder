@@ -56,15 +56,13 @@
             <com.xiangxun.workorder.widget.grid.XwHomeModeButton
                 android:id="@+id/id_maintenance_order"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_sampling_normal" />
+                android:layout_height="wrap_content" />
 
 
             <com.xiangxun.workorder.widget.grid.XwHomeModeButton
                 android:id="@+id/id_maintenance_tour"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_sampling_scene_normal" />
+                android:layout_height="wrap_content" />
 
         </TableRow>
 
@@ -77,15 +75,13 @@
             <com.xiangxun.workorder.widget.grid.XwHomeModeButton
                 android:id="@+id/id_maintenance_equip"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_sampling_target_normal" />
+                android:layout_height="wrap_content" />
 
 
             <com.xiangxun.workorder.widget.grid.XwHomeModeButton
                 android:id="@+id/id_maintenance_notifi"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_sampling_his_normal" />
+                android:layout_height="wrap_content" />
 
         </TableRow>
 

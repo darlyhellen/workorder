@@ -2,6 +2,7 @@ package com.xiangxun.workorder.common.retrofit;
 
 import com.hellen.baseframe.common.dlog.DLog;
 import com.xiangxun.workorder.BuildConfig;
+import com.xiangxun.workorder.base.APP;
 import com.xiangxun.workorder.base.Api;
 import com.xiangxun.workorder.base.HttpRetrofitInterface;
 
@@ -22,7 +23,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RxjavaRetrofitRequestUtil {
     private volatile static RxjavaRetrofitRequestUtil instance;
 
-    private static final int REQUEST_TIME = 3;
+    private static final int REQUEST_TIME = 10;
     private int interSize = 0;
 
     private OkHttpClient.Builder builder;
@@ -38,7 +39,7 @@ public class RxjavaRetrofitRequestUtil {
         builder.writeTimeout(REQUEST_TIME, TimeUnit.SECONDS);//设置写的超时时间
         builder.connectTimeout(REQUEST_TIME, TimeUnit.SECONDS);//设置连接超时时间
         //设置请求日志
-        if (BuildConfig.DEBUG) {
+        if (APP.DEBUG) {
             HttpLoggingInterceptor log = new HttpLoggingInterceptor();
             log.setLevel(HttpLoggingInterceptor.Level.BASIC);
             builder.addInterceptor(log);

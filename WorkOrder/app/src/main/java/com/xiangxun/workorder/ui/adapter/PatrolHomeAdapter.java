@@ -1,10 +1,11 @@
 package com.xiangxun.workorder.ui.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.hellen.baseframe.baseadapter.ParentAdapter;
@@ -35,15 +36,15 @@ public class PatrolHomeAdapter extends ParentAdapter<Patrol> {
         if (view == null) {
             holder = new ViewHolder();
             view = LayoutInflater.from(context).inflate(resID, null);
-            holder.ll = (LinearLayout) view.findViewById(R.id.ll_background);
-            holder.ll.setLayoutParams(new AbsListView.LayoutParams(AppEnum.WIDTH.getLen() / 2, AppEnum.WIDTH.getLen() / 3));
+            holder.iv = (ImageView) view.findViewById(R.id.mode_image);
+            holder.iv.setLayoutParams(new LinearLayout.LayoutParams(AppEnum.WIDTH.getLen() / 4, AppEnum.WIDTH.getLen() / 4));
             holder.modeButton = (XwHomeModeButton) view.findViewById(R.id.mode_button);
             view.setTag(holder);
         } else {
             holder = (ViewHolder) view.getTag();
         }
-
-        holder.modeButton.setIV(patrol.getId(), context.getResources().getString(patrol.getName()));
+        holder.iv.setImageResource(patrol.getId());
+        holder.modeButton.setIV(0, context.getResources().getString(patrol.getName()));
         if (patrol.getNewOrder() > 0) {
             holder.modeButton.setHint(patrol.getNewOrder());
         } else {
@@ -55,7 +56,7 @@ public class PatrolHomeAdapter extends ParentAdapter<Patrol> {
 
     class ViewHolder {
         XwHomeModeButton modeButton;
-        LinearLayout ll;
+        ImageView iv;
     }
 
 }

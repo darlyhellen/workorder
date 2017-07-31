@@ -53,6 +53,8 @@ public class XwHomeModeButton extends RelativeLayout {
     @SuppressLint("NewApi")
     public void setIV(int i, String j) {
         tv_mode_button.setText(j);
-        tv_mode_button.setCompoundDrawablesRelativeWithIntrinsicBounds(null, mContext.getResources().getDrawable(i), null, null);
+        if (i != 0) {
+            tv_mode_button.setCompoundDrawablesRelativeWithIntrinsicBounds(null, mContext.getResources().getDrawable(i), null, null);
+        }
     }
 }
