@@ -38,9 +38,9 @@ public class MainV0Presenter {
     public List<Patrol> findMainV0(int num) {
         List<Patrol> data = new ArrayList<Patrol>();
         data.add(new Patrol(1, R.string.main_work_order_new, R.mipmap.ic_workorder_menu_acc, num));
+        data.add(new Patrol(5, R.string.main_work_order_all, R.mipmap.ic_workorder_menu_all, 0));
         data.add(new Patrol(2, R.string.main_work_order_down, R.mipmap.ic_workorder_menu_complete, 0));
         data.add(new Patrol(3, R.string.main_work_order_undown, R.mipmap.ic_workorder_menu_uncomplete, 0));
-        data.add(new Patrol(5, R.string.main_work_order_all, R.mipmap.ic_workorder_menu_all, 0));
         return data;
     }
 

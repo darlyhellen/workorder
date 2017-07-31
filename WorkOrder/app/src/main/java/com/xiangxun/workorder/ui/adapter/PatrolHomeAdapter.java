@@ -1,10 +1,10 @@
 package com.xiangxun.workorder.ui.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -35,9 +35,12 @@ public class PatrolHomeAdapter extends ParentAdapter<Patrol> {
         ViewHolder holder = null;
         if (view == null) {
             holder = new ViewHolder();
+
             view = LayoutInflater.from(context).inflate(resID, null);
+            holder.ll = (LinearLayout) view.findViewById(R.id.ll_background);
+            holder.ll.setLayoutParams(new AbsListView.LayoutParams(AppEnum.WIDTH.getLen() / 2, AppEnum.WIDTH.getLen() / 2));
             holder.iv = (ImageView) view.findViewById(R.id.mode_image);
-            holder.iv.setLayoutParams(new LinearLayout.LayoutParams(AppEnum.WIDTH.getLen() / 4, AppEnum.WIDTH.getLen() / 4));
+            holder.iv.setLayoutParams(new LinearLayout.LayoutParams(AppEnum.WIDTH.getLen() / 5, AppEnum.WIDTH.getLen() / 5));
             holder.modeButton = (XwHomeModeButton) view.findViewById(R.id.mode_button);
             view.setTag(holder);
         } else {
@@ -57,6 +60,7 @@ public class PatrolHomeAdapter extends ParentAdapter<Patrol> {
     class ViewHolder {
         XwHomeModeButton modeButton;
         ImageView iv;
+        LinearLayout ll;
     }
 
 }

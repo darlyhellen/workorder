@@ -40,15 +40,15 @@ public class SetAdapter extends ParentAdapter<SetModel> {
             hocker.newversion = (TextView) view.findViewById(R.id.id_set_item_new);
             hocker.decl = (TextView) view.findViewById(R.id.id_set_item_decl);
             hocker.image = (ImageView) view.findViewById(R.id.id_set_item_arrow);
+            hocker.icon = (ImageView) view.findViewById(R.id.id_set_item_iv);
             view.setTag(hocker);
         } else {
             hocker = (ViewHocker) view.getTag();
         }
-        hocker.title.setText(setModel.getTitle());
+
         if (!setModel.isLoginOut()) {
             hocker.decls.setText(setModel.getDecls());
             hocker.decl.setText(setModel.getDecl());
-            hocker.image.setImageResource(setModel.getRes());
             String version = SharePreferHelp.getValue(AppEnum.VERSION.getDec(), "0");
             if (R.string.set_update == setModel.getTitle() && Float.parseFloat(version) > APP.getInstance().getVersionCode()) {
                 hocker.newversion.setVisibility(View.VISIBLE);
@@ -57,6 +57,9 @@ public class SetAdapter extends ParentAdapter<SetModel> {
                 hocker.newversion.setVisibility(View.GONE);
             }
         }
+        hocker.title.setText(setModel.getTitle());
+        hocker.icon.setImageResource(setModel.getIc());
+        hocker.image.setImageResource(setModel.getRes());
         return view;
     }
 
@@ -66,6 +69,7 @@ public class SetAdapter extends ParentAdapter<SetModel> {
         TextView newversion;
         TextView decl;
         ImageView image;
+        ImageView icon;
     }
 
 

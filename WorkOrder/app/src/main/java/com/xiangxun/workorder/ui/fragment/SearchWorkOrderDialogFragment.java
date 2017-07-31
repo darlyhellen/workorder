@@ -98,9 +98,9 @@ public class SearchWorkOrderDialogFragment extends DialogFragment implements Vie
         name.setText(getArguments().getString("NAME"));
         num.setText(getArguments().getString("NUM"));
         ip.setText(getArguments().getString("IP"));
+        status = getArguments().getString("WORKORDER");
         if (getArguments().getInt("PATROL") == 5) {
             //展示列表
-            status = getArguments().getString("WORKORDER");
             row.setVisibility(View.VISIBLE);
             data = new ArrayList<TourSelectListener>();
             String[] mItems = getResources().getStringArray(R.array.Status);

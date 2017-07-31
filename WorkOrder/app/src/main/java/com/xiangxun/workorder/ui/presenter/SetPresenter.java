@@ -59,11 +59,11 @@ public class SetPresenter {
             public void onSucces(Long aLong) {
                 biz.onStop(loading);
                 List<SetModel> datas = new ArrayList<>();
-                datas.add(new SetModel(R.string.set_service, R.string.curr_service, Api.getIp(), R.mipmap.arrows, false));
-                datas.add(new SetModel(R.string.set_clean_cache, R.string.curr_cache, (aLong / (1024 * 1024)) + "M", R.mipmap.arrows, false));
-                datas.add(new SetModel(R.string.set_update, R.string.curr_ver, APP.getAppVersionName(), R.mipmap.arrows, false));
+                datas.add(new SetModel(R.mipmap.set_system,R.string.set_service, R.string.curr_service, Api.getIp(), R.mipmap.arrows, false));
+                datas.add(new SetModel(R.mipmap.set_cleardata,R.string.set_clean_cache, R.string.curr_cache, (aLong / (1024 * 1024)) + "M", R.mipmap.arrows, false));
+                datas.add(new SetModel(R.mipmap.set_update,R.string.set_update, R.string.curr_ver, APP.getAppVersionName(), R.mipmap.arrows, false));
                 if (login != 0) {
-                    datas.add(new SetModel(R.string.set_loginout, 0, null, 0, true));
+                    datas.add(new SetModel(R.mipmap.set_loginout,R.string.set_loginout, 0, null, R.mipmap.arrows, true));
                 }
                 view.getUserDate(datas);
             }

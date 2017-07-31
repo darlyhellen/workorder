@@ -95,6 +95,7 @@ public class WorkOrderDetailActivity extends BaseActivity implements OnClickList
 
         Bundle bundle = new Bundle();
         bundle.putSerializable("WorkOrderData", data);
+        bundle.putString("workorder",getIntent().getStringExtra("workorder"));
         order = new DetailOrderFragment();
         order.setArguments(bundle);
         list.add(order);

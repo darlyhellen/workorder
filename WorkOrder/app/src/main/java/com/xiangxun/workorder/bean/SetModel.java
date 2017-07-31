@@ -9,6 +9,7 @@ package com.xiangxun.workorder.bean;
  */
 public class SetModel {
 
+    private int ic;
     private int title;
     private int decls;
     private String decl;
@@ -18,12 +19,21 @@ public class SetModel {
     public SetModel() {
     }
 
-    public SetModel(int title, int decls, String decl, int res, boolean loginOut) {
+    public SetModel(int ic, int title, int decls, String decl, int res, boolean loginOut) {
+        this.ic = ic;
         this.title = title;
         this.decls = decls;
         this.decl = decl;
         this.res = res;
         this.loginOut = loginOut;
+    }
+
+    public int getIc() {
+        return ic;
+    }
+
+    public void setIc(int ic) {
+        this.ic = ic;
     }
 
     public int getTitle() {

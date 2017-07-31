@@ -64,8 +64,8 @@ public class WorkOrderPresenter {
                     if (patrol == 5) {
                         //查询全部工单信息
                         bundle.putInt("PATROL", patrol);
-                        bundle.putString("WORKORDER", workorder);
                     }
+                    bundle.putString("WORKORDER", workorder);
                     dialog.setArguments(bundle);
                     dialog.show(((WorkOrderActivity) context).getFragmentManager(), "SearchWorkOrderDialogFragment");
                 }

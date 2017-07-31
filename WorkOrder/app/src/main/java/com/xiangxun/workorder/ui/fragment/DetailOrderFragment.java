@@ -142,6 +142,12 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
 
     private void hasData() {
         tv_title.setText(R.string.st_detail_detail);
+        if ("".equals(getArguments().getSerializable("workorder"))) {
+            button.setVisibility(View.GONE);
+            except.setVisibility(View.GONE);
+            close.setVisibility(View.GONE);
+            images.setVisibility(View.GONE);
+        }
         switch (data.status) {
             case 0:
                 //派工的状态(接收工单，退回工单)

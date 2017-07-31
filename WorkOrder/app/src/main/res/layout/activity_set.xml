@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/app_background"
     android:orientation="vertical">
 
     <com.xiangxun.workorder.widget.header.HeaderView
@@ -13,11 +14,12 @@
     <ListView
         android:id="@+id/id_set_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="10dp"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
         android:layout_marginTop="10dp"
         android:divider="@color/divider"
-        android:dividerHeight="2dp" />
+        android:background="@color/white"
+        android:dividerHeight="0.5dp" />
 
 
 </LinearLayout>

@@ -175,6 +175,7 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
                 Intent intent = new Intent(WorkOrderActivity.this, WorkOrderDetailActivity.class);
                 //工单详细信息
                 intent.putExtra("WorkOrderData", ds);
+                intent.putExtra("workorder", workorder);
                 startActivityForResult(intent, 700);
             }
         });
