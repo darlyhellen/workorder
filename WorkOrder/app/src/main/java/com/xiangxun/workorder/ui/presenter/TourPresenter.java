@@ -14,6 +14,7 @@ import com.xiangxun.workorder.bean.UpTourRoot;
 import com.xiangxun.workorder.ui.biz.TourListener;
 import com.xiangxun.workorder.ui.main.TourActivity;
 import com.xiangxun.workorder.widget.dialog.TourSelectListener;
+import com.xiangxun.workorder.widget.grid.DetailView;
 import com.xiangxun.workorder.widget.loading.ShowLoading;
 
 import java.util.ArrayList;
@@ -51,9 +52,17 @@ public class TourPresenter {
         List<TourSelectListener> date = new ArrayList<TourSelectListener>();
         cd = new EquipMenuChildData("卡口设备", "device", 0);
         date.add(cd);
-        cd = new EquipMenuChildData("智能机柜", "icabinef", 0);
+        cd = new EquipMenuChildData("智能机柜", "cabinet", 0);
         date.add(cd);
-        cd = new EquipMenuChildData("监控设备", "jiankong", 0);
+//        cd = new EquipMenuChildData("监控设备", "jiankong", 0);
+//        date.add(cd);
+        cd = new EquipMenuChildData("服务器", "server", 0);
+        date.add(cd);
+        cd = new EquipMenuChildData("数据库", "database", 0);
+        date.add(cd);
+        cd = new EquipMenuChildData("平台信息", "project", 0);
+        date.add(cd);
+        cd = new EquipMenuChildData("FTP信息", "ftp", 0);
         date.add(cd);
         return date;
     }
@@ -89,7 +98,7 @@ public class TourPresenter {
 
     private void updateTour(boolean isCheck) {
         biz.onStart(loading);
-        biz.commitTour(isCheck, infoed, view.getDeclare(), view.getImageData(),type, new FrameListener<UpTourRoot>() {
+        biz.commitTour(isCheck, infoed, view.getDeclare(), view.getImageData(), type, new FrameListener<UpTourRoot>() {
             @Override
             public void onSucces(UpTourRoot s) {
                 biz.onStop(loading);

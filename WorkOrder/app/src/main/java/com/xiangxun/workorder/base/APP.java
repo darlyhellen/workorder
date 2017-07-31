@@ -25,7 +25,7 @@ import java.io.File;
 public class APP extends FrameAPP {
     protected static APP instance;
 
-    public static boolean DEBUG = true;
+    public static boolean DEBUG = false;
 
     public static APP getInstance() {
         if (instance == null) {
@@ -43,7 +43,7 @@ public class APP extends FrameAPP {
         // 也可以使用APPlog进行侧面展示。
         DLog.init(DEBUG, "WorkOrder");
         //初始化过程中，选择是否打印日志
-        showinfo.notifyInfo(DEBUG);
+        showinfo.notifyInfo(true);
         //设置缓存文件名
         showinfo.notifyPrefer("WorkOrder", "WorkOrderOBJ");
         //设置固定参数

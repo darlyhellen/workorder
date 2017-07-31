@@ -54,7 +54,6 @@ public class TourListPresenter {
             case R.id.title_view_right_Flipper01:
                 if (patrol == 20) {
                     DLog.i("新增按钮点击，跳转到新增巡检页面。在列表页面中显示巡检列表");
-
                     ((TourListActivity) context).startActivityForResult(new Intent(context, TourActivity.class), 700);
                 } else {
                     DLog.i("搜索按钮点击，跳转到搜索页面。在搜索页面中显示搜索结果");

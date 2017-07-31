@@ -35,27 +35,37 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/app_login_shape"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:padding="@dimen/margin_padding10">
 
                 <RadioButton
                     android:id="@+id/id_detail_radio_down"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:button="@drawable/detail_order_radio_select"
-                    android:gravity="center"
-                    android:padding="@dimen/margin_padding10"
-                    android:text="已处理" />
+                    android:layout_marginLeft="@dimen/margin_padding10"
+                    android:layout_marginRight="@dimen/margin_padding10"
+                    android:text="已处理"
+                    android:textColor="@color/color333333"
+                    android:textSize="@dimen/textSize16" />
 
+                <View
+                    android:layout_width="@dimen/margin_padding1"
+                    android:layout_height="match_parent"
+                    android:background="@color/divider" />
 
                 <RadioButton
                     android:id="@+id/id_detail_radio_undown"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:button="@drawable/detail_order_radio_select"
-                    android:gravity="center"
-                    android:padding="@dimen/margin_padding10"
-                    android:text="未处理" />
+                    android:layout_marginLeft="@dimen/margin_padding10"
+                    android:layout_marginRight="@dimen/margin_padding10"
+                    android:text="未处理"
+                    android:textColor="@color/color333333"
+                    android:textSize="@dimen/textSize16" />
             </RadioGroup>
 
             <TextView
