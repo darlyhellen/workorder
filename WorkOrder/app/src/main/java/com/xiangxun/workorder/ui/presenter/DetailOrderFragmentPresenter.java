@@ -48,6 +48,7 @@ public class DetailOrderFragmentPresenter {
             case R.id.id_detail_fragment_config:
                 switch (view.getStatus()) {
                     case 0:
+                    case 3:
                         getData("1", view.getDataID());
                         break;
                     case 1:
@@ -58,6 +59,7 @@ public class DetailOrderFragmentPresenter {
             case R.id.id_detail_fragment_consel:
                 switch (view.getStatus()) {
                     case 0:
+                    case 3:
                         getData("2", view.getDataID());
                         break;
                     case 1:

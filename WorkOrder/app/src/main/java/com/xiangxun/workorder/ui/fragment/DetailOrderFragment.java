@@ -147,77 +147,78 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
             except.setVisibility(View.GONE);
             close.setVisibility(View.GONE);
             images.setVisibility(View.GONE);
-        }
-        switch (data.status) {
-            case 0:
-                //派工的状态(接收工单，退回工单)
-                button.setVisibility(View.VISIBLE);
-                close.setVisibility(View.GONE);
-                except.setVisibility(View.GONE);
-                images.setVisibility(View.GONE);
-                reason_title.setText(R.string.st_detail_declare_t1);
-                group.setVisibility(View.GONE);
-                commit.setText("接收工单");
-                consel.setText("退回工单");
-                break;
-            case 1:
-                //已接收的状态(异常上报,正常上报)
-                button.setVisibility(View.VISIBLE);
-                except.setVisibility(View.GONE);
-                close.setVisibility(View.GONE);
-                images.setVisibility(View.VISIBLE);
-                group.setVisibility(View.VISIBLE);
-                group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(RadioGroup group, int checkedId) {
-                        switch (checkedId) {
-                            case R.id.id_detail_radio_down:
-                                reason_title.setText(R.string.st_detail_declare_t2);
-                                commit.setText("正常上报");
-                                commit.setVisibility(View.VISIBLE);
-                                consel.setVisibility(View.GONE);
-                                break;
-                            case R.id.id_detail_radio_undown:
-                                reason_title.setText(R.string.st_detail_declare_t3);
-                                consel.setText("异常上报");
-                                commit.setVisibility(View.GONE);
-                                consel.setVisibility(View.VISIBLE);
-                                break;
+        } else {
+            switch (data.status) {
+                case 0:
+                case 3:
+                    //派工的状态(接收工单，退回工单)
+                    button.setVisibility(View.VISIBLE);
+                    close.setVisibility(View.GONE);
+                    except.setVisibility(View.GONE);
+                    images.setVisibility(View.GONE);
+                    reason_title.setText(R.string.st_detail_declare_t1);
+                    group.setVisibility(View.GONE);
+                    commit.setText("接收工单");
+                    consel.setText("退回工单");
+                    break;
+                case 1:
+                    //已接收的状态(异常上报,正常上报)
+                    button.setVisibility(View.VISIBLE);
+                    except.setVisibility(View.GONE);
+                    close.setVisibility(View.GONE);
+                    images.setVisibility(View.VISIBLE);
+                    group.setVisibility(View.VISIBLE);
+                    group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged(RadioGroup group, int checkedId) {
+                            switch (checkedId) {
+                                case R.id.id_detail_radio_down:
+                                    reason_title.setText(R.string.st_detail_declare_t2);
+                                    commit.setText("正常上报");
+                                    commit.setVisibility(View.VISIBLE);
+                                    consel.setVisibility(View.GONE);
+                                    break;
+                                case R.id.id_detail_radio_undown:
+                                    reason_title.setText(R.string.st_detail_declare_t3);
+                                    consel.setText("异常上报");
+                                    commit.setVisibility(View.GONE);
+                                    consel.setVisibility(View.VISIBLE);
+                                    break;
+                            }
                         }
-                    }
-                });
-                down.setChecked(true);
-                break;
-            case 5:
-                //遗留的状态
-                button.setVisibility(View.GONE);
-                except.setVisibility(View.GONE);
-                close.setVisibility(View.GONE);
-                images.setVisibility(View.GONE);
-                break;
-            case 6:
-                //关闭的状态
-                images.setVisibility(View.GONE);
-                button.setVisibility(View.GONE);
-                except.setVisibility(View.GONE);
-                close.setVisibility(View.GONE);
-                break;
-            case 2:
-            case 3:
-            case 4:
-            case 7:
-                //其他的状态
-                images.setVisibility(View.GONE);
-                button.setVisibility(View.GONE);
-                except.setVisibility(View.GONE);
-                close.setVisibility(View.GONE);
-                break;
-            default:
-                button.setVisibility(View.GONE);
-                images.setVisibility(View.GONE);
-                except.setVisibility(View.GONE);
-                close.setVisibility(View.GONE);
-                break;
+                    });
+                    down.setChecked(true);
+                    break;
+                case 5:
+                    //遗留的状态
+                    button.setVisibility(View.GONE);
+                    except.setVisibility(View.GONE);
+                    close.setVisibility(View.GONE);
+                    images.setVisibility(View.GONE);
+                    break;
+                case 6:
+                    //关闭的状态
+                    images.setVisibility(View.GONE);
+                    button.setVisibility(View.GONE);
+                    except.setVisibility(View.GONE);
+                    close.setVisibility(View.GONE);
+                    break;
+                case 2:
+                case 4:
+                case 7:
+                    //其他的状态
+                    images.setVisibility(View.GONE);
+                    button.setVisibility(View.GONE);
+                    except.setVisibility(View.GONE);
+                    close.setVisibility(View.GONE);
+                    break;
+                default:
+                    button.setVisibility(View.GONE);
+                    images.setVisibility(View.GONE);
+                    except.setVisibility(View.GONE);
+                    close.setVisibility(View.GONE);
+                    break;
+            }
         }
         DetailView id = new DetailView(getActivity());
         id.setNameValue(R.string.st_detail_orderid, data.id);
