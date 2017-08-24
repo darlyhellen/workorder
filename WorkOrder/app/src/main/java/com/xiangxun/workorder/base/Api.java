@@ -42,14 +42,10 @@ public class Api {
 
     public static String getIp() {
         if (ip == null) {
-            if (APP.DEBUG) {
+            if (TextUtils.isEmpty(SharePreferHelp.getValue(AppEnum.IP.getDec(), null))) {
                 ip = "193.169.100.153";
             } else {
-                if (TextUtils.isEmpty(SharePreferHelp.getValue(AppEnum.IP.getDec(), null))) {
-                    ip = "10.10.15.111";
-                } else {
-                    ip = SharePreferHelp.getValue(AppEnum.IP.getDec(), null);
-                }
+                ip = SharePreferHelp.getValue(AppEnum.IP.getDec(), null);
             }
         }
         return ip;
@@ -58,14 +54,10 @@ public class Api {
 
     public static String getPort() {
         if (port == null) {
-            if (APP.DEBUG) {
+            if (TextUtils.isEmpty(SharePreferHelp.getValue(AppEnum.PORT.getDec(), null))) {
                 port = "8090";
             } else {
-                if (TextUtils.isEmpty(SharePreferHelp.getValue(AppEnum.PORT.getDec(), null))) {
-                    port = "8090";
-                } else {
-                    port = SharePreferHelp.getValue(AppEnum.PORT.getDec(), null);
-                }
+                port = SharePreferHelp.getValue(AppEnum.PORT.getDec(), null);
             }
         }
         return port;
