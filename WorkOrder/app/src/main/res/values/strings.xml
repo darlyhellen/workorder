@@ -160,6 +160,11 @@
     <string name="st_tour_code">设备编码:</string>
 
 
+    <string name="police_account">用户名：%1$s</string>
+    <string name="police_department">所属部门：%1$s</string>
+    <string name="police_phone">联系方式：%1$s</string>
+
+
     <array name="Status">
         <item>"全 部"</item>
         <item>"已派发"</item>

@@ -243,5 +243,6 @@
     <color name="status_bg_8">#d8d8d8</color>
 
     <color name="tabtopview_bg">#eaeaea</color>
+    <color name="userinfo_bg">#206DBB</color>
 
 </resources>

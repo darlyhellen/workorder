@@ -4,10 +4,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.hellen.baseframe.binder.ContentBinder;
 import com.hellen.baseframe.binder.ViewsBinder;
@@ -15,10 +22,12 @@ import com.hellen.baseframe.common.multithread.MultithreadDownLoadCommon;
 import com.hellen.baseframe.common.multithread.MultithreadDownLoadManager;
 import com.hellen.baseframe.common.multithread.MultithreadDownLoadManager.OnMultithreadUIListener;
 import com.hellen.baseframe.common.obsinfo.ToastApp;
+import com.hellen.baseframe.common.utiltools.SharePreferHelp;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.APP;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.base.BaseActivity;
+import com.xiangxun.workorder.bean.LoginRoot;
 import com.xiangxun.workorder.bean.SetModel;
 import com.xiangxun.workorder.bean.VersionData;
 import com.xiangxun.workorder.bean.VersionRoot;
@@ -47,6 +56,20 @@ public class SetActivity extends BaseActivity implements SetListener.SetInterfac
     private ListView listView;
     private SetAdapter adapter;
 
+    @ViewsBinder(R.id.account)
+    private TextView mTvAccount;
+    @ViewsBinder(R.id.realname)
+    private TextView mTvName;
+    @ViewsBinder(R.id.region)
+    private TextView mTvDepartment;
+    @ViewsBinder(R.id.phone)
+    private TextView mTvPhone;
+    @ViewsBinder(R.id.user_photo)
+    private ImageView user_photo;
+    @ViewsBinder(R.id.id_user_info)
+    private RelativeLayout user_info;
+
+
     private SetPresenter presenter;
 
     private VersionUpDateDialog dialog;
@@ -55,7 +78,7 @@ public class SetActivity extends BaseActivity implements SetListener.SetInterfac
     protected void initView(Bundle savedInstanceState) {
         header.setTitle(R.string.main_work_set);
         header.setLeftBackgroundResource(R.mipmap.ic_title_back);
-
+        user_photo.setLayoutParams(new LinearLayout.LayoutParams(AppEnum.WIDTH.getLen() / 5,AppEnum.WIDTH.getLen() / 5));
         presenter = new SetPresenter(this);
         presenter.findFileSize(getIntent().getIntExtra("LOGIN", -1));
 
@@ -63,6 +86,31 @@ public class SetActivity extends BaseActivity implements SetListener.SetInterfac
         listView.setAdapter(adapter);
     }
 
+    @Override
+    protected void loadData() {
+        super.loadData();
+        LoginRoot root = (LoginRoot) SharePreferHelp.getValue(AppEnum.LoginRoot.getDec());
+        String str;
+        SpannableString ss;
+        int color = getResources().getColor(R.color.white);
+
+        str = String.format(getResources().getString(R.string.police_account), root.getData().getAccount());
+        ss = new SpannableString(str);
+        ss.setSpan(new ForegroundColorSpan(color), 4, str.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        mTvAccount.setText(ss);
+
+        str = String.format("姓    名：" +root.getData().getName());
+        ss = new SpannableString(str);
+        ss.setSpan(new ForegroundColorSpan(color), 7, str.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        mTvName.setText(ss);
+
+        str = String.format(getResources().getString(R.string.police_department),root.getData().getOrgName());
+        ss = new SpannableString(str);
+        ss.setSpan(new ForegroundColorSpan(color), 5, str.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        mTvDepartment.setText(ss);
+
+        mTvPhone.setText(ss);
+    }
 
     @Override
     protected void initListener() {

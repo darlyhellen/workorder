@@ -50,6 +50,7 @@ public class LoginData implements Serializable {
     private String mobileRoles;
 
     private String Cookie;
+    private String orgName;
 
     public void setId(String id) {
         this.id = id;
@@ -209,5 +210,13 @@ public class LoginData implements Serializable {
 
     public void setCookie(String cookie) {
         Cookie = cookie;
+    }
+
+    public String getOrgName() {
+        return orgName;
+    }
+
+    public void setOrgName(String orgName) {
+        this.orgName = orgName;
     }
 }
