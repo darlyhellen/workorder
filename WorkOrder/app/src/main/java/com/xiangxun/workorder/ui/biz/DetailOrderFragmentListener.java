@@ -19,8 +19,11 @@ import com.xiangxun.workorder.common.retrofit.RxjavaRetrofitRequestUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.List;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
@@ -120,6 +123,9 @@ public class DetailOrderFragmentListener implements FramePresenter {
             return;
         }
 
+
+
+
         //在这里进行数据请求
         RxjavaRetrofitRequestUtil.getInstance().get().upDataOrder(status, id, reason).
                 subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io())
@@ -164,24 +170,26 @@ public class DetailOrderFragmentListener implements FramePresenter {
             listener.onFaild(0, "网络异常,请检查网络");
             return;
         }
-        JSONObject ob = new JSONObject();
-        try {
-            ob.put("id", id);
-            if (url != null && url.size() >= 2) {
-                ob.put("picture1", BitmapChangeUtil.convertIconToString(BitmapFactory.decodeFile(url.get(0))));
-            }
-            if (url != null && url.size() >= 3) {
-                ob.put("picture2", BitmapChangeUtil.convertIconToString(BitmapFactory.decodeFile(url.get(1))));
-            }
-            if (url != null && url.size() >= 4) {
-                ob.put("picture3", BitmapChangeUtil.convertIconToString(BitmapFactory.decodeFile(url.get(2))));
-            }
-        } catch (JSONException e) {
 
+
+
+        //构建body
+        MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM)
+                .addFormDataPart("id", id);
+
+        if (url != null && url.size() >= 2) {
+            File file = new File(url.get(0));
+            builder.addFormDataPart("picture1", file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
         }
-        DLog.i(getClass().getSimpleName(), ob);
-        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json;charset=UTF-8"), ob.toString());
-
+        if (url != null && url.size() >= 3) {
+            File file = new File(url.get(1));
+            builder.addFormDataPart("picture2", file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
+        }
+        if (url != null && url.size() >= 4) {
+            File file = new File(url.get(2));
+            builder.addFormDataPart("picture3", file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
+        }
+        RequestBody body = builder.build();
         //在这里进行数据请求
         RxjavaRetrofitRequestUtil.getInstance().post()
                 .upLoadImage(body).subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io())

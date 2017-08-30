@@ -21,8 +21,11 @@ import com.xiangxun.workorder.common.retrofit.RxjavaRetrofitRequestUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.List;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
@@ -93,33 +96,34 @@ public class TourListener implements FramePresenter {
             return;
         }
 
-        JSONObject ob = new JSONObject();
-        try {
-            ob.put("reason", declare);
-            ob.put("note", null);
-            ob.put("deviceid", info.deviceid);
-            ob.put("code", info.code);
-            ob.put("assetname", info.assetname);
-            ob.put("orgname", info.orgname);
-            ob.put("installplace", info.installplace);
-            ob.put("ip", info.ip);
-            ob.put("type", type);
-            if (url.size() >= 2) {
-                ob.put("picture1", BitmapChangeUtil.convertIconToString(BitmapFactory.decodeFile(url.get(0))));
-            }
-            if (url.size() >= 3) {
-                ob.put("picture2", BitmapChangeUtil.convertIconToString(BitmapFactory.decodeFile(url.get(1))));
-            }
-            if (url.size() >= 4) {
-                ob.put("picture3", BitmapChangeUtil.convertIconToString(BitmapFactory.decodeFile(url.get(2))));
-            }
-        } catch (JSONException e) {
 
+        //构建body
+        MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM)
+                .addFormDataPart("reason", declare).
+                addFormDataPart("note", "").
+                addFormDataPart("deviceid", info.deviceid).
+                addFormDataPart("code", info.code).
+                addFormDataPart("assetname", info.assetname).
+                addFormDataPart("orgname", info.orgname).
+                addFormDataPart("installplace", info.installplace).
+                addFormDataPart("ip", info.ip).
+                addFormDataPart("type", type);
+
+        if (url.size() >= 2) {
+            File file = new File(url.get(0));
+            builder.addFormDataPart("picture1", file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
         }
-        DLog.i(getClass().getSimpleName(), ob);
-        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json;charset=UTF-8"), ob.toString());
+        if (url.size() >= 3) {
+            File file = new File(url.get(1));
+            builder.addFormDataPart("picture2", file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
+        }
+        if (url.size() >= 4) {
+            File file = new File(url.get(2));
+            builder.addFormDataPart("picture3", file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
+        }
+        RequestBody requestBody = builder.build();
         //在这里进行数据请求
-        RxjavaRetrofitRequestUtil.getInstance().post().perambulateUp(body).
+        RxjavaRetrofitRequestUtil.getInstance().post().perambulateUp(requestBody).
                 subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(new Func1<JsonObject, UpTourRoot>() {

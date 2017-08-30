@@ -155,32 +155,38 @@ public class DetailImageFragment extends Fragment implements DetailImageFragment
         if (data == null) {
             return;
         }
-        File id = new File(AppEnum.IMAGE, getDataID());
-        if (!id.exists()) {
-            id.mkdir();
-        }
-        for (String sr : data) {
-            Bitmap bt = BitmapChangeUtil.convertStringToIcon(sr);
-            if (bt != null) {
-                //通过工单ID建立文件夹，保存下载下来的图片。
-                File file = new File(AppEnum.IMAGE + getDataID(), "/" + System.currentTimeMillis() + ".png");
-                try {
-                    file.createNewFile();
-                    FileOutputStream out = new FileOutputStream(file);
-                    bt.compress(Bitmap.CompressFormat.PNG, 90, out);
-                    bt.recycle();
-                    urls.add(file.getPath());
-                    out.flush();
-                    out.close();
-                } catch (FileNotFoundException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+        for (String url :
+                data) {
+            if (!TextUtils.isEmpty(url)){
+                urls.add(url);
             }
         }
+//        File id = new File(AppEnum.IMAGE, getDataID());
+//        if (!id.exists()) {
+//            id.mkdir();
+//        }
+//        for (String sr : data) {
+//            Bitmap bt = BitmapChangeUtil.convertStringToIcon(sr);
+//            if (bt != null) {
+//                //通过工单ID建立文件夹，保存下载下来的图片。
+//                File file = new File(AppEnum.IMAGE + getDataID(), "/" + System.currentTimeMillis() + ".png");
+//                try {
+//                    file.createNewFile();
+//                    FileOutputStream out = new FileOutputStream(file);
+//                    bt.compress(Bitmap.CompressFormat.PNG, 90, out);
+//                    bt.recycle();
+//                    urls.add(file.getPath());
+//                    out.flush();
+//                    out.close();
+//                } catch (FileNotFoundException e) {
+//                    // TODO Auto-generated catch block
+//                    e.printStackTrace();
+//                } catch (IOException e) {
+//                    // TODO Auto-generated catch block
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
         DLog.i(getClass().getSimpleName(), urls);
         text.setVisibility(View.GONE);
         adapter.setData(urls);

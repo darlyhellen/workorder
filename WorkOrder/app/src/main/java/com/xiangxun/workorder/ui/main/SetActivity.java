@@ -89,27 +89,29 @@ public class SetActivity extends BaseActivity implements SetListener.SetInterfac
     @Override
     protected void loadData() {
         super.loadData();
-        LoginRoot root = (LoginRoot) SharePreferHelp.getValue(AppEnum.LoginRoot.getDec());
-        String str;
-        SpannableString ss;
-        int color = getResources().getColor(R.color.white);
+        if (getIntent().getIntExtra("LOGIN", -1) != 0) {
+            user_info.setVisibility(View.VISIBLE);
+            LoginRoot root = (LoginRoot) SharePreferHelp.getValue(AppEnum.LoginRoot.getDec());
+            String str;
+            SpannableString ss;
+            int color = getResources().getColor(R.color.white);
+            str = String.format(getResources().getString(R.string.police_account), root.getData().getAccount());
+            ss = new SpannableString(str);
+            ss.setSpan(new ForegroundColorSpan(color), 4, str.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            mTvAccount.setText(ss);
+            str = String.format("姓    名：" +root.getData().getName());
+            ss = new SpannableString(str);
+            ss.setSpan(new ForegroundColorSpan(color), 7, str.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            mTvName.setText(ss);
+            str = String.format(getResources().getString(R.string.police_department),root.getData().getOrgName());
+            ss = new SpannableString(str);
+            ss.setSpan(new ForegroundColorSpan(color), 5, str.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            mTvDepartment.setText(ss);
+            mTvPhone.setText(ss);
+        }else {
+            user_info.setVisibility(View.GONE);
+        }
 
-        str = String.format(getResources().getString(R.string.police_account), root.getData().getAccount());
-        ss = new SpannableString(str);
-        ss.setSpan(new ForegroundColorSpan(color), 4, str.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        mTvAccount.setText(ss);
-
-        str = String.format("姓    名：" +root.getData().getName());
-        ss = new SpannableString(str);
-        ss.setSpan(new ForegroundColorSpan(color), 7, str.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        mTvName.setText(ss);
-
-        str = String.format(getResources().getString(R.string.police_department),root.getData().getOrgName());
-        ss = new SpannableString(str);
-        ss.setSpan(new ForegroundColorSpan(color), 5, str.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        mTvDepartment.setText(ss);
-
-        mTvPhone.setText(ss);
     }
 
     @Override
