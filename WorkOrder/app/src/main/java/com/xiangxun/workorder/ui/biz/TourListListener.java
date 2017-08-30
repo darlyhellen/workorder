@@ -87,7 +87,6 @@ public class TourListListener implements FramePresenter {
                     public void onError(Throwable e) {
                         TourRoot root = (TourRoot) SharePreferHelp.getValue(AppEnum.TourRoot.getDec() + page);
                         if (root != null) {
-                            ToastApp.showToast(e.getMessage());
                             listener.onSucces(root);
                         } else {
                             listener.onFaild(1, e.getMessage());

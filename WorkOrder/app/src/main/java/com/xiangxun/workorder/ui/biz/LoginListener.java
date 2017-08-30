@@ -133,7 +133,6 @@ public class LoginListener implements FramePresenter {
                                    if (APP.DEBUG) {
                                        LoginRoot root = (LoginRoot) SharePreferHelp.getValue(AppEnum.LoginRoot.getDec());
                                        if (root != null) {
-                                           ToastApp.showToast(e.getMessage());
                                            listener.onSucces(root);
                                        } else {
                                            listener.onFaild(1, e.getMessage());

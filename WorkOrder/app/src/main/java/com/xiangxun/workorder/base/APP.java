@@ -25,7 +25,7 @@ import java.io.File;
 public class APP extends FrameAPP {
     protected static APP instance;
 
-    public static boolean DEBUG = true;
+    public static boolean DEBUG = false;
 
     public static APP getInstance() {
         if (instance == null) {

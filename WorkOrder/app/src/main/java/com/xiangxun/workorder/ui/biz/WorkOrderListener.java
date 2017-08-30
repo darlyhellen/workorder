@@ -87,7 +87,6 @@ public class WorkOrderListener implements FramePresenter {
                     public void onError(Throwable e) {
                         WorkOrderRoot root = (WorkOrderRoot) SharePreferHelp.getValue(AppEnum.WorkOrderRoot.getDec() + page + status);
                         if (root != null) {
-                            ToastApp.showToast(e.getMessage());
                             listener.onSucces(root);
                         } else {
                             listener.onFaild(1, e.getMessage());

@@ -86,7 +86,6 @@ public class EquipmentListListener implements FramePresenter {
                     public void onError(Throwable e) {
                         EquipmentRoot root = (EquipmentRoot) SharePreferHelp.getValue(AppEnum.EquipmentRoot.getDec() + page);
                         if (root != null) {
-                            ToastApp.showToast(e.getMessage());
                             listener.onSucces(root);
                         } else {
                             listener.onFaild(1, e.getMessage());
