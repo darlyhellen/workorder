@@ -98,7 +98,7 @@ public class TourPresenter {
 
     private void updateTour(boolean isCheck) {
         biz.onStart(loading);
-        biz.commitTour(isCheck, infoed, view.getDeclare(), view.getImageData(), type, new FrameListener<UpTourRoot>() {
+        biz.commitTour(isCheck, infoed, view.getDeclare(), view.getImageData(), type, view.getAddress(), view.getlongitude(), view.getlatitude(), new FrameListener<UpTourRoot>() {
             @Override
             public void onSucces(UpTourRoot s) {
                 biz.onStop(loading);

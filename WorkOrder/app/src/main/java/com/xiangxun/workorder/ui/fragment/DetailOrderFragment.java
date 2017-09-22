@@ -1,11 +1,10 @@
 package com.xiangxun.workorder.ui.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.text.InputFilter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -21,6 +20,7 @@ import android.widget.TextView;
 import com.hellen.baseframe.binder.InitBinder;
 import com.hellen.baseframe.binder.ViewsBinder;
 import com.hellen.baseframe.common.dlog.DLog;
+import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.base.ItemClickListenter;
@@ -28,13 +28,16 @@ import com.xiangxun.workorder.bean.EquipmentInfo;
 import com.xiangxun.workorder.bean.TourInfo;
 import com.xiangxun.workorder.bean.WorkOrderData;
 import com.xiangxun.workorder.common.WorkOrderUtils;
+import com.xiangxun.workorder.common.image.ImageLoaderUtil;
 import com.xiangxun.workorder.ui.MaxLengthWatcher;
 import com.xiangxun.workorder.ui.MaxLengthWatcher.MaxLengthUiListener;
 import com.xiangxun.workorder.ui.adapter.DetailOrderImageAdapter;
 import com.xiangxun.workorder.ui.adapter.DetailOrderImageAdapter.OnDetailOrderConsListener;
 import com.xiangxun.workorder.ui.biz.DetailOrderFragmentListener.DetailOrderFragmentInterface;
+import com.xiangxun.workorder.widget.camera.CameraActivity;
 import com.xiangxun.workorder.ui.main.ShowImageViewActivity;
 import com.xiangxun.workorder.ui.presenter.DetailOrderFragmentPresenter;
+import com.xiangxun.workorder.widget.camera.OwnerPhotoPop;
 import com.xiangxun.workorder.widget.camera.PhotoPop;
 import com.xiangxun.workorder.widget.grid.DetailView;
 import com.xiangxun.workorder.widget.grid.WholeGridView;
@@ -102,7 +105,7 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
     /**
      * 上午9:29:04 TODO 调出选项的POP窗口，主要为相机，相册，取消
      */
-    public PhotoPop pop;
+    public OwnerPhotoPop pop;
     private DetailOrderFragmentPresenter presenter;
 
     private WorkOrderData data;
@@ -120,7 +123,7 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         presenter = new DetailOrderFragmentPresenter(this);
-        pop = new PhotoPop(getActivity());
+        pop = new OwnerPhotoPop(getActivity());
         initView();
         initListener();
     }
@@ -449,12 +452,12 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
             public void NoDoubleItemClickListener(AdapterView<?> parent, View view, int position, long id) {
                 String st = (String) parent.getItemAtPosition(position);
                 if (position == (imageData.size() - 1)) {
-                    if (position == 3) {
-                        //上传图片
-                        DLog.i(getClass().getSimpleName(), position + "上传图片");
-                        presenter.upLoadImage(imageData);
-                    } else {
-                        pop.show(view);
+                    if (data != null) {
+                        pop.show(view,imageData.size(),AppEnum.IMAGE.concat(data.id));
+                    } else if (info != null) {
+                        pop.show(view,imageData.size(),AppEnum.IMAGE.concat(info.id));
+                    } else if (tour != null) {
+                        pop.show(view,imageData.size(),AppEnum.IMAGE.concat(tour.id));
                     }
                 } else {
                     Intent intent = new Intent(getActivity(), ShowImageViewActivity.class);
@@ -533,38 +536,24 @@ public class DetailOrderFragment extends Fragment implements OnClickListener, De
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         DLog.i("onActivityResult" + requestCode + resultCode);
-        if (requestCode == AppEnum.REQUESTCODE_CUT) {
-            // 裁剪
-            if (data != null) {
-                Bundle extras = data.getExtras();
-                Bitmap head = extras.getParcelable("data");
-            }
-        } else if (requestCode == AppEnum.REQUESTCODE_CAM
-                || requestCode == AppEnum.REQUESTCODE_CAP) {
-
-            // 拍照或相册
-            String head_path = null;
-            if (data == null) {
-                if (pop == null) {
-                    head_path = AppEnum.capUri;
-                } else {
-                    head_path = pop.PopStringActivityResult(null,
-                            AppEnum.REQUESTCODE_CAP);
+      if (resultCode == Activity.RESULT_OK){
+        switch (requestCode) {
+            case 1:
+                if (data != null) {
+                    List<String> photos = (List<String>) data.getSerializableExtra("camera_picture");
+                    imageData.addAll(imageData.size() - 1, photos);
+                    adapter.setData(imageData);
                 }
-            } else {
-                head_path = pop.PopStringActivityResult(data,
-                        AppEnum.REQUESTCODE_CAM);
-            }
-            if (head_path == null) {
-                return;
-            }
-
-            imageData.add(imageData.size() - 1, head_path);
-            adapter.setData(imageData);
-            //pop.cropPhoto(Uri.fromFile(temp));// 裁剪图片
-            //这里不需要裁剪图片。
-
+                break;
+            case 99:
+                if (data != null) {
+                    List<String> photos = (List<String>) data.getSerializableExtra("album_picture");
+                    imageData.addAll(imageData.size() - 1, photos);
+                    adapter.setData(imageData);
+                }
+                break;
         }
+    }
     }
 
     //点击删除图片按钮，进行图片删除操作。

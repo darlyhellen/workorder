@@ -170,7 +170,10 @@ public class DetailOrderFragmentListener implements FramePresenter {
             listener.onFaild(0, "网络异常,请检查网络");
             return;
         }
-
+        if (TextUtils.isEmpty(id)) {
+            listener.onFaild(0, "操作ID不能为空");
+            return;
+        }
 
 
         //构建body

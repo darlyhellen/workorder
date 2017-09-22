@@ -70,7 +70,7 @@ public class TourListActivity extends BaseActivity implements View.OnClickListen
         header.setLeftBackgroundResource(R.mipmap.ic_title_back);
 
         data = new ArrayList<TourInfo>();
-        adapter = new TourAdapter(data, R.layout.item_activity_work_order, this);
+        adapter = new TourAdapter(data, R.layout.item_activity_equipment, this);
         xlist.setAdapter(adapter);
         patrol = (Patrol) getIntent().getSerializableExtra("PATROL");
 

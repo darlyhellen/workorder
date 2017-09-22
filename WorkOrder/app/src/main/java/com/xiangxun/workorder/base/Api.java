@@ -21,6 +21,7 @@ public class Api {
 
     private static String port;
 
+    public static boolean TESTPHONE = false;
 
     public static String getRoot() {
         if (root == null) {

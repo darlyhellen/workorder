@@ -86,6 +86,7 @@ public class LoginActivity extends BaseActivity implements OnClickListener, Logi
                 .getValue(AppEnum.NOTUPDATE.getDec(), 0)) {
             new SetPresenter(this).clickUpdate(this, true);
         }
+        mEdtAcount.setJoinEdit(mEdtPassWord);
         btn_login_github.setViewInit(R.string.mine_login_login, R.string.mine_login_loginning, mEdtAcount, mEdtPassWord);
         mBtnLogin_post.setViewInit(R.string.mine_login_login, R.string.mine_login_loginning, mEdtAcount, mEdtPassWord);
         iv.setLayoutParams(new LinearLayout.LayoutParams(AppEnum.WIDTH.getLen() / 5, AppEnum.WIDTH.getLen() / 5));

@@ -148,7 +148,7 @@
     <string name="st_detail_own">关闭时间:</string>
     <string name="st_detail_back_declare"> </string>
     <string name="project_remark">备&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;注:</string>
-    <string name="st_detail_update_time">说明:</string>
+    <string name="st_detail_update_time">巡检说明:</string>
     <string name="st_detail_declare_t1">退回原因:</string>
     <string name="st_detail_declare_t2">处理说明:</string>
     <string name="st_detail_declare_t3">异常说明:</string>
@@ -177,4 +177,27 @@
         <item>"已评估"</item>
         <item>"已完成"</item>
     </array>
+
+
+    <string name="deviceType">设备编号：</string>
+    <string name="scanSize">预览尺寸</string>
+    <string name="videoSize">视频尺寸</string>
+    <string name="notifyIniError">识别初始化失败:</string>
+    <string name="sdCardOut">SD卡被拨出，数据无法存储！</string>
+    <string name="duijiao">正在扫描，请点击屏幕对焦……</string>
+    <string name="fileSaveFailed">文件存储失败！</string>
+    <string name="focusFailed">对焦失败，请重试！</string>
+    <string name="no">无</string>
+    <string name="font">宋体</string>
+    <string name="textviewtime">时间</string>
+    <string name="textviewaddress">地点</string>
+    <string name="fileWriteError">文件写入失败！</string>
+
+    <string name="ok">确认</string>
+    <string name="cancel">取消</string>
+
+    <string name="taking_pictures">拍照</string>
+    <string name="photo_albums_select">从相册选取</string>
+    <string name="btn_ok">完成(0)</string>
+    <string name="publish_my_album">我的相册</string>
 </resources>

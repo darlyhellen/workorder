@@ -32,11 +32,11 @@ dependencies {
     compile 'com.squareup.okhttp3:logging-interceptor:3.5.0'
     compile files('libs/sunjce_provider.jar')
     compile 'com.android.support:design:25.3.1'
-    compile files('libs/AMap_Location_V3.4.0_20170427.jar')
     compile files('libs/AMap_Search_V5.1.0_20170517.jar')
     compile files('libs/Android_Map3D_SDK_V5.1.0_20170518.jar')
     compile files('libs/universal-image-loader-1.9.5.jar')
     compile 'com.github.bumptech.glide:glide:4.0.0-RC0'
     compile files('libs/darlyframe_v1.0.9.jar')
     compile 'com.android.support:support-v4:25.3.1'
+    compile files('libs/AMap_Location_V3.5.0_20170731.jar')
 }

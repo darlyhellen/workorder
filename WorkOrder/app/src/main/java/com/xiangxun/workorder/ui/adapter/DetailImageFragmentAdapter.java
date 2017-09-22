@@ -5,10 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.hellen.baseframe.baseadapter.ParentAdapter;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.xiangxun.workorder.R;
+import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.common.image.ImageLoaderUtil;
 
 import java.util.List;
@@ -33,6 +35,7 @@ public class DetailImageFragmentAdapter extends ParentAdapter<String> {
             view = LayoutInflater.from(context).inflate(resID, null);
             hocker = new ViewHocker();
             hocker.image = (ImageView) view.findViewById(R.id.id_item_fragment_detail_image);
+            hocker.image.setLayoutParams(new LinearLayout.LayoutParams(AppEnum.WIDTH.getLen() / 2, AppEnum.WIDTH.getLen() / 2));
             view.setTag(hocker);
         } else {
             hocker = (ViewHocker) view.getTag();

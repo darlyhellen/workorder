@@ -84,15 +84,15 @@ public class DetailImageFragment extends Fragment implements DetailImageFragment
             if (TextUtils.isEmpty(data.id)) {
                 return;
             }
-            File f = new File(AppEnum.IMAGE, data.id);
-            if (f.exists()) {
-                File[] lis = f.listFiles();
-                for (int i = 0; i < lis.length; i++) {
-                    urls.add(lis[i].getAbsolutePath());
-                }
-            } else {
+//            File f = new File(AppEnum.IMAGE, data.id);
+//            if (f.exists()) {
+//                File[] lis = f.listFiles();
+//                for (int i = 0; i < lis.length; i++) {
+//                    urls.add(lis[i].getAbsolutePath());
+//                }
+//            } else {
                 presenter.getData();
-            }
+//            }
             adapter = new DetailImageFragmentAdapter(urls, R.layout.item_fragment_detail_image, getActivity());
             gridView.setAdapter(adapter);
         } else if (info != null) {
@@ -100,15 +100,15 @@ public class DetailImageFragment extends Fragment implements DetailImageFragment
             if (TextUtils.isEmpty(info.id)) {
                 return;
             }
-            File f = new File(AppEnum.IMAGE, info.id);
-            if (f.exists()) {
-                File[] lis = f.listFiles();
-                for (int i = 0; i < lis.length; i++) {
-                    urls.add(lis[i].getAbsolutePath());
-                }
-            } else {
+//            File f = new File(AppEnum.IMAGE, info.id);
+//            if (f.exists()) {
+//                File[] lis = f.listFiles();
+//                for (int i = 0; i < lis.length; i++) {
+//                    urls.add(lis[i].getAbsolutePath());
+//                }
+//            } else {
                 presenter.getData();
-            }
+//            }
             adapter = new DetailImageFragmentAdapter(urls, R.layout.item_fragment_detail_image, getActivity());
             gridView.setAdapter(adapter);
         } else if (tour != null) {
@@ -116,15 +116,15 @@ public class DetailImageFragment extends Fragment implements DetailImageFragment
             if (TextUtils.isEmpty(tour.id)) {
                 return;
             }
-            File f = new File(AppEnum.IMAGE, tour.id);
-            if (f.exists()) {
-                File[] lis = f.listFiles();
-                for (int i = 0; i < lis.length; i++) {
-                    urls.add(lis[i].getAbsolutePath());
-                }
-            } else {
+//            File f = new File(AppEnum.IMAGE, tour.id);
+//            if (f.exists()) {
+//                File[] lis = f.listFiles();
+//                for (int i = 0; i < lis.length; i++) {
+//                    urls.add(lis[i].getAbsolutePath());
+//                }
+//            } else {
                 presenter.getData();
-            }
+//            }
             adapter = new DetailImageFragmentAdapter(urls, R.layout.item_fragment_detail_image, getActivity());
             gridView.setAdapter(adapter);
         }

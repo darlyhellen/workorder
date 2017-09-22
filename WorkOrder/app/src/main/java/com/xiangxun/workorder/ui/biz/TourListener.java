@@ -58,6 +58,13 @@ public class TourListener implements FramePresenter {
 
         List<String> getImageData();
 
+        String getAddress();
+
+        String getlongitude();
+
+        String getlatitude();
+
+
         void onTourSuccess(String s);
 
         void onTourFailed();
@@ -73,7 +80,7 @@ public class TourListener implements FramePresenter {
     /**
      * 编辑完成后进行工单提交
      */
-    public void commitTour(boolean isCheck, EquipmentInfo info, String declare, List<String> url, String type, final FrameListener<UpTourRoot> listener) {
+    public void commitTour(boolean isCheck, EquipmentInfo info, String declare, List<String> url, String type, String address, String longitude, String latitude, final FrameListener<UpTourRoot> listener) {
         if (!APP.isNetworkConnected(APP.getInstance())) {
             listener.onFaild(0, "网络异常,请检查网络");
             return;
@@ -86,7 +93,7 @@ public class TourListener implements FramePresenter {
             listener.onFaild(0, "说明信息不能为空");
             return;
         }
-        if (url.size() < 2) {
+        if (url != null && url.size() < 2) {
             listener.onFaild(0, "请选择照片信息");
             return;
         }
@@ -95,29 +102,39 @@ public class TourListener implements FramePresenter {
             listener.onFaild(0, "请选择设备信息");
             return;
         }
-
+        if (TextUtils.isEmpty(longitude)) {
+            listener.onFaild(0, "经度不能为空");
+            return;
+        }
+        if (TextUtils.isEmpty(latitude)) {
+            listener.onFaild(0, "纬度不能为空");
+            return;
+        }
 
         //构建body
         MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM)
                 .addFormDataPart("reason", declare).
-                addFormDataPart("note", "").
-                addFormDataPart("deviceid", info.deviceid).
-                addFormDataPart("code", info.code).
-                addFormDataPart("assetname", info.assetname).
-                addFormDataPart("orgname", info.orgname).
-                addFormDataPart("installplace", info.installplace).
-                addFormDataPart("ip", info.ip).
-                addFormDataPart("type", type);
+                        addFormDataPart("note", "").
+                        addFormDataPart("deviceid", info.deviceid == null ? "" : info.deviceid).
+                        addFormDataPart("code", info.code == null ? "" : info.code).
+                        addFormDataPart("assetname", info.assetname == null ? "" : info.assetname).
+                        addFormDataPart("orgname", info.orgname == null ? "" : info.orgname).
+                        addFormDataPart("installplace", info.installplace == null ? "" : info.installplace).
+                        addFormDataPart("ip", info.ip == null ? "" : info.ip).
+                        addFormDataPart("address", address == null ? "" : address).
+                        addFormDataPart("longitude", longitude).
+                        addFormDataPart("latitude", latitude).
+                        addFormDataPart("type", type);
 
-        if (url.size() >= 2) {
+        if (url != null && url.size() >= 2) {
             File file = new File(url.get(0));
             builder.addFormDataPart("picture1", file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
         }
-        if (url.size() >= 3) {
+        if (url != null && url.size() >= 3) {
             File file = new File(url.get(1));
             builder.addFormDataPart("picture2", file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
         }
-        if (url.size() >= 4) {
+        if (url != null && url.size() >= 4) {
             File file = new File(url.get(2));
             builder.addFormDataPart("picture3", file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
         }

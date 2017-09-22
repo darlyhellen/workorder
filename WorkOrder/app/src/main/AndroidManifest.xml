@@ -48,6 +48,16 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".widget.camera.CameraActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name=".widget.camera.PhotoSelectActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
             android:name=".ui.guide.GuideActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
@@ -134,6 +144,8 @@
             android:name="com.amap.api.v2.apikey"
             android:value="f31962d3f32bcac1f5ff82f353f9e5c8" /><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <!-- 定位需要的服务 -->
+        <service android:name="com.amap.api.location.APSService" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />

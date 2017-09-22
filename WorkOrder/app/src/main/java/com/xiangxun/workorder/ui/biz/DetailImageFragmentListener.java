@@ -81,7 +81,11 @@ public class DetailImageFragmentListener implements FramePresenter {
                             if (data.getStatus() == 1 && data.getData() != null) {
                                 listener.onSucces(data);
                             } else {
-                                listener.onFaild(0, data.getMessage());
+                                if (data.getStatus()==0) {
+                                    listener.onFaild(2, data.getMessage());
+                                }else {
+                                    listener.onFaild(0, data.getMessage());
+                                }
                             }
                         } else {
                             listener.onFaild(0, "解析错误");

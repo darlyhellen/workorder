@@ -51,7 +51,7 @@ public class WorkOrderDetailActivity extends BaseActivity implements OnClickList
     private List<Fragment> list = new ArrayList<Fragment>();
     private int[] titles = new int[]{R.string.st_detail_detal, R.string.st_detail_position, R.string.st_detail_image};
     private int[] titles_no = new int[]{R.string.st_detail_detal, R.string.st_detail_image};
-
+    private int[] detailpage = new int[]{R.string.st_detail_detal};
     private WorkOrderData data;
     private EquipmentInfo info;
     private TourInfo tour;
@@ -129,7 +129,7 @@ public class WorkOrderDetailActivity extends BaseActivity implements OnClickList
      * @TODO:详情信息
      */
     private void hasInfo() {
-
+        //设备管理模块，剔除掉图片展示效果和地图展示效果
         Bundle bundle = new Bundle();
         bundle.putSerializable("EquipmentInfo", info);
         order = new DetailOrderFragment();
@@ -151,9 +151,17 @@ public class WorkOrderDetailActivity extends BaseActivity implements OnClickList
                 tab.addTab(tab.newTab().setText(titles[i]));
             }
         }
-        DetailImageFragment image = new DetailImageFragment();
-        image.setArguments(bundle);
-        list.add(image);
+        //过滤掉图片展示
+        if (info==null) {
+            DetailImageFragment image = new DetailImageFragment();
+            image.setArguments(bundle);
+            list.add(image);
+        }else {
+            for (int i = 0; i < detailpage.length; i++) {
+                //设置未选中和选中时字体的颜色
+                tab.addTab(tab.newTab().setText(titles[i]));
+            }
+        }
         header.setTitle(R.string.st_equip_title_order);
         header.setLeftBackgroundResource(R.mipmap.ic_title_back);
         //创建适配器(这个适配器是自定义的，我用的是FragmentPagerAdapger，根据需求自定义吧)

@@ -12,17 +12,19 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
+import com.amap.api.location.AMapLocation;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.hellen.baseframe.binder.ContentBinder;
 import com.hellen.baseframe.binder.ViewsBinder;
 import com.hellen.baseframe.common.dlog.DLog;
 import com.hellen.baseframe.common.obsinfo.ToastApp;
-import com.hellen.baseframe.common.utiltools.SharePreferHelp;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.base.BaseActivity;
 import com.xiangxun.workorder.bean.Patrol;
 import com.xiangxun.workorder.bean.WorkOrderData;
+import com.xiangxun.workorder.common.LocationTools;
+import com.xiangxun.workorder.common.LocationTools.LocationToolsListener;
 import com.xiangxun.workorder.ui.biz.MaintenanceListener.MaintenanceInterface;
 import com.xiangxun.workorder.ui.main.WorkOrderActivity;
 import com.xiangxun.workorder.ui.main.WorkOrderDetailActivity;
@@ -41,7 +43,7 @@ import java.util.List;
  */
 
 @ContentBinder(R.layout.activity_maintenance)
-public class MaintenanceActivity extends BaseActivity implements AdapterView.OnItemClickListener, MaintenanceInterface, View.OnClickListener {
+public class MaintenanceActivity extends BaseActivity implements AdapterView.OnItemClickListener, MaintenanceInterface, View.OnClickListener,LocationToolsListener {
     private MaintenancePresenter presenter;
     //首页参数集合
     @ViewsBinder(R.id.id_maintenance_title)
@@ -83,6 +85,9 @@ public class MaintenanceActivity extends BaseActivity implements AdapterView.OnI
         equip.setLayoutParams(new TableRow.LayoutParams((int) (AppEnum.WIDTH.getLen() / 2.5), (int) (AppEnum.WIDTH.getLen() / 2.5)));
         notifi.setIV(R.drawable.intenance_selecter_notify, "通知公告");
         notifi.setLayoutParams(new TableRow.LayoutParams((int) (AppEnum.WIDTH.getLen() / 2.5), (int) (AppEnum.WIDTH.getLen() / 2.5)));
+
+        LocationTools.getInstance().setLocationToolsListener(this);
+       // LocationTools.getInstance().start();
     }
 
     @Override
@@ -204,5 +209,15 @@ public class MaintenanceActivity extends BaseActivity implements AdapterView.OnI
         if (resultCode == 701) {
             presenter.getWorkOrderByPage();
         }
+    }
+
+    @Override
+    public void locationSuccess(AMapLocation amapLocation) {
+        DLog.i(amapLocation.getAddress());
+    }
+
+    @Override
+    public void locationFail() {
+        DLog.i("feist");
     }
 }

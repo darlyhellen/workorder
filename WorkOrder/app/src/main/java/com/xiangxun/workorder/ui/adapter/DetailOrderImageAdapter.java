@@ -39,7 +39,7 @@ public class DetailOrderImageAdapter extends ParentAdapter<String> {
 
     @Override
     public int getCount() {
-        return data.size() > 4 ? 4 : data.size();
+        return data.size() > 3 ? 3 : data.size();
     }
 
     @Override

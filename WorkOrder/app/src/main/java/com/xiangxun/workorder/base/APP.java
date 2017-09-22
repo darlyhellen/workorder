@@ -9,8 +9,8 @@ import com.hellen.baseframe.application.FrameAPP;
 import com.hellen.baseframe.common.db.DBControler;
 import com.hellen.baseframe.common.dlog.DLog;
 import com.hellen.baseframe.common.obsinfo.ConApp;
-import com.xiangxun.workorder.BuildConfig;
 import com.xiangxun.workorder.common.Aset;
+import com.xiangxun.workorder.common.LocationTools;
 import com.xiangxun.workorder.common.image.ImageLoaderUtil;
 
 import java.io.File;
@@ -25,7 +25,7 @@ import java.io.File;
 public class APP extends FrameAPP {
     protected static APP instance;
 
-    public static boolean DEBUG = false;
+    public static boolean DEBUG = true;
 
     public static APP getInstance() {
         if (instance == null) {
@@ -59,6 +59,8 @@ public class APP extends FrameAPP {
         //初始化图片工具类
         ImageLoaderUtil.init(this);
         Aset.copyAssetsGif(this);
+        //定位功能模块初始化
+        LocationTools.init(this);
     }
 
     /**
