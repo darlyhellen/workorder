@@ -55,4 +55,66 @@ public class WorkOrderData implements Serializable {
     public WorkOrderData() {
     }
 
+    public WorkOrderData(
+             String position,
+             String isleave,
+             String offtime,
+             String deviceip,
+             String photo1,
+             String reason,
+             String isouter,
+             String contact,
+             String messages,
+             String id,
+             String companyid,
+             String orgname,
+             String devicecode,
+             String note,
+             int status,
+             String companyname,
+             String exceptionid,
+             String contactname,
+             String assigntime,
+             String assignaccount,
+             String devicename,
+             String devicetype,
+             String photo2,
+             String photo3,
+             String offaccount,
+             String telephone,
+             String mapx,
+             String assetid,
+             String mapy,
+             String isreassign
+    ){
+      this.position=  position;
+      this.isleave=  isleave;
+      this.offtime=  offtime;
+      this.deviceip=  deviceip;
+      this.photo1=  photo1;
+      this.reason=  reason;
+      this.contact=  contact;
+      this.messages=  messages;
+      this.id=  id;
+      this.companyid=  companyid;
+      this.orgname=  orgname;
+      this.devicecode=  devicecode;
+      this.note=  note;
+      this.status=  status;
+      this.companyname=  companyname;
+      this.exceptionid=  exceptionid;
+      this.contactname=  contactname;
+      this.assigntime=  assigntime;
+      this.assignaccount=  assignaccount;
+      this.devicename=  devicename;
+      this.devicetype=  devicetype;
+      this.photo2=  photo2;
+      this.photo3=  photo3;
+      this.offaccount=  offaccount;
+      this.telephone=  telephone;
+      this.mapx=  mapx;
+      this.assetid=  assetid;
+      this.mapy=  mapy;
+      this.isreassign=  isreassign;
+    }
 }

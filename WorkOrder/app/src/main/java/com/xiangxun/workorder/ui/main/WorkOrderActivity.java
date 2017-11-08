@@ -11,6 +11,7 @@ import com.hellen.baseframe.binder.ViewsBinder;
 import com.hellen.baseframe.common.dlog.DLog;
 import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.R;
+import com.xiangxun.workorder.base.Api;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.base.BaseActivity;
 import com.xiangxun.workorder.base.ItemClickListenter;
@@ -154,8 +155,12 @@ public class WorkOrderActivity extends BaseActivity implements View.OnClickListe
                 isTour = false;
                 workorder = "10000";
                 textDes = "没有通知公告！";
-                textView.setVisibility(View.VISIBLE);
-                textView.setText(textDes);
+                if (Api.ISOUTLINE){
+                    presenter.getWorkOrderByPage(currentPage, workorder, devicename, devicenum, deviceip);
+                }else {
+                    textView.setVisibility(View.VISIBLE);
+                    textView.setText(textDes);
+                }
                 break;
             default:
                 break;

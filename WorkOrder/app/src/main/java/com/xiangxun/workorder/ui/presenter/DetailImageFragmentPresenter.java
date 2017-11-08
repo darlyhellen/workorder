@@ -3,6 +3,7 @@ package com.xiangxun.workorder.ui.presenter;
 import com.hellen.baseframe.application.FrameListener;
 import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.R;
+import com.xiangxun.workorder.base.Api;
 import com.xiangxun.workorder.bean.DetailImageRoot;
 import com.xiangxun.workorder.ui.biz.DetailImageFragmentListener;
 import com.xiangxun.workorder.ui.fragment.DetailImageFragment;
@@ -34,6 +35,11 @@ public class DetailImageFragmentPresenter {
      * @TODO：接收工单和拒绝工单接口。
      */
     public void getData() {
+        if (Api.ISOUTLINE){
+            //假數據沒有圖片信息
+            view.onLoginFailed();
+            return;
+        }
        // biz.onStart(loading);
         view.setDisableClick();
         biz.downImage(view.getDataID(), new FrameListener<DetailImageRoot>() {

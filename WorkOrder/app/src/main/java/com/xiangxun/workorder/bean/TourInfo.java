@@ -29,5 +29,31 @@ public class TourInfo implements Serializable {
     //纬度
     public String mapy;
 
-
+public TourInfo(
+        String inserttime,
+        String id,
+        String reason,
+        String installtime,
+        String deviceplace,
+        String name,
+        String userid,
+        String devicename,
+        String assettype,
+        String ip,
+        String mobile,
+        String deviceid
+){
+   this.inserttime=inserttime;
+   this.id=id;
+   this.reason=reason;
+   this.installtime=installtime;
+   this.deviceplace=deviceplace;
+   this.name=name;
+   this.userid=userid;
+   this.devicename=devicename;
+   this.assettype=assettype;
+   this.ip=ip;
+   this.mobile=mobile;
+   this.deviceid=deviceid;
+}
 }

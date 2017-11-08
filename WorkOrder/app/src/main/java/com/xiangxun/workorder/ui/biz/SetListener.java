@@ -12,9 +12,11 @@ import com.hellen.baseframe.application.FrameView;
 import com.hellen.baseframe.common.dlog.DLog;
 import com.hellen.baseframe.common.utiltools.SharePreferHelp;
 import com.xiangxun.workorder.base.APP;
+import com.xiangxun.workorder.base.Api;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.bean.SetModel;
 import com.xiangxun.workorder.bean.VersionRoot;
+import com.xiangxun.workorder.common.retrofit.RxTestJson;
 import com.xiangxun.workorder.common.retrofit.RxjavaRetrofitRequestUtil;
 import com.xiangxun.workorder.common.urlencode.Tools;
 
@@ -59,6 +61,10 @@ public class SetListener implements FramePresenter {
      * 获取版本更新接口数据
      */
     public void findNewVersion(int version, final FrameListener<VersionRoot> listener) {
+        if (Api.ISOUTLINE){
+            listener.onSucces(RxTestJson.versionRoot());
+            return;
+        }
         if (!APP.isNetworkConnected(APP.getInstance())) {
             listener.onFaild(0, "网络异常,请检查网络");
             return;

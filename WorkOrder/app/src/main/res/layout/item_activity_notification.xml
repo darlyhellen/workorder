@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.xiangxun.workorder.widget.coupon.CouponDisplayView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/id_notif_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/id_notif_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_padding5"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text=""
+        android:textColor="@color/black"
+        android:textSize="@dimen/textSize16"/>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1.0px"
+        android:background="@color/edit_save_btn_color_disable" />
+
+    <TextView
+        android:id="@+id/id_notif_contact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_padding5"
+        android:text=""
+        android:textColor="@color/black"
+        android:textSize="@dimen/textSize14" />
+
+</com.xiangxun.workorder.widget.coupon.CouponDisplayView>

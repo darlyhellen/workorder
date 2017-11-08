@@ -12,10 +12,12 @@ import com.hellen.baseframe.common.dlog.DLog;
 import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.hellen.baseframe.common.utiltools.SharePreferHelp;
 import com.xiangxun.workorder.base.APP;
+import com.xiangxun.workorder.base.Api;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.bean.TourRoot;
 import com.xiangxun.workorder.bean.WorkOrderData;
 import com.xiangxun.workorder.bean.WorkOrderRoot;
+import com.xiangxun.workorder.common.retrofit.RxTestJson;
 import com.xiangxun.workorder.common.retrofit.RxjavaRetrofitRequestUtil;
 
 import java.util.List;
@@ -56,6 +58,10 @@ public class WorkOrderListener implements FramePresenter {
     }
 
     public void getWorkOrder(final int page, final String status, String devicename, String devicecode, String deviceip, final FrameListener<WorkOrderRoot> listener) {
+        if (Api.ISOUTLINE){
+            listener.onSucces(RxTestJson.workOrderRoot(status));
+            return;
+        }
 
         if (!APP.isNetworkConnected(APP.getInstance())) {
             listener.onFaild(0, "网络异常,请检查网络");

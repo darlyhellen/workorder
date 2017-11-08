@@ -12,10 +12,12 @@ import com.hellen.baseframe.common.dlog.DLog;
 import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.hellen.baseframe.common.utiltools.SharePreferHelp;
 import com.xiangxun.workorder.base.APP;
+import com.xiangxun.workorder.base.Api;
 import com.xiangxun.workorder.base.AppEnum;
 import com.xiangxun.workorder.bean.LoginRoot;
 import com.xiangxun.workorder.bean.WorkOrderData;
 import com.xiangxun.workorder.bean.WorkOrderRoot;
+import com.xiangxun.workorder.common.retrofit.RxTestJson;
 import com.xiangxun.workorder.common.retrofit.RxjavaRetrofitRequestUtil;
 
 import java.util.List;
@@ -41,7 +43,11 @@ public class MaintenanceListener implements FramePresenter {
     }
 
     public void getWorkOrder(final FrameListener<WorkOrderRoot> listener) {
-
+        if (Api.ISOUTLINE){
+            //展示初步请求的假工单数据
+            listener.onSucces(RxTestJson.workOrderRoot("0"));
+            return;
+        }
         if (!APP.isNetworkConnected(APP.getInstance())) {
             listener.onFaild(0, "网络异常,请检查网络");
             return;

@@ -8,6 +8,7 @@ import com.hellen.baseframe.application.FrameListener;
 import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.xiangxun.workorder.R;
 import com.xiangxun.workorder.base.APP;
+import com.xiangxun.workorder.base.Api;
 import com.xiangxun.workorder.bean.DetailChangeRoot;
 import com.xiangxun.workorder.ui.biz.DetailOrderFragmentListener;
 import com.xiangxun.workorder.ui.biz.DetailOrderFragmentListener.DetailOrderFragmentInterface;
@@ -76,6 +77,10 @@ public class DetailOrderFragmentPresenter {
      * @TODO：接收工单和拒绝工单接口。
      */
     private void getData(String status, String id) {
+        if (Api.ISOUTLINE){
+            ToastApp.showToast("离线用户不拥有操作权限");
+            return;
+        }
         biz.onStart(loading);
         view.setDisableClick();
         biz.commitConsel(status, id, view.getReason(), new FrameListener<DetailChangeRoot>() {
@@ -113,6 +118,10 @@ public class DetailOrderFragmentPresenter {
      * @TODO:正常上报和异常上报接口内容。
      */
     private void updataOrder(String status, String id, List<String> urls) {
+        if (Api.ISOUTLINE){
+            ToastApp.showToast("离线用户不拥有操作权限");
+            return;
+        }
         if (!APP.isNetworkConnected(APP.getInstance())) {
             ToastApp.showToast("网络异常,请检查网络");
             return;
@@ -160,6 +169,10 @@ public class DetailOrderFragmentPresenter {
      * @TODO:图片上传测试。
      */
     public void upLoadImage(List<String> url) {
+        if (Api.ISOUTLINE){
+            ToastApp.showToast("离线用户不拥有操作权限");
+            return;
+        }
         biz.onStart(loading);
         biz.upLoadImage(view.getDataID(), url, new FrameListener<DetailChangeRoot>() {
             @Override

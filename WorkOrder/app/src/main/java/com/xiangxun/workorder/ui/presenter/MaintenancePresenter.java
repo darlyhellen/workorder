@@ -16,8 +16,8 @@ import com.xiangxun.workorder.ui.TourListActivity;
 import com.xiangxun.workorder.ui.WorkOrderMenuActivity;
 import com.xiangxun.workorder.ui.biz.MaintenanceListener;
 import com.xiangxun.workorder.ui.biz.MaintenanceListener.MaintenanceInterface;
+import com.xiangxun.workorder.ui.main.NotifactionActivity;
 import com.xiangxun.workorder.ui.main.SetActivity;
-import com.xiangxun.workorder.ui.main.WorkOrderActivity;
 import com.xiangxun.workorder.widget.loading.ShowLoading;
 
 import java.util.ArrayList;
@@ -74,7 +74,7 @@ public class MaintenancePresenter {
                 context.startActivity(new Intent(context, EquipmentMenuAcitvity.class));
                 break;
             case R.id.id_maintenance_notifi:
-                Intent ask = new Intent(context, WorkOrderActivity.class);
+                Intent ask = new Intent(context, NotifactionActivity.class);
                 ask.putExtra("PATROL", new Patrol(40, R.string.maintenance_notification, R.mipmap.patrol_normal, R.mipmap.ic_maintenance_notif));
                 context.startActivity(ask);
                 break;
@@ -84,9 +84,7 @@ public class MaintenancePresenter {
     }
 
     public void getWorkOrderByPage() {
-
         biz.onStart(loading);
-
         biz.getWorkOrder(new FrameListener<WorkOrderRoot>() {
             @Override
             public void onSucces(WorkOrderRoot data) {

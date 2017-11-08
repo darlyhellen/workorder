@@ -8,6 +8,7 @@ import android.content.IntentFilter;
 import android.os.IBinder;
 
 import com.hellen.baseframe.common.dlog.DLog;
+import com.xiangxun.workorder.base.Api;
 import com.xiangxun.workorder.ui.presenter.WorkOrderNewPresenter;
 
 import java.util.Timer;
@@ -68,17 +69,21 @@ public class WorkOrderNewService extends Service {
      */
     private void initService() {
         presenter = new WorkOrderNewPresenter();
-        if (timer == null) {
-            timer = new Timer();
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    //在线程中启动请求，获取参数
-                    if (presenter != null) {
-                        presenter.refreshMainIcon();
+        if (Api.ISOUTLINE){
+            presenter.refreshMainIcon();
+        }else {
+            if (timer == null) {
+                timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        //在线程中启动请求，获取参数
+                        if (presenter != null) {
+                            presenter.refreshMainIcon();
+                        }
                     }
-                }
-            }, 0, delay);
+                }, 0, delay);
+            }
         }
 
     }
@@ -95,7 +100,9 @@ public class WorkOrderNewService extends Service {
         @Override
         public void onReceive(Context context, Intent intent) {
             DLog.i(getClass().getSimpleName(), "CommandReceiver  onReceive ");
-            timer.cancel();
+            if (timer!=null) {
+                timer.cancel();
+            }
             stopSelf();//停止服务
         }
     }

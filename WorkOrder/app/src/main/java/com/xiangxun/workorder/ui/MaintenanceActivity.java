@@ -13,7 +13,6 @@ import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import com.amap.api.location.AMapLocation;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.hellen.baseframe.binder.ContentBinder;
 import com.hellen.baseframe.binder.ViewsBinder;
 import com.hellen.baseframe.common.dlog.DLog;
@@ -62,12 +61,6 @@ public class MaintenanceActivity extends BaseActivity implements AdapterView.OnI
     @ViewsBinder(R.id.id_maintenance_notifi)
     private XwHomeModeButton notifi;
 
-
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
 
     @Override
     protected void initView(Bundle savedInstanceState) {

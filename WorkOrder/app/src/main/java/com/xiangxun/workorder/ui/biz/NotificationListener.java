@@ -9,13 +9,12 @@ import com.hellen.baseframe.application.FrameListener;
 import com.hellen.baseframe.application.FramePresenter;
 import com.hellen.baseframe.application.FrameView;
 import com.hellen.baseframe.common.dlog.DLog;
-import com.hellen.baseframe.common.obsinfo.ToastApp;
 import com.hellen.baseframe.common.utiltools.SharePreferHelp;
 import com.xiangxun.workorder.base.APP;
 import com.xiangxun.workorder.base.Api;
 import com.xiangxun.workorder.base.AppEnum;
-import com.xiangxun.workorder.bean.TourInfo;
-import com.xiangxun.workorder.bean.TourRoot;
+import com.xiangxun.workorder.bean.NotifactionData;
+import com.xiangxun.workorder.bean.WorkOrderData;
 import com.xiangxun.workorder.bean.WorkOrderRoot;
 import com.xiangxun.workorder.common.retrofit.RxTestJson;
 import com.xiangxun.workorder.common.retrofit.RxjavaRetrofitRequestUtil;
@@ -32,23 +31,15 @@ import rx.schedulers.Schedulers;
  * Copyright by [Zhangyuhui/Darly]
  * ©2017 XunXiang.Company. All rights reserved.
  *
- * @TODO: 我的工单监听类
+ * @TODO: 通知監聽
  */
-public class TourListListener implements FramePresenter {
+public class NotificationListener implements FramePresenter {
 
-    public interface TourListInterface extends FrameView {
+    public interface NotificationInterface extends FrameView {
 
-        void onWorkOrderSuccess(List<TourInfo> datas);
+        void onNotificationSuccess(List<NotifactionData> datas);
 
-        void onWorkOrderFailed();
-
-        String getDevicename();
-
-        String getDevicenum();
-
-        String getDeviceip();
-
-        void end();
+        void onNotificationFailed();
     }
 
     @Override
@@ -57,33 +48,28 @@ public class TourListListener implements FramePresenter {
             dialog.show();
     }
 
-    public void getWorkOrder(final int page, String status, String devicename, String devicecode, String deviceip, final FrameListener<TourRoot> listener) {
-        if (Api.ISOUTLINE){
-            //巡检假数据
-            listener.onSucces(RxTestJson.tourRoot());
-            return;
-        }
+    public void getNotification(final int page, final String status, String devicename, String devicecode, String deviceip, final FrameListener<WorkOrderRoot> listener) {
         if (!APP.isNetworkConnected(APP.getInstance())) {
             listener.onFaild(0, "网络异常,请检查网络");
             return;
         }
         //在这里进行数据请求
-        RxjavaRetrofitRequestUtil.getInstance().get().details(page).
+        RxjavaRetrofitRequestUtil.getInstance().get().getWorkOrder(page, status, devicename, devicecode, deviceip).
                 subscribeOn(Schedulers.io()).unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .map(new Func1<JsonObject, TourRoot>() {
+                .map(new Func1<JsonObject, WorkOrderRoot>() {
                     @Override
-                    public TourRoot call(JsonObject jsonObject) {
+                    public WorkOrderRoot call(JsonObject jsonObject) {
                         DLog.json("Func1", jsonObject.toString());
-                        TourRoot root = new Gson().fromJson(jsonObject, new TypeToken<TourRoot>() {
+                        WorkOrderRoot root = new Gson().fromJson(jsonObject, new TypeToken<WorkOrderRoot>() {
                         }.getType());
                         if (root != null && root.getStatus() == 1 && root.getData() != null) {
-                            SharePreferHelp.putValue(AppEnum.TourRoot.getDec() + page, root);
+                            SharePreferHelp.putValue(AppEnum.WorkOrderRoot.getDec() + page + status, root);
                         }
                         return root;
                     }
                 })
-                .subscribe(new Observer<TourRoot>() {
+                .subscribe(new Observer<WorkOrderRoot>() {
                     @Override
                     public void onCompleted() {
 
@@ -91,7 +77,7 @@ public class TourListListener implements FramePresenter {
 
                     @Override
                     public void onError(Throwable e) {
-                        TourRoot root = (TourRoot) SharePreferHelp.getValue(AppEnum.TourRoot.getDec() + page);
+                        WorkOrderRoot root = (WorkOrderRoot) SharePreferHelp.getValue(AppEnum.WorkOrderRoot.getDec() + page + status);
                         if (root != null) {
                             listener.onSucces(root);
                         } else {
@@ -100,7 +86,7 @@ public class TourListListener implements FramePresenter {
                     }
 
                     @Override
-                    public void onNext(TourRoot data) {
+                    public void onNext(WorkOrderRoot data) {
                         if (data != null) {
                             if (data.getData() != null && data.getStatus() == 1) {
                                 listener.onSucces(data);

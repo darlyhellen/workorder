@@ -9,7 +9,9 @@ import com.hellen.baseframe.application.FrameListener;
 import com.hellen.baseframe.application.FramePresenter;
 import com.hellen.baseframe.common.dlog.DLog;
 import com.xiangxun.workorder.base.APP;
+import com.xiangxun.workorder.base.Api;
 import com.xiangxun.workorder.bean.NewServiceRoot;
+import com.xiangxun.workorder.common.retrofit.RxTestJson;
 import com.xiangxun.workorder.common.retrofit.RxjavaRetrofitRequestUtil;
 
 import rx.Observer;
@@ -24,7 +26,10 @@ import rx.schedulers.Schedulers;
 public class WorkOrderNewListener implements FramePresenter {
 
     public void getWorkOrder(final FrameListener<NewServiceRoot> listener) {
-
+        if (Api.ISOUTLINE){
+            listener.onSucces(RxTestJson.workOrderNew());
+            return;
+        }
         if (!APP.isNetworkConnected(APP.getInstance())) {
             listener.onFaild(0, "网络异常,请检查网络");
             return;

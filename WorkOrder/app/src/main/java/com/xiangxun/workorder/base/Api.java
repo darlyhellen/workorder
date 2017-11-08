@@ -22,6 +22,10 @@ public class Api {
     private static String port;
 
     public static boolean TESTPHONE = false;
+    //是否是离线版本，离线版本加载一些辅助假数据。
+    public static boolean ISOUTLINE = false;
+    public static final String ACCOUNT = "xxkj";
+    public static final String PASSWORD = "000000";
 
     public static String getRoot() {
         if (root == null) {
